@@ -44,6 +44,55 @@ class SummarizeTests(unittest.TestCase):
                          stats.summarize([1, 2, 3, 4, 5]))
 
 
+class ParametricSupplementaryTests(unittest.TestCase):
+    """補足のパラメトリック統計（2026-11-13 追加）。
+
+    期待値は手計算と t 分布表の公知値で照合した固定値。
+    位置づけは補足であり、設計値の決定には使わない（METHODOLOGY §4）。
+    """
+
+    def test_se(self):
+        # [1..5]: SD=√2.5, SE = SD/√5 = √0.5
+        self.assertAlmostEqual(stats.se_mean([1, 2, 3, 4, 5]),
+                               0.7071067811865476)
+
+    def test_t_critical_matches_table(self):
+        # t_{0.975, df} の公知値（t 分布表）
+        self.assertAlmostEqual(stats.t_critical_975(1), 12.7062047362, places=6)
+        self.assertAlmostEqual(stats.t_critical_975(4), 2.7764451052, places=6)
+        self.assertAlmostEqual(stats.t_critical_975(9), 2.2621571628, places=6)
+        self.assertAlmostEqual(stats.t_critical_975(30), 2.0422724563, places=6)
+
+    def test_mean_ci_95(self):
+        # [1..5]: 平均3, SE=√0.5, t(df=4)=2.7764451052 → 幅 ±1.9632431615
+        low, high = stats.mean_ci_95([1, 2, 3, 4, 5])
+        self.assertAlmostEqual(low, 1.0367568385, places=6)
+        self.assertAlmostEqual(high, 4.9632431615, places=6)
+        s = stats.summarize([1, 2, 3, 4, 5])
+        self.assertAlmostEqual(s["mean_ci_95"][0], low)
+        self.assertAlmostEqual(s["mean_ci_95"][1], high)
+
+    def test_geometric_mean(self):
+        # 等比数列では幾何平均 = 中央の項。[1,2,4,8] は (1·2·4·8)^(1/4)=2√2
+        self.assertAlmostEqual(stats.geometric_mean([1, 2, 4, 8]),
+                               2.8284271247461903)
+        self.assertAlmostEqual(stats.geometric_mean([100, 1000]),
+                               316.22776601683796)
+        with self.assertRaises(ValueError):
+            stats.geometric_mean([1, 0, 2])
+        # summarize では 0 以下を含むと None（落とさない）
+        self.assertIsNone(stats.summarize([0, 1, 2])["geometric_mean"])
+
+    def test_parametric_is_supplementary_under_outlier(self):
+        # 外れ値で平均と CI は大きく動くが、主役の中央値は動かない。
+        # 補足に留める根拠そのものの確認。
+        s = stats.summarize([10, 11, 12, 13, 100])
+        self.assertAlmostEqual(s["median"], 12.0)
+        # 平均の CI 幅は外れ値で 98 超まで広がる（IQR は 2 のまま）
+        self.assertGreater(s["mean_ci_95"][1] - s["mean_ci_95"][0], 50)
+        self.assertAlmostEqual(s["iqr"], 2.0)
+
+
 class EdgeCaseTests(unittest.TestCase):
     def test_single_value(self):
         s = stats.summarize([42])

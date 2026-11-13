@@ -5,7 +5,8 @@
 - 入力: `../literature/` の統合済み抽出シート
 - 出力: パラメータ表（Frequency_Hz / Sound_Level_dB / Tempo_BPM ごとに
   N・平均・SD・中央値・IQR・正規化MAD、外れ値の PMID と条件メモ、
-  METHODOLOGY.md §4 の規則で決まった設計値とその根拠）
+  METHODOLOGY.md §4 の規則で決まった設計値とその根拠。補足として
+  SE・平均の 95% CI・幾何平均も併記するが、設計値の決定には使わない）
 - 実装は Python。統計量の定義は METHODOLOGY.md §4 に従う。
 
 ファイル:
