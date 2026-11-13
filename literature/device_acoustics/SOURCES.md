@@ -79,3 +79,69 @@
   決め、ソース間は順序と傾向の照合に使う。
 - devices.csv の URL 列は、実在を確認したレビューだけを記入する
   （未確認は空欄＋ Status=To_located）。
+
+## 4. 規格（電気通信・音響標準）
+
+レビュー実測（§1）が「個々の機種の実力」なら、規格は「測定法・
+ラウドネスの定義・許容マスク」という物差しそのものの出典になる。
+設計定数を規格の定義に紐付けることで恣意性を排除する。
+
+正直な限界も明記する: 下記規格の主対象は**通話音声**（狭帯域 3.1kHz /
+広帯域 7kHz / スーパーワイド帯域）であり、音楽再生の直接の要求規格
+ではない。使うのは、測定セットアップ、ラウドネス・レーティングの
+定義、FR マスクの考え方、最大音圧の安全側の枠組みである。
+
+- **ITU-T P.313**（2015-06、現行）: 携帯端末・ヘッドセット・
+  スピーカーフォンセットの電気音響要求。送受信レベル、周波数特性、
+  歪み、線形性の要求と試験法を含む。スピーカーフォンセットの節
+  （狭帯域 §10 / 広帯域 §13）が端末スピーカー再生に最も近い。
+  https://www.itu.int/dms_pubrec/itu-t/rec/p/T-REC-P.313-201506-I!!SUM-HTM-E.htm
+- **3GPP TS 26.131 / TS 26.132**: 端末音響特性の要求（26.131）と
+  試験仕様（26.132）。ハンドヘルド・ハンズフリー（=スピーカー
+  フォンモード）のラウドネス・レーティングと周波数特性マスクを
+  帯域別に規定し、CTIA の認証テストプランもこれを参照する。
+  https://api.ctia.org/docs/default-source/default-document-library/ctia-speech-performance-test-plan.pdf
+- **ETSI STQ（Speech and multimedia Transmission Quality）**:
+  TS 103 738（狭帯域ワイヤレス・ハンズフリー伝送要求）、
+  TS 103 740（広帯域版、送受信 FR マスクを含む）、
+  EG 202 518（端末音響出力の最大レベルと測定法。聴覚安全側の
+  上限を考える際の出典）。測定環境の再現法として TS 103 224
+  （背景雑音）/ TS 103 557（残響）もある。
+  https://standards.iteh.ai/catalog/standards/etsi/a96e0e20-129a-49ae-9224-bd7c1e3a78b5/etsi-ts-103-740-v1-1-2-2010-09
+- 関連: ITU-T P.341（広帯域ハンズフリー端末の伝送特性）、
+  ITU-T P.79（ラウドネス・レーティングの計算法）、P.501（試験信号）。
+
+## 5. マイクロスピーカーの物理モデリング文献（AES / JASA）
+
+端末スピーカーの低域限界と歪みは、ドライバの物理パラメータ
+（Thiele–Small パラメータ、共振周波数 Fs、最大振幅 Xmax、非線形
+パラメータ）で決まる。クラス別カットオフやブースト上限を
+「レビュー記事の印象」でなく物理量で語るための基盤文献。
+
+- Klippel, W. "Modeling the Large Signal Behavior of Micro-Speakers"
+  (2012): 携帯電話用マイクロスピーカーの非線形集中定数モデル。
+  Bl(x)・Kms(x) に加え、マイクロスピーカーでは機械・音響損失
+  Rms(v) が歪みの支配要因になることを実測で検証。
+  https://www.klippel.de/fileadmin/klippel/Files/Know_How/Literature/Papers/KLIPPEL%20Modeling%20the%20Large%20Signal%20Behavior%20of%20Micro-Speakers.pdf
+- Klippel, W. "Tutorial: Loudspeaker Nonlinearities — Causes,
+  Parameters, Symptoms", J. Audio Eng. Soc. 54(10), 907–939 (2006):
+  非線形の原因・パラメータ・症状（高調波/相互変調歪み）の総説。
+- Bai, M. R. & Liao, J. "Acoustic Analysis and Design of Miniature
+  Loudspeakers for Mobile Phones", J. Audio Eng. Soc. 53(11),
+  1061–1076 (2005): 携帯電話内蔵の小型スピーカーについて、
+  Thiele–Small パラメータの同定、電気-機械-音響等価回路、ダクト
+  構造とヘッド回折を含むシミュレーション。
+  https://secure.aes.org/forum/pubs/journal/?elib=13399
+- "Preventing damage to miniature-loudspeaker by means of dynamic
+  detection of excessive diaphragm displacement", J. Acoust. Soc.
+  Am. 141, 1615–1626 (2017): 非線形パラメータ推定と振幅リミッタ
+  による損傷防止。スマートアンプの保護が物理量（振幅）ベースで
+  あることの学術側の裏付けで、§2 の設計規則 1・2 の根拠になる。
+  https://pubs.aip.org/asa/jasa/article-abstract/141/3/1615/1056445/Preventing-damage-to-miniature-loudspeaker-by
+- Brunet, P. et al. "Specifying Xmax for micro-speakers and smart
+  amplifiers", 137th AES Convention (2014), e-Library 9114:
+  マイクロスピーカーの Xmax の定義（ブースト上限を語る際の物差し）。
+
+使い方: カットオフは Fs と筐体（背気積・ダクト）の帰結として、
+ブースト上限は Xmax と非線形症状の発現レベルとして説明できる
+形にする。数値そのものは §1 の実測分布と突き合わせて決める。
