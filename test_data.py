@@ -74,6 +74,26 @@ class TemplateAndScreeningTests(unittest.TestCase):
         strata = {r["Stratum_firstpass"] for r in rows}
         self.assertTrue(strata <= {"A", "B", "C", "REVIEW"}, strata)
 
+    def test_manual_screening_covers_exactly_the_ambiguous_set(self):
+        # 手動スクリーニングの対象は「firstpass で確定できなかった集合」
+        # （REVIEW ∪ Diagnosis_only_possible）とちょうど一致すること。
+        fp = read_csv(os.path.join(LIT, "screening_firstpass.csv"))
+        target = {r["PMID"] for r in fp
+                  if r["Stratum_firstpass"] == "REVIEW"
+                  or r["Diagnosis_only_possible"] == "True"}
+        self.assertEqual(len(target), 126)
+        man = read_csv(os.path.join(LIT, "screening_manual.csv"))
+        self.assertEqual(len(man), 126)
+        self.assertEqual({r["PMID"] for r in man}, target)
+        for r in man:
+            self.assertIn(r["Stratum_manual"], ("A", "B", "C", "UNDETERMINED"))
+            self.assertIn(r["Decision_manual"],
+                          ("Include_for_extraction", "Exclude_diagnosis_only",
+                           "Count_only_no_acoustic", "Undetermined_no_abstract"))
+            # 根拠引用は必須（抄録なしの場合のみ空を許す）
+            if r["Reason_code"] != "NO_ABSTRACT":
+                self.assertTrue(r["Evidence_Quote"], r["PMID"])
+
 
 if __name__ == "__main__":
     unittest.main()
