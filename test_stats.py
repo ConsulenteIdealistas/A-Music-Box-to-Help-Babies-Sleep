@@ -93,6 +93,48 @@ class ParametricSupplementaryTests(unittest.TestCase):
         self.assertAlmostEqual(s["iqr"], 2.0)
 
 
+class SnQnTests(unittest.TestCase):
+    """Sn / Qn 推定量（補足のロバスト尺度、2026-11-13 追加）。
+
+    期待値は順序統計量を手で数えた固定値:
+    - [1..5]: Sn の raw lowmed = 1 → 1.1926 × c_5(1.351)
+              Qn のペア差ソート済み [1,1,1,1,2,2,2,3,3,4] の k=3 番目 = 1
+              → 2.219144 × d_5(0.844)
+    - [1,2,3]: Sn raw = 1 → 1.1926 × c_3(1.851)、Qn raw = 1 → 2.219144 × d_3(0.994)
+    定数 2.219144 は原論文の誤植 2.2219 ではない正値を使う。
+    """
+
+    def test_fixed_values(self):
+        self.assertAlmostEqual(stats.sn_estimator([1, 2, 3, 4, 5]),
+                               1.1926 * 1.351)
+        self.assertAlmostEqual(stats.qn_estimator([1, 2, 3, 4, 5]),
+                               2.21914446598508 * 0.844)
+        self.assertAlmostEqual(stats.sn_estimator([1, 2, 3]),
+                               1.1926 * 1.851)
+        self.assertAlmostEqual(stats.qn_estimator([1, 2, 3]),
+                               2.21914446598508 * 0.994)
+
+    def test_scale_equivariance_and_shift_invariance(self):
+        x = [3, 1, 4, 1, 5, 9, 2, 6]
+        self.assertAlmostEqual(stats.sn_estimator([2 * v for v in x]),
+                               2 * stats.sn_estimator(x))
+        self.assertAlmostEqual(stats.qn_estimator([v + 100 for v in x]),
+                               stats.qn_estimator(x))
+
+    def test_small_n(self):
+        self.assertEqual(stats.sn_estimator([7]), 0.0)
+        self.assertIsNone(stats.qn_estimator([7]))  # ペアが無い
+        # n=2: raw はどちらも |a-b| そのもの
+        self.assertAlmostEqual(stats.sn_estimator([0, 10]), 1.1926 * 0.743 * 10)
+        self.assertAlmostEqual(stats.qn_estimator([0, 10]),
+                               2.21914446598508 * 0.399 * 10)
+
+    def test_in_summarize(self):
+        s = stats.summarize([1, 2, 3, 4, 5])
+        self.assertAlmostEqual(s["sn"], 1.1926 * 1.351)
+        self.assertAlmostEqual(s["qn"], 2.21914446598508 * 0.844)
+
+
 class EdgeCaseTests(unittest.TestCase):
     def test_single_value(self):
         s = stats.summarize([42])

@@ -20,6 +20,21 @@
 - 幾何平均 = exp(平均(log x))。周波数 Hz のような比の尺度で使う。
   0 以下の値を含む場合は定義できない（geometric_mean は ValueError、
   summarize では None）。
+- Sn / Qn 推定量（Rousseeuw & Croux 1993）は補足のロバスト尺度。
+  中心（中央値）を介さず全ペア差 |x_i − x_j| から作るため、左右非対称な
+  分布でも MAD より歪みに引きずられにくい。正規化MAD が主役のままで、
+  主役の交代は実データの分布（歪み・同点率・n）を見てから判断する。
+  - Sn = 1.1926 · c_n · lowmed_i( highmed_j |x_i − x_j| )。
+    high median は順序統計量の ⌊n/2⌋+1 番目、low median は ⌊(n+1)/2⌋ 番目。
+  - Qn = 2.219144 · d_n · {|x_i − x_j|; i<j} の k 番目（k = C(⌊n/2⌋+1, 2)）。
+    定数 2.219144 = 1/(√2·Φ^-1(5/8))。原論文等の 2.2219 は誤植であり
+    使わない（Akinshin 2022, arXiv:2209.12268 が指摘）。
+  - 有限標本修正 c_n / d_n は Croux & Rousseeuw (1992) の近似を使う:
+    n≤9 は同論文の表、n≥10 は予測式（Sn: 奇数 n/(n−0.9)・偶数 1、
+    Qn: 奇数 n/(n+1.4)・偶数 n/(n+3.8)）。精密化した表も存在するが、
+    補足用途ではこの近似で十分と判断した（同論文比の最大差は
+    cn で約 0.0077、dn で約 0.0045 と報告されている）。
+  - Qn はペアが存在しない n=1 では定義できないため None を返す。
 
 §4 の「通常SD ≈ ロバストSD」の判定は、乖離の許容幅という新しい定数を
 必要とするため、ここでは自動判定せず sd_ratio（通常SD ÷ ロバストSD）を
@@ -155,6 +170,57 @@ def geometric_mean(values):
     return math.exp(sum(math.log(x) for x in xs) / len(xs))
 
 
+SN_CONSTANT = 1.1926
+QN_CONSTANT = 2.21914446598508  # 1/(sqrt(2) * Phi^-1(5/8)); 2.2219 は原論文の誤植
+
+# Croux & Rousseeuw (1992) の有限標本修正（n<=9 の表）
+_SN_FINITE = {2: 0.743, 3: 1.851, 4: 0.954, 5: 1.351, 6: 0.993,
+              7: 1.198, 8: 1.005, 9: 1.131}
+_QN_FINITE = {2: 0.399, 3: 0.994, 4: 0.512, 5: 0.844, 6: 0.611,
+              7: 0.857, 8: 0.669, 9: 0.872}
+
+
+def _sn_correction(n):
+    if n in _SN_FINITE:
+        return _SN_FINITE[n]
+    return n / (n - 0.9) if n % 2 == 1 else 1.0
+
+
+def _qn_correction(n):
+    if n in _QN_FINITE:
+        return _QN_FINITE[n]
+    return n / (n + 1.4) if n % 2 == 1 else n / (n + 3.8)
+
+
+def sn_estimator(values):
+    """Sn 推定量（Rousseeuw & Croux）。補足のロバスト尺度。"""
+    xs = _sorted_floats(values)
+    n = len(xs)
+    if n == 1:
+        return 0.0
+    # inner: high median（⌊n/2⌋+1 番目、0-indexed では ⌊n/2⌋）
+    inner = []
+    for x in xs:
+        diffs = sorted(abs(x - y) for y in xs)
+        inner.append(diffs[n // 2])
+    inner.sort()
+    # outer: low median（⌊(n+1)/2⌋ 番目、0-indexed では ⌊(n+1)/2⌋−1 = n//2 if odd else n//2−1）
+    low_med = inner[(n + 1) // 2 - 1]
+    return SN_CONSTANT * _sn_correction(n) * low_med
+
+
+def qn_estimator(values):
+    """Qn 推定量（Rousseeuw & Croux）。補足のロバスト尺度。n=1 では None。"""
+    xs = _sorted_floats(values)
+    n = len(xs)
+    if n < 2:
+        return None
+    diffs = sorted(abs(xs[i] - xs[j]) for i in range(n) for j in range(i + 1, n))
+    h = n // 2 + 1
+    k = h * (h - 1) // 2  # C(h, 2)、1-indexed の順序統計量
+    return QN_CONSTANT * _qn_correction(n) * diffs[k - 1]
+
+
 def percentile(values, p):
     if not 0.0 <= p <= 1.0:
         raise ValueError("p must be in [0, 1]")
@@ -197,6 +263,7 @@ def summarize(values):
 
     ロバスト統計が主役、パラメトリック統計（mean/sd/se/mean_ci_95/
     geometric_mean）は補足。geometric_mean は 0 以下の値を含むと None。
+    sn / qn は補足のロバスト尺度（主役は正規化MAD のまま）。
     """
     xs = _sorted_floats(values)
     sd = sample_sd(xs)
@@ -208,6 +275,8 @@ def summarize(values):
         "se": se_mean(xs),
         "mean_ci_95": mean_ci_95(xs),
         "geometric_mean": geometric_mean(xs) if all(x > 0.0 for x in xs) else None,
+        "sn": sn_estimator(xs),
+        "qn": qn_estimator(xs),
         "median": median(xs),
         "q1": q1(xs),
         "q3": q3(xs),
