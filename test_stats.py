@@ -135,6 +135,31 @@ class SnQnTests(unittest.TestCase):
         self.assertAlmostEqual(s["qn"], 2.21914446598508 * 0.844)
 
 
+class QuartileTests(unittest.TestCase):
+    """四分位ベースの補足（2026-11-13 追加）。
+
+    [1..5]: Q1=2, Q3=4 → QD=1、IQR正規化SD = 2/1.3489795 = 1.4826022…、
+    対称なので Bowley = 0。
+    [1,1,2,3,4,5,10,20]: Q1=1.75, 中央値=3.5, Q3=6.25, IQR=4.5 →
+    Bowley = (6.25+1.75−7)/4.5 = 1/4.5。
+    """
+
+    def test_symmetric(self):
+        s = stats.summarize([1, 2, 3, 4, 5])
+        self.assertAlmostEqual(s["quartile_deviation"], 1.0)
+        self.assertAlmostEqual(s["iqr_sd"], 1.4826022185056, places=9)
+        self.assertAlmostEqual(s["bowley_skewness"], 0.0)
+
+    def test_right_skewed(self):
+        s = stats.summarize([1, 1, 2, 3, 4, 5, 10, 20])
+        self.assertAlmostEqual(s["quartile_deviation"], 2.25)
+        self.assertAlmostEqual(s["bowley_skewness"], 1.0 / 4.5)
+
+    def test_zero_iqr_bowley_undefined(self):
+        self.assertIsNone(stats.bowley_skewness([5, 5, 5, 5]))
+        self.assertEqual(stats.quartile_deviation([5, 5, 5, 5]), 0.0)
+
+
 class EdgeCaseTests(unittest.TestCase):
     def test_single_value(self):
         s = stats.summarize([42])

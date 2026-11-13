@@ -35,6 +35,13 @@
     補足用途ではこの近似で十分と判断した（同論文比の最大差は
     cn で約 0.0077、dn で約 0.0045 と報告されている）。
   - Qn はペアが存在しない n=1 では定義できないため None を返す。
+- 四分位ベースの補足（2026-11-13 追加）: 四分位偏差 = (Q3−Q1)/2、
+  IQR 正規化 SD = IQR / 1.3489795（1.3489795 = 2·Φ^-1(0.75)、正規分布の
+  IQR が σ のこの倍数になることからの換算で、MAD の 1.4826 と同種）。
+  四分位は外れ値に触れないためロバストだが、崩壊点は 25% で
+  MAD / Sn / Qn（50%）より低い。Bowley 歪度 = (Q3 + Q1 − 2·中央値) / IQR
+  は −1〜+1 で分布の左右非対称そのものを測る（主役交代の判断材料）。
+  IQR = 0 では Bowley 歪度は定義できないため None を返す。
 
 §4 の「通常SD ≈ ロバストSD」の判定は、乖離の許容幅という新しい定数を
 必要とするため、ここでは自動判定せず sd_ratio（通常SD ÷ ロバストSD）を
@@ -249,6 +256,28 @@ def iqr(values):
     return q3(values) - q1(values)
 
 
+IQR_TO_SD = 1.3489795003921634  # 2 * Phi^-1(0.75)
+
+
+def quartile_deviation(values):
+    """四分位偏差 (Q3−Q1)/2。補足のロバスト尺度。"""
+    return iqr(values) / 2.0
+
+
+def iqr_sd(values):
+    """IQR を σ 相当に正規化した尺度 IQR/1.3489795。補足。"""
+    return iqr(values) / IQR_TO_SD
+
+
+def bowley_skewness(values):
+    """Bowley 歪度 (Q3+Q1−2·中央値)/IQR。IQR=0 では None。"""
+    xs = _sorted_floats(values)
+    spread = iqr(xs)
+    if spread == 0.0:
+        return None
+    return (q3(xs) + q1(xs) - 2.0 * median(xs)) / spread
+
+
 def mad(values):
     med = median(values)
     return median([abs(float(v) - med) for v in values])
@@ -281,6 +310,9 @@ def summarize(values):
         "q1": q1(xs),
         "q3": q3(xs),
         "iqr": iqr(xs),
+        "quartile_deviation": quartile_deviation(xs),
+        "iqr_sd": iqr_sd(xs),
+        "bowley_skewness": bowley_skewness(xs),
         "mad": mad(xs),
         "robust_sd": rsd,
         "min": xs[0],
