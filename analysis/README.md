@@ -14,7 +14,13 @@
 - `fetch_bibliography.py` — PubMed から書誌を取得（Identification）
 - `stats.py` — 統計量の実装。定義（標本SD・type 7 パーセンタイル・
   正規化MAD）はモジュール冒頭に固定してある
+- `plots.py` — 可視化（ドットプロット / 散布図、SVG 出力、標準
+  ライブラリのみ）。周波数は対数軸が既定。分布の形（非対称・
+  同点の集中・外れ値）を目で確認し、統計量の主役交代の判断材料にする
+
+    python -m analysis.plots dot --input literature/extraction.csv --value Frequency_Hz --group Stratum --out freq_dot.svg
+    python -m analysis.plots scatter --input literature/extraction.csv --x Frequency_Hz --y Sound_Level_dB --out freq_db.svg
 
 テスト（リポジトリ直下、TRL と同じ流儀の標準ライブラリ unittest）:
 
-    python -m unittest test_stats test_data -v
+    python -m unittest test_stats test_data test_plots -v
