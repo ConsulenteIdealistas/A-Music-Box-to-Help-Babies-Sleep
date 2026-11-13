@@ -21,6 +21,10 @@
     python -m analysis.plots dot --input literature/extraction.csv --value Frequency_Hz --group Stratum --out freq_dot.svg
     python -m analysis.plots scatter --input literature/extraction.csv --x Frequency_Hz --y Sound_Level_dB --out freq_db.svg
 
+- `plots.html` — 同じ可視化のブラウザ版（単一 HTML、バニラ JS、
+  計算は plots.py と同一）。開くとデモデータで即描画され、
+  CSV を読み込むと実データに切り替わる。スマホで見るための版
+
 テスト（リポジトリ直下、TRL と同じ流儀の標準ライブラリ unittest）:
 
     python -m unittest test_stats test_data test_plots -v

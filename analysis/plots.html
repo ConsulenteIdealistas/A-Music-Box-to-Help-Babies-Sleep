@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>抽出データ可視化 — A Music Box to Help Babies Sleep</title>
+<style>
+  :root { color-scheme: dark; }
+  body { margin: 0; padding: 16px; background: #0b1220; color: #e5e7eb;
+         font-family: system-ui, -apple-system, sans-serif; }
+  h1 { font-size: 17px; margin: 0 0 4px; }
+  p.note { color: #9ca3af; font-size: 12.5px; margin: 2px 0 12px; line-height: 1.5; }
+  .controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+              margin-bottom: 10px; }
+  select, button, label.file {
+    background: #1f2937; color: #e5e7eb; border: 1px solid #374151;
+    border-radius: 8px; padding: 7px 10px; font-size: 13.5px; }
+  button { cursor: pointer; }
+  button.active { background: #2563eb; border-color: #2563eb; color: #fff; }
+  input[type="file"] { display: none; }
+  .plot { background: #111827; border: 1px solid #1f2937; border-radius: 12px;
+          padding: 10px; overflow-x: auto; margin-bottom: 14px; }
+  .plot svg { max-width: 100%; height: auto; display: block; }
+  #status { font-size: 12.5px; color: #9ca3af; margin: 6px 0 10px; }
+  .demo-banner { background: #78350f; color: #fde68a; border-radius: 8px;
+                 padding: 6px 10px; font-size: 12.5px; margin-bottom: 10px; }
+</style>
+</head>
+<body>
+<h1>抽出データの可視化</h1>
+<p class="note">ドットプロット（層別、Q1〜Q3 の帯と中央値つき）と散布図。
+周波数（Frequency_Hz）は対数軸が既定。CSV を読み込むと実データに切り替わります。</p>
+
+<div class="controls">
+  <label class="file">CSV を開く<input type="file" id="file" accept=".csv,text/csv"></label>
+  <button id="demoBtn" type="button">デモデータ</button>
+  <button id="dotBtn" type="button" class="active">ドットプロット</button>
+  <button id="scatterBtn" type="button">散布図</button>
+</div>
+<div class="controls" id="dotControls">
+  <span>値</span><select id="valueCol"></select>
+  <span>群</span><select id="groupCol"></select>
+  <label><input type="checkbox" id="dotLog"> 対数軸</label>
+</div>
+<div class="controls" id="scatterControls" style="display:none">
+  <span>X</span><select id="xCol"></select>
+  <span>Y</span><select id="yCol"></select>
+  <label><input type="checkbox" id="xLog"> X対数</label>
+  <label><input type="checkbox" id="yLog"> Y対数</label>
+</div>
+<div id="banner"></div>
+<div id="status"></div>
+<div class="plot" id="plot"></div>
+
+<script>
+"use strict";
+/* ===== 純粋関数（plots.py と同じ定義・同じ計算） ===== */
+const PALETTE = ["#60a5fa", "#f87171", "#34d399", "#a78bfa", "#fbbf24", "#22d3ee"];
+const LOG_DEFAULT_COLUMNS = new Set(["Frequency_Hz"]);
+const W = 880, ML = 130, MR = 30, MT = 44, MB = 46;
+
+function median(xs) {
+  const s = [...xs].sort((a, b) => a - b), n = s.length;
+  return n % 2 ? s[(n - 1) / 2] : (s[n / 2 - 1] + s[n / 2]) / 2;
+}
+function quantile(xs, p) { // type 7
+  const s = [...xs].sort((a, b) => a - b), n = s.length;
+  if (n === 1) return s[0];
+  const k = (n - 1) * p, f = Math.floor(k);
+  return s[f] + (s[Math.min(f + 1, n - 1)] - s[f]) * (k - f);
+}
+const q1 = xs => quantile(xs, 0.25), q3 = xs => quantile(xs, 0.75);
+
+function fmt(v) {
+  if (v >= 100) return String(Math.round(v));
+  if (v >= 10) return String(parseFloat(v.toFixed(1)));
+  return String(parseFloat(v.toFixed(2)));
+}
+function esc(s) {
+  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+function jitter(i) { return (((i * 2654435761) % 1000) / 1000) - 0.5; }
+
+class Scale {
+  constructor(values, log, px0, px1) {
+    if (!values.length) throw new Error("no values");
+    this.log = log; this.px0 = px0; this.px1 = px1; this.ticks = [];
+    let lo, hi;
+    if (log) {
+      if (values.some(v => v <= 0)) throw new Error("log scale requires all values > 0");
+      lo = 10 ** Math.floor(Math.log10(Math.min(...values)));
+      hi = 10 ** Math.ceil(Math.log10(Math.max(...values)));
+      if (lo === hi) hi = lo * 10;
+      this.tLo = Math.log10(lo); this.tHi = Math.log10(hi);
+      for (let p = Math.log10(lo); 10 ** p <= hi; p++) {
+        this.ticks.push([10 ** p, fmt(10 ** p), true]);
+        for (let m = 2; m < 10; m++) if (10 ** p * m < hi) this.ticks.push([10 ** p * m, "", false]);
+      }
+    } else {
+      lo = Math.min(...values); hi = Math.max(...values);
+      if (lo === hi) { lo -= 1; hi += 1; }
+      const rawStep = (hi - lo) / 5, mag = 10 ** Math.floor(Math.log10(rawStep));
+      const step = [1, 2, 5, 10].find(s => mag * s >= rawStep) * mag;
+      lo = Math.floor(lo / step) * step; hi = Math.ceil(hi / step) * step;
+      this.tLo = lo; this.tHi = hi;
+      for (let v = lo; v <= hi + step * 0.5; v += step) this.ticks.push([v, fmt(v), true]);
+    }
+  }
+  t(v) { return this.log ? Math.log10(v) : v; }
+  x(v) { return this.px0 + (this.t(v) - this.tLo) / (this.tHi - this.tLo) * (this.px1 - this.px0); }
+}
+
+function dotPlotSVG(groups, title, xLabel, logX) {
+  const rowH = 58, plotW = W - ML - MR;
+  const height = MT + rowH * groups.length + MB;
+  const all = groups.flatMap(g => g[1]);
+  const scale = new Scale(all, logX, ML, ML + plotW);
+  const axisY = MT + rowH * groups.length + 6;
+  const out = [`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${height}" font-family="sans-serif" viewBox="0 0 ${W} ${height}">`];
+  out.push(`<text x="${ML}" y="26" font-size="16" font-weight="bold" fill="#e5e7eb">${esc(title)}</text>`);
+  for (const [v, label, major] of scale.ticks) {
+    const x = scale.x(v);
+    out.push(`<line x1="${x.toFixed(1)}" y1="${MT - 8}" x2="${x.toFixed(1)}" y2="${axisY}" stroke="${major ? "#374151" : "#1f2937"}"/>`);
+    if (label) out.push(`<text x="${x.toFixed(1)}" y="${axisY + 18}" font-size="11" text-anchor="middle" fill="#9ca3af">${esc(label)}</text>`);
+  }
+  out.push(`<text x="${ML + plotW / 2}" y="${axisY + 38}" font-size="11" text-anchor="middle" fill="#9ca3af">${esc(xLabel)}${logX ? " (log scale)" : ""}</text>`);
+  groups.forEach(([label, values], gi) => {
+    const cy = MT + rowH * gi + rowH / 2, color = PALETTE[gi % PALETTE.length];
+    out.push(`<text x="${ML - 10}" y="${cy + 4}" font-size="12" text-anchor="end" fill="#e5e7eb">${esc(label)} (n=${values.length})</text>`);
+    if (values.length >= 2) {
+      const a = scale.x(q1(values)), b = scale.x(q3(values)), m = scale.x(median(values));
+      out.push(`<rect x="${a.toFixed(1)}" y="${cy - 13}" width="${(b - a).toFixed(1)}" height="26" fill="${color}" opacity="0.18"/>`);
+      out.push(`<line x1="${m.toFixed(1)}" y1="${cy - 15}" x2="${m.toFixed(1)}" y2="${cy + 15}" stroke="${color}" stroke-width="2.5"/>`);
+    }
+    [...values].sort((a, b) => a - b).forEach((v, i) => {
+      out.push(`<circle cx="${scale.x(v).toFixed(1)}" cy="${(cy + jitter(i) * 26).toFixed(1)}" r="4" fill="${color}" opacity="0.8"/>`);
+    });
+  });
+  out.push("</svg>");
+  return out.join("\n");
+}
+
+function scatterSVG(points, title, xLabel, yLabel, logX, logY) {
+  const plotW = W - ML - MR, plotH = 460;
+  const height = MT + plotH + MB + 14, baseY = MT + plotH;
+  const xs = new Scale(points.map(p => p[0]), logX, ML, ML + plotW);
+  const ys = new Scale(points.map(p => p[1]), logY, 0, plotH);
+  const yPx = v => baseY - ys.x(v);
+  const out = [`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${height}" font-family="sans-serif" viewBox="0 0 ${W} ${height}">`];
+  out.push(`<text x="${ML}" y="26" font-size="16" font-weight="bold" fill="#e5e7eb">${esc(title)}</text>`);
+  for (const [v, label, major] of xs.ticks) {
+    const x = xs.x(v);
+    out.push(`<line x1="${x.toFixed(1)}" y1="${MT}" x2="${x.toFixed(1)}" y2="${baseY}" stroke="${major ? "#374151" : "#1f2937"}"/>`);
+    if (label) out.push(`<text x="${x.toFixed(1)}" y="${baseY + 18}" font-size="11" text-anchor="middle" fill="#9ca3af">${esc(label)}</text>`);
+  }
+  for (const [v, label] of ys.ticks) {
+    if (!label) continue;
+    const y = yPx(v);
+    out.push(`<line x1="${ML}" y1="${y.toFixed(1)}" x2="${ML + plotW}" y2="${y.toFixed(1)}" stroke="#1f2937"/>`);
+    out.push(`<text x="${ML - 8}" y="${(y + 4).toFixed(1)}" font-size="11" text-anchor="end" fill="#9ca3af">${esc(label)}</text>`);
+  }
+  out.push(`<text x="${ML + plotW / 2}" y="${baseY + 38}" font-size="11" text-anchor="middle" fill="#9ca3af">${esc(xLabel)}${logX ? " (log scale)" : ""}</text>`);
+  out.push(`<text x="18" y="${MT + plotH / 2}" font-size="11" text-anchor="middle" fill="#9ca3af" transform="rotate(-90 18 ${MT + plotH / 2})">${esc(yLabel)}${logY ? " (log scale)" : ""}</text>`);
+  for (const [x, y] of points) {
+    out.push(`<circle cx="${xs.x(x).toFixed(1)}" cy="${yPx(y).toFixed(1)}" r="3.5" fill="${PALETTE[0]}" opacity="0.8"/>`);
+  }
+  out.push("</svg>");
+  return out.join("\n");
+}
+
+/* ===== CSV ===== */
+function parseCSV(text) {
+  const rows = [];
+  let row = [], field = "", inQ = false;
+  const s = text.replace(/\r\n/g, "\n");
+  for (let i = 0; i < s.length; i++) {
+    const c = s[i];
+    if (inQ) {
+      if (c === '"') { if (s[i + 1] === '"') { field += '"'; i++; } else inQ = false; }
+      else field += c;
+    } else if (c === '"') inQ = true;
+    else if (c === ",") { row.push(field); field = ""; }
+    else if (c === "\n") { row.push(field); rows.push(row); row = []; field = ""; }
+    else field += c;
+  }
+  if (field !== "" || row.length) { row.push(field); rows.push(row); }
+  const header = rows[0];
+  return rows.slice(1).filter(r => r.some(c => c.trim() !== ""))
+    .map(r => Object.fromEntries(header.map((h, i) => [h.trim(), (r[i] ?? "").trim()])));
+}
+
+/* ===== デモデータ（実データではない。表示確認用） ===== */
+const DEMO_CSV = `PMID,Stratum,Frequency_Hz,Sound_Level_dB
+demo,A,125,71.5
+demo,A,250,64.8
+demo,A,250,62.9
+demo,A,500,76.4
+demo,A,500,66.1
+demo,A,500,64.9
+demo,A,500,64.3
+demo,A,500,60.8
+demo,A,750,57.6
+demo,A,1000,66.7
+demo,A,1000,58.7
+demo,A,2000,55.6
+demo,A,2000,53.6
+demo,A,4000,55.6
+demo,B,2000,78.0
+demo,B,4000,52.1
+demo,B,8000,59.1
+demo,C,500,84.6
+demo,C,1000,68.1
+demo,C,2000,84.5
+demo,C,8000,60.3
+demo,C,16000,84.4
+demo,C,32000,81.0
+demo,C,45000,71.4`;
+
+/* ===== UI（ブラウザでのみ配線） ===== */
+if (typeof document !== "undefined") {
+  let rows = [], mode = "dot", isDemo = true;
+  const $ = id => document.getElementById(id);
+  const NUM_HINT = ["Frequency_Hz", "Sound_Level_dB", "Tempo_BPM", "Attenuation_dB_oct"];
+
+  function numericCols() {
+    if (!rows.length) return [];
+    return Object.keys(rows[0]).filter(c => rows.some(r => Number.isFinite(parseFloat(r[c]))));
+  }
+  function fillSelect(sel, cols, preferred) {
+    sel.innerHTML = "";
+    for (const c of cols) { const o = document.createElement("option"); o.value = c; o.textContent = c; sel.appendChild(o); }
+    if (preferred && cols.includes(preferred)) sel.value = preferred;
+  }
+  function setup() {
+    const cols = Object.keys(rows[0] || {});
+    const nums = numericCols();
+    fillSelect($("valueCol"), nums, "Frequency_Hz");
+    fillSelect($("groupCol"), cols, "Stratum");
+    fillSelect($("xCol"), nums, "Frequency_Hz");
+    fillSelect($("yCol"), nums, "Sound_Level_dB");
+    $("dotLog").checked = LOG_DEFAULT_COLUMNS.has($("valueCol").value);
+    $("xLog").checked = LOG_DEFAULT_COLUMNS.has($("xCol").value);
+    $("yLog").checked = LOG_DEFAULT_COLUMNS.has($("yCol").value);
+    $("banner").innerHTML = isDemo ? '<div class="demo-banner">デモデータ（実データではありません）</div>' : "";
+  }
+  function render() {
+    try {
+      let svg, n = 0, total = rows.length;
+      if (mode === "dot") {
+        const vc = $("valueCol").value, gc = $("groupCol").value;
+        const grouped = new Map();
+        for (const r of rows) {
+          const g = (r[gc] || "").trim(), v = parseFloat(r[vc]);
+          if (g && Number.isFinite(v)) { if (!grouped.has(g)) grouped.set(g, []); grouped.get(g).push(v); }
+        }
+        const groups = [...grouped.entries()].sort((a, b) => a[0].localeCompare(b[0]));
+        n = groups.reduce((s, g) => s + g[1].length, 0);
+        svg = dotPlotSVG(groups, `${vc} by ${gc}`, vc, $("dotLog").checked);
+      } else {
+        const xc = $("xCol").value, yc = $("yCol").value;
+        const points = [];
+        for (const r of rows) {
+          const x = parseFloat(r[xc]), y = parseFloat(r[yc]);
+          if (Number.isFinite(x) && Number.isFinite(y)) points.push([x, y]);
+        }
+        n = points.length;
+        svg = scatterSVG(points, `${yc} vs ${xc}`, xc, yc, $("xLog").checked, $("yLog").checked);
+      }
+      $("plot").innerHTML = svg;
+      $("status").textContent = `${n} 点を描画（全 ${total} 行、数値化できない行は除外）`;
+    } catch (e) {
+      $("status").textContent = "描画できませんでした: " + e.message;
+    }
+  }
+  function setMode(m) {
+    mode = m;
+    $("dotBtn").classList.toggle("active", m === "dot");
+    $("scatterBtn").classList.toggle("active", m === "scatter");
+    $("dotControls").style.display = m === "dot" ? "" : "none";
+    $("scatterControls").style.display = m === "scatter" ? "" : "none";
+    render();
+  }
+  $("file").addEventListener("change", ev => {
+    const f = ev.target.files[0]; if (!f) return;
+    f.text().then(t => { rows = parseCSV(t); isDemo = false; setup(); render(); });
+  });
+  $("demoBtn").addEventListener("click", () => { rows = parseCSV(DEMO_CSV); isDemo = true; setup(); render(); });
+  $("dotBtn").addEventListener("click", () => setMode("dot"));
+  $("scatterBtn").addEventListener("click", () => setMode("scatter"));
+  for (const id of ["valueCol", "groupCol", "dotLog", "xCol", "yCol", "xLog", "yLog"]) {
+    $(id).addEventListener("change", () => {
+      if (id === "valueCol") $("dotLog").checked = LOG_DEFAULT_COLUMNS.has($("valueCol").value);
+      if (id === "xCol") $("xLog").checked = LOG_DEFAULT_COLUMNS.has($("xCol").value);
+      if (id === "yCol") $("yLog").checked = LOG_DEFAULT_COLUMNS.has($("yCol").value);
+      render();
+    });
+  }
+  rows = parseCSV(DEMO_CSV); setup(); render();
+}
+</script>
+</body>
+</html>
