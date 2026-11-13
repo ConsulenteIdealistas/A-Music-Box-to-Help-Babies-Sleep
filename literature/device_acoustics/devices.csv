@@ -1,0 +1,24 @@
+Device,Maker,Release_Year,Device_Class,DXOMARK_URL,GSMArena_URL,Notebookcheck_URL,RTINGS_URL,Status,Notes
+iPhone 12,Apple,2020,iphone,,,,,To_located,
+iPhone 13,Apple,2021,iphone,,,,,To_located,
+iPhone 14,Apple,2022,iphone,,,,,To_located,
+iPhone 15,Apple,2023,iphone,,,,,To_located,
+iPhone 16,Apple,2024,iphone,,,,,To_located,
+iPhone SE (3rd generation),Apple,2022,iphone_budget,,,,,To_located,
+Galaxy S21,Samsung,2021,android_flagship,,,,,To_located,
+Galaxy S22,Samsung,2022,android_flagship,,,,,To_located,
+Galaxy S23,Samsung,2023,android_flagship,,,,,To_located,
+Galaxy S24,Samsung,2024,android_flagship,,,,,To_located,
+Galaxy S25,Samsung,2025,android_flagship,,,,,To_located,
+Galaxy A54,Samsung,2023,android_mid,,,,,To_located,
+Galaxy A55,Samsung,2024,android_mid,,,,,To_located,
+Galaxy A16,Samsung,2024,android_budget,,,,,To_located,
+Pixel 7,Google,2022,android_flagship,,,,,To_located,
+Pixel 8,Google,2023,android_flagship,,,,,To_located,
+Pixel 9,Google,2024,android_flagship,,,,,To_located,
+Xperia 1 V,Sony,2023,android_flagship,,,,,To_located,オーディオ注力モデル
+Xiaomi 13,Xiaomi,2023,android_flagship,,,,,To_located,
+Xiaomi 14,Xiaomi,2024,android_flagship,,,,,To_located,
+JBL Flip 6,JBL,2021,external_speaker,,,,,To_located,RTINGS 対象クラス
+JBL Charge 5,JBL,2021,external_speaker,,,,,To_located,RTINGS 対象クラス
+Bose SoundLink Flex,Bose,2021,external_speaker,,,,,To_located,RTINGS 対象クラス

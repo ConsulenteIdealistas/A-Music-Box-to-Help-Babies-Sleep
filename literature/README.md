@@ -12,3 +12,7 @@
 - ジャーナル別書誌 CSV（取得後に配置）:
   `bibliography_pediatrics.csv` など。ファイル名・取得日・クエリ版を
   取得時のメモに残すこと。
+- `device_acoustics/` — 端末スピーカー一次情報の別コレクション
+  （GSMArena / DXOMARK / Notebookcheck / RTINGS 等）。方法論は
+  同フォルダの `SOURCES.md`、対象機種リストは `devices.csv`。
+  PubMed 母集団とは混ぜない。
