@@ -110,6 +110,12 @@ UNDETERMINED 25、診断手法のみとして除外 10件、抽出候補は合�
 - 抽出した数値には、根拠として抄録内の該当フレーズ（原文）を必ず併記する
   （抽出シートの `Evidence_Quote` 列）。
 - 抽出項目は `literature/extraction_sheet_template.csv` の列定義に従う。
+- **照合（二重ろ過）**: 抽出（むぎ）が終わったバッチは、統合前に必ず
+  `analysis/validate_extraction.py` で照合する。Evidence_Quote の
+  verbatim 一致、数値の引用内存在（kHz→Hz 換算は WARN として記録）、
+  PMID の参照整合性、妥当域チェック（WARN のみ、却下には使わない）を
+  機械判定し、ERROR が残る行は統合しない。WARN はスポットチェックの
+  キューとして扱う。
 
 ## 4. 統計処理とパラメータ決定ルール
 
