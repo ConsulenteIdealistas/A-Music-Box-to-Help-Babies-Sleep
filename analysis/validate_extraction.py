@@ -9,7 +9,11 @@
     - 数値があるのに Evidence_Quote が空
     - Evidence_Quote が抄録に verbatim（空白正規化後）で存在しない
     - 数値セルの数値が引用文の中に見つからない（単位換算の候補も含め）
-    - Decision / Stratum の値が不正、Exclude なのに Exclude_Reason が空
+    - Decision / Stratum の値が不正、Exclude / Count_only なのに
+      Exclude_Reason が空
+    - Decision=Reference は設計統計の参入ゲート（METHODOLOGY §3）を
+      満たさないが値と引用は保持する行。数値・引用の検査は Include と
+      同じく受ける
   WARN（止めないが人間の目視キューに載せる）:
     - 抄録が無い論文（照合不能）
     - 数値が引用文中の kHz 表記からの換算でのみ一致（換算の発生を記録）
@@ -32,7 +36,7 @@ Issue = namedtuple("Issue", ["level", "pmid", "code", "message"])
 
 NUMERIC_COLUMNS = ["Frequency_Hz", "Attenuation_dB_oct", "Sound_Level_dB", "Tempo_BPM"]
 VALID_STRATA = {"A", "B", "C", "UNDETERMINED", ""}
-VALID_DECISIONS = {"Include", "Exclude", ""}
+VALID_DECISIONS = {"Include", "Exclude", "Count_only", "Reference", ""}
 
 # 妥当域（WARN 専用、却下には使わない）。
 # 周波数: ヒト可聴域 20Hz–20kHz が中心だが、動物層（C）では齧歯類・
@@ -114,9 +118,9 @@ def validate_rows(rows, abstracts):
                                 f"Decision が不正: {decision!r}"))
         if decision == "":
             issues.append(Issue("WARN", tag, "undecided", "Decision が未記入"))
-        if decision == "Exclude" and not (r.get("Exclude_Reason") or "").strip():
+        if decision in ("Exclude", "Count_only") and not (r.get("Exclude_Reason") or "").strip():
             issues.append(Issue("ERROR", tag, "exclude_no_reason",
-                                "Exclude なのに Exclude_Reason が空"))
+                                f"{decision} なのに Exclude_Reason が空"))
 
         if has_numeric and not quote:
             issues.append(Issue("ERROR", tag, "numeric_without_quote",
