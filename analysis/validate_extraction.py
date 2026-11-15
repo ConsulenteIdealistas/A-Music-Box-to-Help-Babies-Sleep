@@ -71,17 +71,26 @@ def _cell_numbers(cell):
 def number_in_quote(value, quote):
     """数値が引用文に在るか。戻り値: 'verbatim' / 'converted' / None。
 
-    converted は Hz セルに対する kHz 表記（値を 1/1000 した表記が
-    引用にあり、かつ引用に kHz の記載がある）場合のみ認める。
-    換算を認めた事実は呼び出し側で WARN として記録する。
+    照合は文字列ではなく数値の一致で見る（引用側の "1.0" や "8.0"
+    のような小数トークンと、セルの 1 や 8 を同一視するため）。
+    converted は Hz セルに対する kHz / MHz 表記（値を 1/1000 /
+    1/1000000 した数値が引用にあり、かつ引用にその単位の記載が
+    ある）場合のみ認める。換算を認めた事実は呼び出し側で WARN
+    として記録する。
     """
     q = quote.replace(",", "")
-    if _fmt_num(value) in _NUMBER_RE.findall(q):
+    tokens = [float(m) for m in _NUMBER_RE.findall(q)]
+
+    def _hit(v):
+        return any(abs(t - v) < 1e-9 for t in tokens)
+
+    if _hit(value):
         return "verbatim"
-    if "khz" in q.lower():
-        scaled = _fmt_num(value / 1000.0)
-        if scaled in _NUMBER_RE.findall(q):
-            return "converted"
+    ql = q.lower()
+    if "khz" in ql and _hit(value / 1000.0):
+        return "converted"
+    if "mhz" in ql and _hit(value / 1000000.0):
+        return "converted"
     return None
 
 

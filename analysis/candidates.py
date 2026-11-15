@@ -41,7 +41,7 @@ import re
 import sys
 from pathlib import Path
 
-TOOL_VERSION = "candidates/1"
+TOOL_VERSION = "candidates/3"
 
 # A number: 1,000 / 0.5 / .5 / 30 ; a range joins two with -, –, —, or "to".
 _NUM = r"(?:\d{1,3}(?:,\d{3})+|\d+(?:\.\d+)?|\.\d+)"
@@ -49,8 +49,15 @@ _RANGE_SEP = r"(?:\s*[-–—]\s*|\s+to\s+|\s+and\s+)"
 _UNIT = (
     r"(?P<unit>kHz|MHz|Hz|dB\s?/oct|dBA|dB\s?SPL|dB\s?HL|dB\s?nHL|dB|BPM|bpm)"
 )
+# 単位の直前のハイフン（"1000-Hz" のような形容詞形）も許す。
+# v1 はこの形を取りこぼした（2026-11-15 の本抽出で発覚、8件）。
 _PATTERN = re.compile(
-    rf"(?P<first>{_NUM})(?:{_RANGE_SEP}(?P<second>{_NUM}))?\s*{_UNIT}\b"
+    rf"(?P<first>{_NUM})(?:{_RANGE_SEP}(?P<second>{_NUM}))?\s*-?\s*{_UNIT}\b"
+)
+# 複合形 "4000- and 1000-Hz" の先行要素（単位は後続要素が担う）。
+# v2 は後続要素しか拾えなかった（同日発覚）。
+_PATTERN_COMPOUND = re.compile(
+    rf"(?P<first>{_NUM})\s*-\s*(?:and|or)\s+{_NUM}\s*-?\s*{_UNIT}\b"
 )
 
 _UNIT_KIND = {
@@ -83,8 +90,9 @@ def _fmt(value: float) -> str:
 
 def find_candidates(abstract: str) -> list[dict]:
     """All unit-bearing numeric mentions, in order of appearance."""
+    abstract = abstract or ""
     out = []
-    for m in _PATTERN.finditer(abstract or ""):
+    for m in _PATTERN.finditer(abstract):
         column, factor = _unit_info(m.group("unit"))
         first = _to_float(m.group("first")) * factor
         if m.group("second"):
@@ -103,6 +111,21 @@ def find_candidates(abstract: str) -> list[dict]:
                 "Snippet": abstract[start:end].replace("\n", " "),
             }
         )
+    for m in _PATTERN_COMPOUND.finditer(abstract):
+        column, factor = _unit_info(m.group("unit"))
+        value = _fmt(_to_float(m.group("first")) * factor)
+        start = max(0, m.start() - 60)
+        end = min(len(abstract), m.end() + 60)
+        out.append(
+            {
+                "Raw_Text": m.group(0),
+                "Value_Normalized": value,
+                "Column_Candidate": column,
+                "Position": m.start(),
+                "Snippet": abstract[start:end].replace("\n", " "),
+            }
+        )
+    out.sort(key=lambda c: c["Position"])
     return out
 
 

@@ -54,6 +54,24 @@ class TestFindCandidates(unittest.TestCase):
             vals("a 1,000 Hz tone"),
             [("1,000 Hz", "1000", "Frequency_Hz")])
 
+    def test_hyphenated_unit_adjective(self):
+        # "1000-Hz tone" のような形容詞形も拾う（v1 の取りこぼし）。
+        self.assertEqual(
+            vals("a 1000-Hz tone burst"),
+            [("1000-Hz", "1000", "Frequency_Hz")])
+        self.assertEqual(
+            vals("exposed to 3.6-MHz ultrasound"),
+            [("3.6-MHz", "3600000", "Frequency_Hz")])
+        self.assertEqual(
+            vals("a 50-dB masking noise"),
+            [("50-dB", "50", "Sound_Level_dB")])
+
+    def test_compound_hyphenated_first_element(self):
+        # "4000- and 1000-Hz" の先行要素も候補になる（v2 の取りこぼし）。
+        got = vals("probes at 4000- and 1000-Hz")
+        self.assertEqual(
+            sorted(g[1] for g in got), ["1000", "4000"])
+
     def test_non_acoustic_numbers_ignored(self):
         # Ages, sample sizes, statistics carry no acoustic unit.
         self.assertEqual(
