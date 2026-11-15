@@ -5,14 +5,26 @@
  * グラフとミキサーを配線しただけの器。音源とパラメータは
  * Phase 1（文献レビュー）・Phase 2（音源制作）で差し込む。
  *
- * TODO(Phase 2): オルゴールはステム音源のシームレスループに差し替え
  * TODO(Phase 1): 最大音量リミッター値をレビューの安全側統計から設定
  * TODO: エントレインメント減速カーブ（BPM 85 → 65）、キー変更、画面ロック
+ *
+ * オルゴール音源: audio/render_klank.py で書き出し、audio/make_loop.py で
+ * ループ化した WAV を app/assets/ に置く（生成物なのでリポジトリには
+ * 含めない）。ループ境界は「無音 → 曲頭のアタック」で、継ぎ目なし。
  */
+
+const SONGS = [
+  { id: "brahms", label: "ブラームスの子守歌", file: "assets/brahms_wiegenlied_klank_loop.wav" },
+  { id: "yurikago", label: "ゆりかごのうた", file: "assets/yurikago_no_uta_klank_loop.wav" },
+  { id: "moldau", label: "モルダウ主題", file: "assets/moldau_theme_klank_loop.wav" },
+  { id: "vissi", label: "歌に生き、愛に生き", file: "assets/vissi_darte_klank_loop.wav" },
+];
 
 let ctx = null;
 let master, gainMusic, gainHeart, gainWaves;
 let heartTimer = null, fadeTimer = null, wavesNodes = null;
+let musicSrc = null;
+const musicBuffers = {}; // id -> AudioBuffer（デコード済みキャッシュ）
 let playing = false;
 
 const $ = (id) => document.getElementById(id);
@@ -91,8 +103,38 @@ function stopWaves() {
   wavesNodes = null;
 }
 
-// --- オルゴール: Phase 2 でステム音源を接続する。現状は無音 ---
-// gainMusic は配線済み。音源が入るまではスライダーだけが効く。
+// --- オルゴール: ループ WAV を BufferSource(loop=true) で再生 ---
+async function loadSong(id) {
+  if (musicBuffers[id]) return musicBuffers[id];
+  const song = SONGS.find((s) => s.id === id);
+  const res = await fetch(song.file);
+  if (!res.ok) throw new Error("fetch failed: " + song.file);
+  const buf = await ctx.decodeAudioData(await res.arrayBuffer());
+  musicBuffers[id] = buf;
+  return buf;
+}
+async function startMusic() {
+  const id = $("song").value;
+  try {
+    const buf = await loadSong(id);
+    stopMusic();
+    musicSrc = ctx.createBufferSource();
+    musicSrc.buffer = buf;
+    musicSrc.loop = true;
+    musicSrc.connect(gainMusic);
+    musicSrc.start();
+    $("songStatus").textContent = "";
+  } catch (e) {
+    // 音源ファイルが無い場合は他の層だけで再生を続ける
+    $("songStatus").textContent = "オルゴール音源が見つかりません（app/assets/ にループ WAV を配置してください）";
+  }
+}
+function stopMusic() {
+  if (!musicSrc) return;
+  try { musicSrc.stop(); } catch (_) {}
+  musicSrc.disconnect();
+  musicSrc = null;
+}
 
 function applyVolumes() {
   if (!ctx) return;
@@ -120,6 +162,7 @@ async function play() {
   master.gain.value = 0.9;
   scheduleHeart();
   startWaves();
+  startMusic();
   startFadeOut(Number($("timer").value));
   $("playBtn").textContent = "■ 停止";
 }
@@ -128,10 +171,12 @@ function stop() {
   clearTimeout(heartTimer);
   clearTimeout(fadeTimer);
   stopWaves();
+  stopMusic();
   if (ctx) ctx.suspend();
   $("playBtn").textContent = "▶ 再生";
 }
 
+$("song").addEventListener("change", () => { if (playing) startMusic(); });
 $("playBtn").addEventListener("click", () => (playing ? stop() : play()));
 $("bpm").addEventListener("input", () => { $("bpmVal").textContent = $("bpm").value; });
 ["volMusic", "volHeart", "volWaves"].forEach((id) => $(id).addEventListener("input", applyVolumes));

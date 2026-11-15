@@ -16,6 +16,17 @@
   <button id="playBtn" class="play" type="button">▶ 再生</button>
 
   <section>
+    <label for="song">曲（オルゴール、ループ再生）</label>
+    <select id="song">
+      <option value="brahms">ブラームスの子守歌</option>
+      <option value="yurikago">ゆりかごのうた</option>
+      <option value="moldau">モルダウ主題</option>
+      <option value="vissi">歌に生き、愛に生き</option>
+    </select>
+    <p id="songStatus" class="note"></p>
+  </section>
+
+  <section>
     <label for="bpm">心音 BPM <span id="bpmVal">70</span></label>
     <input id="bpm" type="range" min="60" max="90" step="1" value="70">
   </section>
