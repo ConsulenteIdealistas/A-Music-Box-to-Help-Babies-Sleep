@@ -1,0 +1,43 @@
+Raw_Value,Count,V1_Note
+kanamycin,2,耳毒性薬剤であり音響刺激ではない
+"3,3'-iminodipropionitrile (IDPN)",1,化学物質（神経毒）であり音響刺激ではない
+3.6-MHz focused ultrasonic beams,1,超音波であり可聴域の音響刺激の語彙に該当なし
+ATP and UTP stimulation,1,薬理学的刺激（プリン受容体作動薬）であり音響刺激ではない
+Doppler ultrasound,1,超音波ドプラであり音響刺激ではない
+Kangaroo care,1,ケア介入であり音響刺激ではない
+acoustic change complex,1,誘発反応の名称であり刺激種別を特定できない
+acoustic stimulation,1,音響刺激一般で種別を特定できない
+acoustic stimuli,1,音響刺激一般で種別を特定できない
+acoustically enriched environment,1,音響環境の豊か化であり刺激種別を特定できない
+auditory stimulation,1,聴覚刺激一般で種別を特定できない
+aural stimuli,1,聴覚刺激一般で種別を特定できない
+carbachol,1,薬剤（コリン作動薬）であり音響刺激ではない
+codified interactions,1,相互作用の様式であり音響刺激の種別を特定できない
+communicative vocalizations,1,発声一般であり発話と特定できない
+conspecific vocalizations,1,同種個体の発声（動物）であり語彙に該当なし
+contact calls,1,動物のコンタクトコールであり語彙に該当なし
+continuous sound,1,持続音一般で種別を特定できない
+diagnostic ultrasound,1,診断用超音波であり音響刺激ではない
+entrained breath sounds,1,呼吸音であり語彙に該当なし
+gentamicin,1,耳毒性薬剤であり音響刺激ではない
+gesture cues,1,視覚的な身振り手がかりであり音響刺激ではない
+high-frequency cosignal,1,マスキング文脈の随伴信号で種別を特定できない
+immunization,1,予防接種という医療処置であり音響刺激ではない
+in utero paracetamol exposure,1,薬剤曝露であり音響刺激ではない
+induced maternal stress using the Stroop color-word task,1,母親へのストレス負荷であり乳児への音響刺激ではない
+infant African elephant roars,1,動物（ゾウ）の発声であり語彙に該当なし
+infant sleep machines,1,スリープマシンの再生音で内容を特定できない
+infant vocalizations,1,乳児の発声一般であり啼泣と特定できない
+interaural stimulation,1,両耳提示という提示様式であり刺激種別を特定できない
+interaural time difference information,1,両耳間時間差という手がかり操作であり刺激種別を特定できない
+intersensory redundancy,1,感覚間の冗長性という特性であり音響刺激の種別ではない
+intrahepatic vein transfusion puncture,1,医療処置であり音響刺激ではない
+low-frequency stimuli,1,低周波という特性のみで刺激種別を特定できない
+maternal aerobic exercise,1,母親の運動という曝露であり音刺激ではない
+maternal hyperoxygenation,1,母親への酸素投与という生理学的曝露であり音刺激ではない
+maternal physical activity,1,母親の身体活動であり音刺激ではない
+maternal soothing,1,母親のなだめ行為。音の形態が特定できない
+monosodium glutamate exposure,1,化学物質（MSG）曝露であり音刺激ではない
+neonatal nicotine exposure,1,ニコチン曝露であり音刺激ではない
+non-speech sounds,1,非音声の音一般。形態が特定できない
+nonspeech formant onset time stimuli,1,音声の音響特性を模した合成非音声刺激。既存カテゴリに合わない

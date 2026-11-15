@@ -1,0 +1,71 @@
+Raw_Value,Canonical_Value,Note
+auditory system structure and function,anatomy_structure,構造と機能の総称だが解剖・形態側に寄せて分類
+cochlear nucleus volume,anatomy_structure,体積（解剖・形態）
+cochlear tuning,cellular_physiology,蝸牛の周波数選択性は蝸牛生理の指標として分類
+learning,other,対象・領域が特定できない汎用語のため
+physiologic parameters,other,複合的な生理指標の総称で単一ラベルに落とせないため
+quality of life,other,QOLに該当するラベルが無いため
+Ca2+ oscillations,cellular_physiology,細胞レベルのCa動態
+Doppler flow velocity waveforms,blood_flow,血流速度波形
+"Na+,K+-ATPase distribution",cellular_physiology,分子・組織レベルの分布
+absolute pitch prevalence,other,集団における絶対音感の保有率であり転帰指標のラベルに合わないため
+absorbance,other,中耳の音響吸収率という物理量で、聴力・閾値のラベルには当たらないため
+acoustic cues to coda voicing and place contrasts,other,刺激側の音響的手がかりであり転帰でないため
+acoustic masking,other,マスキング現象そのもので、単一の転帰指標ラベルに落とせないため
+acoustic parameters,other,対象が特定できない汎用語のため
+acoustic traits,other,対象が特定できない汎用語のため
+adaptation effects,other,適応の対象（神経/知覚）が特定できないため
+affect,other,情動に該当するラベルが無いため
+alpha-thyroid hormone receptor expression in cochlea,cellular_physiology,受容体発現（分子レベル）
+amplitude-growth-function slopes,other,ABR/OAEいずれの成長関数か特定できず、neural_responseとotoacoustic_emissionsの間で決められないため
+auditory development,neurodevelopment,聴覚系の発達経過として発達ラベルに分類
+auditory neuron loss,cellular_physiology,神経細胞の喪失（細胞数レベルの所見）
+auditory system structure,anatomy_structure,解剖学的構造
+autonomic and neurobehavioral development,neurodevelopment,神経行動発達
+autonomic nervous system stability,other,自律神経系の安定性一般で、HRV等の単一指標ラベルに落とせないため
+blood flow measurement,blood_flow,血流測定
+blood flow velocity waveform,blood_flow,血流速度波形
+c-Fos expression in auditory cortex and locus coeruleus,cellular_physiology,タンパク発現（分子レベル）
+cadherin 23 expression,cellular_physiology,遺伝子発現（分子レベル）
+cadherin 23 localization to stereocilia,cellular_physiology,タンパクの細胞内局在（分子・細胞レベル）
+carotid-femoral pulse wave velocity,blood_flow,血圧そのものではないが血行動態・血管系の指標として血流ラベルに分類
+cerebral oxygenation,oxygen_saturation,NIRSによる脳組織酸素飽和度（rSO2）として酸素飽和度に分類
+child responses,other,対象が特定できない汎用語のため
+classification of septic newborns,method_performance,診断分類の性能として分類
+classification precision,method_performance,分類器の性能指標
+cochlear metabolites,cellular_physiology,代謝物（分子・生化学レベル）
+cochlear responses,other,電気生理/OAEの両義で特定できず単一ラベルに決められないため
+cognitive behavior,neurodevelopment,認知面の発達・行動指標として分類
+cognitive development,neurodevelopment,認知発達
+coherence masking protection,other,知覚現象だが単一の転帰指標ラベルに落とせないため
+conceptual framework,other,転帰ではなく概念枠組みのため
+correlation dimension,other,信号の非線形解析指標で、手法性能とも転帰とも言い切れないため
+cost-effectiveness,other,経済評価であり転帰ラベルに無いため
+cross-sectional area of neurons in nucleus magnocellularis,anatomy_structure,解剖学的計測（断面積）
+cry signal segmentation,method_performance,信号解析手法の性能として分類
+del(GJB6-D13S1830) presence,other,遺伝子変異の有無（病因・素因）であり生理指標ではないため
+diagnostic rate,method_performance,検査の診断率（性能指標）
+ear asymmetries,other,測定系が特定できず左右差だけでは単一ラベルに落とせないため
+ear opening,anatomy_structure,発生・解剖学的な構造変化
+ear-canal volume change,anatomy_structure,外耳道容積という形態・物理量として分類
+electromotility,cellular_physiology,外有毛細胞の細胞生理
+electrophysiological properties,cellular_physiology,細胞レベルの電気生理特性
+elimination half-life,other,薬物動態の指標で該当ラベルが無いため
+emotions,other,情動そのもので該当ラベルが無いため
+endocochlear potential,cellular_physiology,蝸牛内電位（蝸牛生理）
+entropy,other,対象信号が特定できない信号指標のため
+facial expressions,other,表情（情動表出）で該当ラベルが無いため
+feasibility,other,研究の実施可能性であり転帰・手法性能の指標ではないため
+fractional shortening,other,左室心機能の指標で、心拍数・血流・血圧のいずれのラベルにも当たらないため
+frequency,other,単独では何の周波数か特定できないため
+function of the basal turn of the cochlea,cellular_physiology,蝸牛基底回転の機能は蝸牛生理として分類
+gender effects,other,性別効果は転帰ではなく調整因子のため
+generalization,other,学習の般化だが対象が特定できない汎用語のため
+genetic causes,other,遺伝的病因であり転帰ではないため
+haemodynamics,blood_flow,血行動態一般として血流ラベルに分類
+heating of skull,other,安全性に関する物理量で該当ラベルが無いため
+hemodynamics,blood_flow,血行動態一般として血流ラベルに分類
+infant development,neurodevelopment,発達一般の指標（発達スコア類）として分類
+infants' development,neurodevelopment,発達一般の指標（発達スコア類）として分類
+inositol phosphates accumulation,cellular_physiology,細胞内生化学の指標
+input resistance,cellular_physiology,細胞膜の電気生理特性

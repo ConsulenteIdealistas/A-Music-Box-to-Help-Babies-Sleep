@@ -1,0 +1,71 @@
+Raw_Value,Count,V1_Note
+auditory system structure and function,2,聴覚系の解剖と機能の総称で単一指標でない
+cochlear nucleus volume,2,解剖学的体積であり機能応答でない
+cochlear tuning,2,測定法（神経/OAE）が特定できず分類困難
+learning,2,対象が特定できない汎用語
+physiologic parameters,2,複合的な生理指標の総称
+quality of life,2,QOLは統制語彙に無い
+Ca2+ oscillations,1,細胞レベルのCa動態
+Doppler flow velocity waveforms,1,血流速度であり血圧ではない
+"Na+,K+-ATPase distribution",1,分子・組織学的分布
+absolute pitch prevalence,1,絶対音感の保有率であり転帰指標でない
+absorbance,1,中耳の音響吸収率で語彙に無い
+acoustic cues to coda voicing and place contrasts,1,刺激側の音響的手がかりであり転帰でない
+acoustic masking,1,マスキング効果そのもので単一の転帰指標に落とせない
+acoustic parameters,1,対象が特定できない汎用語
+acoustic traits,1,対象が特定できない汎用語
+adaptation effects,1,適応の対象（神経/知覚）が特定できない
+affect,1,情動であり語彙に無い
+alpha-thyroid hormone receptor expression in cochlea,1,受容体の発現（分子レベル）
+amplitude-growth-function slopes,1,ABR/OAEいずれの成長関数か特定できない
+auditory development,1,聴覚発達の総称で単一指標でない
+auditory neuron loss,1,神経細胞の喪失（組織所見）であり応答でない
+auditory system structure,1,解剖学的構造
+autonomic and neurobehavioral development,1,自律・神経行動発達の総称
+autonomic nervous system stability,1,特定の単一指標（HRV等）に落とせない
+blood flow measurement,1,血流であり血圧ではない
+blood flow velocity waveform,1,血流速度波形であり血圧ではない
+c-Fos expression in auditory cortex and locus coeruleus,1,タンパク発現（組織所見）であり応答測定でない
+cadherin 23 expression,1,遺伝子発現（分子レベル）
+cadherin 23 localization to stereocilia,1,タンパク局在（組織所見）
+carotid-femoral pulse wave velocity,1,動脈スティフネスであり血圧そのものではない
+cerebral oxygenation,1,脳組織酸素化であり末梢SpO2とは別
+child responses,1,対象が特定できない汎用語
+classification of septic newborns,1,敗血症の診断分類であり転帰でない
+classification precision,1,分類手法の性能指標であり転帰でない
+cochlear metabolites,1,代謝物（生化学）
+cochlear responses,1,電気生理/OAEの両義で特定できない
+cognitive behavior,1,認知行動であり言語発達指標ではない
+cognitive development,1,認知発達であり言語発達とは区別
+coherence masking protection,1,知覚現象だが単一の転帰指標に落とせない
+conceptual framework,1,転帰ではなく概念枠組み
+correlation dimension,1,信号の非線形解析指標
+cost-effectiveness,1,経済評価であり転帰でない
+cross-sectional area of neurons in nucleus magnocellularis,1,解剖学的計測
+cry signal segmentation,1,泣き声信号の解析手法であり啼泣そのものでない
+del(GJB6-D13S1830) presence,1,遺伝子変異の有無
+diagnostic rate,1,検査の診断率（性能指標）であり転帰でない
+ear asymmetries,1,耳の左右差で測定系（OAE/ABR等）が特定できない
+ear opening,1,発生・解剖学的な耳の開口
+ear-canal volume change,1,外耳道容積の物理量
+electromotility,1,外有毛細胞の細胞生理
+electrophysiological properties,1,細胞レベルの電気生理特性
+elimination half-life,1,薬物動態
+emotions,1,情動そのもので該当語彙なし
+endocochlear potential,1,蝸牛内電位（蝸牛生理）
+entropy,1,信号のエントロピーで対象信号が特定できない
+facial expressions,1,表情（情動表出）で該当語彙なし
+feasibility,1,研究の実施可能性でアウトカム領域ではない
+fractional shortening,1,左室の心機能指標
+frequency,1,単独では何の周波数か特定できない
+function of the basal turn of the cochlea,1,蝸牛基底回転の解剖・機能
+gender effects,1,性別効果はアウトカム領域ではなく調整因子
+generalization,1,学習の般化で対象が特定できない
+genetic causes,1,遺伝的要因（病因）でアウトカムではない
+haemodynamics,1,血行動態一般で血圧そのものではない
+heating of skull,1,頭蓋の加熱（安全性・物理量）
+hemodynamics,1,血行動態一般で血圧そのものではない
+infant development,1,発達一般で領域が特定できない
+infants' development,1,発達一般で領域が特定できない
+inositol phosphates accumulation,1,細胞内生化学
+input resistance,1,細胞膜の電気生理特性

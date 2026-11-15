@@ -1,0 +1,43 @@
+Raw_Value,Canonical_Value,Note
+nonspeech signals,acoustic_general,非音声だが音響信号であり種類は特定できない
+nonspeech sounds,acoustic_general,非音声の音であり種類は特定できない
+nonspeech stimuli that mimicked certain temporal properties of VOT stimuli,acoustic_general,非音声の音響刺激であり種類は特定できない
+onset asynchrony,other,提示タイミングの特性であり音の種類ではない
+parental psychological distress,other,状態変数であり音刺激でもケア介入でもない
+pitch,other,音響特性であり音の種類ではない
+playback of pup-calls,animal_vocalization,動物の子の鳴き声の再生
+pressure varied to -3 kPa or +3 kPa,other,圧力刺激であり該当ラベルがない
+rattle sounds,other,玩具の音であり専用ラベルがなく一般語ともいえない
+repeating sound sequences,acoustic_general,音系列だが種類は特定できない
+repeating stimuli,acoustic_general,種類は明記されていない反復提示刺激
+repetitive auditory stimulation,acoustic_general,聴覚刺激だが種類は特定できない
+repetitive sound stimuli,acoustic_general,音刺激だが種類は特定できない
+rhythm,other,刺激の時間特性であり音の種類ではない
+rocking,care_intervention,音でないケア的介入（揺らし）
+sequential bilateral cochlear implantation,care_intervention,音刺激ではない医療処置
+simulated Kangaroo care,care_intervention,カンガルーケアの模擬
+simultaneous bilateral cochlear implantation,care_intervention,音刺激ではない医療処置
+skin-to-skin care,care_intervention,ケア介入そのもの
+social sounds,acoustic_general,音だが形態は特定できない
+sound,acoustic_general,音一般で種類の明記なし
+sound exposure,acoustic_general,音曝露で種類の明記なし
+sound stimulation,acoustic_general,音刺激で種類の明記なし
+sound stimuli,acoustic_general,音刺激で種類の明記なし
+sounding object,acoustic_general,音の出る物体の音で種類は特定できない
+sounds,acoustic_general,音一般で種類の明記なし
+sounds in modulated maskers,acoustic_general,対象音の種類は特定できない
+spectrally and temporally modulated complex sounds,other,変調複合音でありsweep_chirpとは明記されず該当ラベルがない
+static-pressure range of +/-3kPa,other,静圧条件であり音刺激ではない
+stimulation,acoustic_general,刺激一般だが本コーパスでは聴覚刺激として抽出されたもの
+stimulus polarity,other,刺激パラメータであり音の種類ではない
+stress stimuli,other,ストレス刺激であり音響刺激と特定できない
+test trials,other,試行そのものであり刺激ではない
+toy play,other,遊びという活動でありケア介入にも音にも当たらない
+two similar sounds from different locations,acoustic_general,音の種類は特定できず提示位置の記述
+tympanometry,other,測定手技であり音の種類ではない
+ultrasound,ultrasound,超音波そのもの
+uterine contractions during an oxytocin challenge test,other,生理学的イベントであり音刺激でも介入でもない
+viral vector injection,care_intervention,音でない処置（注射）
+visual cues from speaker's face,other,視覚的手がかりであり音刺激ではない
+visual rhythm,other,視覚的リズムであり音刺激ではない
+wideband middle ear acoustic test battery,other,検査バッテリーという手技であり単一刺激の種類ではない

@@ -1,0 +1,70 @@
+Raw_Value,Canonical_Value,Note
+intracellular Ca2+ transients,cellular_physiology,細胞内カルシウム動態は細胞生理指標
+intrinsic membrane properties,cellular_physiology,細胞膜の電気生理特性は細胞生理指標
+kanamycin pharmacokinetics,other,薬物動態であり細胞・分子指標でも発達・性能・形態・血流のいずれでもない
+largest Lyapunov exponents,other,非線形動態の指標で対象信号が特定できず、性能指標でもない
+left ventricular mass,anatomy_structure,左室心筋重量は心臓の構造・形態計測
+length changes in outer hair cells,cellular_physiology,外有毛細胞の細胞生理
+level,other,単独では何のレベルか特定できない
+lived experience,other,質的な体験記述で該当ラベルなし
+lived experiences of uncertainty,other,質的な体験記述で該当ラベルなし
+magnitude and phase of components,other,信号成分の大きさ・位相で対象が特定できず、性能指標ではない
+maturation of the organ of Corti,anatomy_structure,コルチ器の解剖学的成熟
+maximum output sound pressure levels,other,機器の最大出力音圧という仕様パラメータで、手法の性能指標でも乳児のアウトカムでもない
+maximum stimulation levels,other,人工内耳の刺激レベルという機器パラメータで該当ラベルなし
+measured activity,other,活動量の測定で内容が特定できない
+membrane time constant,cellular_physiology,細胞膜の電気生理特性は細胞生理指標
+memory,other,単独では何の記憶か特定できず、発達指標と断定できない
+metabolism,other,代謝一般で範囲が広く、細胞・分子レベルの指標と特定できない
+middle cerebral artery pulsatility index,blood_flow,中大脳動脈のドプラ血流指標
+middle-ear responses,other,中耳の音響応答という機能測定で、聴力・OAE・形態のいずれにも当たらない
+musical self,other,質的概念（音楽的自己）で該当ラベルなし
+mutation spectrum,cellular_physiology,遺伝子変異の分布は分子レベルの指標
+neurofunctional assessment,neurodevelopment,神経機能評価は神経発達・機能評価の指標
+neurological examination,neurodevelopment,神経学的診察は神経学的転帰の評価
+neurological outcome,neurodevelopment,神経学的予後は発達予後に当たる
+neurological outcome at 24 months,neurodevelopment,神経学的予後は発達予後に当たる
+neuron density,anatomy_structure,ニューロン密度は組織形態の計測
+nonlinear phenomena,other,非線形現象一般で対象が特定できない
+opening of Corti's tunnel,anatomy_structure,コルチトンネルの解剖学的発生
+original songwriting practices,other,母親の作詞実践という質的記述で、親子相互作用の指標ではない
+otolith growth,anatomy_structure,耳石の成長は解剖学的指標
+ototoxicity,other,薬剤の毒性（有害事象）であり、聴力指標でも死亡・罹患の転帰でもない
+outcomes and cost components,other,費用・サービス評価に関する記述で該当ラベルなし
+pathology identification,other,病理の同定そのもので、精度等の性能指標ではない
+perceived warmth,other,音の質に対する知覚評価で、弁別・選好課題とは異なる
+perceptions of the use of MT,other,音楽療法利用に関する認識の調査で該当ラベルなし
+perspectives on developing music therapy,other,音楽療法の開発に関する見解・調査で該当ラベルなし
+phosphoinositide breakdown,cellular_physiology,細胞内生化学指標
+physiologic measures,other,生理指標全般で特定のラベルに落とせない
+physiological parameters,other,生理指標全般で特定のラベルに落とせない
+preference for congruently sized objects,other,視覚対象の選好で聴覚弁別ではない
+prevalence,other,疫学的な有病率で該当ラベルなし
+psychosocial development,neurodevelopment,心理社会発達は発達指標の一種
+pulsatility index,blood_flow,ドプラ血流指標であり血圧ではない
+resourcefulness,other,行動特性の評定で該当ラベルなし
+response to stimulation,other,刺激への反応全般で特定できない
+segmentation of expiratory and inspiratory sounds,other,呼吸音の分節化という解析タスクの出力で、精度等の性能指標そのものではなく呼吸機能でもない
+self-regulation,other,自己調整は注意・覚醒とも発達スコアとも一致しない
+sense of agency,other,主体感という認知指標で該当ラベルなし
+sensory functioning,other,感覚機能全般で特定できない
+service delivery,other,サービス提供の実施面で該当ラベルなし
+spherical cell size,anatomy_structure,細胞形態の解剖学的計測
+spiral ganglion cell density,anatomy_structure,組織学的計測（密度は形態計測）
+spiral ganglion neuron density,anatomy_structure,組織学的計測（密度は形態計測）
+stable skin color,other,皮膚色の安定という臨床観察指標で該当ラベルなし
+stimulation parameters,other,刺激パラメータ自体（方法の記述）で該当ラベルなし
+survey of clinical practice,other,診療実態の調査で該当ラベルなし
+therapist behaviors,other,療法士側の行動（実施面）で該当ラベルなし
+toddlers' responses,other,幼児の反応全般で特定できない
+total attenuation estimation,other,減衰量の推定という音響測定値で、性能指標でも乳児の結果指標でもない
+tracking accuracy,method_performance,トラッキング精度は手法の性能指標
+tympanic membrane volume changes,anatomy_structure,鼓膜の体積変化は形態変化の計測
+ultrasound attenuation,other,超音波減衰という工学的指標で該当ラベルなし
+umbilical artery pulsatility index,blood_flow,胎児血流のドプラ指標であり血圧ではない
+use of music in home environment,other,家庭環境での音楽使用（実施・環境面）で該当ラベルなし
+vesicle-like bodies (VBs),anatomy_structure,細胞内構造の形態観察
+viral tropism,other,ウイルスの組織指向性という生物学的性質で、生理指標ではない
+visual rhythm discrimination,other,視覚弁別であり聴覚弁別ではない
+vocal tract dimensions,anatomy_structure,声道の解剖計測
+wideband acoustic reflectance,other,中耳機能の音響測定であり聴力閾値でも性能指標でもない

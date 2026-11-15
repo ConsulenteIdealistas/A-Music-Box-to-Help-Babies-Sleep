@@ -1,0 +1,43 @@
+Raw_Value,Count,V1_Note
+nonspeech signals,1,非音声信号。形態が特定できない
+nonspeech sounds,1,非音声の音。形態が特定できない
+nonspeech stimuli that mimicked certain temporal properties of VOT stimuli,1,VOT刺激の時間特性を模した非音声刺激。既存カテゴリに合わない
+onset asynchrony,1,刺激の性質（開始時点の非同期）であり音の種類ではない
+parental psychological distress,1,親の心理的苦痛という状態・曝露変数であり音刺激ではない
+pitch,1,音響的性質（ピッチ）であり音の種類ではない
+playback of pup-calls,1,動物（子）の鳴き声の再生。人間の声カテゴリに合わない
+pressure varied to -3 kPa or +3 kPa,1,圧力刺激（ティンパノメトリー）であり音刺激ではない
+rattle sounds,1,ガラガラ（玩具）の音。既存カテゴリに合わない
+repeating sound sequences,1,反復する音系列。音の種類が特定できない
+repeating stimuli,1,反復刺激。種類の明記なし
+repetitive auditory stimulation,1,反復聴覚刺激。種類の明記なし
+repetitive sound stimuli,1,反復音刺激。種類の明記なし
+rhythm,1,刺激の性質（リズム）であり音の種類ではない
+rocking,1,揺らし（前庭・運動刺激）であり音刺激ではない
+sequential bilateral cochlear implantation,1,医療処置（逐次両側人工内耳）であり音刺激ではない
+simulated Kangaroo care,1,ケア介入の模擬であり音刺激ではない
+simultaneous bilateral cochlear implantation,1,医療処置（同時両側人工内耳）であり音刺激ではない
+skin-to-skin care,1,ケア介入（肌と肌の接触）であり音刺激ではない
+social sounds,1,社会的な音。形態が特定できない
+sound,1,音一般。種類の明記なし
+sound exposure,1,音曝露。種類の明記なし
+sound stimulation,1,音刺激。種類の明記なし
+sound stimuli,1,音刺激。種類の明記なし
+sounding object,1,音の出る物体の音。形態が特定できない
+sounds,1,音一般。種類の明記なし
+sounds in modulated maskers,1,変調マスカー中の音。対象音の種類が特定できない
+spectrally and temporally modulated complex sounds,1,変調された複合音。スイープ等とは明記されず既存カテゴリに合わない
+static-pressure range of +/-3kPa,1,静圧の範囲（ティンパノメトリー）であり音刺激ではない
+stimulation,1,刺激一般。種類の明記なし
+stimulus polarity,1,刺激のパラメータ（極性）であり音の種類ではない
+stress stimuli,1,ストレス刺激。種類の明記なし
+test trials,1,試行そのものであり音刺激ではない
+toy play,1,玩具遊びという活動であり音刺激ではない
+two similar sounds from different locations,1,異なる位置からの音の提示。音の種類が特定できない
+tympanometry,1,測定手技であり音刺激そのものではない
+ultrasound,1,超音波（曝露・撮像）であり可聴音刺激ではない
+uterine contractions during an oxytocin challenge test,1,子宮収縮という生理学的イベントであり音刺激ではない
+viral vector injection,1,ウイルスベクター注射という処置であり音刺激ではない
+visual cues from speaker's face,1,視覚的手がかりであり音刺激ではない
+visual rhythm,1,視覚的リズムであり音刺激ではない
+wideband middle ear acoustic test battery,1,検査バッテリー（手技）であり単一の音刺激ではない

@@ -1,0 +1,43 @@
+Raw_Value,Canonical_Value,Note
+kanamycin,chemical_exposure,耳毒性薬剤への曝露
+"3,3'-iminodipropionitrile (IDPN)",chemical_exposure,化学物質（神経毒）への曝露
+3.6-MHz focused ultrasonic beams,ultrasound,超音波ビーム
+ATP and UTP stimulation,chemical_exposure,プリン受容体作動薬による薬理学的刺激
+Doppler ultrasound,ultrasound,超音波ドプラ
+Kangaroo care,care_intervention,音でないケア介入
+acoustic change complex,other,誘発反応（ACC）の名称であり刺激そのものではない
+acoustic stimulation,acoustic_general,音響刺激一般で種別を特定できない
+acoustic stimuli,acoustic_general,音響刺激一般で種別を特定できない
+acoustically enriched environment,acoustic_general,音響環境の豊か化であり種別を特定できない
+auditory stimulation,acoustic_general,聴覚刺激一般で種別を特定できない
+aural stimuli,acoustic_general,聴覚刺激一般で種別を特定できない
+carbachol,chemical_exposure,コリン作動薬への曝露
+codified interactions,other,相互作用の様式であり音響刺激でもケア介入でもない
+communicative vocalizations,other,発声一般であり発話・啼泣・動物発声のいずれとも特定できない
+conspecific vocalizations,animal_vocalization,同種個体（動物）の発声
+contact calls,animal_vocalization,動物のコンタクトコール
+continuous sound,acoustic_general,持続音一般で種別を特定できない
+diagnostic ultrasound,ultrasound,診断用超音波
+entrained breath sounds,other,呼吸音であり該当するラベルがない
+gentamicin,chemical_exposure,耳毒性薬剤への曝露
+gesture cues,other,視覚的な身振り手がかりであり音響刺激ではない
+high-frequency cosignal,acoustic_general,マスキング文脈の随伴信号で種別を特定できない
+immunization,care_intervention,予防接種という医療処置
+in utero paracetamol exposure,chemical_exposure,薬剤曝露
+induced maternal stress using the Stroop color-word task,other,母親へのストレス負荷課題であり乳児への音響刺激でもケア介入でもない
+infant African elephant roars,animal_vocalization,動物（ゾウの幼獣）の発声
+infant sleep machines,acoustic_general,スリープマシンの再生音で内容を特定できない
+infant vocalizations,other,乳児の発声一般であり啼泣・発話のいずれとも特定できない
+interaural stimulation,acoustic_general,両耳提示という提示様式のみで種別を特定できない
+interaural time difference information,other,両耳間時間差という手がかり操作であり刺激種別ではない
+intersensory redundancy,other,感覚間の冗長性という刺激の特性であり種別ではない
+intrahepatic vein transfusion puncture,care_intervention,医療処置
+low-frequency stimuli,acoustic_general,低周波という特性のみで種別を特定できない
+maternal aerobic exercise,other,母親の運動という曝露でありケア・医療介入には当たらない
+maternal hyperoxygenation,care_intervention,母親への酸素投与という医療介入
+maternal physical activity,other,母親の身体活動という曝露でありケア・医療介入には当たらない
+maternal soothing,care_intervention,母親のなだめ行為というケア介入（音の形態は特定できない）
+monosodium glutamate exposure,chemical_exposure,化学物質（MSG）への曝露
+neonatal nicotine exposure,chemical_exposure,ニコチン曝露
+non-speech sounds,acoustic_general,非音声の音一般で形態を特定できない
+nonspeech formant onset time stimuli,other,音声の音響特性を模した合成非音声刺激であり既存カテゴリに合わない
