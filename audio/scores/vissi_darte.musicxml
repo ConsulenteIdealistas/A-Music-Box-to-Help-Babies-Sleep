@@ -167,6 +167,19 @@
       </note>
       <note>
         <pitch>
+          <step>B</step>
+          <alter>-1</alter>
+          <octave>4</octave>
+        </pitch>
+        <duration>4</duration>
+        <type>eighth</type>
+        <time-modification>
+          <actual-notes>3</actual-notes>
+          <normal-notes>2</normal-notes>
+        </time-modification>
+      </note>
+      <note>
+        <pitch>
           <step>A</step>
           <alter>-1</alter>
           <octave>4</octave>
@@ -191,19 +204,6 @@
           <normal-notes>2</normal-notes>
         </time-modification>
       </note>
-      <note>
-        <pitch>
-          <step>C</step>
-          <alter>-1</alter>
-          <octave>5</octave>
-        </pitch>
-        <duration>4</duration>
-        <type>eighth</type>
-        <time-modification>
-          <actual-notes>3</actual-notes>
-          <normal-notes>2</normal-notes>
-        </time-modification>
-      </note>
     </measure>
     <measure number="6">
       <harmony>
@@ -215,7 +215,8 @@
       </harmony>
       <note>
         <pitch>
-          <step>F</step>
+          <step>B</step>
+          <alter>-1</alter>
           <octave>4</octave>
         </pitch>
         <duration>4</duration>
@@ -265,7 +266,8 @@
       </note>
       <note>
         <pitch>
-          <step>F</step>
+          <step>G</step>
+          <alter>-1</alter>
           <octave>4</octave>
         </pitch>
         <duration>4</duration>
@@ -299,8 +301,7 @@
       </harmony>
       <note>
         <pitch>
-          <step>E</step>
-          <alter>-1</alter>
+          <step>F</step>
           <octave>4</octave>
         </pitch>
         <duration>4</duration>
@@ -312,8 +313,7 @@
       </note>
       <note>
         <pitch>
-          <step>E</step>
-          <alter>-1</alter>
+          <step>F</step>
           <octave>4</octave>
         </pitch>
         <duration>4</duration>
