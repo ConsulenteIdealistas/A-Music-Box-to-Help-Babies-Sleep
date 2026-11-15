@@ -45,8 +45,8 @@ FLOW_CUTOFF_HZ = 400.0
 WOMB_FILTER_HZ = 1500.0
 SEED = 20261115
 
-GAIN_HEART = 0.50
-GAIN_FLOW = 0.26
+GAIN_HEART = 0.32  # bed softened 2026-11-15 after first audition (was 0.50)
+GAIN_FLOW = 0.16  # was 0.26
 GAIN_MUSIC = 1.10
 PHRASE_GAP_S = 4.5  # silence between music-box phrases
 
