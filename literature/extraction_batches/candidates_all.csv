@@ -1,0 +1,440 @@
+PMID,Raw_Text,Value_Normalized,Column_Candidate,Position,Snippet
+512209,2 MHz,2000000,Frequency_Hz,167,"trasound at 0.44 W/cm2 (+/- 20%) spatial average intensity, 2 MHz, continuous wave, for 60--180 s in a 37 degrees C water bat"
+512209,1MHz,1000000,Frequency_Hz,462,"xposure on Day 14 of gestation at about 0.125 to 0.5 W/cm2, 1MHz, continuous wave, for 180 s in a 30 degrees C bath. It is c"
+670550,24 dB,24,Sound_Level_dB,1069,"ory handicap, beginning at an average hearing loss of about 24 dB."
+670553,30 to 2500 Hz,30-2500,Frequency_Hz,182,"ographic analysis. Fundamental frequency values ranged from 30 to 2500 Hz, well outside the values reported in previous studies of no"
+690336,0.25 to 6 MHz,250000-6000000,Frequency_Hz,210, skulls. Measurements were made in the frequency range from 0.25 to 6 MHz. Most studies were restricted to an upper frequency limit o
+690336,2.2 MHz,2200000,Frequency_Hz,285,Most studies were restricted to an upper frequency limit of 2.2 MHz. An axisymmetric focused beam configuration was used as the
+690336,0.5-1.0 MHz,500000-1000000,Frequency_Hz,1348,We conclude that with selection of appropriate frequencies (0.5-1.0 MHz) and beam configuration it will be possible to perform clin
+1464577,500 Hz,500,Frequency_Hz,224,edia with effusion (OME). Subjects were trained to detect a 500 Hz signal (either in or out-of-phase between the ears) against
+1464577,500 Hz,500,Frequency_Hz,340,"s) against an in-phase, narrow band noise masker centred at 500 Hz. Non-OME infants had elevated masked thresholds and reduced"
+1490906,6 dB,6,Sound_Level_dB,924, the bipolar electrodes and moderate stimulation intensity (6 dB above electrically evoked auditory brainstem response thres
+1490906,2 dB,2,Sound_Level_dB,1564,l stimulation of the cochlea at an extremely low intensity (2 dB above electrically evoked auditory brainstem response thres
+1506534,7 dB,7,Sound_Level_dB,604,100 cm). For the control group the near sound was naturally 7 dB louder than the far. The experimental group had SPL counter
+1559899,0.2 and 10.0 kHz,200-10000,Frequency_Hz,241,velocity and phase responses in the frequency range between 0.2 and 10.0 kHz were measured in animals ranging from 3 days of age to adul
+1559899,11 dB,11,Sound_Level_dB,439,ith age while the ES low frequency sensitivity increased by 11 dB. The sensitivity improvement indicated an increase in low f
+1564194,1.0 and 2.0 kHz,1000-2000,Frequency_Hz,941,"ge levels of SOAEs. The majority of adult SOAEs are between 1.0 and 2.0 kHz, whereas the majority of neonatal SOAEs are between 2.5 and"
+1564194,2.5 and 5.0 kHz,2500-5000,Frequency_Hz,1009,"2.0 kHz, whereas the majority of neonatal SOAEs are between 2.5 and 5.0 kHz. The average SOAE level is -2.6 dB SPL for adults and 8.5 d"
+1564194,2.6 dB SPL,2.6,Sound_Level_dB,1053,AEs are between 2.5 and 5.0 kHz. The average SOAE level is -2.6 dB SPL for adults and 8.5 dB SPL for infants.
+1564194,8.5 dB SPL,8.5,Sound_Level_dB,1079,0 kHz. The average SOAE level is -2.6 dB SPL for adults and 8.5 dB SPL for infants.
+1774201,10dB,10,Sound_Level_dB,783,"wo-tone suppression, the slopes of tuning-curve flanks and Q10dB values were similar to those previously reported for the st"
+1880073,1.5 kHz,1500,Frequency_Hz,301,"g pure-tone exposure. Chicks were exposed to a pure-tone of 1.5 kHz at 124 dB SPL. Lesion was found in both TM and hair cells, "
+1880073,124 dB SPL,124,Sound_Level_dB,312," exposure. Chicks were exposed to a pure-tone of 1.5 kHz at 124 dB SPL. Lesion was found in both TM and hair cells, but the area o"
+1880073,2.2 kHz,2200,Frequency_Hz,524,"osure, chicks were exposed to a second intense pure-tone at 2.2 kHz 124 dB SPL. The frequency of the second exposure correspond"
+1880073,124 dB SPL,124,Sound_Level_dB,532,hicks were exposed to a second intense pure-tone at 2.2 kHz 124 dB SPL. The frequency of the second exposure corresponded to a reg
+1880073,1.5 kHz,1500,Frequency_Hz,787,ntly less hair cell damage in chicks already exposed to the 1.5 kHz pure-tone than in controls which were not primed with the f
+1880297,96 dB/oct,96,Attenuation_dB_oct,435,g adults) in the presence of high-pass noise masking (slope 96 dB/oct) to obtain frequency specific responses from octave-wide ba
+1880297,11.3 kHz,11300,Frequency_Hz,735,delay between the octave band with center frequency (CF) of 11.3 kHz and that with CF of 5.7 kHz decreased (about 0.4 ms on aver
+1880297,5.7 kHz,5700,Frequency_Hz,764, with center frequency (CF) of 11.3 kHz and that with CF of 5.7 kHz decreased (about 0.4 ms on average) in exponential fashion 
+1938628,500 Hz,500,Frequency_Hz,138,"te. Profound hearing losses were documented by ABR and FFR (500 Hz) testing. At 9-17 weeks of age, the young deafened cats wer"
+1938628,6 dB,6,Sound_Level_dB,324,lectrode. Six of the animals were chronically stimulated at 6 dB above electrically evoked ABR thresholds for 1 h/day for pe
+1938629,6 dB,6,Sound_Level_dB,363,"arting at 13-18 weeks of age), for a period of one hour, at 6 dB above the electrically evoked auditory brainstem response t"
+1960280,5 dB,5,Sound_Level_dB,797,"vidual 6-month-olds' thresholds rarely changed by more than 5 dB between blocks, and the correlation between the thresholds "
+1960280,10 dB,10,Sound_Level_dB,983,"-olds' thresholds, however, sometimes changed by as much as 10 dB between blocks, and the correlation between first and secon"
+1960280,5 dB,5,Sound_Level_dB,1643, rates changed the average thresholds obtained by less than 5 dB.(ABSTRACT TRUNCATED AT 250 WORDS)
+2061219,500 and 608 Hz,500-608,Frequency_Hz,395,ence between all possible pairs of five frequencies between 500 and 608 Hz. Coordinates of five points are calculated to create a map 
+2076984,2 dB,2,Sound_Level_dB,650,"alanced biphasic pulses (200 microseconds/phase, 30 pps) at 2 dB above the electrically evoked auditory brain stem response "
+2076984,6 dB,6,Sound_Level_dB,749,"tory brain stem response (EABR) threshold for 4 h/day or at 6 dB 1 h/day, 5 days/week, for up to 3 months. The second electr"
+2076984,6 dB,6,Sound_Level_dB,2377,area activated by chronically stimulated electrode pairs at 6 dB above minimum threshold was approximately twice that of uns
+2299044,16 dB,16,Sound_Level_dB,286,"timated by testing each infant at four S/N's (-8, 0, 8, and 16 dB). Adults were tested for comparison at four S/N's (-12, -8,"
+2299044,0 dB,0,Sound_Level_dB,360," were tested for comparison at four S/N's (-12, -8, -4, and 0 dB). The S/N's were chosen based on pilot data. Performance va"
+2312410,4 and 11.3 kHz,4000-11300,Frequency_Hz,372,"primaries were tested at one-half octave intervals, between 4 and 11.3 kHz. No emissions were detected on postnatal day 12; however, b"
+2312410,5.7 and 11.3 kHz,5700-11300,Frequency_Hz,518,"issions were measured at geometric-mean frequencies between 5.7 and 11.3 kHz, but not at 4 kHz. By the 18th postnatal day, all animals h"
+2312410,4 kHz,4000,Frequency_Hz,547,"etric-mean frequencies between 5.7 and 11.3 kHz, but not at 4 kHz. By the 18th postnatal day, all animals had measurable emis"
+2312410,11.3 kHz,11300,Frequency_Hz,637,"ay, all animals had measurable emissions at 4, 5, 7, 8, and 11.3 kHz. Both the functional onset and maturation of high- to midfr"
+2358411,6 dB,6,Sound_Level_dB,402, conditions and controls. Thresholds decrease approximately 6 dB per doubling of duration. No difference in temporal integra
+2681313,1 MHz,1000000,Frequency_Hz,76,"increase measured in vitro in human fetal femurs exposed to 1 MHz, continuous wave ultrasound at 37 degrees C is reported. Th"
+2768086,3.05 dB,3.05,Sound_Level_dB,732,s an inverse function of blood O2 level with an approximate 3.05 dB elevation for every mmHg decrease in PaO2 (2.89 dB/% SaO2).
+2768086,2.89 dB,2.89,Sound_Level_dB,783,roximate 3.05 dB elevation for every mmHg decrease in PaO2 (2.89 dB/% SaO2). These findings are probably due to hypoxia induced
+2808150,0.9 kHz,900,Frequency_Hz,169,"se pure-tone stimulus. One day old chicks were exposed to a 0.9 kHz tone for 48 h at 120 dB. At 0, 1, 3, 6, 9, 12 and 15 days a"
+2808150,120 dB,120,Sound_Level_dB,194,"e day old chicks were exposed to a 0.9 kHz tone for 48 h at 120 dB. At 0, 1, 3, 6, 9, 12 and 15 days after exposure, cochlear "
+2808150,60 dB,60,Sound_Level_dB,427,ately after removal from the pure tone a threshold shift of 60 dB relative to age-matched controls was measured. The sharpnes
+2808150,10 dB,10,Sound_Level_dB,528,"s measured. The sharpness of tuning curves, as measured by Q10 dB, decreased by over 50%. By post-exposure day 15, near compl"
+2808922,10 kHz,10000,Frequency_Hz,86,"ve-band noises with center frequencies of 0.4, 1, 2, 4, and 10 kHz and for a 1/3-octave-band noise centered at 10 kHz were obt"
+2808922,10 kHz,10000,Frequency_Hz,137,", 4, and 10 kHz and for a 1/3-octave-band noise centered at 10 kHz were obtained from listeners 6.5 months to 20.5 years of ag"
+2808922,0 and 10 dB,0-10,Sound_Level_dB,242,s to 20.5 years of age at two levels of a broadband masker (0 and 10 dB/cycle). Thresholds declined exponentially as a function of 
+3198866,250 to 8000 Hz,250-8000,Frequency_Hz,49,"Pure-tone thresholds at frequencies ranging from 250 to 8000 Hz were estimated for 3-, 6-, and 12-month-old infants and for"
+3198866,10-15 dB,10-15,Sound_Level_dB,428,"uencies. The thresholds of 6- and 12-month-old infants were 10-15 dB higher than those of the adults, with the difference being "
+3198866,15-30 dB,15-30,Sound_Level_dB,636,rom other laboratories. The thresholds of 3-month-olds were 15-30 dB higher than those of adults. The greatest difference betwee
+3198866,8000 Hz,8000,Frequency_Hz,737, greatest difference between 3-month-olds and adults was at 8000 Hz. This threshold difference is smaller than that reported in
+3558141,70 dB,70,Sound_Level_dB,647,tectability of the different components in the ABR tests at 70 dB reached 80-100% at about 32 weeks CA. The side of stimulati
+3558957,4.0 and 8.0 kHz,4000-8000,Frequency_Hz,701,"milar for the 1.0-kHz probe. For the high-frequency probes (4.0 and 8.0 kHz), smaller tip-to-tail differences and lower Q 10 values wer"
+3558968,40 kHz,40000,Frequency_Hz,173,and LPC or FFT analyses based on waveforms sampled at 20 or 40 kHz. The two major closant types studied were fricatives and tr
+3558968,14 kHz,14000,Frequency_Hz,438,"ectral components at higher frequencies, i.e., to and above 14 kHz. Trill rate varied from 16-180 Hz with a mean of about 100,"
+3558968,16-180 Hz,16-180,Frequency_Hz,469,"quencies, i.e., to and above 14 kHz. Trill rate varied from 16-180 Hz with a mean of about 100, approximately four times the mean"
+3610862,1.5 kHz,1500,Frequency_Hz,581,"pass tuning curves, with center frequencies clustering near 1.5 kHz. Throughout the first week, response thresholds, maximum di"
+3611513,70 dB SPL,70,Sound_Level_dB,137,"as measured at three stimulus intensity levels (50, 60, and 70 dB SPL) using the operant head-turn procedure. The procedure was m"
+3624650,4000 Hz,4000,Frequency_Hz,137,"d infants and for adults using pure tones at 500, 1000, and 4000 Hz. Each listener provided an FDL at 40 dB and at a higher (80"
+3624650,40 dB,40,Sound_Level_dB,179,"at 500, 1000, and 4000 Hz. Each listener provided an FDL at 40 dB and at a higher (80 dB, in most cases) sensation level (SL)"
+3624650,80 dB,80,Sound_Level_dB,202,"Hz. Each listener provided an FDL at 40 dB and at a higher (80 dB, in most cases) sensation level (SL). An observer-based beh"
+3624650,500 and 1000 Hz,500-1000,Frequency_Hz,495," of 6- and 12-month-olds were worse than those of adults at 500 and 1000 Hz, but not at 4000 Hz. Decreasing the SL led to an increase i"
+3624650,4000 Hz,4000,Frequency_Hz,523,"e worse than those of adults at 500 and 1000 Hz, but not at 4000 Hz. Decreasing the SL led to an increase in the FDL of about t"
+3655123,4 kHz,4000,Frequency_Hz,808,"ced. For each of three bandpass noise conditions (less than 4 kHz, 4-8 kHz, 8-12 kHz), minimum audible angle (MAA) for each l"
+3655123,4-8 kHz,4000-8000,Frequency_Hz,815,"r each of three bandpass noise conditions (less than 4 kHz, 4-8 kHz, 8-12 kHz), minimum audible angle (MAA) for each listener, "
+3655123,8-12 kHz,8000-12000,Frequency_Hz,824," three bandpass noise conditions (less than 4 kHz, 4-8 kHz, 8-12 kHz), minimum audible angle (MAA) for each listener, i.e., the "
+3655123,4 kHz,4000,Frequency_Hz,1320,ts did not reliably localize the low-pass signal (less than 4 kHz) and showed the best performance to the signal comprising t
+3655123,8-12 kHz,8000-12000,Frequency_Hz,1409,rformance to the signal comprising the highest frequencies (8-12 kHz). These findings reveal systematic age-related improvements
+3771926,8.0 kHz,8000,Frequency_Hz,207,"d noise. Notch center frequencies were set at 1.0, 4.0, and 8.0 kHz. Responses were obtained at 20, 40, and 60 dBnHL during the"
+3771926,60 dBnHL,60,Sound_Level_dB,255,"0, 4.0, and 8.0 kHz. Responses were obtained at 20, 40, and 60 dBnHL during the simultaneous presentation of each notched-noise "
+3793640,0.66-1.8 kHz,660-1800,Frequency_Hz,153,een 1 and 150 days post-hatch. Admittance at 7 frequencies (0.66-1.8 kHz) was calculated from measurements of the magnitude and phas
+3958315,86 dB,86,Sound_Level_dB,217,and in adults. The signal was a 4-kHz tone pip presented at 86 dB peak equivalent sound-pressure level (p.e.SPL). The masking
+3973221,30 Hz,30,Frequency_Hz,472," was above chance expectation for increments of 10, 20, and 30 Hz relative to a 150-Hz standard. There were no differences in"
+3973221,30 Hz,30,Frequency_Hz,706,", performance was above chance for increments of 5, 10, and 30 Hz relative to the same 150-Hz standard. Both experiments indi"
+3989107,200 Hz,200,Frequency_Hz,471,"s that differed in pitch by approximately 20% (e.g., 160 vs 200 Hz). Using a visually reinforced conditioned head-turning para"
+4029054,500 and 4000 Hz,500-4000,Frequency_Hz,764,"ds from outside the mother decreased at frequencies between 500 and 4000 Hz, but not below or above those frequencies. In a second expe"
+4044425,100 dB SPL,100,Sound_Level_dB,631,"nic membrane, and corrected to a constant stimulus level of 100 dB SPL, was obtained for the neonatal chick and parakeet for frequ"
+4044425,0.2 and 10.0 kHz,200-10000,Frequency_Hz,716,for the neonatal chick and parakeet for frequencies between 0.2 and 10.0 kHz with a capacitive probe. In both species this curve resembl
+4044425,1.5-3.0 kHz,1500-3000,Frequency_Hz,854, a bandpass filter whose best frequency was in the range of 1.5-3.0 kHz. The low and high frequency roll-off was 6 and 16 dB per oc
+4044425,6 and 16 dB,6-16,Sound_Level_dB,907,"nge of 1.5-3.0 kHz. The low and high frequency roll-off was 6 and 16 dB per octave, respectively. Displacement of the TM in the chi"
+4044425,70 and 120 dB SPL,70-120,Sound_Level_dB,1025,TM in the chick was measured at several frequencies between 70 and 120 dB SPL and was found to be linear. The results of displacement mea
+4066520,30 to 1.5 kHz,30000-1500,Frequency_Hz,136,"mbryonic day 18 or 20 or on post-hatching days 1, 10, 20 or 30 to 1.5 kHz pure tone at an intensity of 125 dB SPL. After a 20- or 30-"
+4066520,125 dB SPL,125,Sound_Level_dB,179,"ays 1, 10, 20 or 30 to 1.5 kHz pure tone at an intensity of 125 dB SPL. After a 20- or 30-day survival time, audiograms were recor"
+4066520,4 kHz,4000,Frequency_Hz,394, frequency of maximum threshold elevation was seen at about 4 kHz when the chicks were exposed to the traumatic tone at embry
+4078175,11-29 Hz,11-29,Frequency_Hz,613,"increments and decrements in frequency, and DLs ranged from 11-29 Hz, while adult DLs ranged from 3-5 Hz. Infants also easily di"
+4078175,3-5 Hz,3-5,Frequency_Hz,651,", and DLs ranged from 11-29 Hz, while adult DLs ranged from 3-5 Hz. Infants also easily discriminated intensity increments, an"
+4078175,3-12 dB,3-12,Sound_Level_dB,735,"ily discriminated intensity increments, and DLs ranged from 3-12 dB, while adult DLs ranged from 1-2 dB. No infants successfull"
+4078175,1-2 dB,1-2,Sound_Level_dB,772,"s, and DLs ranged from 3-12 dB, while adult DLs ranged from 1-2 dB. No infants successfully discriminated intensity decrements"
+4086386,50 dB,50,Sound_Level_dB,1483, ear to participate in the binaural response was as much as 50 dB higher than that at the opposite normal ear in contrast to 
+6401088,4.0 and 10.0 kHz,4000-10000,Frequency_Hz,45,"Auditory evoked-potential thresholds to 0.5, 4.0 and 10.0 kHz tone pips were measured in 40 normal infants 2-28 wks old a"
+6401088,500 Hz,500,Frequency_Hz,164,"ts 2-28 wks old and 14 normal hearing adults. Thresholds to 500 Hz tone pips were based upon the steady-state, 40 Hz evoked po"
+6401088,40 Hz,40,Frequency_Hz,215,"holds to 500 Hz tone pips were based upon the steady-state, 40 Hz evoked potential. Thresholds to 4.0 and 10.0 kHz tone pips "
+6401088,4.0 and 10.0 kHz,4000-10000,Frequency_Hz,253,"pon the steady-state, 40 Hz evoked potential. Thresholds to 4.0 and 10.0 kHz tone pips were based upon the brainstem response. Stimulus "
+6401088,4.0 kHz,4000,Frequency_Hz,458, difference between infant and adult thresholds occurred at 4.0 kHz. The magnitude of this difference decreased with age; howev
+6401088,500 Hz,500,Frequency_Hz,625,p to 28 wks of age. No significant differences were seen at 500 Hz. To the 10.0 kHz stimulus only the youngest (2-4 wk) infant
+6401088,10.0 kHz,10000,Frequency_Hz,640,age. No significant differences were seen at 500 Hz. To the 10.0 kHz stimulus only the youngest (2-4 wk) infants had thresholds 
+6619005,60-70 dB SPL,60-70,Sound_Level_dB,636," animals definitely demonstrated elevated thresholds around 60-70 dB SPL. Morphological results indicated that some structures, like"
+7096216,4 and 8 kHz,4000-8000,Frequency_Hz,201,"e times for additional recordings. Filtered clicks of 1, 2, 4 and 8 kHz were presented at two intensities, 30 and 50 dB HL re the a"
+7096216,30 and 50 dB HL,30-50,Sound_Level_dB,248,"cks of 1, 2, 4 and 8 kHz were presented at two intensities, 30 and 50 dB HL re the average threshold for a group of young adults. Respo"
+7096216,50 dB nHL,50,Sound_Level_dB,350,"or a group of young adults. Responses to a broadband click, 50 dB nHL, were also recorded. The latencies of waves I, III and V we"
+7096216,8 kHz,8000,Frequency_Hz,457," waves I, III and V were measured. Wave I latencies for the 8 kHz filtered click showed no change but those for lower frequen"
+7096216,1 kHz,1000,Frequency_Hz,668,"among the filtered clicks, was largest for the responses to 1 kHz. Best-fitting curves were determined for latency vs. age fo"
+7096216,8 kHz,8000,Frequency_Hz,880,"howed that the rostral conduction time for responses to the 8 kHz FC decreased with age and, for the 1 kHz filtered click (50"
+7096216,1 kHz,1000,Frequency_Hz,921,"r responses to the 8 kHz FC decreased with age and, for the 1 kHz filtered click (50 dB), remained constant. The early develo"
+7096216,50 dB,50,Sound_Level_dB,943,"Hz FC decreased with age and, for the 1 kHz filtered click (50 dB), remained constant. The early development of basal regions"
+7119278,445 Hz,445,Frequency_Hz,895,"ished descriptions of infant cry. The f0 frequency averaged 445 Hz for 3-month-olds, 450 Hz for 6-month-olds, and 415 Hz for 9"
+7119278,450 Hz,450,Frequency_Hz,920,"ant cry. The f0 frequency averaged 445 Hz for 3-month-olds, 450 Hz for 6-month-olds, and 415 Hz for 9-month-olds. As has been "
+7119278,415 Hz,415,Frequency_Hz,949,"raged 445 Hz for 3-month-olds, 450 Hz for 6-month-olds, and 415 Hz for 9-month-olds. As has been previously reported for infan"
+7560507,160 and 200 Hz,160-200,Frequency_Hz,380,"monic complexes based on missing fundamental frequencies of 160 and 200 Hz. After learning this basic task, infants learned to discrim"
+7560507,30 Hz,30,Frequency_Hz,562,"y shifting the partials of the harmonic complexes upward by 30 Hz (experiment 1) or 20 Hz (experiment 2). Finally, three spec"
+7560507,20 Hz,20,Frequency_Hz,586,"of the harmonic complexes upward by 30 Hz (experiment 1) or 20 Hz (experiment 2). Finally, three spectrally different inharmo"
+7593925,100 Hz,100,Frequency_Hz,1132,ate that (1) energy in the infant ABR is concentrated below 100 Hz and (2) a high-pass recording filter of 30 Hz reveals a lar
+7593925,30 Hz,30,Frequency_Hz,1179,trated below 100 Hz and (2) a high-pass recording filter of 30 Hz reveals a larger-amplitude ABR and enhances the overall sig
+7608394,160 and 200 Hz,160-200,Frequency_Hz,323,"tonal complexes based on missing fundamental frequencies of 160 and 200 Hz. After learning this basic task, infants were presented wit"
+7642831,8000 Hz,8000,Frequency_Hz,952,"ld, and adult subjects. Tone-pip stimuli at 1000, 4000, and 8000 Hz (50 dB nHL) were presented simultaneously with notched-nois"
+7642831,50 dB nHL,50,Sound_Level_dB,961,"dult subjects. Tone-pip stimuli at 1000, 4000, and 8000 Hz (50 dB nHL) were presented simultaneously with notched-noise masking c"
+7642831,8000 Hz,8000,Frequency_Hz,1590,"o not have adultlike tuning for high-frequency stimulation (8000 Hz). In contrast, by 6 months of age, tuning-function width (Q"
+7714257,500-8000 Hz,500-8000,Frequency_Hz,1080," notched-noise masking with center frequencies ranging from 500-8000 Hz. With high-frequency centered notches, latency, and morphol"
+7928706,7-110 kHz,7000-110000,Frequency_Hz,263,"imal, Carollia perspicillata, has an adult hearing range of 7-110 kHz (characteristic frequencies) but lack any significant overr"
+7928706,8 to 76 kHz,8000-76000,Frequency_Hz,500,"e newborn Carollia includes characteristic frequencies from 8 to 76 kHz, which is about 65% of the adult hearing range. As in adult"
+7928706,90 dB SPL,90,Sound_Level_dB,746,non-responsive to acoustic stimulation up to intensities of 90 dB SPL. During development there is a progressive conversion of no
+7928706,76 kHz,76000,Frequency_Hz,910,ally responsive slabs with characteristic frequencies above 76 kHz along the dorsolateral to ventromedial (low-to-high frequen
+7928741,4 and 8 kHz,4000-8000,Frequency_Hz,99,"esholds and auditory brainstem response (ABR) latencies for 4 and 8 kHz tone pips were examined in normal-hearing 3-month-olds, 6-m"
+7928741,4 and 8 kHz,4000-8000,Frequency_Hz,1115,nsity intercept difference and behavioral threshold at both 4 and 8 kHz among 3-month-olds. The correlation was not significant amo
+8040092,120 dB SPL,120,Sound_Level_dB,179,owing exposure of pregnant ewes to intense broadband noise (120 dB SPL for 16 h). ABRs were elicited by clicks and tone bursts (0.
+8040092,4 kHz,4000,Frequency_Hz,262,"BRs were elicited by clicks and tone bursts (0.5, 1, 2, and 4 kHz) delivered through a bone oscillator secured to the fetal s"
+8040092,8 dB,8,Sound_Level_dB,497,d ABR thresholds were temporarily elevated by an average of 8 dB following the noise exposure. Results show that exogenous s
+8040097,500 Hz,500,Frequency_Hz,315, brainstem response (ABR) and frequency following response (500 Hz) testing. Five of the kittens were implanted unilaterally w
+8040097,2 dB,2,Sound_Level_dB,491,"eeks. These kittens were stimulated daily for four hours at 2 dB above the evoked ABR threshold, over a period of three mont"
+8113139,0.9 kHz,900,Frequency_Hz,154,age and number of times they were exposed to a pure tone of 0.9 kHz at 120 dB SPL for 48 h. Several animals were exposed once a
+8113139,120 dB SPL,120,Sound_Level_dB,165,ber of times they were exposed to a pure tone of 0.9 kHz at 120 dB SPL for 48 h. Several animals were exposed once at 2 or 16 days
+8113139,57 dB,57,Sound_Level_dB,558,erage threshold loss in the mid-range frequencies was about 57 dB at 0 days for all three conditions. This level was reduced 
+8113139,15 dB,15,Sound_Level_dB,632,"s for all three conditions. This level was reduced to about 15 dB in all three groups at 12 days of recovery, while in birds "
+8120247,125-10700 Hz,125-10700,Frequency_Hz,161,"ts, ages 1, 3, 6, 12, and 24 months, has been measured from 125-10700 Hz. The source was a loudspeaker using pink noise, and the dif"
+8120247,4.4 kHz,4400,Frequency_Hz,548,esonances. The ear-canal resonance frequency decreases from 4.4 kHz at age 1 month to 2.9 kHz at age 24 months. The concha reso
+8120247,2.9 kHz,2900,Frequency_Hz,574,esonance frequency decreases from 4.4 kHz at age 1 month to 2.9 kHz at age 24 months. The concha resonance frequency decreases 
+8120247,5.5 kHz,5500,Frequency_Hz,646,"ge 24 months. The concha resonance frequency decreases from 5.5 kHz at age 1 month to 4.5 kHz at age 24 months. Below 2 kHz, th"
+8120247,4.5 kHz,4500,Frequency_Hz,672,"esonance frequency decreases from 5.5 kHz at age 1 month to 4.5 kHz at age 24 months. Below 2 kHz, the diffuse-field transfer f"
+8120247,2 kHz,2000,Frequency_Hz,704,"m 5.5 kHz at age 1 month to 4.5 kHz at age 24 months. Below 2 kHz, the diffuse-field transfer function shows effects due to t"
+8157500,20 dB,20,Sound_Level_dB,761," be recorded (n = 5), the neonatal threshold was on average 20 dB better than in the fetus. These findings are probably due t"
+8226331,2 and 42 dB SPL,2-42,Sound_Level_dB,940,ly lower than in girls (4.6). The SOAE levels were between -2 and 42 dB SPL. The mean level per emitting ear was 8.0 dB SPL and not sig
+8226331,8.0 dB SPL,8,Sound_Level_dB,993,tween -2 and 42 dB SPL. The mean level per emitting ear was 8.0 dB SPL and not significantly different between right and left ears
+8226331,2 kHz,2000,Frequency_Hz,1270,adults most of the emissions (70%) are at frequencies above 2 kHz. Comparing the levels of the EOAEs between ears with and wi
+8226345,55 dB,55,Sound_Level_dB,531,ined in neonatal rats. ABR to maximal intensity BC stimuli (55 dB above adult rat ABR threshold--55 dB HL*) could be recorded
+8226345,55 dB HL,55,Sound_Level_dB,568, intensity BC stimuli (55 dB above adult rat ABR threshold--55 dB HL*) could be recorded from PND 7-8 while AC responses to 80 d
+8226345,80 dB HL,80,Sound_Level_dB,632,"B HL*) could be recorded from PND 7-8 while AC responses to 80 dB HL* stimuli, only from PND 11. The air-bone gap (a measure of "
+8226347,0.9 kHz,900,Frequency_Hz,57,"One-day-old chicks were exposed to an intense pure tone (0.9 kHz, 120 dB SPL) and assigned to one of eight groups based on c"
+8226347,120 dB SPL,120,Sound_Level_dB,66,"y-old chicks were exposed to an intense pure tone (0.9 kHz, 120 dB SPL) and assigned to one of eight groups based on continuous ex"
+8226347,0.1 and 4.5 kHz,100-4500,Frequency_Hz,439,ctivity. Thresholds were measured at 10 frequencies between 0.1 and 4.5 kHz while frequency selectivity was assessed by a simultaneous 
+8226347,0.3 and 2.5 kHz,300-2500,Frequency_Hz,584,ning-curve procedure at five probe-tone frequencies between 0.3 and 2.5 kHz. Threshold shift was greatest at 1.3 kHz and reached a maxi
+8226347,1.3 kHz,1300,Frequency_Hz,633,es between 0.3 and 2.5 kHz. Threshold shift was greatest at 1.3 kHz and reached a maximum loss of approximately 57 dB between 4
+8226347,57 dB,57,Sound_Level_dB,685,test at 1.3 kHz and reached a maximum loss of approximately 57 dB between 48 and 200 h of exposure. The shape of the threshol
+8226347,10 dB,10,Sound_Level_dB,964, tuning sharpness was evaluated by comparing the values of Q10 dB for control and exposed tuning curves and expressing the di
+8226347,0.9 kHz,900,Frequency_Hz,1103,en them as a percent change. Probe-tone tuning curves above 0.9 kHz became less selective as exposure duration increased. A max
+8226347,0.9 kHz,900,Frequency_Hz,1310,d constant to 200 h. The low-frequency tuning curves (below 0.9 kHz) did not show any systematic loss in selectivity. The chang
+8226352,25 dB,25,Sound_Level_dB,281,data were collected with a 500-Hz masker presented at 15 or 25 dB above absolute threshold. Signals to be detected varied up 
+8270739,"125-10,700 Hz",125-10700,Frequency_Hz,163,"ants of age 1, 3, 6, 12, and 24 months over frequency range 125-10,700 Hz. The development of the external ear canal and middle ear s"
+8300947,0.3-60 kHz,300-60000,Frequency_Hz,116,eri) was tested through behavioral measures in the range of 0.3-60 kHz from the first postnatal thresholds detectable through to t
+8300947,1-5 kHz,1000-5000,Frequency_Hz,673,ned reactions to tones were found at DAB 18 in the range of 1-5 kHz (range of mother-infant call). Responses were restricted to
+8300947,1-10 kHz,1000-10000,Frequency_Hz,786, restricted to the range of greatest sensitivity in adults (1-10 kHz). An increase in sensitivity was detected from DAB 18-38. T
+8300947,0.3 kHz,300,Frequency_Hz,882,y was detected from DAB 18-38. The lowest tested frequency (0.3 kHz) reached adult levels earlier than higher frequencies. No f
+8354755,10 and 500 Hz,10-500,Frequency_Hz,454,"tact area of 2.85 cm2 produced abdominal vibrations between 10 and 500 Hz, and the resulting force and acceleration were measured. Af"
+8354755,16 Hz,16,Frequency_Hz,865,"ct at low frequencies, a resonance at a frequency of 28 +/- 16 Hz (mean +/- s.d.), and a dominant mass effect at higher frequ"
+8376210,8 kHz,8000,Frequency_Hz,247,"dults. Thresholds were estimated for tone pips at 1, 4, and 8 kHz, presented at a rate of 13.3/s. The time course of developm"
+8376210,4 kHz,4000,Frequency_Hz,999,on between behavioral and ABR thresholds was significant at 4 kHz for 3-month-olds and at 8 kHz for adults. This suggests tha
+8376210,8 kHz,8000,Frequency_Hz,1029,thresholds was significant at 4 kHz for 3-month-olds and at 8 kHz for adults. This suggests that variability in sensory funct
+8376214,10 and 80 Hz,10-80,Frequency_Hz,512,"n rate on the response. Stimulus AM rate was varied between 10 and 80 Hz for continuous tonal stimuli of 500 Hz, and between 20 and "
+8376214,500 Hz,500,Frequency_Hz,557,"varied between 10 and 80 Hz for continuous tonal stimuli of 500 Hz, and between 20 and 80 Hz for continuous tonal stimuli of 2"
+8376214,20 and 80 Hz,20-80,Frequency_Hz,577,"d 80 Hz for continuous tonal stimuli of 500 Hz, and between 20 and 80 Hz for continuous tonal stimuli of 2000 Hz. Optimal modulation"
+8376214,2000 Hz,2000,Frequency_Hz,622,"z, and between 20 and 80 Hz for continuous tonal stimuli of 2000 Hz. Optimal modulation rate was defined as the AM rate that pr"
+8376214,10 and 40 Hz,10-40,Frequency_Hz,767," coherence estimate. Adult AMFR coherence increased between 10 and 40 Hz (20-40 Hz for 2000 Hz), and decreased between 40 and 80 Hz "
+8376214,20-40 Hz,20-40,Frequency_Hz,781,"imate. Adult AMFR coherence increased between 10 and 40 Hz (20-40 Hz for 2000 Hz), and decreased between 40 and 80 Hz in both ca"
+8376214,2000 Hz,2000,Frequency_Hz,794,"AMFR coherence increased between 10 and 40 Hz (20-40 Hz for 2000 Hz), and decreased between 40 and 80 Hz in both carrier freque"
+8376214,40 and 80 Hz,40-80,Frequency_Hz,826," 10 and 40 Hz (20-40 Hz for 2000 Hz), and decreased between 40 and 80 Hz in both carrier frequency conditions. Infant AMFR coherence"
+8376214,20-80 Hz,20-80,Frequency_Hz,958,", in contrast, monotonically increased between 10 and 80 H (20-80 Hz for 2000 Hz). Thus, within the frequency range examined, 40"
+8376214,2000 Hz,2000,Frequency_Hz,971,", monotonically increased between 10 and 80 H (20-80 Hz for 2000 Hz). Thus, within the frequency range examined, 40 Hz is optim"
+8376214,40 Hz,40,Frequency_Hz,1024,"Hz for 2000 Hz). Thus, within the frequency range examined, 40 Hz is optimal for generating the AMFR in adults, whereas 80 Hz"
+8376214,80 Hz,80,Frequency_Hz,1084,"40 Hz is optimal for generating the AMFR in adults, whereas 80 Hz is optimal in infants. Adults were tested while awake and i"
+8376214,80 Hz,80,Frequency_Hz,1372,"s in both awake and sedated states. As in sleeping infants, 80 Hz was optimal for generating AMFRs in the sedated adults."
+8509307,75 dBnHL,75,Sound_Level_dB,411,"3CLTs). ABEPs were evoked by alternating polarity, monaural 75 dBnHL clicks presented at rates of 10/s, 55/s and 80/s. Potential"
+8509307,45 dBnHL,45,Sound_Level_dB,503,"es of 10/s, 55/s and 80/s. Potentials were also recorded to 45 dBnHL and 15 dBnHL clicks presented at 10/s. 3CLT point by point "
+8509307,15 dBnHL,15,Sound_Level_dB,516,5/s and 80/s. Potentials were also recorded to 45 dBnHL and 15 dBnHL clicks presented at 10/s. 3CLT point by point (apex latenci
+8567420,1.5 kHz,1500,Frequency_Hz,261, exposed to an octave band noise with a center frequency of 1.5 kHz at 116 dB SPL for 4 h. The chicks were grouped based on rec
+8567420,116 dB SPL,116,Sound_Level_dB,272, an octave band noise with a center frequency of 1.5 kHz at 116 dB SPL for 4 h. The chicks were grouped based on recovery duration
+8584373,90 dB,90,Sound_Level_dB,428,"eye movement (REM) sleep, both before and after exposure to 90 dB (A) of white-noise. RESULTS: Ten infants were excluded from"
+8600128,80 Hz,80,Frequency_Hz,254,e amplitude-modulated (AM) tones. A modulation frequency of 80 Hz was used in infants; modulation frequencies of 40 and 80 Hz
+8600128,40 and 80 Hz,40-80,Frequency_Hz,307,"ncy of 80 Hz was used in infants; modulation frequencies of 40 and 80 Hz were used in adults. The effects of intensity, carrier freq"
+8600128,80 Hz,80,Frequency_Hz,805,"ot differ across age groups. 'Best frequency' (i.e., infant 80 Hz and adult 40 Hz) EFR thresholds were the same for infants a"
+8600128,40 Hz,40,Frequency_Hz,821," age groups. 'Best frequency' (i.e., infant 80 Hz and adult 40 Hz) EFR thresholds were the same for infants and adults at 500"
+8600128,500 and 1000 Hz,500-1000,Frequency_Hz,883," Hz) EFR thresholds were the same for infants and adults at 500 and 1000 Hz, but infant EFR thresholds were poorer than adult threshold"
+8600128,2000 Hz,2000,Frequency_Hz,963," infant EFR thresholds were poorer than adult thresholds at 2000 Hz. Thus, although FFRs and EFRs are primarily adult-like at 1"
+8647727,1 kHz,1000,Frequency_Hz,363," in quiet and in increasing levels of a masking noise for a 1 kHz tone, in infants 8 to 11 months old and in adults, were det"
+8647727,1 kHz,1000,Frequency_Hz,990,"nt-adult difference in unmasked threshold. In the region of 1 kHz, the infant-adult difference in behavioral threshold was 12"
+8647727,12 dB,12,Sound_Level_dB,1053,"Hz, the infant-adult difference in behavioral threshold was 12 dB and the infant-adult difference in MML was 8 dB. Therefore,"
+8647727,8 dB,8,Sound_Level_dB,1102,"eshold was 12 dB and the infant-adult difference in MML was 8 dB. Therefore, according to our assumptions, 8 dB of the infan"
+8647727,8 dB,8,Sound_Level_dB,1149,"e in MML was 8 dB. Therefore, according to our assumptions, 8 dB of the infant-adult difference in unmasked threshold is acc"
+8647727,4 dB,4,Sound_Level_dB,1261,shold is accounted for by sensory factors and the remaining 4 dB must be attributable to non-sensory factors.
+8647737,5-20 kHz,5000-20000,Frequency_Hz,269,th. The hearing range at the onset of hearing is limited to 5-20 kHz with lowest thresholds of 60 dB SPL at 8-12 kHz. During ont
+8647737,60 dB SPL,60,Sound_Level_dB,304,"of hearing is limited to 5-20 kHz with lowest thresholds of 60 dB SPL at 8-12 kHz. During ontogeny, the hearing range expands tow"
+8647737,8-12 kHz,8000-12000,Frequency_Hz,317," limited to 5-20 kHz with lowest thresholds of 60 dB SPL at 8-12 kHz. During ontogeny, the hearing range expands towards lower a"
+8789820,0.3 and 31.9 kHz,300-31900,Frequency_Hz,513,"e cochleae. The map was established for frequencies between 0.3 and 31.9 kHz. As in other mammals, a baso-apical frequency gradient from"
+8789820,4 kHz,4000,Frequency_Hz,718,map amounted to 1.5 mm/octave for higher frequencies. Below 4 kHz the slope decreased to a value of 1 mm/octave at 0.5 kHz. A
+8789820,0.5 kHz,500,Frequency_Hz,773,elow 4 kHz the slope decreased to a value of 1 mm/octave at 0.5 kHz. A shift in the frequency map occurs during cochlear matura
+8789820,6 kHz,6000,Frequency_Hz,996," corresponding to an octave, at least for frequencies above 6 kHz."
+8844183,8 kHz,8000,Frequency_Hz,436,ar. DPEs were recorded at an earlier postnatal age to high (8 kHz) frequencies and progressed to lower (3 kHz) frequencies wi
+8844183,3 kHz,3000,Frequency_Hz,480,al age to high (8 kHz) frequencies and progressed to lower (3 kHz) frequencies with age. ABRs to high-intensity clicks were r
+8844183,8 kHz,8000,Frequency_Hz,604,"recorded at least 2 days before DPEs, although DPE onset at 8 kHz preceded adult-like ABR thresholds. Both ABR and DPEs appea"
+8844183,70 dB SPL,70,Sound_Level_dB,1081,"he experimental group, DPEs had smaller amplitudes to high (70 dB SPL) and to low (50 dB SPL) stimulus intensities at low frequen"
+8844183,50 dB SPL,50,Sound_Level_dB,1104,"DPEs had smaller amplitudes to high (70 dB SPL) and to low (50 dB SPL) stimulus intensities at low frequencies. Hence, despite th"
+8844189,11.2 kHz,11200,Frequency_Hz,762,"ode for the roughly the same frequency (e.g., approximately 11.2 kHz) at different ages can have basilar membranes of very diffe"
+8880180,50 dB SPL,50,Sound_Level_dB,263," was elicited using f2/f1 = 1.2, LI = 1.2, LI = 65 and L2 = 50 dB SPL. A suppressor tone was presented at frequencies ranging fro"
+8880180,6 dB,6,Sound_Level_dB,429,f2 and varied in level until DPOAE amplitude was reduced by 6 dB. The suppressor level required for 6 dB suppression was plo
+8880180,6 dB,6,Sound_Level_dB,469,tude was reduced by 6 dB. The suppressor level required for 6 dB suppression was plotted as function of suppressor frequency
+8880180,3000 and 6000 Hz,3000-6000,Frequency_Hz,1043,"wer width and steeper slope. Neonatal STCs were recorded at 3000 and 6000 Hz only and were comparable in shape, width and slope to adult"
+8969474,1500 and 6000 Hz,1500-6000,Frequency_Hz,1093,e developing cochlea. Two f2 frequencies were investigated: 1500 and 6000 Hz. F2 was held constant while f1 was varied to produce 13 fre
+9104019,10 kHz,10000,Frequency_Hz,960,e presence of the evanescent wave in human ear canals below 10 kHz is predicted to be 3 dB in adults and 1.3 dB in 1 month old
+9104019,3 dB,3,Sound_Level_dB,986,"nt wave in human ear canals below 10 kHz is predicted to be 3 dB in adults and 1.3 dB in 1 month old infants, when the louds"
+9104019,1.3 dB,1.3,Sound_Level_dB,1005,"r canals below 10 kHz is predicted to be 3 dB in adults and 1.3 dB in 1 month old infants, when the loudspeaker and microphone"
+9119764,4.0 and 8.0 kHz,4000-8000,Frequency_Hz,191,"ABRs were elicited with clicks and tone-bursts of 0.5, 1.5, 4.0 and 8.0 kHz, embedded in notched noise, in healthy, full-term human neo"
+9119764,3-25 dB,3-25,Sound_Level_dB,804,lds measured in p.e. SPL for all stimuli are elevated by to 3-25 dB relative to adult thresholds. Threshold elevation is greate
+9165342,20 Hz,20,Frequency_Hz,1603,"ormal ossicular transmission of sound for frequencies above 20 Hz. In pathological ears, such as those with ossicular disrupt"
+9165342,150 Hz,150,Frequency_Hz,1767, patent aqueduct might affect hearing for frequencies below 150 Hz.
+9387986,83 dB SPL,83,Sound_Level_dB,304,s were first recorded at postnatal day 24 at a threshold of 83 dB SPL; thresholds declined over subsequent weeks to below 58 dB a
+9387986,58 dB,58,Sound_Level_dB,366, dB SPL; thresholds declined over subsequent weeks to below 58 dB at 40 days. Isolation calls emitted by the pups had stereot
+9387986,13 kHz,13000,Frequency_Hz,463,tted by the pups had stereotypic spectra with peaks at near 13 kHz and an octave higher. Such calls declined in frequency by d
+9387991,2.8-8 kHz,2800-8000,Frequency_Hz,910,"e of the cochlea, about 40-60% from the base (approximately 2.8-8 kHz). Thus, neuronal degeneration apparently is not secondary t"
+9387996,1.0 kHz,1000,Frequency_Hz,166,re and after a 16-h exposure to low-pass (cut-off frequency 1.0 kHz) and high-pass (cut-off frequency 1.0 kHz) noises (approxim
+9387996,1.0 kHz,1000,Frequency_Hz,208,"cut-off frequency 1.0 kHz) and high-pass (cut-off frequency 1.0 kHz) noises (approximately 120 dB sound pressure level, recorde"
+9387996,120 dB,120,Sound_Level_dB,239,"high-pass (cut-off frequency 1.0 kHz) noises (approximately 120 dB sound pressure level, recorded in air). Bone-conduction ABR"
+9387996,1.0 and 2.0 kHz,1000-2000,Frequency_Hz,350,"-conduction ABRs were elicited by broadband clicks and 0.5, 1.0 and 2.0 kHz tone bursts. Following low-pass noise exposure, ABR thresho"
+9387996,0.5 and 1.0 kHz,500-1000,Frequency_Hz,479,hresholds and wave IV latencies increased significantly for 0.5 and 1.0 kHz tone bursts. The high-pass noise exposure produced signific
+9387996,1.0 kHz,1000,Frequency_Hz,618,shifts in ABR thresholds and wave IV latencies only for the 1.0 kHz tone bursts. These findings confirm previous reports of low
+9407658,160 and 200 Hz,160-200,Frequency_Hz,246,Adults and infants were presented with either pure tones of 160 and 200 Hz or harmonic tonal complexes with pitches equivalent to 160 
+9407658,160 and 200 Hz,160-200,Frequency_Hz,316,0 Hz or harmonic tonal complexes with pitches equivalent to 160 and 200 Hz. The tonal complexes did not contain energy at the fundamen
+9479751,5-15 dB,5-15,Sound_Level_dB,350,he occluded outer ear canal. Noise levels in the canal were 5-15 dB lower for adults at frequencies less than about 3 kHz. The 
+9479751,3 kHz,3000,Frequency_Hz,406,ere 5-15 dB lower for adults at frequencies less than about 3 kHz. The 2 f1-f2 DPOAE was the most reliably recorded DPOAE exc
+9479751,1.5 dB,1.5,Sound_Level_dB,776,consecutively recorded 2 f1-f2 DPOAEs were generally within 1.5 dB of each other for all age groups (slightly better reproduci
+9479751,4.2-9.9 kHz,4200-9900,Frequency_Hz,1090,ts respectively). At the highest frequencies assessed (f2 = 4.2-9.9 kHz) all subjects had similar amplitude 2 f1-f2 DPOAEs. At lowe
+9479751,1.5-2.1 kHz,1500-2100,Frequency_Hz,1298,newborns. At the lowest frequencies reliably assessed (f2 = 1.5-2.1 kHz) term newborns had significantly larger 2 f1-f2 DPOAEs than
+9557980,4-12 kHz,4000-12000,Frequency_Hz,1373,e. Thresholds to tone bursts in the centre frequency range (4-12 kHz) remained less than those for low (0.5-1.5 kHz) and higher 
+9557980,0.5-1.5 kHz,500-1500,Frequency_Hz,1417,requency range (4-12 kHz) remained less than those for low (0.5-1.5 kHz) and higher (16 kHz) frequencies. Latencies of an identifie
+9557980,16 kHz,16000,Frequency_Hz,1442, remained less than those for low (0.5-1.5 kHz) and higher (16 kHz) frequencies. Latencies of an identified peak in ABR wavefo
+9682815,1500 and 6000 Hz,1500-6000,Frequency_Hz,907,e neonates showed non-adult-like DPOAE suppression at f2 of 1500 and 6000 Hz: (1) STCs were narrower in width (Q10) and steeper in slope
+9872134,500 and 8000 Hz,500-8000,Frequency_Hz,156,nfants in response to clicks and tone burst stimuli between 500 and 8000 Hz as detailed in a previous study. These results were further
+9872134,7.45 dB,7.45,Sound_Level_dB,516,ld between male and female infants occurs in the right ear (7.45 dB) as opposed to the left ear (1.56 dB). Both male and female
+9872134,1.56 dB,1.56,Sound_Level_dB,553,curs in the right ear (7.45 dB) as opposed to the left ear (1.56 dB). Both male and female infants have significantly larger wa
+9925011,20 kHz,20000,Frequency_Hz,611,"n the adult correspond to best frequencies of approximately 20 kHz, 2 kHz and 500 Hz, respectively. In addition, measurements "
+9925011,2 kHz,2000,Frequency_Hz,619,"ult correspond to best frequencies of approximately 20 kHz, 2 kHz and 500 Hz, respectively. In addition, measurements of basi"
+9925011,500 Hz,500,Frequency_Hz,629,"pond to best frequencies of approximately 20 kHz, 2 kHz and 500 Hz, respectively. In addition, measurements of basilar membran"
+9925011,25 kHz,25000,Frequency_Hz,1098, mm from the cochlear base (best frequency of approximately 25 kHz in the adult cochlea); (iii) the thickness of the tympanic 
+10195705,0.04-0.15 Hz,0.04-0.15,Frequency_Hz,681," was marked at 38-42 weeks of gestation. The low-frequency (0.04-0.15 Hz) component and, therefore, the periodicity of the low-frequ"
+10212420,6000 Hz,6000,Frequency_Hz,674,"premature neonates at three f2 frequencies: 1500, 3000, and 6000 Hz, using fixed primary tone frequency ratio (f2/f1 = 1.2) and"
+10212420,10 dB,10,Sound_Level_dB,760,"ry tone frequency ratio (f2/f1 = 1.2) and level separation (10 dB, L1 > L2). Average DPOAE growth functions were recorded wit"
+10212420,6000 Hz,6000,Frequency_Hz,941,"icate that contralateral suppression of DPOAEs is absent at 6000 Hz, but present at 1500 and 3000 Hz for all ages. However, DPO"
+10212420,1500 and 3000 Hz,1500-3000,Frequency_Hz,965," suppression of DPOAEs is absent at 6000 Hz, but present at 1500 and 3000 Hz for all ages. However, DPOAE amplitude from premature neona"
+10212425,65 dB SPL,65,Sound_Level_dB,452,ne burst was preceded by a 100-ms broadband noise masker at 65 dB SPL. Listeners were trained to respond when they heard the prob
+10392547,8 kHz,8000,Frequency_Hz,1224,"ses was also observed in the D1 group, at frequencies below 8 kHz."
+10452385,70 dB SPL,70,Sound_Level_dB,286,"eral stimulation was a broad band white noise, presented at 70 dB SPL. Efferent suppression was determined by subtracting the wit"
+10530014,20-200 Hz,20-200,Frequency_Hz,733," decay law, with characteristic damping coefficients in the 20-200 Hz range, was found to fit the data. These results are not com"
+10575120,20 dB,20,Sound_Level_dB,972,"It can be obtained with click and tone-burst stimuli within 20 dB of the subjective detection threshold, can be evoked with t"
+10575120,500 Hz,500,Frequency_Hz,1056,"detection threshold, can be evoked with tone-bursts between 500 Hz and 16 kHz and grows either linearly with the click level o"
+10575120,16 kHz,16000,Frequency_Hz,1067,"hreshold, can be evoked with tone-bursts between 500 Hz and 16 kHz and grows either linearly with the click level or approxima"
+10575120,25 and 200 Hz,25-200,Frequency_Hz,1288,"n some subjects. It has a frequency spectrum mostly between 25 and 200 Hz. The response is often visible in raw recordings, with as f"
+10748332,6 kHz,6000,Frequency_Hz,302," demonstrates that exposure of 5-week-old kittens to a loud 6 kHz tone, producing mild to moderate high-frequency hearing los"
+10867273,4 kHz,4000,Frequency_Hz,816, ratio for both neonates and adults. Low f(2) frequencies (<4 kHz) were associated with higher optimum ratios than high f(2) 
+10867273,4 kHz,4000,Frequency_Hz,895,ted with higher optimum ratios than high f(2) frequencies (>4 kHz). The adult group was used to investigate the effect of sti
+10867273,1.7 to 10 kHz,1700-10000,Frequency_Hz,1029,el on the optimum f(2)/f(1) ratio for f(2) frequencies from 1.7 to 10 kHz. Regression analysis showed significant differences across 
+10867273,3.4 and 7.0 kHz,3400-7000,Frequency_Hz,1161, levels of the primaries at all frequencies except for f(2)=3.4 and 7.0 kHz. These differences in f(2)/f(1) ratio across stimulus frequ
+10936438,105 and 110 dB,105-110,Sound_Level_dB,260,"33, and 36 weeks GA received three sound trials at 90, 100, 105 and 110 dB and three no-stimulus control trials. The onset of cardiac "
+10936438,105-110 dB,105-110,Sound_Level_dB,482,"iac response was observed with a decrease in threshold from 105-110 dB at 33 weeks GA to 100-105 dB at 36 weeks GA. In Study 2, th"
+10936438,100-105 dB,100-105,Sound_Level_dB,511,"h a decrease in threshold from 105-110 dB at 33 weeks GA to 100-105 dB at 36 weeks GA. In Study 2, the procedure was similar excep"
+10936438,90 dB,90,Sound_Level_dB,665,"fetuses at 27, 30 and 33 weeks GA did not receive sounds at 90 dB. For the high-risk fetuses, the onset of cardiac and motor "
+11386562,14 and 7 dB,14-7,Sound_Level_dB,700,"rence between infants and adults in unmasked threshold were 14 and 7 dB for tones and noise, respectively. The difference between i"
+11386562,10 and 5 dB,10-5,Sound_Level_dB,814,"ference between infants and adults in masked threshold were 10 and 5 dB for tones and noise, respectively. Psychometric functions f"
+11407963,78 and 83 dB SPL,78-83,Sound_Level_dB,248," this test, a sudden burst of sound is presented at between 78 and 83 dB SPL which stimulates the entire basilar membrane. This in turn "
+11407963,1.6 kHz,1600,Frequency_Hz,953,"thing hospital. Responses to TEOAE stimuli were recorded at 1.6 kHz, 2.4 kHz, 3.2 kHz, and 4.0 kHz. The responses were recorded"
+11407963,2.4 kHz,2400,Frequency_Hz,962,"pital. Responses to TEOAE stimuli were recorded at 1.6 kHz, 2.4 kHz, 3.2 kHz, and 4.0 kHz. The responses were recorded as decib"
+11407963,3.2 kHz,3200,Frequency_Hz,971,"sponses to TEOAE stimuli were recorded at 1.6 kHz, 2.4 kHz, 3.2 kHz, and 4.0 kHz. The responses were recorded as decibel levels"
+11407963,4.0 kHz,4000,Frequency_Hz,984,"OAE stimuli were recorded at 1.6 kHz, 2.4 kHz, 3.2 kHz, and 4.0 kHz. The responses were recorded as decibel levels indicating a"
+11407963,1.6 kHz,1600,Frequency_Hz,1343,"an male) and frequency (least sensitive hearing recorded at 1.6 kHz, most sensitive hearing recorded at 3.2 kHz). A significant"
+11407963,3.2 kHz,3200,Frequency_Hz,1387,"ing recorded at 1.6 kHz, most sensitive hearing recorded at 3.2 kHz). A significant two-way interaction indicated that differen"
+11785816,6000 Hz,6000,Frequency_Hz,1022," adult cochlea. DPOAE STCs were recorded at 1500, 3000, and 6000 Hz using optimal parameters in normal-hearing children and adu"
+11785816,1500 and 6000 Hz,1500-6000,Frequency_Hz,1322,dult STCs and significantly different from neonatal STCS at 1500 and 6000 Hz. Only the growth of suppression was not adultlike in childr
+11785816,6000 Hz,6000,Frequency_Hz,1413,th of suppression was not adultlike in children and only at 6000 Hz. These findings do not strongly support the auditory aging 
+11785816,6000 Hz,6000,Frequency_Hz,1761,"er, nonadultlike suppression growth observed in children at 6000 Hz warrants further attention and may be indicative of subtle "
+12062768,16 and 32 kHz,16000-32000,Frequency_Hz,741,"econd (pps) and tone pip stimuli at frequencies of 2, 4, 8, 16 and 32 kHz. To examine temporal response properties, click stimuli wer"
+12942974,1500 and 6000 Hz,1500-6000,Frequency_Hz,909,"POAE suppression growth was measured at two f2 frequencies (1500 and 6000 Hz) and three primary tone levels (55-45, 65-55, and 75-65 dB "
+12942974,75-65 dB SPL,75-65,Sound_Level_dB,976,"d 6000 Hz) and three primary tone levels (55-45, 65-55, and 75-65 dB SPL). Slope of DPOAE suppression growth, as well as an asymmetr"
+12942974,6000 Hz,6000,Frequency_Hz,1426,"uppressor tones. These age effects are most evident at f2 = 6000 Hz. In neonates, suppression growth is shallower and suppressi"
+14714805,6000 Hz,6000,Frequency_Hz,296, (2001)]. These age differences are most pronounced at f2 = 6000 Hz and have been interpreted to indicate a subtle immaturity i
+14714805,6000 Hz,6000,Frequency_Hz,586,"this question, DPOAE suppression and I/O functions for f2 = 6000 Hz were measured in a group of prematurely born neonates at we"
+15139625,4000 and 6000 Hz,4000-6000,Frequency_Hz,702,"atio functions were analyzed at three f2 frequencies--2000, 4000 and 6000 Hz. An analysis included an estimation of the optimal ratio (O"
+15139625,6 kHz,6000,Frequency_Hz,1083," OR and Q3 were found in female subjects and when f2 = 2 or 6 kHz. This supports research by others [Abdala, J. Acoust. Soc. "
+15219315,2.0 and 8.0 kHz,2000-8000,Frequency_Hz,712, primary tone level range at up to 8 f2 frequencies between 2.0 and 8.0 kHz (15 dB SPL < L2< 60 dB SPL; L1=0.46 L2 + 41 dB SPL; f2/f1=1
+15219315,15 dB SPL,15,Sound_Level_dB,729,el range at up to 8 f2 frequencies between 2.0 and 8.0 kHz (15 dB SPL < L2< 60 dB SPL; L1=0.46 L2 + 41 dB SPL; f2/f1=1.2) in guin
+15219315,60 dB SPL,60,Sound_Level_dB,745,o 8 f2 frequencies between 2.0 and 8.0 kHz (15 dB SPL < L2< 60 dB SPL; L1=0.46 L2 + 41 dB SPL; f2/f1=1.2) in guinea pigs in which
+15219315,41 dB SPL,41,Sound_Level_dB,769,en 2.0 and 8.0 kHz (15 dB SPL < L2< 60 dB SPL; L1=0.46 L2 + 41 dB SPL; f2/f1=1.2) in guinea pigs in which middle (saline solution
+15286256,50 dB,50,Sound_Level_dB,1863,"t (REM) sleep, to white noise of increasing intensity, from 50 dB(A) to 100 dB(A), to determine their arousal thresholds. Aro"
+15286256,100 dB,100,Sound_Level_dB,1875,"p, to white noise of increasing intensity, from 50 dB(A) to 100 dB(A), to determine their arousal thresholds. Arousal threshol"
+15574301,0.25-6.25 kHz,250-6250,Frequency_Hz,354,"EOAEs were decomposed into 12 frequency bands, spanning the 0.25-6.25 kHz range. For each band, the root-mean-square (RMS) level and "
+15574301,4 kHz,4000,Frequency_Hz,1600,"same for all the frequencies, being greater for frequencies 4 kHz, and resembled the development of the cochlear partition, w"
+15658708,6000 Hz,6000,Frequency_Hz,711,"owth patterns were measured in the three age groups at f2 = 6000 Hz, L1 = 65, L2 = 55 dB SPL, with an f2/f1 of 1.2. Results ind"
+15658708,55 dB SPL,55,Sound_Level_dB,734,"ured in the three age groups at f2 = 6000 Hz, L1 = 65, L2 = 55 dB SPL, with an f2/f1 of 1.2. Results indicate that term-born neon"
+15807032,2 MHz,2000000,Frequency_Hz,824,ith a typical spatial-peak pulse-average intensity value at 2 MHz may generate a localized sound-pressure level close to 100 
+15807032,100 dB,100,Sound_Level_dB,885, MHz may generate a localized sound-pressure level close to 100 dB relative to 20 microPa in the audible (< 20 kHz) range unde
+15807032,20 kHz,20000,Frequency_Hz,933,el close to 100 dB relative to 20 microPa in the audible (< 20 kHz) range under laboratory conditions. These findings suggest 
+15867039,50 to 100 dB,50-100,Sound_Level_dB,693,"s were exposed to white noise of increasing intensity, from 50 to 100 dB(A), during rapid eye movement sleep, to determine their aro"
+15957767,1.5 and 8 kHz,1500-8000,Frequency_Hz,420,weeks later (follow-up) at 11 test frequencies between f2 = 1.5 and 8 kHz and compared to that found in normal hearing subjects and c
+16086603,55-60 dB,55-60,Sound_Level_dB,705,"bject's head and played at three different loudness levels: 55-60 dB, 65-70 dB, and 75-80 dB. Heart rate was measured using a pu"
+16086603,65-70 dB,65-70,Sound_Level_dB,715,"ad and played at three different loudness levels: 55-60 dB, 65-70 dB, and 75-80 dB. Heart rate was measured using a pulse oximet"
+16086603,75-80 dB,75-80,Sound_Level_dB,729,"at three different loudness levels: 55-60 dB, 65-70 dB, and 75-80 dB. Heart rate was measured using a pulse oximeter with a Y-se"
+16240817,6000 Hz,6000,Frequency_Hz,197,"ssion. Newborns do not have adultlike DPOAE suppression. At 6000 Hz, infants show excessively narrow DPOAE suppression tuning a"
+16240817,1500 and 6000 Hz,1500-6000,Frequency_Hz,490,"n the present study, DPOAE suppression was measured at f2 = 1500 and 6000 Hz from two groups with impaired OHC function in an attempt to"
+16240817,6000 Hz,6000,Frequency_Hz,1000,"n systematically alters DPOAE suppression in adults at f2 = 6000 Hz, but not 1500 Hz. However, neither aspirin-induced OHC dysf"
+16240817,1500 Hz,1500,Frequency_Hz,1017,"alters DPOAE suppression in adults at f2 = 6000 Hz, but not 1500 Hz. However, neither aspirin-induced OHC dysfunction nor natur"
+16459037,400 Hz,400,Frequency_Hz,297,"ults (18-45 years). CAEPs were obtained in response to low (400 Hz) and high (3000 Hz) tones and to the word token /baed/, all"
+16459037,3000 Hz,3000,Frequency_Hz,315,". CAEPs were obtained in response to low (400 Hz) and high (3000 Hz) tones and to the word token /baed/, all presented at 60 dB"
+16459037,60 dB HL,60,Sound_Level_dB,377,"00 Hz) tones and to the word token /baed/, all presented at 60 dB HL, at a rate of 0.22 Hz. Latency and amplitude measures were "
+16459037,0.22 Hz,0.22,Frequency_Hz,400," word token /baed/, all presented at 60 dB HL, at a rate of 0.22 Hz. Latency and amplitude measures were made for CAEP componen"
+16644155,4 kHz,4000,Frequency_Hz,465,"yzed. Neonates show a monomodal distribution with a peak at 4 kHz, but both children (5-11 y) and adults show an identical bi"
+16644155,1.5 and 3 kHz,1500-3000,Frequency_Hz,588,"bimodal distribution, with two peaks in an octave distance (1.5 and 3 kHz). For the combined children and adult data, distribution de"
+16644155,2140 Hz,2140,Frequency_Hz,872,nificant narrow-band dip precisely at the low in between at 2140 Hz (P<0.008). External ear canal resonance can explain the sin
+16644155,4 kHz,4000,Frequency_Hz,943,0.008). External ear canal resonance can explain the single 4 kHz mode at birth and the 3 kHz mode in children and adults. Th
+16644155,3 kHz,3000,Frequency_Hz,971,esonance can explain the single 4 kHz mode at birth and the 3 kHz mode in children and adults. The octave shifted 1.5 kHz mod
+16644155,1.5 kHz,1500,Frequency_Hz,1025,d the 3 kHz mode in children and adults. The octave shifted 1.5 kHz mode remains without mechanical explanation. It may reflect
+16838539,60 dB SPL,60,Sound_Level_dB,345, Maskers repeated at 300-ms intervals throughout testing at 60 dB SPL. The signal was presented simultaneously with one presentat
+17225410,6000 Hz,6000,Frequency_Hz,1345,"ease in primary tone level, DPOAE suppression tuning at f2= 6000 Hz was similar in adults and infants."
+17348521,6 kHz,6000,Frequency_Hz,251,E input/output (I/O) functions were shown to differ at f2 = 6 kHz in adults compared to infants through 6 months of age. Thes
+17348521,16 dB,16,Sound_Level_dB,1162,"and adults. The forward middle-ear transmittance level was -16 dB less in infants, so that the conductive efficiency was poor"
+17550168,61 to 63 dB,61-63,Sound_Level_dB,206,"uivalent sound pressure levels (LEQ) for NICU A ranged from 61 to 63 dB (A weighted), depending on the level of care. NICU B L(EQ) "
+17550168,55 to 60 dB,55-60,Sound_Level_dB,302,on the level of care. NICU B L(EQ) measurements ranged from 55 to 60 dB (A weighted). NICU B was recently built with a focus on sou
+17550168,45 dB,45,Sound_Level_dB,466,"the difference between the two NICUs. Sound levels exceeded 45 dB (A weighted), recommended by the American Academy of Pediat"
+17550168,50 dB,50,Sound_Level_dB,607,"70% of the time for all levels of care. Hourly L(EQ)s below 50 dB (A weighted) and hourly L10s below 55 dB (A weighted), reco"
+17550168,55 dB,55,Sound_Level_dB,648,"ourly L(EQ)s below 50 dB (A weighted) and hourly L10s below 55 dB (A weighted), recommended by the Sound Study Group (SSG) of"
+17550168,70 dB,70,Sound_Level_dB,868," SSG recommendation, that the 1 s L(MAX), should not exceed 70 dB (A weighted), was exceeded relatively infrequently (< 11% o"
+17550168,90 dB,90,Sound_Level_dB,981,tly (< 11% of the time). Peak impulse measurements exceeded 90 dB for 6.3% of 5 s samples recorded from NICU A and 2.8% of NI
+17552713,6000 Hz,6000,Frequency_Hz,125,"oustic emission (DPOAE) suppression in human newborns at f2=6000 Hz, indicating an immaturity in peripheral auditory function. "
+17552713,5700 Hz,5700,Frequency_Hz,1041,strongest correlation was noted between admittance phase at 5700 Hz and STC tip-to-tail (R=0.49). The association between middl
+17850998,3.8dB,3.8,Sound_Level_dB,879,"h rates. MLS averaging produced an SNR improvement of up to 3.8dB, with the greatest improvement found in higher frequency ba"
+18345839,4 kHz,4000,Frequency_Hz,745,"evaluated separately and across frequencies (1.5, 2, 3, and 4 kHz), and ABR asymmetries were compared with cochlear asymmetri"
+18345867,0.6 dB,0.6,Sound_Level_dB,1055,"ion slope of the cervix in the ex vivo experiment was 2.6+/-0.6 dB/cm-MHz, which is comparable to 2.5+/-0.4 dB/cm-MHz measured"
+18345867,0.4 dB,0.4,Sound_Level_dB,1099,"iment was 2.6+/-0.6 dB/cm-MHz, which is comparable to 2.5+/-0.4 dB/cm-MHz measured using a through-transmission insertion loss"
+19045786,1.5-2.5 kHz,1500-2500,Frequency_Hz,964,"no significant change, whereas in the right ears and in the 1.5-2.5 kHz frequency range only, a slow decrease of latency with postc"
+19062852,0.25 to 0.75 kHz,250-750,Frequency_Hz,326,nts varied as a function of frequency. For frequencies from 0.25 to 0.75 kHz there was as much as a 30% change in mean ER and mid |Y| wi
+19062852,0.75 to 2 kHz,750-2000,Frequency_Hz,478,"atic ear-canal pressure between 4 and 24 weeks of age. From 0.75 to 2 kHz, the effects of pressure produced a small number of signifi"
+19062852,2 and 6 kHz,2000-6000,Frequency_Hz,660,"estive of a developmentally stable frequency range. Between 2 and 6 kHz, there were differential effects of pressure for the younge"
+19206878,1 kHz,1000,Frequency_Hz,203," temporal expectancy on infants' and adults' detection of a 1 kHz tone in a broadband noise were examined. In one experiment,"
+19757874,65 dB,65,Sound_Level_dB,677,"of the females listened to music presented at an average of 65 dB, one quarter at an average of 70 dB, one quarter at an aver"
+19757874,70 dB,70,Sound_Level_dB,713,"sented at an average of 65 dB, one quarter at an average of 70 dB, one quarter at an average of 75 dB, and one quarter did no"
+19757874,75 dB,75,Sound_Level_dB,749,"uarter at an average of 70 dB, one quarter at an average of 75 dB, and one quarter did not listen to any music and served as "
+20058986,100 Hz,100,Frequency_Hz,471,"tion along the cochlear arrays, using a stimulation rate of 100 Hz. Results show that there is a trend for people whose onset "
+20950966,1000Hz,1000,Frequency_Hz,496,digm was used with frequently occurring 'standard' tones at 1000Hz and infrequent 'deviant' tones at 2000Hz. Waveforms were re
+20950966,2000Hz,2000,Frequency_Hz,537,"standard' tones at 1000Hz and infrequent 'deviant' tones at 2000Hz. Waveforms were recorded at Fz, Cz, Pz, T3 and T4 scalp loc"
+21144889,0.1-20 kHz,100-20000,Frequency_Hz,399,ups were exposed continuously to an upward linear FM sweep (0.1-20 kHz) at 0.05 kHz/ms for 4 weeks. Neuronal responses to pure ton
+21144889,0.05 kHz,50,Frequency_Hz,414,d continuously to an upward linear FM sweep (0.1-20 kHz) at 0.05 kHz/ms for 4 weeks. Neuronal responses to pure tones and bidire
+21144889,0.1-20 kHz,100-20000,Frequency_Hz,515,es to pure tones and bidirectional linear FM sweeps (range: 0.1-20 kHz; speeds: 0.05-0.82 kHz/ms) were assessed in anesthetized an
+21144889,0.05-0.82 kHz,50-820,Frequency_Hz,535, bidirectional linear FM sweeps (range: 0.1-20 kHz; speeds: 0.05-0.82 kHz/ms) were assessed in anesthetized animals following the exp
+21147207,10-11 dB,10-11,Sound_Level_dB,798,"ng loss. Hearing thresholds in general appeared to be about 10-11 dB worse in children with a monosomy 45,X or isochromosome (bo"
+21476616,6 kHz,6000,Frequency_Hz,167, in infant and adult ears occurs at a stimulus frequency of 6 kHz. These infant and adult STCs are much more similar when con
+21568380,64 Hz,64,Frequency_Hz,430,ba/and /apa/ processed to retain envelope information below 64 Hz while degrading temporal fine structure cues. Infants atten
+21568413,1-1.5 kHz,1000-1500,Frequency_Hz,156,istortion product otoacoustic emission (DPOAE) phase above ∼1-1.5 kHz when using frequency-scaled stimuli. Below this frequency d
+21568413,0.5 to 4 kHz,500-4000,Frequency_Hz,566,"h a swept-tone protocol in three, octave-wide segments from 0.5 to 4 kHz. The lowest-frequency octave was targeted with increased si"
+21568413,1.4 and 1 kHz,1400-1000,Frequency_Hz,1088,"ults and infants showed an unambiguous discontinuity around 1.4 and 1 kHz when described using two- and three-segment fits, respectiv"
+21682402,10 Hz,10,Frequency_Hz,511,"as found to be frequency dependent, with a mean estimate of 10 Hz/week for frequencies around 2 kHz and 30 Hz/week for freque"
+21682402,2 kHz,2000,Frequency_Hz,545,", with a mean estimate of 10 Hz/week for frequencies around 2 kHz and 30 Hz/week for frequencies around 4.25 kHz. This rate d"
+21682402,30 Hz,30,Frequency_Hz,555,ean estimate of 10 Hz/week for frequencies around 2 kHz and 30 Hz/week for frequencies around 4.25 kHz. This rate decreased w
+21682402,4.25 kHz,4250,Frequency_Hz,589,quencies around 2 kHz and 30 Hz/week for frequencies around 4.25 kHz. This rate decreased with increasing PMA. Because SSOAEs ar
+21974484,4.0 kHz,4000,Frequency_Hz,207,y of birth were frequency-modulated ultrasounds from 30.0 ± 4.0 kHz to 19.3 ± 1.9 kHz with multiple harmonics. The terminal fre
+21974484,1.9 kHz,1900,Frequency_Hz,225,equency-modulated ultrasounds from 30.0 ± 4.0 kHz to 19.3 ± 1.9 kHz with multiple harmonics. The terminal frequency of the seco
+21974484,2.6 kHz,2600,Frequency_Hz,403,"ed to that of the fundamental (TF(1)) in adult bats (41.4 ± 2.6 kHz), suggesting that pup vocalizations can be easily detected "
+22280722,240 Hz,240,Frequency_Hz,397,"-month-old infants are able to discriminate a complex tone (240 Hz, 500 ms, six harmonics in random phase with a 6 dB roll-off"
+22280722,6 dB,6,Sound_Level_dB,450," tone (240 Hz, 500 ms, six harmonics in random phase with a 6 dB roll-off per octave) from a version with the third harmonic"
+23145607,2.53 dBA,2.53,Sound_Level_dB,633,"redict the noise levels one hour ahead, which correspond to 2.53 dBA ± 2.02 dBA. The ANN has the tendency to overpredict during "
+23145607,2.02 dBA,2.02,Sound_Level_dB,644,"noise levels one hour ahead, which correspond to 2.53 dBA ± 2.02 dBA. The ANN has the tendency to overpredict during periods of "
+23231118,160 Hz,160,Frequency_Hz,547,"the pitch of MF harmonic complexes based on fundamentals of 160 Hz and 200 Hz using an observer-based method. In experiment I,"
+23231118,200 Hz,200,Frequency_Hz,558,"f MF harmonic complexes based on fundamentals of 160 Hz and 200 Hz using an observer-based method. In experiment I, to demonst"
+23231118,60-260 Hz,60-260,Frequency_Hz,824,"pond only when the fundamental changed. In experiment II, a 60-260 Hz noise was presented with complexes to mask combination tone"
+23231118,12 dB,12,Sound_Level_dB,985,"In experiment III, complexes were bandpass filtered with a -12 dB/octave slope to limit use of spectral edge cues and present"
+23363111,1.5 kHz,1500,Frequency_Hz,772,"all ages, the MOC reflex was strongest at frequencies below 1.5 kHz, and the reflection component of the DPOAE was most affecte"
+23764671,167 to 200 Hz,167-200,Frequency_Hz,632,infants showed above-chance discrimination of a change from 167 to 200 Hz in the fundamental frequency (F0) of such high-passed filte
+25096110,12 dB,12,Sound_Level_dB,570,"method. Stimuli were MF complexes bandpass filtered with a -12 dB/octave slope, combined in random phase, presented at 70 dB "
+25096110,70 dB,70,Sound_Level_dB,629,"-12 dB/octave slope, combined in random phase, presented at 70 dB sound pressure level (SPL) for 650 ms with a 50 ms rise/fal"
+25096110,65 dB SPL,65,Sound_Level_dB,717,"SPL) for 650 ms with a 50 ms rise/fall with a pink noise at 65 dB SPL. The conditions were (1) ""LOW"" unresolved harmonics (2500-4"
+25096110,2500-4500 Hz,2500-4500,Frequency_Hz,780,"dB SPL. The conditions were (1) ""LOW"" unresolved harmonics (2500-4500 Hz) based on MFs of 160 and 200 Hz and (2) ""HIGH"" unresolved h"
+25096110,160 and 200 Hz,160-200,Frequency_Hz,810,") ""LOW"" unresolved harmonics (2500-4500 Hz) based on MFs of 160 and 200 Hz and (2) ""HIGH"" unresolved harmonics (4000-6000 Hz) based on"
+25096110,4000-6000 Hz,4000-6000,Frequency_Hz,862," MFs of 160 and 200 Hz and (2) ""HIGH"" unresolved harmonics (4000-6000 Hz) based on MFs of 190 and 200 Hz. To demonstrate MF discrimi"
+25096110,190 and 200 Hz,190-200,Frequency_Hz,892," ""HIGH"" unresolved harmonics (4000-6000 Hz) based on MFs of 190 and 200 Hz. To demonstrate MF discrimination, participants had to igno"
+25234993,0.5-4 kHz,500-4000,Frequency_Hz,736, born neonates to elderly adults. DPOAEs were measured from 0.5-4 kHz in all age groups and extended to 8 kHz in young adults. De
+25234993,8 kHz,8000,Frequency_Hz,780,e measured from 0.5-4 kHz in all age groups and extended to 8 kHz in young adults. Delay trends were effectively estimated us
+25234993,1 kHz,1000,Frequency_Hz,1204,"ays showed the expected bend (apical-basal transition) near 1 kHz, consistent with a break in cochlear scaling. Consistent wi"
+25463830,0.7-1.5 Hz,0.7-1.5,Frequency_Hz,1416," during SSC compared to CTL in the eupneic frequency range (0.7-1.5 Hz, p=0.018) and reduced for slower frequencies (0.15-0.45 Hz;"
+25463830,0.15-0.45 Hz,0.15-0.45,Frequency_Hz,1473,"e (0.7-1.5 Hz, p=0.018) and reduced for slower frequencies (0.15-0.45 Hz; p=0.036). CONCLUSION: These findings suggest that during S"
+25618103,15 dB,15,Sound_Level_dB,261,OAEs in newborns were measured at stimulus levels as low as 15 dB sound pressure level (SPL). Responses were compared between
+25618103,40 dB SPL,40,Sound_Level_dB,441," both age groups demonstrated approximately linear growth (<40 dB SPL for newborns, <25 dB SPL for adults). Neonates had adult-li"
+25618103,25 dB SPL,25,Sound_Level_dB,466,"ated approximately linear growth (<40 dB SPL for newborns, <25 dB SPL for adults). Neonates had adult-like SFOAE delays when comp"
+26386286,95 dB,95,Sound_Level_dB,577,nsidered successful when the hearing threshold was at least 95 dB above the threshold of the normal hearing ear. Growing up w
+26428839,6 dB,6,Sound_Level_dB,276,/-/l/ and /ɔ/-/ɐ/ in three conditions: (a) unmodified; (b) -6 dB/octave tilt; and (c) +6 dB/octave tilt. Six-month-olds disc
+26428839,6 dB,6,Sound_Level_dB,303,conditions: (a) unmodified; (b) -6 dB/octave tilt; and (c) +6 dB/octave tilt. Six-month-olds discriminated /ɔ/-/ɐ/ in condit
+26723319,0.2 to 8 kHz,200-8000,Frequency_Hz,123,mittance in human adult and infant ears at frequencies from 0.2 to 8 kHz. Transfer functions were measured at ambient pressure in th
+26723319,2 kHz,2000,Frequency_Hz,740,h was estimated from group delay around the frequency above 2 kHz of minimum absorbance. Illustrative measurements in ears wi
+27036239,5000 Hz,5000,Frequency_Hz,909,"rtments only; those having a fundamental frequency (F0) of >5000 Hz involved inflation of pars lateralis only, whereas those wi"
+27036239,4000 Hz,4000,Frequency_Hz,989,"lation of pars lateralis only, whereas those with an F0 of <4000 Hz (tone-pips and ""infant"" calls) involved inflation of pars v"
+28372113,5 to 6 dB,5-6,Sound_Level_dB,578,-68% for young adults. Newborn SOAEs are also an average of 5 to 6 dB higher in level than those from young-adult ears. These age
+28863611,70 dBA,70,Sound_Level_dB,619," (IDS), in conversation with a Mandarin-speaking adult in a 70 dBA eight-talker babble noise environment (Lombard speech), and"
+29502907,47.6 dB,47.6,Sound_Level_dB,257,3.1 ± 3.6 years of asymmetric hearing (difference of 47.2 ± 47.6 dB) before receiving an implant at age 8.7 ± 5.1 years. Multi-
+29502907,250 Hz,250,Frequency_Hz,565," of 9 acoustic clicks/biphasic electric pulses at a rate of 250 Hz, repeated at 1 Hz. The time-restricted artifact and coheren"
+29502907,1 Hz,1,Frequency_Hz,585,"s/biphasic electric pulses at a rate of 250 Hz, repeated at 1 Hz. The time-restricted artifact and coherent source suppressi"
+29534830,500 Hz,500,Frequency_Hz,460,n amplitude modulated tone (AM) with a carrier frequency of 500 Hz to the maternal abdomen modulated by low modulation rates (
+30077866,70 bpm,70,Tempo_BPM,434,", Beethoven's Moonlight Sonata, heartbeat sound recordings (70 bpm) or no music. Pain perception (evaluated using the Neonatal"
+30612027,5-90 kHz,5000-90000,Frequency_Hz,331," and narrowband tone pips covering a large frequency range (5-90 kHz) in juveniles (p7 to p200) and adults of the bat, Phyllosto"
+30612027,20 kHz,20000,Frequency_Hz,504,"uveniles at p7 are already quite responsive, not only below 20 kHz but up to 90 kHz. Hearing sensitivity increases further unt"
+30612027,90 kHz,90000,Frequency_Hz,521,"e already quite responsive, not only below 20 kHz but up to 90 kHz. Hearing sensitivity increases further until about p14 and "
+31255105,10 Hz,10,Frequency_Hz,485,threshold (MDT) of a broadband noise amplitude modulated at 10 Hz estimated the y-intercept of the TMTF. The cutoff frequency
+31255105,4 dB,4,Sound_Level_dB,595,"utoff frequency of the TMTF, measured at a modulation depth 4 dB greater than the MDT, provided an estimate of temporal reso"
+31255105,10 dB,10,Sound_Level_dB,818," infants and in 16 of 16 adults. Mean MDT was approximately 10 dB poorer in infants compared to adults. In contrast, mean tem"
+34311267,125 dB SPL,125,Sound_Level_dB,487,exposed on postnatal day 14 (P14) for 12 minutes to a loud (125 dB SPL) broad-band noise. The responses to an amplitude-modulated 
+34823054,3-6 Hz,3-6,Frequency_Hz,986,. Our results were consistent with the expectations. Theta (3-6 Hz) and alpha (6-9 Hz) power were higher at frontal sites (Fp1
+34823054,6-9 Hz,6-9,Frequency_Hz,1005,consistent with the expectations. Theta (3-6 Hz) and alpha (6-9 Hz) power were higher at frontal sites (Fp1/Fp2) during play r
+34823054,9-30 Hz,9-30,Frequency_Hz,1098,tal sites (Fp1/Fp2) during play relative to baseline. Beta (9-30 Hz) and gamma (30-50 Hz) power were higher at frontal (Fp1/Fp2
+34823054,30-50 Hz,30-50,Frequency_Hz,1118,during play relative to baseline. Beta (9-30 Hz) and gamma (30-50 Hz) power were higher at frontal (Fp1/Fp2) and frontal medial 
+35131579,16 and 32 kHz,16000-32000,Frequency_Hz,903,"injected. At 6 weeks, ABR thresholds to tonal stimuli at 8, 16 and 32 kHz were determined for each ear. At 8 weeks a sub-group of tre"
+36306607,2 kHz,2000,Frequency_Hz,138,"ul residual hearing, typically in the low frequency range (<2 kHz). These recipients typically use both electrical stimulatio"
+36306607,4 kHz,4000,Frequency_Hz,889, cat model that resulted in a high frequency hearing loss (>4 kHz). Two separate cohorts of animals were implanted and receiv
+36306607,80 dB SPL,80,Sound_Level_dB,1211,o exposed to an enhanced acoustic environment consisting of 80 dB SPL 4-talker babble presented 14 h per day. Hearing thresholds 
+37772774,20 Hz,20,Frequency_Hz,565,"using non-speech carriers have not included slow AM rates (<20 Hz), which are particularly important for speech processing. T"
+37772774,8 and 40 Hz,8-40,Frequency_Hz,837,"young adults and for both slow and faster modulation rates (8 and 40 Hz). The AMFR was observable at 8 Hz at all ages (40%, 60%, an"
+37772774,8 Hz,8,Frequency_Hz,878," modulation rates (8 and 40 Hz). The AMFR was observable at 8 Hz at all ages (40%, 60%, and 33% of significant AMFR at 3 mon"
+37772774,40 Hz,40,Frequency_Hz,1030,"respectively), but only adults showed reliable responses at 40 Hz (6% of significant AMFR at both 3 and 10 months, 100% in ad"
+40652664,8 kHz,8000,Frequency_Hz,1335,"bited a direct current (DC) shift in the rCM elicited by an 8 kHz tone burst as the sound intensity increased, which was dela"
+40816165,30-40 dB,30-40,Sound_Level_dB,758,"g silicon earplugs at P14, elevating auditory thresholds by 30-40 dB, and assessed fusiform neuron electrophysiology 5-7 days la"
+42777332,30 bpm,30,Tempo_BPM,1297,", and others, dramatic variations (e.g., singing a pop song 30 bpm and six semitones apart). In contrast with prior laboratory"
+43008456,1 kHz,1000,Frequency_Hz,617,Ignore) a counting task designed to direct attention toward 1 kHz sound stimuli containing a 10% frequency change (2000 ms pr

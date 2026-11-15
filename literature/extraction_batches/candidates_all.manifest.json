@@ -1,0 +1,11 @@
+{
+ "tool": "candidates/1",
+ "input_file": "literature/bibliography_all.csv",
+ "input_sha256": "d9722fd803e318a5388ceebcddea388d3bf56ecf9834df5655a3e313fc127afe",
+ "pmid_filter_files": [
+  "literature/extraction_batches/output"
+ ],
+ "abstracts_scanned": 498,
+ "candidates_found": 439,
+ "pmids_with_candidates": 168
+}
