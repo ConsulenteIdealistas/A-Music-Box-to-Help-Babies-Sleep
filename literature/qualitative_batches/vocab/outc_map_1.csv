@@ -1,0 +1,203 @@
+Raw_Value,Canonical_Value,Note
+heart rate,heart_rate,
+discrimination,auditory_discrimination,
+heart rate variability,heart_rate_variability,
+hearing loss,hearing_status,
+sound localization,sound_localization,
+speech recognition,auditory_discrimination,
+spontaneous otoacoustic emissions,otoacoustic_emissions,
+vowel discrimination,auditory_discrimination,
+vowel duration,speech_production,
+auditory brainstem response,neural_response,
+fetal breathing movements,respiration,胎児の呼吸運動として
+fetal heart rate,heart_rate,
+hearing,hearing_status,
+listening time,auditory_discrimination,選好・注視パラダイムの指標として
+oxygen saturation,oxygen_saturation,
+sleep,sleep,
+speech perception,auditory_discrimination,
+spontaneous otoacoustic emissions (SOAEs),otoacoustic_emissions,
+word recognition,auditory_discrimination,
+ABR thresholds,hearing_status,ABRで推定した聴力閾値として
+auditory brainstem responses,neural_response,
+auditory system structure and function,other,聴覚系の解剖と機能の総称で単一指標でない
+auditory thresholds,hearing_status,
+behavioural states,attention_arousal,睡眠覚醒を含む状態指標として
+blood pressure,blood_pressure,
+cochlear nucleus volume,other,解剖学的体積であり機能応答でない
+cochlear tuning,other,測定法（神経/OAE）が特定できず分類困難
+discrimination of place of articulation,auditory_discrimination,
+distortion product otoacoustic emissions (DPOAEs),otoacoustic_emissions,
+distortion-product otoacoustic emissions,otoacoustic_emissions,
+first and second formant frequencies,speech_production,産出音声の音響特性
+frequency-following response,neural_response,
+fundamental frequency,speech_production,発声・音声の基本周波数
+gap detection,auditory_discrimination,時間分解能の知覚課題として
+general movements,motor,
+group delay,otoacoustic_emissions,OAEの群遅延と解釈
+learning,other,対象が特定できない汎用語
+length of hospitalization,survival_morbidity,臨床転帰（入院期間）として
+parent-infant attachment,interaction_attachment,
+peripheral auditory neuron responses,neural_response,
+physiologic parameters,other,複合的な生理指標の総称
+quality of general movements,motor,
+quality of life,other,QOLは統制語彙に無い
+respiratory rate,respiration,
+speech discrimination,auditory_discrimination,
+speech intelligibility,speech_production,本人の発話の明瞭度として
+speech rate,speech_production,
+stress behaviors,stress_pain,
+thresholds,hearing_status,
+tonal categorization,auditory_discrimination,
+vowel categorization,auditory_discrimination,
+weight gain,growth,
+ABR wave V amplitude,neural_response,
+ABR wave V latency,neural_response,
+ACC responses,neural_response,acoustic change complex（皮質ERP）
+ACTH concentration,stress_pain,ストレスホルモンとして
+ACTH reaction,stress_pain,ストレスホルモン反応として
+Ca2+ oscillations,other,細胞レベルのCa動態
+DPOAE fine structure,otoacoustic_emissions,
+DPOAE growth functions,otoacoustic_emissions,
+DPOAE levels,otoacoustic_emissions,
+DPOAE phase,otoacoustic_emissions,
+Doppler flow velocity waveforms,other,血流速度であり血圧ではない
+EEG,neural_response,
+EKG,heart_rate,心電図による心拍指標として
+I-V interpeak latency,neural_response,ABR頂点間潜時
+ITD processing,sound_localization,両耳間時間差は音源定位の手がかり
+"Na+,K+-ATPase distribution",other,分子・組織学的分布
+O2 saturation,oxygen_saturation,
+P1 cortical response latency,neural_response,
+Spanish pronunciation,speech_production,発音（産出側）として
+abnormal fetal heart rate trace,heart_rate,
+absolute pitch prevalence,other,絶対音感の保有率であり転帰指標でない
+absorbance,other,中耳の音響吸収率で語彙に無い
+acoustic characteristics,speech_production,音声産出の音響特性として（対象は文脈依存）
+acoustic characteristics of point vowels,speech_production,
+acoustic cues to coda voicing and place contrasts,other,刺激側の音響的手がかりであり転帰でない
+acoustic features of IDS,speech_production,養育者発話の音響特性
+acoustic features of grunt calls,speech_production,発声の音響特性
+acoustic features of vowel-like grunt vocalizations,speech_production,発声の音響特性
+acoustic masking,other,マスキング効果そのもので単一の転帰指標に落とせない
+acoustic parameters,other,対象が特定できない汎用語
+acoustic realization of neutral tone and tone sandhi,speech_production,声調の音響的実現（産出側）
+acoustic structure of cries,speech_production,泣き声の音響構造（啼泣量ではない）
+acoustic structure of vocalizations,speech_production,
+acoustic traits,other,対象が特定できない汎用語
+action potentials,neural_response,
+active sleep (pattern B),sleep,
+activity level,motor,活動量として
+adaptation effects,other,適応の対象（神経/知覚）が特定できない
+affect,other,情動であり語彙に無い
+alpha-thyroid hormone receptor expression in cochlea,other,受容体の発現（分子レベル）
+amplitude difference between the first two harmonics,speech_production,音声の倍音振幅差（H1-H2）
+amplitude-growth-function slopes,other,ABR/OAEいずれの成長関数か特定できない
+anticipatory eye-movements,attention_arousal,予測的注意の指標として
+anxiety and depression symptoms,interaction_attachment,母親側の指標として
+apnea detection,respiration,
+arousal state,attention_arousal,
+attention,attention_arousal,
+attention to familiar objects,attention_arousal,
+audio-visual matching,auditory_discrimination,視聴覚対応の知覚課題として
+audiogram estimation,hearing_status,
+audiometric responses,hearing_status,
+audiometric thresholds,hearing_status,
+audiovisual integration,auditory_discrimination,視聴覚統合の知覚処理として
+auditory brain-stem response interpeak latency,neural_response,
+auditory brain-stem responses,neural_response,
+auditory brainstem response (ABR) latencies,neural_response,
+auditory brainstem response (ABR) thresholds,hearing_status,ABRで推定した聴力閾値として
+auditory brainstem responses thresholds,hearing_status,ABRで推定した聴力閾値として
+auditory cortex neuron responses,neural_response,
+auditory detection,auditory_discrimination,検出課題として
+auditory development,other,聴覚発達の総称で単一指標でない
+auditory evoked brainstem response amplitudes,neural_response,
+auditory evoked brainstem response latencies,neural_response,
+auditory function,hearing_status,聴覚機能として
+auditory nerve brainstem evoked responses,neural_response,
+auditory nerve compound action potentials,neural_response,
+auditory nerve thresholds,neural_response,聴神経線維の応答閾値（神経生理）として
+auditory neuron loss,other,神経細胞の喪失（組織所見）であり応答でない
+auditory stream organization,auditory_discrimination,聴覚情景分析（知覚体制化）として
+auditory system structure,other,解剖学的構造
+auditory temporal processing,auditory_discrimination,時間処理の知覚課題として
+automated auditory brainstem responses,neural_response,
+autonomic and neurobehavioral development,other,自律・神経行動発達の総称
+autonomic nervous system stability,other,特定の単一指標（HRV等）に落とせない
+behavior state,attention_arousal,睡眠覚醒を含む状態指標として
+behavioral state,attention_arousal,睡眠覚醒を含む状態指標として
+behavioural state transitions,attention_arousal,状態遷移として
+binaural interaction,neural_response,両耳相互作用成分（ABR由来）として。行動指標の可能性もあり
+binaural sensitivity,sound_localization,両耳手がかりの感度として
+biphonation,speech_production,発声現象として
+blood flow measurement,other,血流であり血圧ではない
+blood flow velocity waveform,other,血流速度波形であり血圧ではない
+body movements,motor,
+body volume,growth,体格・体組成として
+bonding,interaction_attachment,
+brainstem auditory evoked response wave amplitude,neural_response,
+brainstem auditory evoked responses (BAERs),neural_response,
+brainstem auditory-evoked potentials,neural_response,
+brainstem responses,neural_response,
+breathing movements,respiration,
+c-Fos expression in auditory cortex and locus coeruleus,other,タンパク発現（組織所見）であり応答測定でない
+cadherin 23 expression,other,遺伝子発現（分子レベル）
+cadherin 23 localization to stereocilia,other,タンパク局在（組織所見）
+call repertoire,speech_production,発声レパートリーとして
+call types,speech_production,発声の種類として
+caloric and formula intake,feeding,
+caloric intake,feeding,
+canonical babble,speech_production,
+canonical syllable production,speech_production,
+carotid-femoral pulse wave velocity,other,動脈スティフネスであり血圧そのものではない
+categorical representation of initial and final syllables,auditory_discrimination,音節の知覚表象として
+categorical representations to syllable-initial consonants,auditory_discrimination,
+categorization of Dutch vowels /ɑ/ and /aː/,auditory_discrimination,
+categorization of place of articulation,auditory_discrimination,
+categorization performance,auditory_discrimination,
+category goodness,auditory_discrimination,範疇の典型性判断（知覚課題）として
+cerebral oxygenation,other,脳組織酸素化であり末梢SpO2とは別
+cerebral palsy,survival_morbidity,神経学的転帰・合併症として
+characteristic frequencies,neural_response,単一神経線維の同調特性として
+child responses,other,対象が特定できない汎用語
+classification of septic newborns,other,敗血症の診断分類であり転帰でない
+classification of vocalizations,speech_production,発声の分類として
+classification precision,other,分類手法の性能指標であり転帰でない
+click-evoked otoacoustic emissions (COAEs),otoacoustic_emissions,
+cochlear metabolites,other,代謝物（生化学）
+cochlear microphonic (CM),neural_response,蝸牛の電気的応答として（OAEではない）
+cochlear microphonic potential,neural_response,蝸牛の電気的応答として
+cochlear microphonics,neural_response,蝸牛の電気的応答として
+cochlear responses,other,電気生理/OAEの両義で特定できない
+cochleotopic representation in cortex,neural_response,皮質の周波数局在表現として
+cognitive behavior,other,認知行動であり言語発達指標ではない
+cognitive development,other,認知発達であり言語発達とは区別
+coherence masking protection,other,知覚現象だが単一の転帰指標に落とせない
+communication skills,language_development,
+compound action potential,neural_response,
+compound action potential (CAP),neural_response,
+comprehension of auditory speech signals,auditory_discrimination,音声理解を知覚課題として測定するため
+conceptual framework,other,転帰ではなく概念枠組み
+consonantal categories,auditory_discrimination,子音範疇の知覚として
+"coordination between the jaw, the tongue tip, and the lower lip",speech_production,調音運動の協調として
+correlation dimension,other,信号の非線形解析指標
+cortical auditory evoked potential (CAEP) morphology,neural_response,
+cortical evoked potentials,neural_response,
+cortical responses,neural_response,
+cortical responses to auditory and electrical stimuli,neural_response,
+cortical sensitivity to vocalizations,neural_response,皮質応答として
+cortisol concentration,stress_pain,
+cost-effectiveness,other,経済評価であり転帰でない
+cross-sectional area of neurons in nucleus magnocellularis,other,解剖学的計測
+cry signal segmentation,other,泣き声信号の解析手法であり啼泣そのものでない
+cry/fuss,crying,
+crying,crying,
+deafness,hearing_status,
+del(GJB6-D13S1830) presence,other,遺伝子変異の有無
+detection of noise band,auditory_discrimination,検出課題として
+detection of prosodic boundaries,auditory_discrimination,
+detection thresholds,hearing_status,
+diagnostic rate,other,検査の診断率（性能指標）であり転帰でない
+difference limens,auditory_discrimination,弁別閾として
+differentiation of sound contrasts,auditory_discrimination,

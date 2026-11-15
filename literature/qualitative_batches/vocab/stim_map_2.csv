@@ -1,0 +1,161 @@
+Raw_Value,Canonical_Value,Note
+major versus minor modes,music_general,長調・短調のモード対比。音楽一般と判断
+maternal aerobic exercise,other,母親の運動という曝露であり音刺激ではない
+maternal hyperoxygenation,other,母親への酸素投与という生理学的曝露であり音刺激ではない
+maternal infant-directed singing,singing_infant_directed,母親による歌唱だが、乳児向け歌唱の形態を優先
+maternal infant-directed speech,speech_infant_directed,母親による発話だが、乳児向け発話の形態を優先
+maternal physical activity,other,母親の身体活動であり音刺激ではない
+maternal soothing,other,母親のなだめ行為。音の形態が特定できない
+maternal voice administered by bone conduction,voice_maternal,骨伝導による提示だが、出所（母親の声）を優先
+melodic sequences,music_general,旋律の系列。形態不明のため音楽一般
+melody,music_general,
+mispronunciations kuh and ler,speech_general,語の誤発音トークン。音声刺激
+mispronunciations of familiar words,speech_general,
+missing fundamental melody,music_general,基本周波数を欠く旋律。音楽一般
+mixture of sounds,multiple_mixed,音の混合と明記
+monosodium glutamate exposure,other,化学物質（MSG）曝露であり音刺激ではない
+monosyllabic stimuli,speech_general,単音節の音声刺激と判断
+mothers' singing,singing_general,母親の歌唱だが、乳児向けとの明記なし
+multi-accent speech exposure,speech_general,
+multimodal stimulation,multiple_mixed,多感覚の複合刺激と明記。非聴覚モダリティを含む
+multisyllabic stimuli,speech_general,多音節の音声刺激と判断
+music (tone-scrambles),music_general,スクランブル化された音楽。音楽一般
+music listening,music_general,音楽聴取。録音・生演奏の別が不明
+music programs,music_general,音楽プログラム。形態不明
+music therapy entrainment,music_therapy,
+music therapy intervention,music_therapy,
+music-based interventions,music_therapy,music therapy の明記はないが、音楽を用いた介入
+music-reinforced nonnutritive sucking,music_therapy,音楽療法の技法（音楽強化による非栄養的吸啜）
+musical dialogues,music_general,音楽的対話。録音・生演奏の別が不明
+musical excerpts rated as happy or sad,music_general,音楽の抜粋。録音再生が一般的だが明記なし
+musical interactions,music_general,音楽的相互作用。形態不明
+musical lullaby,lullaby,
+narrating,speech_general,語り（ナレーション）の音声
+natural and synthetic speech,speech_general,自然・合成音声の混合だが単一カテゴリとして音声一般
+naturally produced syllables,speech_general,
+naturally produced vocalizations,voice_other,発声一般。音声言語とは限らないため声一般とした
+neonatal nicotine exposure,other,ニコチン曝露であり音刺激ではない
+newborn cry,cry_sounds,
+noise exposure,noise_general,
+non-English speech contrasts,speech_general,
+non-speech sounds,other,非音声の音一般。形態が特定できない
+nonsense words keet,speech_general,無意味語トークン
+nonsense words keets,speech_general,無意味語トークン
+nonsense words keetsu,speech_general,無意味語トークン
+nonsense-word sentences,speech_general,
+nonspeech formant onset time stimuli,other,音声の音響特性を模した合成非音声刺激。既存カテゴリに合わない
+nonspeech signals,other,非音声信号。形態が特定できない
+nonspeech sounds,other,非音声の音。形態が特定できない
+nonspeech stimuli that mimicked certain temporal properties of VOT stimuli,other,VOT刺激の時間特性を模した非音声刺激。既存カテゴリに合わない
+novel words,speech_general,
+nursery rhymes,singing_general,わらべ歌。歌唱・朗唱の別は明記なし
+off-channel maskers,noise_general,マスカー（雑音）と判断
+on-channel maskers,noise_general,マスカー（雑音）と判断
+onset asynchrony,other,刺激の性質（開始時点の非同期）であり音の種類ではない
+oral reading,speech_general,読み上げ音声。向け先の明記なし
+original songs,singing_general,歌。録音・生演奏の別が不明
+overhearing Spanish during childhood,speech_general,環境中の発話の偶発的聴取
+pacifier-activated lullaby,lullaby,
+parent-led infant-directed singing,singing_infant_directed,
+parent-preferred lullabies,lullaby,
+parental psychological distress,other,親の心理的苦痛という状態・曝露変数であり音刺激ではない
+phonetic contrasts,speech_general,
+pitch,other,音響的性質（ピッチ）であり音の種類ではない
+pitch of Mandarin tones in infant-directed speech,speech_infant_directed,刺激自体は乳児向け発話。ピッチは測定対象の特徴
+playback of pup-calls,other,動物（子）の鳴き声の再生。人間の声カテゴリに合わない
+playsong,singing_general,遊び歌
+playsongs,singing_general,遊び歌
+polyphonic music,music_general,
+popular French playsong,singing_general,遊び歌
+pressure varied to -3 kPa or +3 kPa,other,圧力刺激（ティンパノメトリー）であり音刺激ではない
+primaries,tone_pure,DPOAE のプライマリトーン（純音）と判断
+primary tones,tone_pure,
+"primary tones (f1, f2)",tone_pure,
+pulsed-noise,noise_general,
+pure tones,tone_pure,
+pure-tone maskers,tone_pure,マスカーは純音
+rattle sounds,other,ガラガラ（玩具）の音。既存カテゴリに合わない
+read speech,speech_general,読み上げ音声
+recorded NICU noise,noise_general,
+recorded maternal sounds,voice_maternal,録音された母親の音・声。出所を優先
+repeating sound sequences,other,反復する音系列。音の種類が特定できない
+repeating stimuli,other,反復刺激。種類の明記なし
+repetitive auditory stimulation,other,反復聴覚刺激。種類の明記なし
+repetitive sound stimuli,other,反復音刺激。種類の明記なし
+rhythm,other,刺激の性質（リズム）であり音の種類ではない
+rocking,other,揺らし（前庭・運動刺激）であり音刺激ではない
+sequential bilateral cochlear implantation,other,医療処置（逐次両側人工内耳）であり音刺激ではない
+shortened CV syllables,speech_general,
+simulated Kangaroo care,other,ケア介入の模擬であり音刺激ではない
+simultaneous bilateral cochlear implantation,other,医療処置（同時両側人工内耳）であり音刺激ではない
+singing,singing_general,
+singing interactions,singing_general,歌唱による相互作用
+skin-to-skin care,other,ケア介入（肌と肌の接触）であり音刺激ではない
+social sounds,other,社会的な音。形態が特定できない
+sound,other,音一般。種類の明記なし
+sound exposure,other,音曝露。種類の明記なし
+sound stimulation,other,音刺激。種類の明記なし
+sound stimuli,other,音刺激。種類の明記なし
+sounding object,other,音の出る物体の音。形態が特定できない
+sounds,other,音一般。種類の明記なし
+sounds in modulated maskers,other,変調マスカー中の音。対象音の種類が特定できない
+spectrally and temporally modulated complex sounds,other,変調された複合音。スイープ等とは明記されず既存カテゴリに合わない
+speech (English words),speech_general,
+speech contrast (English /d-th/),speech_general,
+speech in fluctuating masker,speech_general,対象は音声。マスカーは文脈
+speech in steady masker,speech_general,対象は音声。マスカーは文脈
+speech passages,speech_general,
+speech passages at varying speaking rates,speech_general,
+speech sequences,speech_general,
+speech signals with infant vocal properties,speech_general,乳児の声の特性を持つ音声信号。乳児向け発話ではない
+speech sounds (/da/ and /ga/ syllables),speech_general,
+speech sounds ([da] vs [t = a]),speech_general,
+speech stimuli,speech_general,
+speech syllable,speech_general,
+speech-in-noise,speech_general,対象は音声。雑音は背景
+spoken nonword,speech_general,
+spontaneous maternal singing,singing_general,母親の歌唱だが、乳児向けとの明記なし
+static-pressure range of +/-3kPa,other,静圧の範囲（ティンパノメトリー）であり音刺激ではない
+stimulation,other,刺激一般。種類の明記なし
+stimulus polarity,other,刺激のパラメータ（極性）であり音の種類ではない
+stimulus-sentences with prosodic cues,speech_general,
+stress stimuli,other,ストレス刺激。種類の明記なし
+sweeping primaries,sweep_chirp,周波数が掃引されるプライマリトーン
+swept-tone stimulation,sweep_chirp,
+swept-tone technique,sweep_chirp,掃引トーンを用いる手法
+syllables sharing nasal consonants,speech_general,
+synthetic CVC syllable,speech_general,合成音節
+synthetic speech sounds,speech_general,
+synthetic speech stimuli,speech_general,
+synthetic voice-onset-time series,speech_general,合成音声の VOT 連続体
+tape recorded vocal music including lullabies and children's music,lullaby,子守歌を含むと明記。児童音楽も含む複合だが規則により lullaby を優先
+tense/lax vowels,speech_general,
+test sentences containing previously familiarized verbs,speech_general,
+test trials,other,試行そのものであり音刺激ではない
+test words,speech_general,
+tonal stimuli,tone_pure,トーン刺激一般。純音と明記はないが tonal として純音に分類
+tone,tone_pure,単一トーン。純音と判断
+tone-bursts,tone_burst,
+toy play,other,玩具遊びという活動であり音刺激ではない
+traditional stories,speech_general,物語の語り聞かせ
+transcellular electrical stimulation,electrical,
+two similar sounds from different locations,other,異なる位置からの音の提示。音の種類が特定できない
+two simultaneous voices,voice_other,2つの声の同時提示
+two- and five-formant voiced stop consonants,speech_general,合成された有声破裂子音（音声）
+two-component tones,tone_pure,2成分の複合トーン。純音そのものではないがトーン系として分類
+tympanometry,other,測定手技であり音刺激そのものではない
+ultrasound,other,超音波（曝露・撮像）であり可聴音刺激ではない
+unprocessed speech,speech_general,
+uterine contractions during an oxytocin challenge test,other,子宮収縮という生理学的イベントであり音刺激ではない
+utterance-initial voiced stop consonants,speech_general,
+vibrio-acoustic stimulation,vibroacoustic,表記ゆれ（vibrio-）だが振動音響刺激と判断
+vibroacoustic stimulation,vibroacoustic,
+viral vector injection,other,ウイルスベクター注射という処置であり音刺激ではない
+visual cues from speaker's face,other,視覚的手がかりであり音刺激ではない
+visual rhythm,other,視覚的リズムであり音刺激ではない
+vowel,speech_general,
+vowel contrasts,speech_general,
+vowel sounds,speech_general,
+vowel stimuli,speech_general,
+wideband middle ear acoustic test battery,other,検査バッテリー（手技）であり単一の音刺激ではない
+word in two-talker speech masking,speech_general,対象は語（音声）。2話者マスカーは文脈

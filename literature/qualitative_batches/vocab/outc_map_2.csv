@@ -1,0 +1,203 @@
+Raw_Value,Canonical_Value,Note
+discrimination accuracy,auditory_discrimination,
+discrimination between initial stress and final stress,auditory_discrimination,
+discrimination between test words,auditory_discrimination,
+discrimination of /s/ from /ʃ/,auditory_discrimination,
+discrimination of affricate-fricative contrasts,auditory_discrimination,
+discrimination of happy and sad musical excerpts,auditory_discrimination,
+discrimination of intensity variation,auditory_discrimination,
+discrimination of nasal consonant place of articulation,auditory_discrimination,
+discrimination of nonsense words,auditory_discrimination,
+discrimination of phonetic contrasts,auditory_discrimination,
+discrimination of relative onset time,auditory_discrimination,
+discrimination of repeated rising and falling four-tone sequences,auditory_discrimination,
+discrimination of speech contrasts,auditory_discrimination,
+discrimination of stop consonant contrast,auditory_discrimination,
+discrimination of voice onset time,auditory_discrimination,
+discrimination of vowel contrasts,auditory_discrimination,
+discrimination of vowel duration,auditory_discrimination,
+discrimination of vowel quality,auditory_discrimination,
+discrimination of weak-strong words from strong words,auditory_discrimination,
+discrimination of word boundary,auditory_discrimination,
+distortion product otoacoustic emission (2f1-f2) amplitude growth,otoacoustic_emissions,
+distortion product otoacoustic emissions,otoacoustic_emissions,
+duration,speech_production,単独では曖昧。音声産出の持続時間指標と解釈
+durational measures,speech_production,持続時間系の産出指標と解釈
+dyadic emotion regulation,interaction_attachment,
+dyadic interaction,interaction_attachment,
+eCAP amplitudes,neural_response,
+ear asymmetries,other,耳の左右差で測定系（OAE/ABR等）が特定できない
+ear opening,other,発生・解剖学的な耳の開口
+ear-canal volume change,other,外耳道容積の物理量
+effect of maskers on attention to target frequency range,attention_arousal,標的への注意として判定
+electrically evoked auditory brainstem responses (EABRs),neural_response,
+electrocochleography (ECohG),neural_response,蝸牛の誘発電位として判定
+electromotility,other,外有毛細胞の細胞生理
+electrophysiological properties,other,細胞レベルの電気生理特性
+elimination half-life,other,薬物動態
+emotions,other,情動そのもので該当語彙なし
+encoding of higher versus lower voice,neural_response,神経符号化として判定
+endocochlear potential,other,蝸牛内電位（蝸牛生理）
+entropy,other,信号のエントロピーで対象信号が特定できない
+evoked otoacoustic emissions,otoacoustic_emissions,
+expiratory and inspiratory episode detection,respiration,
+expressive language,language_development,
+expressive timing of maternal singing,interaction_attachment,母親側の歌唱行動指標
+expressive vocabulary size,language_development,
+eye and body movements,motor,眼球・身体運動として判定
+eye gaze,attention_arousal,
+facial expressions,other,表情（情動表出）で該当語彙なし
+feasibility,other,研究の実施可能性でアウトカム領域ではない
+feeding and sleep practices,feeding,睡眠実践も含む複合だが哺乳側で判定
+feeding behavior,feeding,
+feeding behaviors,feeding,
+fetal auditory threshold,hearing_status,
+fetal behavioural state organization,attention_arousal,胎児の睡眠-覚醒状態の組織化として判定
+fetal body movement,motor,
+fetal breathing movement,respiration,
+fetal cardiac sympathetic activation,heart_rate_variability,FHR由来の自律神経（交感神経）指標として判定
+fetal general movements,motor,
+fetal heart rate (FHR) dynamics,heart_rate_variability,FHRの動態＝変動解析として判定
+fetal heart rate dynamics,heart_rate_variability,FHRの動態＝変動解析として判定
+fetal heart rate parameters,heart_rate,汎用パラメータとして心拍数側で判定
+fetal heart rate pattern,heart_rate,
+fetal heart rate variation,heart_rate_variability,
+fetal hypoxia,oxygen_saturation,低酸素状態そのもの（酸素化指標）として判定
+fetal motility,motor,
+fetal movement response,motor,
+fetal movements,motor,
+final-syllable vowel lengthening,speech_production,
+fine structure depth,otoacoustic_emissions,DPOAE微細構造の深さと解釈
+fine structure spacing,otoacoustic_emissions,DPOAE微細構造の間隔と解釈
+formant frequencies,speech_production,
+fractional shortening,other,左室の心機能指標
+fractional tissue oxygen extraction,oxygen_saturation,組織酸素抽出（酸素化指標）として判定
+frequency,other,単独では何の周波数か特定できない
+frequency following response,neural_response,
+frequency resolution,auditory_discrimination,周波数分解能（知覚能力）として判定
+frequency selectivity,auditory_discrimination,周波数選択性（知覚・聴覚フィルタ）として判定
+frequency separation threshold,auditory_discrimination,周波数分離の弁別閾値として判定
+frequency-following responses,neural_response,
+frequent waking,sleep,
+function of the basal turn of the cochlea,other,蝸牛基底回転の解剖・機能
+fundamental frequency (F0),speech_production,
+fundamental frequency shift,speech_production,
+gap detection ability,auditory_discrimination,
+gap-PPI,auditory_discrimination,ギャップ検出の驚愕プレパルス抑制パラダイム（動物）
+gender effects,other,性別効果はアウトカム領域ではなく調整因子
+generalization,other,学習の般化で対象が特定できない
+genetic causes,other,遺伝的要因（病因）でアウトカムではない
+grammatical acquisition,language_development,
+haemodynamics,other,血行動態一般で血圧そのものではない
+harmonic doubling,speech_production,発声（啼泣等）の音響現象として判定
+head circumference,growth,
+head orientation,sound_localization,音への頭部定位反応と解釈したが曖昧
+hearing functionality,hearing_status,
+hearing outcomes,hearing_status,
+hearing sensitivity,hearing_status,
+hearing status,hearing_status,
+hearing thresholds,hearing_status,
+heart rate decelerations,heart_rate,
+heart rate variation,heart_rate_variability,
+heart-rate variability,heart_rate_variability,
+heating of skull,other,頭蓋の加熱（安全性・物理量）
+hemodynamics,other,血行動態一般で血圧そのものではない
+identification,auditory_discrimination,同定課題として判定
+identification of place of articulation,auditory_discrimination,
+inconsolable crying,crying,
+individual differentiation,auditory_discrimination,個体（声）の弁別・識別と解釈
+infant availability behaviors,interaction_attachment,
+infant crying,crying,
+infant development,other,発達一般で領域が特定できない
+infant gaze,attention_arousal,
+infant responsiveness,interaction_attachment,相互作用場面の応答性と解釈
+infant social development,interaction_attachment,社会的発達として判定
+infant stress and nonstress behaviors,stress_pain,
+infant vocalizations,speech_production,
+infant vowel space,speech_production,
+infants' development,other,発達一般で領域が特定できない
+infants' vocabulary size,language_development,
+inositol phosphates accumulation,other,細胞内生化学
+input resistance,other,細胞膜の電気生理特性
+interpeak interval,neural_response,ABRの頂点間潜時として判定
+intonational exaggeration,speech_production,母親の対乳児発話の音響特性（産出側）
+intracellular Ca2+ transients,other,細胞内カルシウム動態
+intrinsic F0 of vowels,speech_production,
+intrinsic membrane properties,other,細胞膜の電気生理特性
+kanamycin pharmacokinetics,other,薬物動態
+labeling of F1,auditory_discrimination,フォルマントのラベリング（同定）課題として判定
+language,language_development,
+language acquisition,language_development,
+largest Lyapunov exponents,other,非線形動態の指標で対象信号が特定できない
+latency,neural_response,単独では曖昧だが誘発電位の潜時と解釈
+learning of vowel categories,auditory_discrimination,知覚カテゴリ学習として判定
+left ventricular mass,other,左室心筋重量（心構造）
+length changes in outer hair cells,other,外有毛細胞の細胞生理
+length of hospital stay,survival_morbidity,臨床アウトカム（罹患関連）として判定
+level,other,単独では何のレベルか特定できない
+lexical boundary errors,language_development,語彙境界の知覚・分節の誤りとして言語発達側で判定
+lexical tone acquisition,language_development,
+lexical tone contours,speech_production,産出された声調の音響輪郭として判定
+lexical tone learning,language_development,声調の学習・習得として判定
+listening preference,auditory_discrimination,
+listening preference for trochaic words,auditory_discrimination,
+lived experience,other,質的な体験記述
+lived experiences of uncertainty,other,質的な体験記述
+localization discrimination,sound_localization,
+localization responses,sound_localization,
+locomotion,motor,
+looking time,attention_arousal,注視時間（注意指標）として判定
+looking times,attention_arousal,注視時間（注意指標）として判定
+looking to target object,attention_arousal,
+magnitude and phase of components,other,信号成分の大きさ・位相で対象が特定できない
+markers of interplay,interaction_attachment,母子相互作用の指標として判定
+masking release,auditory_discrimination,マスキング解除（知覚）として判定
+masking strength,auditory_discrimination,マスキングの強さ（知覚測定）として判定
+maternal adjustment,interaction_attachment,母親側指標
+maternal recognition,auditory_discrimination,母親（声）の認識課題として判定
+maternal soothing behaviors,interaction_attachment,
+maternal-infant bonding,interaction_attachment,
+maturation of the organ of Corti,other,コルチ器の解剖学的成熟
+maximum output sound pressure levels,other,機器の最大出力音圧で乳児のアウトカムではない
+maximum stimulation levels,other,人工内耳の刺激レベル（機器パラメータ）
+mean arterial pressure,blood_pressure,
+mean fetal heart rate,heart_rate,
+measured activity,other,活動量の測定で内容が特定できない
+melody change detection,auditory_discrimination,
+melody recognition,auditory_discrimination,
+membrane time constant,other,細胞膜の電気生理特性
+memory,other,単独では何の記憶か特定できない
+metabolism,other,代謝一般
+middle cerebral artery pulsatility index,other,中大脳動脈のドプラ指標（血行動態）
+middle latency auditory evoked response,neural_response,
+middle latency response,neural_response,
+middle-ear dysfunction,hearing_status,中耳機能障害（聴力状態の一部）として判定
+middle-ear responses,other,中耳の音響応答で聴力指標とは区別
+minimum audible angle,sound_localization,
+mismatch negativity (MMN),neural_response,
+morphosyntax,language_development,
+motor activity,motor,
+musical self,other,質的概念（音楽的自己）
+mutation spectrum,other,遺伝子変異のスペクトル（病因側）
+myoclonic jerks during sleep,sleep,睡眠中のミオクローヌスとして睡眠側で判定
+neonatal death,survival_morbidity,
+neonatal sleep myoclonus,sleep,
+neural capacity for sound and speech discrimination,neural_response,弁別の神経基盤として判定
+neural encoding of speech sounds,neural_response,
+neural health,neural_response,蝸牛神経の健全性（神経応答由来の指標）として判定
+neural responses in primary auditory cortex,neural_response,
+neural responsiveness,neural_response,
+neural sensitivity to ITDs,neural_response,両耳間時間差への神経感度として判定
+neurofunctional assessment,other,神経機能評価一般
+neurological examination,other,神経学的診察（臨床評価）
+neurological outcome,other,神経学的予後（臨床アウトカム）
+neurological outcome at 24 months,other,神経学的予後（臨床アウトカム）
+neuron density,other,ニューロン密度（組織学）
+night waking,sleep,
+non-nutritive sucking,feeding,吸啜行動（哺乳関連）として判定
+nonlinear phenomena,other,非線形現象一般で対象が特定できない
+obstructive apneas,respiration,
+opening of Corti's tunnel,other,コルチトンネルの解剖学的発生
+orienting,attention_arousal,定位・オリエンティング反応として判定
+original songwriting practices,other,母親の作詞実践（質的記述）
+otoacoustic emission (OAE) levels,otoacoustic_emissions,

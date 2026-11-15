@@ -1,0 +1,203 @@
+Raw_Value,Canonical_Value,Note
+otoacoustic emission latency,otoacoustic_emissions,
+otoacoustic emissions latency,otoacoustic_emissions,
+otolith growth,other,耳石の成長という解剖学的指標で、聴力・OAE のいずれにも当たらない
+ototoxicity,other,薬剤の毒性（有害事象）であり聴力指標そのものではない
+outcomes and cost components,other,費用・サービス評価に関する記述
+parent-infant interactions,interaction_attachment,
+parent-neonate interactions,interaction_attachment,
+parental anxiety,interaction_attachment,親側の指標として interaction_attachment に含めた
+parental responsiveness,interaction_attachment,
+parental stress perception,interaction_attachment,親側のストレス認識のため interaction_attachment とした（stress_pain と迷った）
+parenting behaviors,interaction_attachment,
+pathology identification,other,病理の同定そのもので、機能指標ではない
+peak amplitude,neural_response,文脈不明だが喚起応答のピーク振幅と判断（迷った）
+peak fundamental frequency,speech_production,
+perceived warmth,other,音の質に対する知覚評価で、弁別・選好課題とは異なる
+perception,auditory_discrimination,知覚全般の課題として
+perception of auditory streams,auditory_discrimination,
+perceptions of the use of MT,other,音楽療法利用に関する認識の調査
+perceptual category boundaries,auditory_discrimination,
+perceptual differentiation,auditory_discrimination,
+perceptual magnet effect,auditory_discrimination,
+perceptual ratings,auditory_discrimination,知覚評価全般として
+perceptual sensitivity to vowel duration,auditory_discrimination,
+perceptual similarity,auditory_discrimination,
+perceptual space warping,auditory_discrimination,
+peripheral neural responses,neural_response,
+peripheral oxygen saturation,oxygen_saturation,
+perspectives on developing music therapy,other,音楽療法の開発に関する見解・調査
+phoneme intelligibility,auditory_discrimination,音素の聞き取り（知覚）として
+phonetic enhancement of sibilants,speech_production,発話音響の強調という産出側特性として
+phosphoinositide breakdown,other,細胞内生化学指標
+physical behavior,motor,
+physiologic measures,other,生理指標全般で特定の語彙に落とせない
+physiological parameters,other,生理指標全般で特定の語彙に落とせない
+pitch,speech_production,単独では産出側ピッチと判断（pitch perception と別トークンがあるため。迷った）
+pitch (F0) characteristics,speech_production,
+pitch contour,speech_production,
+pitch height,speech_production,発話ピッチの高さとして（知覚の tone height と別トークンがあるため）
+pitch perception,auditory_discrimination,
+pitch preferences,auditory_discrimination,
+pitch-range expansion,speech_production,
+poor neonatal outcome,survival_morbidity,新生児の不良転帰として
+postsynaptic potentials (PSPs),neural_response,
+precedence effect,sound_localization,先行音効果は音源定位に関わる両耳処理として
+preference for congruently sized objects,other,視覚対象の選好で聴覚弁別ではない
+preference for labial-coronal words,auditory_discrimination,
+preferential looking,auditory_discrimination,注視による選好測定（知覚課題）として（attention_arousal と迷った）
+prelinguistic phonatory categories,speech_production,
+prevalence,other,疫学的な有病率
+prominence of vocalic/sonorant segments,speech_production,
+prosodic bootstrapping,language_development,韻律を手がかりとする言語獲得として
+prosodic boundary classification,auditory_discrimination,韻律境界の分類・知覚課題として
+psychometric functions,auditory_discrimination,検出・弁別の心理測定関数として
+psychosocial development,other,心理社会発達という全般的発達指標で語彙に無い
+pulsatility index,other,ドプラ血流指標であり血圧ではない
+pup retrieval,interaction_attachment,動物の母性行動（母親側指標）として
+quality of general movements (GMs),motor,
+quiet sleep (pattern A),sleep,
+rate facilitation,neural_response,喚起応答のレート効果として
+rate suppression,neural_response,喚起応答のレート効果として
+receptive language,language_development,
+recognition of noise-vocoded speech,auditory_discrimination,
+recognition of perceptual similarity,auditory_discrimination,
+recognition of rhyme,auditory_discrimination,
+recognition of the pseudo-nouns,auditory_discrimination,
+relaxation,attention_arousal,覚醒水準の低下（リラックス状態）として
+residual hearing,hearing_status,
+resourcefulness,other,行動特性の評定で語彙に無い
+respiration,respiration,
+respiration rate,respiration,
+respiratory rates,respiration,
+response amplitudes,neural_response,文脈不明だが喚起応答の振幅と判断（迷った）
+response latencies,neural_response,文脈不明だが喚起応答の潜時と判断（迷った）
+response to stimulation,other,刺激への反応全般で特定できない
+response to vowel tokens,auditory_discrimination,
+responses of single neurons in the inferior colliculus,neural_response,
+responsiveness to faces and voices,attention_arousal,顔・声への応答性（社会的注意）として
+rhythmic behaviors,motor,
+rhythmic differences,speech_production,発話リズムの差として（迷った）
+risk of noise-induced hearing loss,hearing_status,
+sFFR latency,neural_response,
+segmentation of expiratory and inspiratory sounds,other,呼吸音の分節化という解析指標であり呼吸機能そのものではない
+segmentation of verb forms,language_development,
+self-regulation,other,自己調整は注意・覚醒のいずれとも一致しないため other
+sense of agency,other,主体感という認知指標で語彙に無い
+sensitivity to major versus minor,auditory_discrimination,
+sensitivity to tone chroma,auditory_discrimination,
+sensitivity to tone height,auditory_discrimination,
+sensorineural hearing loss (SNHL),hearing_status,
+sensory functioning,other,感覚機能全般で特定できない
+service delivery,other,サービス提供の実施面
+single unit responses in the inferior colliculus,neural_response,
+sleep stages,sleep,
+social toy play,interaction_attachment,社会的遊び（相互作用場面）として
+sound-evoked post-auricular muscle response (PAMR),neural_response,音誘発の電気生理学的応答として（OAE ではない）
+spatial hearing,sound_localization,
+speaking fundamental frequency,speech_production,
+speaking style classification,speech_production,
+spectral amplitude,neural_response,FFR 等の応答スペクトル振幅と判断（産出音響の可能性もあり迷った）
+spectral amplitudes,neural_response,応答スペクトルの振幅と判断（迷った）
+spectral and temporal characteristics,speech_production,音声の音響特性として（迷った）
+spectral characteristics,speech_production,音声の音響特性として（迷った）
+spectral resonant peaks of vowels,speech_production,
+spectral structure,speech_production,音声の音響構造として（迷った）
+speech,speech_production,単独では音声産出と判断（迷った）
+speech comprehension,language_development,
+speech development,language_development,
+speech evoked frequency following response,neural_response,
+speech production,speech_production,
+speech recognition in quiet and in masking speech,auditory_discrimination,
+speech recognition performance,auditory_discrimination,
+speech sound segregation,auditory_discrimination,
+speech understanding,auditory_discrimination,音声の聞き取り・理解（知覚課題）として
+speech understanding in noise,auditory_discrimination,
+spherical cell size,other,細胞形態の解剖学的計測
+spike count-vs.-intensity functions,neural_response,
+spiral ganglion cell density,other,組織学的計測
+spiral ganglion neuron density,other,組織学的計測
+splanchnic oxygenation,oxygen_saturation,内臓組織の酸素化（酸素飽和の近傍指標）として
+spontaneous motility,motor,
+spontaneous otoacoustic emission minimal spacing,otoacoustic_emissions,
+spontaneous otoacoustic emissions incidence,otoacoustic_emissions,
+stable skin color,other,皮膚色の安定という臨床観察指標
+statistical learning,auditory_discrimination,聴覚統計学習の知覚課題として（language_development と迷った）
+stimulation parameters,other,刺激パラメータ自体（方法の記述）
+stream segregation,auditory_discrimination,
+stress level,stress_pain,
+stress-related behaviors,stress_pain,
+sucking behavior,feeding,
+sucking times,feeding,
+sucking-swallowing disorders,feeding,
+summating potential (SP),neural_response,
+summating potential responses,neural_response,
+suppression tuning curves,neural_response,抑制同調曲線（OAE 抑制の可能性もあり迷った）
+survey of clinical practice,other,診療実態の調査
+syllable duration,speech_production,
+syllable stress production,speech_production,
+synaptic responses,neural_response,
+synchrony,neural_response,神経同期と判断（親子同期の可能性もあり迷った）
+syntactic interpretation,language_development,
+syntax,language_development,
+syntax learning,language_development,
+systolic blood pressure,blood_pressure,
+target vowel identification,auditory_discrimination,
+temperature increments,temperature,
+temperature rise,temperature,
+therapist behaviors,other,療法士側の行動（実施面）
+threshold elevations,hearing_status,
+time awake,sleep,覚醒時間は睡眠指標として
+time awake at night,sleep,
+time spans of TEOAE components,otoacoustic_emissions,
+time to habituate,auditory_discrimination,習慣化までの時間として
+time-frequency features of CEOAEs,otoacoustic_emissions,
+toddlers' responses,other,幼児の反応全般で特定できない
+tone detection,auditory_discrimination,
+tone-bearing vowel duration,speech_production,
+total attenuation estimation,other,減衰量の推定という音響測定であり乳児の結果指標ではない
+tracking accuracy,other,何のトラッキングか特定できない
+transfer of learning,auditory_discrimination,知覚学習の転移として
+transient evoked otoacoustic emission latency,otoacoustic_emissions,
+transient-evoked otoacoustic emissions (TEOAE),otoacoustic_emissions,
+transient-evoked otoacoustic emissions (TEOAEs),otoacoustic_emissions,
+tuning curves,neural_response,同調曲線（神経応答）として（迷った）
+two-tone suppression,neural_response,二音抑制（神経・蝸牛応答）として（迷った）
+tympanic membrane volume changes,other,鼓膜・中耳の物理的変化で聴力指標ではない
+ultrasound attenuation,other,超音波減衰という工学的指標
+umbilical artery pulsatility index,other,胎児血流指標であり血圧ではない
+understanding of communicative intention,language_development,コミュニケーション意図の理解（語用発達）として
+uninterrupted sleep,sleep,
+use of music in home environment,other,家庭環境での音楽使用（実施・環境面）
+verb categorization,language_development,
+vesicle-like bodies (VBs),other,細胞内構造の観察
+viral tropism,other,ウイルスの組織指向性
+visual attention,attention_arousal,
+visual rhythm discrimination,other,視覚弁別であり聴覚弁別ではない
+vocabulary,language_development,
+vocabulary size,language_development,
+vocal behaviors,speech_production,
+vocal communication processing,auditory_discrimination,発声コミュニケーションの処理（知覚側）として（迷った）
+vocal emissions,speech_production,
+vocal fundamental frequency characteristics,speech_production,
+vocal imitation,speech_production,
+vocal production,speech_production,
+vocal tract dimensions,other,声道の解剖計測
+voice onset time acquisition,speech_production,
+voice-onset time,speech_production,
+voicing cue sensitivity,auditory_discrimination,
+vowel detection,auditory_discrimination,
+vowel formant structure,speech_production,
+vowel learnability,auditory_discrimination,母音の学習可能性（知覚学習）として
+vowel perception,auditory_discrimination,
+vowel pitch,speech_production,母音の音響的ピッチとして（迷った）
+vowel segregation,auditory_discrimination,
+vowel space expansion,speech_production,
+wave latencies,neural_response,
+wave latency,neural_response,
+weight,growth,
+wideband acoustic reflectance,other,中耳機能の音響測定であり聴力閾値ではない
+word categorization,language_development,
+word form recognition,auditory_discrimination,語形の認識（知覚課題）として
+word meaning interpretation,language_development,
+word segmentation,language_development,

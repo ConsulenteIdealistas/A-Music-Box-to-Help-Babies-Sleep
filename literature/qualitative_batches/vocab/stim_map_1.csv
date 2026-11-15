@@ -1,0 +1,161 @@
+Raw_Value,Canonical_Value,Note
+infant-directed speech,speech_infant_directed,
+adult-directed speech,speech_adult_directed,
+music therapy,music_therapy,
+music,music_general,
+speech,speech_general,
+click,click,
+infant-directed singing,singing_infant_directed,
+clicks,click,
+speech sounds,speech_general,
+spontaneous speech,speech_general,
+tone bursts,tone_burst,
+two-tone stimuli,tone_pure,2純音のペア刺激
+DPOAE stimulation,tone_pure,DPOAE測定に用いる2純音刺激
+bilateral cochlear implants,electrical,人工内耳経由の電気刺激として分類
+bisyllabic stimuli,speech_general,
+cry sounds,cry_sounds,
+electrical stimulation,electrical,
+environmental noise,noise_general,
+filtered clicks,click,
+kanamycin,other,耳毒性薬剤であり音響刺激ではない
+lullabies,lullaby,
+music from personal listening devices,music_recorded,個人用再生機器で提示される録音音楽と解釈
+noise,noise_general,
+noise-vocoded speech,speech_general,ノイズボコード処理された発話
+prosody,speech_general,発話の韻律操作
+recorded music,music_recorded,
+superimposed vowel pairs,speech_general,
+vowel tokens,speech_general,
+/da/ syllable,speech_general,
+/ti/ and /ta/,speech_general,
+0.1 ms clicks,click,
+1.0-kHz pulsed-tone,tone_burst,パルス状に提示される純音
+100 msec bipolar clicks,click,
+1000-Hz FM tone,sweep_chirp,FM音
+16-channel speech,speech_general,チャネルボコード発話
+"3,3'-iminodipropionitrile (IDPN)",other,化学物質（神経毒）であり音響刺激ではない
+3.6-MHz focused ultrasonic beams,other,超音波であり可聴域の音響刺激の語彙に該当なし
+32-channel speech,speech_general,チャネルボコード発話
+5- and 40-kHz tones,tone_pure,
+50-dB sound pressure level noise band,noise_general,
+500-Hz tone,tone_pure,
+500-Hz tone pips,tone_burst,トーンピップ（短い純音バースト）
+ATP and UTP stimulation,other,薬理学的刺激（プリン受容体作動薬）であり音響刺激ではない
+CL words,speech_general,
+CVC stimuli,speech_general,
+Doppler ultrasound,other,超音波ドプラであり音響刺激ではない
+German and Swedish speech,speech_general,
+German vowels,speech_general,
+Japanese infant-directed speech,speech_infant_directed,
+Kangaroo care,other,ケア介入であり音響刺激ではない
+Lombard speech,speech_general,
+Mandarin pitch contours,speech_general,声調のピッチ輪郭
+Pacifier Activated Lullaby (PAL),lullaby,PAL装置による子守歌提示
+Spanish-spoken disyllabic nonwords,speech_general,
+[ba]-[pa] stimuli,speech_general,
+[du]-[tu] stimuli,speech_general,
+acoustic change complex,other,誘発反応の名称であり刺激種別を特定できない
+acoustic stimulation,other,音響刺激一般で種別を特定できない
+acoustic stimuli,other,音響刺激一般で種別を特定できない
+acoustically enriched environment,other,音響環境の豊か化であり刺激種別を特定できない
+adult vowels,speech_general,成人の母音（向け先の明記なし）
+affricate-fricative contrasts,speech_general,
+alternating syllables,speech_general,
+ambient noise,noise_general,
+audio-visual speech,speech_general,視覚情報を伴う発話
+audiotaped lullaby of instrumental music with vocals,lullaby,子守歌と明記されているため録音形態より優先
+audiovisual speech,speech_general,視覚情報を伴う発話
+auditory speech signals,speech_general,
+auditory stimulation,other,聴覚刺激一般で種別を特定できない
+aural stimuli,other,聴覚刺激一般で種別を特定できない
+baby cry audio recordings,cry_sounds,
+background noise,noise_general,
+bimodal distribution of vowels,speech_general,母音の二峰性分布への曝露
+bisyllabic LC words,speech_general,
+bone conduction stimulation,vibroacoustic,骨伝導による振動刺激
+bone vibrator stimulation,vibroacoustic,骨振動子による振動刺激
+book reading,speech_infant_directed,乳児への読み聞かせと解釈
+broadband noise masker,noise_general,
+broadband noise signal,noise_general,
+carbachol,other,薬剤（コリン作動薬）であり音響刺激ではない
+caregivers' speech,speech_infant_directed,養育者が乳児に向ける発話と解釈
+children's songs,singing_general,子ども向けの歌（乳児向け歌唱とは明記なし）
+chronic bilateral intra-cochlear electrical stimulation,electrical,
+chronic intracochlear electrical stimulation,electrical,
+clear- and noise-vocoded sentences,speech_general,
+click and tone burst stimuli,multiple_mixed,クリックとトーンバーストの複合と明記
+click and tone-burst stimuli,multiple_mixed,クリックとトーンバーストの複合と明記
+click-evoked otoacoustic emissions,click,刺激はクリック（OAEは反応側）
+cochlear implant auditory input,electrical,人工内耳経由の入力として分類
+cochlear implants,electrical,人工内耳経由の電気刺激として分類
+coda mispronunciations,speech_general,
+codified interactions,other,相互作用の様式であり音響刺激の種別を特定できない
+communicative vocalizations,other,発声一般であり発話と特定できない
+competing speech (target and masker voices),speech_general,標的とマスカーの競合発話
+complex tones,tone_pure,複合音（純音系の音響刺激として分類）
+computer-edited speech samples,speech_general,
+concurrent vowels,speech_general,
+consonant-vowel syllables,speech_general,
+conspecific vocalizations,other,同種個体の発声（動物）であり語彙に該当なし
+contact calls,other,動物のコンタクトコールであり語彙に該当なし
+contingent music,music_general,随伴性のある音楽提示（形態不明）
+contingent singing,singing_infant_directed,乳児の行動に随伴して提示される歌唱と解釈
+continuous sound,other,持続音一般で種別を特定できない
+continuous speech input,speech_general,
+control noise,noise_general,対照条件としてのノイズ
+cries,cry_sounds,
+depolarizing current pulses,electrical,電流パルスによる刺激
+developmental music groups,music_general,発達支援の音楽グループ活動（療法とは明記なし）
+deviant pitches,tone_pure,オドボール課題の逸脱音高刺激
+diagnostic ultrasound,other,診断用超音波であり音響刺激ではない
+distress screams,cry_sounds,苦痛時の悲鳴（啼泣系の発声として分類）
+disyllables /pata/,speech_general,
+disyllables /tapa/,speech_general,
+electric pulse trains,electrical,
+electric stimulation,electrical,
+electrical stimulation (bipolar scala tympani stimulating electrodes),electrical,
+electrical stimulation from a cochlear implant,electrical,
+electrical stimulation of the lateral lemniscus and commissure of Probst,electrical,
+electrical stimuli,electrical,
+enhanced bimodal distribution,speech_general,母音分布の強調曝露と推定
+entrained breath sounds,other,呼吸音であり語彙に該当なし
+expressive maternal singing,voice_maternal,母親の歌唱。出所優先の規則を適用
+foreigner-directed speech,speech_adult_directed,外国人向け発話（成人向けとして分類）
+four-tone sequences,tone_pure,4音の系列刺激
+full-spectrum sentences,speech_general,
+functor her,speech_general,
+functor the,speech_general,
+gentamicin,other,耳毒性薬剤であり音響刺激ではない
+gesture cues,other,視覚的な身振り手がかりであり音響刺激ではない
+harmonic intervals,tone_pure,和声音程（2音の組み合わせ）
+heartbeat sounds,heartbeat,
+high-frequency cosignal,other,マスキング文脈の随伴信号で種別を特定できない
+high-pass noise masking,noise_general,
+iconic speech,speech_general,アイコン性のある発話
+immunization,other,予防接種という医療処置であり音響刺激ではない
+in utero paracetamol exposure,other,薬剤曝露であり音響刺激ではない
+induced maternal stress using the Stroop color-word task,other,母親へのストレス負荷であり乳児への音響刺激ではない
+infant African elephant roars,other,動物（ゾウ）の発声であり語彙に該当なし
+infant cries (resynthesized),cry_sounds,
+infant sleep machines,other,スリープマシンの再生音で内容を特定できない
+infant vocalizations,other,乳児の発声一般であり啼泣と特定できない
+infant-directed speech with prosodic exaggeration,speech_infant_directed,
+instrumental and vocal music sounds,music_general,器楽と声楽の音楽音
+instrumental music without vocals,music_general,
+interaural stimulation,other,両耳提示という提示様式であり刺激種別を特定できない
+interaural time difference information,other,両耳間時間差という手がかり操作であり刺激種別を特定できない
+interphase gap,electrical,人工内耳の電気パルスのパラメータ
+intersensory redundancy,other,感覚間の冗長性という特性であり音響刺激の種別ではない
+intracochlear electrical stimulation,electrical,
+intrahepatic vein transfusion puncture,other,医療処置であり音響刺激ではない
+labial consonant-vowel voice-onset-time (CV VOT) series,speech_general,
+lexical tone mispronunciations,speech_general,
+linear frequency transitions,sweep_chirp,周波数遷移（スイープ状）
+lists of words,speech_general,
+live face/voice stimulus,speech_infant_directed,対面で乳児に向けられる生の発話と解釈
+live music,music_live,
+low-frequency stimuli,other,低周波という特性のみで刺激種別を特定できない
+low-frequency target (first formant),speech_general,第1フォルマントを標的とした音声刺激
+lullaby,lullaby,
+lullaby with vocals added,lullaby,
