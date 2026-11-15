@@ -36,6 +36,7 @@ EVENTS
     ],
     "/tmp/score_klank.osc",
     "OUTFILE",
+    headerFormat: "WAV",
     sampleRate: 44100,
     options: ServerOptions.new.numOutputBusChannels_(1)
 );
