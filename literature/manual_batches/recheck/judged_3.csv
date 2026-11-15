@@ -1,0 +1,11 @@
+PMID,Stratum,Decision,Evidence_Quote,Reason
+18243607,C,Count_only_no_acoustic,"Ogn-deficient mice, when analyzed by auditory brainstem response and distortion product otoacoustic emissions, have normal hearing thresholds.",ヒト側は胎児蝸牛cDNAライブラリ（生体材料）のみで聴性表現型の対象はマウス、音響数値なし
+15964725,UNDETERMINED,Count_only_no_acoustic,"Non-syndromic 46 probands (17 familial and 29 sporadic cases) were genetically evaluated.",遺伝子変異の有病率研究で対象年齢の記載がなく音響条件もなし
+15504600,A,Count_only_no_acoustic,"the frequency of GJB2 alleles in 20 newborns with bilateral severe-to-profound non-syndromic hearing impairment (NSHI) who were found at birth through newborn hearing screening",新生児対象の遺伝学研究で音響条件の数値なし
+12361870,UNDETERMINED,Count_only_no_acoustic,"data obtained in a cohort of 10 patients with congenital CH who were euthyroid at the time of audiological evaluation",評価時の年齢が抄録から確定できず音響数値もなし
+12062765,A,Include_for_extraction,"the results of measuring of the transient-evoked otoacoustic emissions (TEOAE) in a population of 29 newborns, who tested positive on a screening test for hypothyroidism (CH group)",新生児対象、クリック刺激によるTEOAE測定で刺激種が読み取れ、問いは甲状腺と外有毛細胞の関連（基礎科学）
+9213129,C,Count_only_no_acoustic,"The excitability of cultured spiral ganglion (SG) neurons from early postnatal gerbil (P0-P1) was examined with the whole-cell patch-clamp technique.",スナネズミ培養ニューロンの電気生理研究で、Hzは電気パルスの頻度であり音響刺激なし
+9165342,A,Include_for_extraction,"has little effect on normal ossicular transmission of sound for frequencies above 20 Hz",0〜1歳を含む側頭骨標本の研究で、音伝導に関する周波数（20 Hz・150 Hz）の記述あり
+41880481,A,Count_only_no_acoustic,"a convenience sample of 20 clients (ages 1-69 years) receiving individual sessions in Nordoff-Robbins Music Therapy (NRMT)",1歳を含む対象だが音響条件（dB・Hz・BPM）の記載なし
+36995776,A,Count_only_no_acoustic,"typically developing children aged birth to 5 years old and their parents",出生〜5歳を対象とするレビューだが介入は定性記述のみで音響数値なし
+11407963,A,Include_for_extraction,"a sudden burst of sound is presented at between 78 and 83 dB SPL which stimulates the entire basilar membrane",新生児対象、刺激音圧（78–83 dB SPL）と応答周波数が明記され、問いは性差という基礎科学

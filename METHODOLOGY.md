@@ -102,6 +102,10 @@ UNDETERMINED 25、診断手法のみとして除外 10件、抽出候補は合�
 498件（firstpass 確定 437件＋手動 61件）。UNDETERMINED 25件
 （抄録なし7件・年齢記載なし18件）は推測で埋めず、本文確認まで
 未確定として残す。残り437件の層別は抽出時に再確認する。
+再チェック（2026-11-15）: 手動判定のうち際どい31件（AMBIGUOUS）を
+元の判定を見せない blind で再判定し、24件が完全一致。相違7件のうち
+PMID 42933285（年齢記載なし）のみユーザーの承認で A → UNDETERMINED
+に訂正し、最終層別は A 424 / B 39 / C 74 / UNDETERMINED 26 となった。
 
 ## 3. 抽出ルール（恣意性とハルシネーションの排除）
 
@@ -110,6 +114,9 @@ UNDETERMINED 25、診断手法のみとして除外 10件、抽出候補は合�
 - 抽出した数値には、根拠として抄録内の該当フレーズ（原文）を必ず併記する
   （抽出シートの `Evidence_Quote` 列）。
 - 抽出項目は `literature/extraction_sheet_template.csv` の列定義に従う。
+  抄録に音響数値が一切無い行は `Decision=Count_only`（数値列は N/A、
+  `Exclude_Reason` に理由）として件数のみ数える。バリデータの
+  `VALID_DECISIONS` とこの語彙は一致させる。
 - **照合（二重ろ過）**: 抽出（むぎ）が終わったバッチは、統合前に必ず
   `analysis/validate_extraction.py` で照合する。Evidence_Quote の
   verbatim 一致、数値の引用内存在（kHz→Hz 換算は WARN として記録）、

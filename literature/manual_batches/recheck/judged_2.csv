@@ -1,0 +1,11 @@
+PMID,Stratum,Decision,Evidence_Quote,Reason
+30336355,B,Exclude_diagnosis_only,"CAEPs were recorded in response to a 1 kHz puretone from twenty adults with no hearing loss","対象は成人20名のみ。目的はCAEPによる客観的聴力閾値推定法の精度評価で診断手法の評価にあたる"
+29502907,B,Include_for_extraction,"Monaurally presented stimuli consisted of 36 ms trains of 9 acoustic clicks/biphasic electric pulses at a rate of 250 Hz, repeated at 1 Hz","対象は移植時年齢8.7±5.1歳の小児のみ（2歳未満の記載なし）。刺激条件（250 Hz・1 Hz、聴力差dB）が抄録に明記され、問いは皮質可塑性という基礎科学"
+29133013,UNDETERMINED,Count_only_no_acoustic,"a preferred interval of up to four years in children under the age of 4 at first implantation","年齢区分が4歳未満/以上のみで2歳未満が含まれるか判断できない。音響条件の数値（dB・Hz等）は抄録に一切なし"
+28463805,C,Count_only_no_acoustic,"Using dissociated cell culture we analyzed whole-cell patch-clamp recordings of spiral ganglion neurons grown in the presence or absence of neurotrophins and/or penicillin and streptomycin","ヒト対象なし、解離培養の蝸牛神経節ニューロンのみ。曝露は神経栄養因子と抗生物質で音響刺激の条件はなし"
+28460251,C,Count_only_no_acoustic,"we present a novel ex vivo experimental setup to examine in detail the pattern of hair cell loss upon exposure to different S. pneumoniae strains","ヒト対象なし、コルチ器explant培養のみ。曝露は細菌・毒素であり音響条件はなし"
+26994659,A,Include_for_extraction,"this activity is altered during early ontogeny as a consequence of, e.g., an unnatural acoustic environment or acoustic trauma","発達期の騒音曝露を主題とするレビューで、対象集団は新生児医療を射程に入れた発達初期。音響曝露そのものが研究条件として抄録から読み取れる"
+26828740,B,Count_only_no_acoustic,"In children with normal hearing (NH), spatial hearing abilities are fairly well developed by age 4-5 years","両側CI児のレビューで記述の中心は4-5歳以上。ITD/ILDは定性論述のみで抽出可能な音響数値なし"
+26070426,UNDETERMINED,Count_only_no_acoustic,"Children with ANSD provide a unique platform to examine the effects of asynchronous and degraded afferent stimulation on cortical auditory neuroplasticity and behavioral processing of sound","対象は「小児」とのみで年齢の記載が一切ない。音響条件の数値もなし"
+22008826,UNDETERMINED,Count_only_no_acoustic,"Forty-two temporal bones from 21 individuals with bilaterally symmetric profound hearing impairment were studied","ヒト側頭骨ドナーだが年齢の記載なし。組織学的計数の研究で音響条件なし"
+18662763,UNDETERMINED,Include_for_extraction,"This paper proposes a new minimum variance spectral estimation (MVSE)-based time-frequency analysis (TFA) technique for click-evoked otoacoustic emissions (CEOAEs)","CEOAE信号処理の方法論文で被験者の記載なし。解析対象はクリック誘発反応で刺激種が明記され、診断性能の評価が目的ではない"

@@ -15,6 +15,16 @@ DIAG_check 28: 7 excluded as diagnosis-only, 9 had their first-pass stratum corr
 ## Updated totals for the full population (N=563)
 
 Final strata: A 425 / B 39 / C 74 / UNDETERMINED 25.
+Recheck (2026-11-15): the 31 AMBIGUOUS rows were blind re-judged without the
+original decisions; 24 agreed exactly. Of 7 divergences, one correction was
+approved by the user: PMID 42933285 A -> UNDETERMINED (participants' ages not
+stated; newborns appear only in background — the pilot extraction had
+independently reached the same stratum). Updated final strata:
+A 424 / B 39 / C 74 / UNDETERMINED 26. The other divergences were kept as-is:
+two culture studies stay UNDETERMINED (species unstated; no inference), two
+Include rows stay (extraction itself demotes them if no acoustic values
+exist), and two boundary definitions (human fetal material; neonatal device
+calibration) are recorded in the recheck working files.
 Excluded as diagnosis-only: 10 (across all strata).
 Extraction candidates: 498 (= 437 first-pass includes + 61 manual includes). Of these, 5 are stratum-UNDETERMINED with acoustic data: values may be extracted but must not enter stratum statistics until age is resolved from full text.
 

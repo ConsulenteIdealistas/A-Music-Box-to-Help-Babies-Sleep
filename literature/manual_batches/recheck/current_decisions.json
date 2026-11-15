@@ -1,0 +1,126 @@
+{
+ "6739203": {
+  "Stratum": "UNDETERMINED",
+  "Decision": "Count_only_no_acoustic"
+ },
+ "27586713": {
+  "Stratum": "A",
+  "Decision": "Exclude_diagnosis_only"
+ },
+ "25096106": {
+  "Stratum": "UNDETERMINED",
+  "Decision": "Count_only_no_acoustic"
+ },
+ "21428510": {
+  "Stratum": "A",
+  "Decision": "Exclude_diagnosis_only"
+ },
+ "17552712": {
+  "Stratum": "B",
+  "Decision": "Exclude_diagnosis_only"
+ },
+ "16583911": {
+  "Stratum": "B",
+  "Decision": "Include_for_extraction"
+ },
+ "7593926": {
+  "Stratum": "UNDETERMINED",
+  "Decision": "Count_only_no_acoustic"
+ },
+ "7963021": {
+  "Stratum": "C",
+  "Decision": "Include_for_extraction"
+ },
+ "2708687": {
+  "Stratum": "A",
+  "Decision": "Include_for_extraction"
+ },
+ "3403803": {
+  "Stratum": "A",
+  "Decision": "Include_for_extraction"
+ },
+ "42933285": {
+  "Stratum": "A",
+  "Decision": "Include_for_extraction"
+ },
+ "30336355": {
+  "Stratum": "B",
+  "Decision": "Exclude_diagnosis_only"
+ },
+ "29502907": {
+  "Stratum": "B",
+  "Decision": "Include_for_extraction"
+ },
+ "29133013": {
+  "Stratum": "UNDETERMINED",
+  "Decision": "Include_for_extraction"
+ },
+ "28463805": {
+  "Stratum": "UNDETERMINED",
+  "Decision": "Count_only_no_acoustic"
+ },
+ "28460251": {
+  "Stratum": "UNDETERMINED",
+  "Decision": "Count_only_no_acoustic"
+ },
+ "26994659": {
+  "Stratum": "A",
+  "Decision": "Include_for_extraction"
+ },
+ "26828740": {
+  "Stratum": "B",
+  "Decision": "Include_for_extraction"
+ },
+ "26070426": {
+  "Stratum": "UNDETERMINED",
+  "Decision": "Count_only_no_acoustic"
+ },
+ "22008826": {
+  "Stratum": "UNDETERMINED",
+  "Decision": "Count_only_no_acoustic"
+ },
+ "18662763": {
+  "Stratum": "UNDETERMINED",
+  "Decision": "Include_for_extraction"
+ },
+ "18243607": {
+  "Stratum": "A",
+  "Decision": "Count_only_no_acoustic"
+ },
+ "15964725": {
+  "Stratum": "UNDETERMINED",
+  "Decision": "Count_only_no_acoustic"
+ },
+ "15504600": {
+  "Stratum": "A",
+  "Decision": "Count_only_no_acoustic"
+ },
+ "12361870": {
+  "Stratum": "UNDETERMINED",
+  "Decision": "Count_only_no_acoustic"
+ },
+ "12062765": {
+  "Stratum": "A",
+  "Decision": "Include_for_extraction"
+ },
+ "9213129": {
+  "Stratum": "C",
+  "Decision": "Count_only_no_acoustic"
+ },
+ "9165342": {
+  "Stratum": "A",
+  "Decision": "Include_for_extraction"
+ },
+ "41880481": {
+  "Stratum": "A",
+  "Decision": "Count_only_no_acoustic"
+ },
+ "36995776": {
+  "Stratum": "A",
+  "Decision": "Count_only_no_acoustic"
+ },
+ "11407963": {
+  "Stratum": "A",
+  "Decision": "Include_for_extraction"
+ }
+}

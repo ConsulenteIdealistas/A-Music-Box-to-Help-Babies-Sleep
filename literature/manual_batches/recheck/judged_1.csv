@@ -1,0 +1,12 @@
+PMID,Stratum,Decision,Evidence_Quote,Reason
+6739203,UNDETERMINED,Count_only_no_acoustic,persists as a loud paroxysmal barking or honking sound for weeks to months,対象年齢の記載なし。咳の音は定性記述のみで音響条件の数値が読み取れない
+27586713,C,Exclude_diagnosis_only,"The objectives of this study were to develop calibration methods, verify conformance to the design goals, demonstrate that the device is capable of being calibrated reliably",ヒト対象なし（イヤシミュレータ装置）。聴覚評価機器の校正のみが目的
+25096106,UNDETERMINED,Count_only_no_acoustic,13 subjects completed pitch ranking and electrode discrimination for adjacent PEs and the corresponding PE-DE pairs,対象年齢の記載なし。電気刺激のピッチ課題のみで dB/Hz の数値が読み取れない
+21428510,A,Exclude_diagnosis_only,Measurements in infants indicated that the screening performance of BC-TEOAEs and AC-TEOAEs may be comparable.,乳児を含むが、目的は新生児スクリーニングへの適用可否とスクリーニング性能の比較
+17552712,B,Exclude_diagnosis_only,Mean wideband MEMR thresholds across 40 normal-hearing adult ears were 2.2-4.0 dB lower than clinical MEMR thresholds,実測は成人のみ（小児は今後の課題）。臨床検査法MEMRの評価が目的
+16583911,B,Include_for_extraction,It was hypothesized that early bilinguals (mean AOA=3.8 years) would more likely be native-like in production of English and Korean stops and maintain greater independence between Korean and English stop systems than late bilinguals (mean AOA=21.4 years).,習得年齢が平均3.8歳/21.4歳で2歳未満を含まない。子音の音響特性（VOT・振幅差・F0）を分析
+7593926,UNDETERMINED,Count_only_no_acoustic,Estimation of the residual noise in the auditory brain-stem response waveform is considered.,対象者の記載なし。ABR残留ノイズ推定の方法論文で音響条件が読み取れない
+7963021,C,Include_for_extraction,The intelligibility of speech stimuli recorded within the uterus of a pregnant sheep was determined perceptually using a group of untrained judges.,実験対象は妊娠羊（ヒト102人は評価者）。子宮内外で録音した音声刺激の明瞭度を比較
+2708687,A,Include_for_extraction,"The children were followed longitudinally for a 12-month period, spanning preword, single-word, and multiword vocalizations.",生後2年間の追跡で preword 期を含み2歳未満が対象。声のFo特性を測定
+3403803,A,Include_for_extraction,A corpus of 1200 non-cry vocalization samples produced by 14 normal children between the ages of 11-25 months was examined retrospectively.,11〜25ヶ月（2歳未満を含む）の非泣き発声のF0特徴を分析
+42933285,UNDETERMINED,Include_for_extraction,"This study investigated ipsilateral acoustic masking of electric stimulation delivered at apical, basal, and near-RW sites in 12 EAS users with residual low-frequency hearing implanted with short or partially inserted electrode arrays.",参加者の年齢記載なし。低周波音響トーンによる電気刺激のマスキングを測定
