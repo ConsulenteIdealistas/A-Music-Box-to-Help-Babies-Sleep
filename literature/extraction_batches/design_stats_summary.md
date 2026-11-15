@@ -34,6 +34,12 @@ are supplements only, per METHODOLOGY §4.
   physiological assumption (resting maternal heart rate), NOT a
   literature statistic. Any future tempo parameter must be justified
   on other grounds and labelled as such.
+- User decision (2026-11-15): BPM is NOT fixed from literature. It is
+  a variable parameter — default 70 (midpoint of the resting maternal
+  heart-rate range 60–80), adjustable range anchored to that same
+  physiological range. The heartbeat layer already implements this
+  (slider 60–90, default 70); the music-box layer's tempo stays an
+  arrangement choice baked into the recordings.
 
 ## Extraction totals (498 papers)
 - Decision: Include 69 / Reference 97 / Count_only 332
