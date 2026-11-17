@@ -66,9 +66,10 @@ FLOW_RMS_PER_GAIN = 0.087975
 WOMB_FILTER_HZ = 1500.0
 SEED = 20261115
 
-GAIN_HEART = 0.20  # softened twice on listening judgement, -4 dB each:
-                   # 0.50 -> 0.32 (2026-11-15) -> 0.20 (2026-11-17)
-GAIN_FLOW = 0.10  # 0.26 -> 0.16 -> 0.10, same steps as GAIN_HEART
+GAIN_HEART = 0.10  # softened on listening judgement: 0.50 -> 0.32
+                   # (2026-11-15) -> 0.20 (2026-11-17, -4 dB) -> 0.10
+                   # (2026-11-17, halved at the user's direction)
+GAIN_FLOW = 0.05  # 0.26 -> 0.16 -> 0.10 -> 0.05, same steps as GAIN_HEART
 GAIN_MUSIC = 1.10
 PHRASE_GAP_S = 4.5  # silence between music-box phrases
 

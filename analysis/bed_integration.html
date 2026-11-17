@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ベッド統合 — 伝達曲線と4曲の照合 (2026-11-17)</title>
+<style>
+body{background:#111418;color:#e8e6e1;font-family:system-ui,sans-serif;margin:16px}
+h1{font-size:17px} h2{font-size:14px;margin-top:26px;color:#bcd}
+p,li{font-size:13px;line-height:1.55;color:#c9cdd4}
+canvas{width:100%;max-width:860px;background:#171b21;border:1px solid #2a2f37;border-radius:8px}
+.legend{font-size:12px;margin:6px 0}
+.sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin:0 4px 0 10px}
+</style></head><body>
+<h1>ベッド統合 — 伝達曲線と4曲の照合 (2026-11-17)</h1>
+<p>第1弾 (抽出→ブラウン) と第2弾 (一次文献の伝達曲線) の統合結果。数値の正本は
+literature/bed_transfer_evidence.csv、統計は analysis/bed_integration.py / .R (相互検証済み)。</p>
+<h2>1. 統合伝達曲線 (子宮内 − 外部, dB)</h2>
+<div class="legend" id="leg1"></div>
+<canvas id="c1" width="860" height="380"></canvas>
+<p>錨 (Gerhardt 1990, ヒツジ): 250 Hz 以下 +3.5 dB (明記範囲 +2..+5 の中点)、それ以上 −6 dB/oct。
+4 kHz で −20.5 dB となり、原典の「4 kHz で平均 20 dB」と 0.5 dB 以内で一致する。
+Richards 1992 (ヒト) は端点 (+3.7 dB @125 Hz → −10 dB @4 kHz) を結んだ緩やかな下限。
+ブラウン直線は 250 Hz より下で際限なく上がる点だけが錨と違う。</p>
+<h2>2. 4曲とベッドの帯域プロファイル (250 Hz 帯 = 0 dB の相対値)</h2>
+<div class="legend" id="leg2"></div>
+<canvas id="c2" width="860" height="380"></canvas>
+<p>実線 = 素の帯域プロファイル、破線 = 錨曲線を通した後。曲は元々 500–1000 Hz に
+エネルギーが集中し、1500 Hz 以上の帯域は全体の約 1.1% しかない。</p>
+<script>
+const D = {"freqs": [60, 125, 250, 500, 1000, 2000, 4000, 8000, 12000], "curves": {"anchor (Gerhardt, integrated)": [3.5, 3.5, 3.5, -2.5, -8.5, -14.5, -20.5, -26.5, -30.0], "richards (human bound)": [6.6, 3.7, 1.0, -1.8, -4.5, -7.3, -10.0, -12.7, -14.3], "brown line (round 1)": [12.4, 6.0, -0.0, -6.0, -12.0, -18.0, -24.0, -30.0, -33.5], "current music filter 1500Hz/12dB": [0.0, 0.0, 0.0, 0.0, 0.0, -5.0, -17.0, -29.0, -36.0]}, "bands": [125, 250, 500, 1000, 2000, 4000, 8000], "songs": {"brahms": {"raw": [2.1, 0.0, 15.1, 13.8, -18.3, -2.8, -10.2], "anchor": [2.2, 0.0, 7.6, 3.1, -35.1, -27.0, -38.4]}, "moldau": {"raw": [3.9, 0.0, 8.3, 17.3, -15.5, -3.1, -6.3], "anchor": [4.0, 0.0, 0.5, 6.8, -31.9, -28.6, -34.1]}, "vissi_darte": {"raw": [-10.1, 0.0, 7.9, 1.6, -15.5, -11.9, -23.2], "anchor": [-8.3, 0.0, 4.2, -6.3, -33.0, -32.7, -51.3]}, "yurikago": {"raw": [2.4, 0.0, 15.1, 10.7, -12.5, -3.5, -18.4], "anchor": [2.5, 0.0, 8.2, 0.6, -31.8, -27.4, -48.7]}, "bed_brown (round 1)": {"raw": [7.7, 0.0, -4.5, -7.9, -11.0, -14.0, -16.6], "anchor": [8.1, 0.0, -9.3, -18.8, -27.9, -36.9, -45.6]}, "bed_literature (round 2)": {"raw": [-0.5, 0.0, -2.3, -5.3, -8.3, -11.4, -14.4], "anchor": [0.1, 0.0, -7.0, -16.1, -25.0, -34.1, -43.1]}}};
+const COLORS = ['#e8a33d','#5db3e8','#8fd45d','#e85d75','#b48ce8','#e8e6e1'];
+function draw(id, xs, series, ylab){
+  const cv = document.getElementById(id), ctx = cv.getContext('2d');
+  const W = cv.width, H = cv.height, L = 46, R = 10, T = 12, B = 30;
+  let ymin = 1e9, ymax = -1e9;
+  series.forEach(s => s.y.forEach(v => { ymin = Math.min(ymin, v); ymax = Math.max(ymax, v); }));
+  ymin = Math.floor((ymin - 2) / 5) * 5; ymax = Math.ceil((ymax + 2) / 5) * 5;
+  const lx = f => L + (Math.log2(f / xs[0]) / Math.log2(xs[xs.length-1] / xs[0])) * (W - L - R);
+  const ly = v => T + (ymax - v) / (ymax - ymin) * (H - T - B);
+  ctx.strokeStyle = '#2a2f37'; ctx.fillStyle = '#8a919c'; ctx.font = '11px system-ui';
+  for (let v = ymin; v <= ymax; v += 5){
+    ctx.beginPath(); ctx.moveTo(L, ly(v)); ctx.lineTo(W - R, ly(v)); ctx.stroke();
+    ctx.fillText(v + '', 14, ly(v) + 4);
+  }
+  xs.forEach(f => ctx.fillText(f >= 1000 ? (f/1000) + 'k' : f, lx(f) - 8, H - 10));
+  series.forEach((s, i) => {
+    ctx.strokeStyle = COLORS[i % COLORS.length]; ctx.lineWidth = 2;
+    ctx.setLineDash(s.dash ? [5, 4] : []);
+    ctx.beginPath();
+    s.y.forEach((v, j) => { const X = lx(xs[j]), Y = ly(v); j ? ctx.lineTo(X, Y) : ctx.moveTo(X, Y); });
+    ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = COLORS[i % COLORS.length];
+    s.y.forEach((v, j) => { ctx.beginPath(); ctx.arc(lx(xs[j]), ly(v), 3, 0, 7); ctx.fill(); });
+  });
+  return COLORS;
+}
+const c1 = Object.entries(D.curves).map(([name, y]) => ({name, y}));
+draw('c1', D.freqs, c1);
+document.getElementById('leg1').innerHTML = c1.map((s, i) =>
+  `<span class="sw" style="background:${COLORS[i]}"></span>${s.name}`).join('');
+const names = Object.keys(D.songs);
+const s2 = [];
+names.forEach(n => { s2.push({name: n, y: D.songs[n].raw}); s2.push({name: n + ' (錨通過後)', y: D.songs[n].anchor, dash: 1}); });
+draw('c2', D.bands, s2);
+document.getElementById('leg2').innerHTML = names.map((n, i) =>
+  `<span class="sw" style="background:${COLORS[i]}"></span>${n}`).join('') + ' (破線 = 錨通過後)';
+</script></body></html>
