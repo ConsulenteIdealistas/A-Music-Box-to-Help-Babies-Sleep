@@ -13,7 +13,9 @@ Layers:
      design judgement, not a literature value -- see
      audio/noise_target_2026-11-16.md. The flow level is matched to
      the previous (400 Hz x3 lowpass) flow, so adoption changed only
-     the spectrum, not the level.
+     the spectrum. Bed gains were then softened on the user's
+     listening judgement (2026-11-15 and 2026-11-17, -4 dB each step)
+     because the bed asserted itself too much against the music box.
 
 Parameter bases:
   HEART_BPM = 70        midpoint of the typical maternal resting range
@@ -21,16 +23,17 @@ Parameter bases:
                         variable parameter, not a fixed value. The
                         entrainment curve (85 -> 65) sketched in
                         app/app.js is a later step, not applied here.
-  BEAT_FREQ_HZ = 55     image-based choice (user decision 2026-11-17):
-                        the heartbeat tone does NOT have to reproduce
-                        measured heart-sound spectra; it is set by the
-                        intended womb image and listening impression.
+  BEAT_FREQ_HZ = 55     low sine burst in the style of measured heart
+                        sounds. The user confirmed 2026-11-17 that this
+                        basis is fine (an image-based choice would also
+                        have been acceptable); what needed changing
+                        was the bed level, not the heartbeat character.
   LUB_DUB_MS = 280      typical systolic interval at rest.
   WOMB_FILTER_HZ = 1500, 12 dB/oct -- the standing provisional womb
                         filter for the music-box layer.
   FLOW_CUTOFF_HZ = 400  retired flow shaping (pre-2026-11-17), kept
                         only as the reference definition for
-                        FLOW_REF_RMS and audio/render_bed_variants.py.
+                        FLOW_RMS_PER_GAIN and audio/render_bed_variants.py.
 Noise uses a fixed seed so anyone re-running this script gets the
 identical render. Python standard library only.
 
@@ -52,17 +55,20 @@ DURATION_S = 60.0
 
 HEART_BPM = 70.0
 LUB_DUB_MS = 280.0
-BEAT_FREQ_HZ = 55.0  # image-based (see docstring), not a measured value
+BEAT_FREQ_HZ = 55.0  # measured-style heartbeat tone (see docstring)
 FLOW_CUTOFF_HZ = 400.0
-# RMS of the retired 400 Hz x3 flow (same seed, envelope and gains),
-# measured 2026-11-17. The brown flow is scaled to this so adopting
-# brown changed the spectrum only, not the level.
-FLOW_REF_RMS = 0.014076
+# RMS of the retired 400 Hz x3 flow per unit GAIN_FLOW: measured
+# 2026-11-17 as 0.014076 at GAIN_FLOW = 0.16 (same seed and envelope),
+# divided by 0.16. The brown flow is scaled to
+# FLOW_RMS_PER_GAIN * GAIN_FLOW, so GAIN_FLOW sets the level while
+# the spectrum stays brown at any gain.
+FLOW_RMS_PER_GAIN = 0.087975
 WOMB_FILTER_HZ = 1500.0
 SEED = 20261115
 
-GAIN_HEART = 0.32  # bed softened 2026-11-15 after first audition (was 0.50)
-GAIN_FLOW = 0.16  # was 0.26
+GAIN_HEART = 0.20  # softened twice on listening judgement, -4 dB each:
+                   # 0.50 -> 0.32 (2026-11-15) -> 0.20 (2026-11-17)
+GAIN_FLOW = 0.10  # 0.26 -> 0.16 -> 0.10, same steps as GAIN_HEART
 GAIN_MUSIC = 1.10
 PHRASE_GAP_S = 4.5  # silence between music-box phrases
 
@@ -104,9 +110,9 @@ def heartbeat(n: int) -> list[float]:
 
 def womb_flow(n: int) -> list[float]:
     """Brown noise (-6 dB/oct) by leaky integration of white noise,
-    surging with each heartbeat. Scaled to FLOW_REF_RMS so the level
-    matches the retired lowpassed flow; only the spectrum changed
-    when brown was adopted (2026-11-17)."""
+    surging with each heartbeat. The shaped flow is scaled to
+    FLOW_RMS_PER_GAIN * GAIN_FLOW, so GAIN_FLOW sets the level and
+    the spectrum stays brown at any gain."""
     rng = random.Random(SEED)
     white = [rng.uniform(-1.0, 1.0) for _ in range(n)]
     smooth = []
@@ -121,9 +127,9 @@ def womb_flow(n: int) -> list[float]:
         phase = ((t - 0.3) % period) / period
         surge = 0.55 + 0.45 * math.exp(-phase * 4.0)  # pulse after each beat
         swell = 1.0 + 0.10 * math.sin(2 * math.pi * 0.05 * t)
-        out.append(x * surge * swell * GAIN_FLOW * 2.2)
+        out.append(x * surge * swell)
     rms = math.sqrt(sum(x * x for x in out) / len(out))
-    scale = FLOW_REF_RMS / rms
+    scale = FLOW_RMS_PER_GAIN * GAIN_FLOW / rms
     return [x * scale for x in out]
 
 
