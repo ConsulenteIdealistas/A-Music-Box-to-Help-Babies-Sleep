@@ -436,7 +436,8 @@ function stop() {
 
 // --- プリセット（状態＋遷移を JSON で保存する、DESIGN.md 参照） ---
 // 正本プリセットは app/presets.json。ユーザーが保存したプリセットは
-// localStorage に同じ形式で入り、JSON ファイルに書き出しもできる。
+// localStorage に同じ形式で入る。JSON ファイルへの書き出しと、
+// 書き出したファイルの読み込み（形式を検証してから取り込む）ができる。
 // parameters で省略した項目は変更しない。then は遷移完了後に続けて
 // 適用する次の状態（エントレインメント減速用）。
 let builtinPresets = [], userPresets = [];
@@ -538,6 +539,96 @@ function currentParams() {
   };
 }
 
+// --- プリセット読み込み（インポート）の検証 ---
+// 受け付けるのは、書き出し形式（{version, presets}、正本 presets.json
+// と同形式）と、プリセット単体のオブジェクト。1件でも形式が違う
+// ものがあれば全体を拒否し、何も取り込まない（部分的な取り込みで
+// 保存分が中途半端な状態になるのを避ける）。
+const PRESET_CURVES = ["linear", "easeIn", "easeOut", "easeInOut", "smoothstep"];
+const PRESET_PARAM_KEYS = ["bpm", "gain", "lowpassHz", "reverb"];
+const PRESET_GAIN_LAYERS = ["music", "heart", "waves"];
+
+function isPlainObject(v) {
+  return typeof v === "object" && v !== null && !Array.isArray(v);
+}
+function isFiniteNumber(v) {
+  return typeof v === "number" && Number.isFinite(v);
+}
+// transition の検証。問題があれば日本語の理由を、なければ null を返す。
+function presetTransitionError(tr, where) {
+  if (!isPlainObject(tr)) return where + " の transition がオブジェクトではありません";
+  if (!isFiniteNumber(tr.duration)) return where + " の transition.duration が数値ではありません";
+  if (tr.curve != null && !PRESET_CURVES.includes(tr.curve)) {
+    return where + " の transition.curve \"" + tr.curve + "\" は使えません（使えるのは " + PRESET_CURVES.join(" / ") + "）";
+  }
+  if (tr.parameters != null) {
+    if (!isPlainObject(tr.parameters)) return where + " の transition.parameters がオブジェクトではありません";
+    for (const [k, v] of Object.entries(tr.parameters)) {
+      if (v == null) continue;
+      if (!isPlainObject(v)) return where + " の transition.parameters." + k + " がオブジェクトではありません";
+      if (v.curve != null && !PRESET_CURVES.includes(v.curve)) {
+        return where + " の transition.parameters." + k + ".curve \"" + v.curve + "\" は使えません";
+      }
+    }
+  }
+  return null;
+}
+// 状態（parameters / transition / then）の検証。then は名前なしで再帰する。
+function presetStateError(p, where) {
+  if (!isPlainObject(p.parameters)) return where + " に parameters がありません";
+  for (const k of Object.keys(p.parameters)) {
+    if (!PRESET_PARAM_KEYS.includes(k)) return where + " に不明なパラメータ \"" + k + "\" があります";
+  }
+  const P = p.parameters;
+  if (P.bpm != null && !isFiniteNumber(P.bpm)) return where + " の parameters.bpm が数値ではありません";
+  if (P.lowpassHz != null && !(isFiniteNumber(P.lowpassHz) && P.lowpassHz > 0)) {
+    return where + " の parameters.lowpassHz が正の数値ではありません";
+  }
+  if (P.gain != null) {
+    if (!isPlainObject(P.gain)) return where + " の parameters.gain がオブジェクトではありません";
+    for (const [k, v] of Object.entries(P.gain)) {
+      if (!PRESET_GAIN_LAYERS.includes(k)) return where + " の parameters.gain に不明な層 \"" + k + "\" があります";
+      if (!isFiniteNumber(v)) return where + " の parameters.gain." + k + " が数値ではありません";
+    }
+  }
+  if (P.reverb != null && !isPlainObject(P.reverb)) return where + " の parameters.reverb がオブジェクトではありません";
+  if (p.transition != null) {
+    const e = presetTransitionError(p.transition, where);
+    if (e) return e;
+  }
+  if (p.then != null) {
+    if (!isPlainObject(p.then)) return where + " の then がオブジェクトではありません";
+    const e = presetStateError(p.then, where + " の then");
+    if (e) return e;
+  }
+  return null;
+}
+// パース済みデータ全体の検証。{ ok: true, presets } か { ok: false, error } を返す。
+function validatePresetData(data) {
+  let list;
+  if (isPlainObject(data) && Array.isArray(data.presets)) list = data.presets;
+  else if (isPlainObject(data) && ("name" in data || "parameters" in data)) list = [data];
+  else return { ok: false, error: "プリセットの形式ではありません（presets の配列、またはプリセット単体のオブジェクトが必要です）" };
+  if (!list.length) return { ok: false, error: "プリセットが1件も含まれていません" };
+  for (let i = 0; i < list.length; i++) {
+    const p = list[i];
+    if (!isPlainObject(p)) return { ok: false, error: "プリセット " + (i + 1) + " 件目がオブジェクトではありません" };
+    if (typeof p.name !== "string" || !p.name.trim()) {
+      return { ok: false, error: "プリセット " + (i + 1) + " 件目に名前（name）がありません" };
+    }
+    const e = presetStateError(p, "プリセット「" + p.name + "」");
+    if (e) return { ok: false, error: e };
+  }
+  return { ok: true, presets: list };
+}
+// ファイルの中身（テキスト）から検証までをまとめた純粋関数。
+function parsePresetImport(text) {
+  let data;
+  try { data = JSON.parse(text); }
+  catch (_) { return { ok: false, error: "JSON として解釈できないファイルです" }; }
+  return validatePresetData(data);
+}
+
 $("song").addEventListener("change", () => { if (playing) startMusic(); });
 $("playBtn").addEventListener("click", () => (playing ? stop() : play()));
 $("bpm").addEventListener("input", () => {
@@ -579,6 +670,27 @@ $("exportPresets").addEventListener("click", () => {
   a.click();
   setTimeout(() => URL.revokeObjectURL(a.href), 5000);
 });
+$("importPresets").addEventListener("change", async (ev) => {
+  const file = ev.target.files && ev.target.files[0];
+  ev.target.value = ""; // 同じファイルを選び直せるようにする
+  if (!file) return;
+  let text;
+  try { text = await file.text(); }
+  catch (_) {
+    $("importStatus").textContent = "読み込めませんでした: ファイルを開けませんでした";
+    return;
+  }
+  const r = parsePresetImport(text);
+  if (!r.ok) {
+    // 検証に失敗したら何も取り込まず、理由だけを表示する
+    $("importStatus").textContent = "読み込めませんでした: " + r.error;
+    return;
+  }
+  userPresets.push(...r.presets);
+  storeUserPresets();
+  refreshPresetOptions();
+  $("importStatus").textContent = r.presets.length + " 件のプリセットを読み込みました";
+});
 initPresets();
 ["volMusic", "volHeart", "volWaves"].forEach((id) => $(id).addEventListener("input", applyVolumes));
 $("timer").addEventListener("change", () => { if (playing) startFadeOut(Number($("timer").value)); });
@@ -586,4 +698,9 @@ $("lockBtn").addEventListener("click", () => alert("画面ロックは Phase 3 �
 
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("./sw.js").catch(() => {});
+}
+
+// Node の検証ハーネス用に検証関数だけを公開する（ブラウザでは module が無いので何もしない）
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = { validatePresetData, parsePresetImport };
 }

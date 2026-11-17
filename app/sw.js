@@ -1,5 +1,5 @@
 // Service Worker: アプリシェルをキャッシュして完全オフライン動作させる。
-const CACHE = "lullaby-shell-v2";
+const CACHE = "lullaby-shell-v3";
 const SHELL = ["./", "./index.html", "./style.css", "./app.js", "./manifest.webmanifest", "./presets.json"];
 
 self.addEventListener("install", (e) => {
