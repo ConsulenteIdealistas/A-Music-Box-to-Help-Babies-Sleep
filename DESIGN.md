@@ -12,6 +12,14 @@
 4. 確率的な揺らぎは初期段階では導入しない。
 5. AIによるリアルタイム判断ではなく、事前定義した数理モデルで制御する。
 
+### 2. システム構成
+
+1. **State Definition** — 初期状態・目標状態・遷移時間を定義
+2. **Easing Engine** — 時間軸に沿った補間関数を適用
+3. **Parameter Coupling** — 複数パラメータの連動制御
+   （Gain: 音量 / Filter: 周波数特性 / Reverb: 残響 / Modulation: 揺らぎ）
+4. **Audio Rendering** — Web Audio API による音響処理
+
 ### 3. パラメータの優先順位
 
 最初から全部実装する必要はない。
