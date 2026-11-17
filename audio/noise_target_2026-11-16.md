@@ -85,6 +85,14 @@
   のでスペクトル形は不変。試聴ファイルは bed_only_brown_soft.wav /
   mix_3layer_brown_soft.wav。
 
+## 2026-11-17 追記（「決定」節への補足）
+
+- 「決定」節のブラウン（漏れあり積分）への置き換えは中間段階だった。
+  その後の最終実装では、フロー層の整形は統合伝達曲線（白色ノイズに
+  250Hz の1極ローパスを適用する方式）に置き換わっている。現行の
+  実装は `audio/render_mix.py`、曲線の根拠は
+  `audio/bed_integration_2026-11-17.md` を参照。
+
 ## 出典
 
 - `literature/extraction_batches/design_stats_summary.md` (2026-11-15):

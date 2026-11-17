@@ -671,6 +671,35 @@ function parsePresetImport(text) {
   catch (_) { return { ok: false, error: "JSON として解釈できないファイルです" }; }
   return validatePresetData(data);
 }
+// 重複判定用の安定した JSON 化（オブジェクトのキー順に依存しない）。
+function stableStringify(v) {
+  if (v === null || typeof v !== "object") return JSON.stringify(v);
+  if (Array.isArray(v)) {
+    return "[" + v.map((x) => (x === undefined ? "null" : stableStringify(x))).join(",") + "]";
+  }
+  const keys = Object.keys(v).filter((k) => v[k] !== undefined).sort();
+  return "{" + keys.map((k) => JSON.stringify(k) + ":" + stableStringify(v[k])).join(",") + "}";
+}
+// プリセットの同一性を決める署名（名前と、状態・遷移・続きの内容）。
+function presetSignature(p) {
+  return stableStringify({
+    name: p.name, parameters: p.parameters, transition: p.transition, then: p.then,
+  });
+}
+// 取り込み候補を、既存の保存プリセットと候補同士の中で重複しない
+// 新規分（fresh）と、重複で除いた件数（skipped）に分ける純粋関数。
+function splitImportedPresets(incoming, existing) {
+  const seen = new Set(existing.map(presetSignature));
+  const fresh = [];
+  let skipped = 0;
+  for (const p of incoming) {
+    const sig = presetSignature(p);
+    if (seen.has(sig)) { skipped++; continue; }
+    seen.add(sig);
+    fresh.push(p);
+  }
+  return { fresh, skipped };
+}
 
 $("song").addEventListener("change", () => { if (playing) startMusic(); });
 $("playBtn").addEventListener("click", () => (playing ? stop() : play()));
@@ -741,7 +770,13 @@ $("importPresets").addEventListener("change", async (ev) => {
     $("importStatus").textContent = "読み込めませんでした: " + r.error;
     return;
   }
-  userPresets.push(...r.presets);
+  // 既に保存済みのもの（と、同じファイルの中で重なったもの）は取り込まない
+  const split = splitImportedPresets(r.presets, userPresets);
+  if (!split.fresh.length) {
+    $("importStatus").textContent = "読み込める新しいプリセットはありませんでした（" + split.skipped + " 件すべて重複）";
+    return;
+  }
+  userPresets.push(...split.fresh);
   if (!storeUserPresets()) {
     // 取り込めても保存できていなければ、その旨を表示する
     $("importStatus").textContent = "読み込みましたが保存できませんでした（ブラウザの保存容量を超えている可能性があります）";
@@ -749,7 +784,8 @@ $("importPresets").addEventListener("change", async (ev) => {
     return;
   }
   refreshPresetOptions();
-  $("importStatus").textContent = r.presets.length + " 件のプリセットを読み込みました";
+  $("importStatus").textContent = split.fresh.length + " 件のプリセットを読み込みました" +
+    (split.skipped ? "（" + split.skipped + " 件は重複のためスキップ）" : "");
 });
 initPresets();
 // 音量スライダを手で動かしたら、その層の gain 遷移と予約済みの then を
@@ -772,7 +808,7 @@ if ("serviceWorker" in navigator) {
 // Node の検証ハーネス用に検証関数と状態系の一部を公開する（ブラウザでは module が無いので何もしない）
 if (typeof module !== "undefined" && module.exports) {
   module.exports = {
-    validatePresetData, parsePresetImport,
+    validatePresetData, parsePresetImport, stableStringify, splitImportedPresets,
     loadUserPresets, storeUserPresets, applyPreset, stop,
     getUserPresets: () => userPresets,
     thenTimerPending: () => thenTimer !== null,

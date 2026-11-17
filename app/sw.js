@@ -1,5 +1,5 @@
 // Service Worker: アプリシェルをキャッシュして完全オフライン動作させる。
-const CACHE = "lullaby-shell-v4";
+const CACHE = "lullaby-shell-v5";
 // コアシェルは addAll で一括に入れる。presets.json は正本データ側なので
 // 分けて入れ、取得に失敗してもシェル全体のインストールを巻き込まない
 // （標準プリセットが無い状態でもアプリは起動し、アプリ側が表示で知らせる）。
