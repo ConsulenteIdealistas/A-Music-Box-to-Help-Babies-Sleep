@@ -8,6 +8,8 @@
  * 基本設計思想（DESIGN.md）: 同じ入力には同じ出力（決定性）、
  * パラメータは独立・協調制御、変化はイージングで滑らかに、
  * 確率的な揺らぎは入れない、制御は事前定義した数理モデルのみ。
+ * 状態と遷移はプリセットとして JSON で保存する（正本は
+ * app/presets.json、ユーザーの保存分は localStorage に同形式）。
  *
  * 確定設計の要点:
  *   統合伝達曲線 … 250 Hz の1極ローパス（250 Hz 以下は平坦、
@@ -75,12 +77,53 @@ function mulberry32(seed) {
 let ctx = null;
 let master, gainMusic, gainHeart, gainWaves, surgeNode, heartDesign, flowDesign;
 let heartTimer = null, fadeTimer = null, wavesNodes = null;
-let musicSrc = null;
-const musicBuffers = {}; // id -> AudioBuffer（フィルタ済み・正規化済み）
+let musicSrc = null, musicSrcGain = null, musicStartedAt = 0, musicOffset = 0;
+const musicBuffers = {}; // "id@cutoff" -> AudioBuffer（フィルタ済み・正規化済み）
 let playing = false;
 let playGen = 0; // 再生世代（停止直後の再開で suspend が競合しないよう）
+let bpmCurrent = 70;            // 心音 BPM の現在値（遷移で連続的に変わる）
+let lowpassHz = KNEE_HZ;        // ローパスの現在値（プリセットで変更可）
 
 const $ = (id) => document.getElementById(id);
+
+// --- イージング関数（DESIGN.md §4: 初期標準 Ease In Out、比較基準 Linear、
+// パラメータごとに異なる曲線を使ってよい） ---
+const EASING = {
+  linear: (t) => t,
+  easeIn: (t) => t * t * t,
+  easeOut: (t) => 1 - Math.pow(1 - t, 3),
+  easeInOut: (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2),
+  smoothstep: (t) => t * t * (3 - 2 * t),
+};
+function easingSamples(name, points = 64) {
+  const f = EASING[name] || EASING.easeInOut;
+  const c = new Float32Array(points);
+  for (let i = 0; i < points; i++) c[i] = f(i / (points - 1));
+  return c;
+}
+
+// --- 遷移エンジン（DESIGN.md §2 の Easing Engine） ---
+// key ごとに1本の遷移を持ち、同じ key の再登録で置き換える。
+const tweens = new Map();
+let tweenTimer = null;
+function addTween(key, durS, curveName, apply, done) {
+  if (!(durS > 0)) { apply(1); if (done) done(); return; }
+  tweens.set(key, {
+    t0: performance.now(), dur: durS * 1000,
+    ease: EASING[curveName] || EASING.easeInOut, apply, done,
+  });
+  if (!tweenTimer) tweenTimer = setInterval(tickTweens, 50);
+}
+function tickTweens() {
+  const now = performance.now();
+  for (const [key, tw] of tweens) {
+    const p = Math.min(1, (now - tw.t0) / tw.dur);
+    tw.apply(tw.ease(p));
+    if (p >= 1) { tweens.delete(key); if (tw.done) tw.done(); }
+  }
+  if (!tweens.size) { clearInterval(tweenTimer); tweenTimer = null; }
+}
+function cancelTween(key) { tweens.delete(key); }
 
 // 1極ローパスの係数（render_mix.py の one_pole_alpha と同一式）
 function onePoleAlpha(cutoffHz, sampleRate) {
@@ -109,8 +152,7 @@ function surgeCurve(points = 128) {
     raw[i] = SURGE_BASE + SURGE_DEPTH * Math.exp(-SURGE_RATE * (i / points));
   }
   // 周期信号として平滑化（2周期つないで2周期目を取る）
-  const bpm = Number($("bpm").value);
-  const period = 60 / bpm;
+  const period = 60 / bpmCurrent;
   const a = 1.0 - Math.exp(-1.0 / (SURGE_SMOOTH_S * (points / period)));
   const out = new Float32Array(points);
   let y = raw[points - 1];
@@ -171,8 +213,7 @@ function thump(when, peak) {
 function scheduleHeart() {
   clearTimeout(heartTimer);
   if (!playing) return;
-  const bpm = Number($("bpm").value);
-  const period = 60 / bpm;
+  const period = 60 / bpmCurrent;
   const t = ctx.currentTime + 0.05;
   thump(t, 1.0);                 // lub
   thump(t + LUB_DUB_S, 0.55);    // dub（280 ms 固定）
@@ -186,13 +227,13 @@ function scheduleHeart() {
 }
 
 // --- さざ波（血流）: 白色ノイズを統合曲線で整形してループ ---
-function startWaves() {
+function shapedNoiseBuffer(cutoff) {
   const len = ctx.sampleRate * 8;
   const buf = ctx.createBuffer(1, len, ctx.sampleRate);
   const white = new Float32Array(len);
   const rng = mulberry32(SEED);
   for (let i = 0; i < len; i++) white[i] = rng() * 2 - 1;
-  const shaped = lowpassBuffer(white, onePoleAlpha(KNEE_HZ, ctx.sampleRate), true);
+  const shaped = lowpassBuffer(white, onePoleAlpha(cutoff, ctx.sampleRate), true);
   // ループ境界の波形段差を 50 ms クロスフェードで消す
   const xf = Math.floor(ctx.sampleRate * 0.05);
   for (let i = 0; i < xf; i++) {
@@ -200,29 +241,56 @@ function startWaves() {
     shaped[i] = shaped[i] * k + shaped[len - xf + i] * (1 - k);
   }
   buf.getChannelData(0).set(shaped);
+  return buf;
+}
+function spawnWaves(cutoff, gainVal) {
   const src = ctx.createBufferSource();
-  src.buffer = buf;
+  src.buffer = shapedNoiseBuffer(cutoff);
   src.loop = true;
-  src.connect(surgeNode);
+  const g = ctx.createGain();
+  g.gain.value = gainVal;
+  src.connect(g).connect(surgeNode);
   src.start();
-  wavesNodes.src = src;
+  return { src, g };
+}
+function startWaves() {
+  const w = spawnWaves(lowpassHz, 1);
+  wavesNodes.src = w.src;
+  wavesNodes.srcGain = w.g;
 }
 function stopWaves() {
   if (wavesNodes && wavesNodes.src) {
     try { wavesNodes.src.stop(); } catch (_) {}
     wavesNodes.src = null;
+    wavesNodes.srcGain = null;
   }
+}
+// ローパス変更: 新しい整形で作り直した音源とクロスフェードする
+function crossfadeWavesTo(cutoff, durS, curveName) {
+  if (!wavesNodes || !wavesNodes.src) return;
+  const old = { src: wavesNodes.src, g: wavesNodes.srcGain };
+  const nw = spawnWaves(cutoff, 0);
+  const t = ctx.currentTime;
+  const inC = easingSamples(curveName);
+  const outC = new Float32Array(inC.length);
+  for (let i = 0; i < inC.length; i++) outC[i] = 1 - inC[i];
+  nw.g.gain.setValueCurveAtTime(inC, t, durS);
+  old.g.gain.setValueCurveAtTime(outC, t, durS);
+  wavesNodes.src = nw.src;
+  wavesNodes.srcGain = nw.g;
+  setTimeout(() => { try { old.src.stop(); } catch (_) {} old.g.disconnect(); }, (durS + 0.2) * 1000);
 }
 
 // --- オルゴール: 読み込み時に統合曲線を適用し RMS を正規化 ---
-async function loadSong(id) {
-  if (musicBuffers[id]) return musicBuffers[id];
+async function loadSong(id, cutoff = lowpassHz) {
+  const key = id + "@" + cutoff;
+  if (musicBuffers[key]) return musicBuffers[key];
   const song = SONGS.find((s) => s.id === id);
   const res = await fetch(song.file);
   if (!res.ok) throw new Error("fetch failed: " + song.file);
   const raw = await ctx.decodeAudioData(await res.arrayBuffer());
   const src = raw.getChannelData(0);
-  const filtered = lowpassBuffer(src, onePoleAlpha(KNEE_HZ, ctx.sampleRate), true);
+  const filtered = lowpassBuffer(src, onePoleAlpha(cutoff, ctx.sampleRate), true);
   let sum = 0;
   for (let i = 0; i < filtered.length; i++) sum += filtered[i] * filtered[i];
   const rms = Math.sqrt(sum / filtered.length);
@@ -230,19 +298,29 @@ async function loadSong(id) {
   const buf = ctx.createBuffer(1, filtered.length, ctx.sampleRate);
   const d = buf.getChannelData(0);
   for (let i = 0; i < filtered.length; i++) d[i] = filtered[i] * norm;
-  musicBuffers[id] = buf;
+  musicBuffers[key] = buf;
   return buf;
+}
+function spawnMusic(buf, offset, gainVal) {
+  const src = ctx.createBufferSource();
+  src.buffer = buf;
+  src.loop = true;
+  const g = ctx.createGain();
+  g.gain.value = gainVal;
+  src.connect(g).connect(gainMusic);
+  src.start(0, offset % buf.duration);
+  return { src, g };
 }
 async function startMusic() {
   const id = $("song").value;
   try {
-    const buf = await loadSong(id);
+    const buf = await loadSong(id, lowpassHz);
     stopMusic();
-    musicSrc = ctx.createBufferSource();
-    musicSrc.buffer = buf;
-    musicSrc.loop = true;
-    musicSrc.connect(gainMusic);
-    musicSrc.start();
+    const m = spawnMusic(buf, 0, 1);
+    musicSrc = m.src;
+    musicSrcGain = m.g;
+    musicStartedAt = ctx.currentTime;
+    musicOffset = 0;
     $("songStatus").textContent = "";
   } catch (e) {
     // 音源ファイルが無い場合は他の層だけで再生を続ける
@@ -253,7 +331,34 @@ function stopMusic() {
   if (!musicSrc) return;
   try { musicSrc.stop(); } catch (_) {}
   musicSrc.disconnect();
+  if (musicSrcGain) musicSrcGain.disconnect();
   musicSrc = null;
+  musicSrcGain = null;
+}
+function musicPos() {
+  if (!musicSrc) return 0;
+  return (musicOffset + (ctx.currentTime - musicStartedAt)) % musicSrc.buffer.duration;
+}
+// ローパス変更: 同じ再生位置から新しいフィルタ版をクロスフェードで差し替える
+async function crossfadeMusicTo(cutoff, durS, curveName) {
+  if (!musicSrc) return;
+  try {
+    const buf = await loadSong($("song").value, cutoff);
+    const pos = musicPos();
+    const old = { src: musicSrc, g: musicSrcGain };
+    const nw = spawnMusic(buf, pos, 0);
+    const t = ctx.currentTime;
+    const inC = easingSamples(curveName);
+    const outC = new Float32Array(inC.length);
+    for (let i = 0; i < inC.length; i++) outC[i] = 1 - inC[i];
+    nw.g.gain.setValueCurveAtTime(inC, t, durS);
+    if (old.g) old.g.gain.setValueCurveAtTime(outC, t, durS);
+    musicSrc = nw.src;
+    musicSrcGain = nw.g;
+    musicStartedAt = t;
+    musicOffset = pos;
+    setTimeout(() => { try { old.src.stop(); } catch (_) {} if (old.g) old.g.disconnect(); }, (durS + 0.2) * 1000);
+  } catch (e) { /* 音源が無い場合は現状維持 */ }
 }
 
 function applyVolumes() {
@@ -265,11 +370,11 @@ function applyVolumes() {
   gainWaves.gain.setTargetAtTime($("volWaves").value / 100, t, VOLUME_EASE_S);
 }
 
-// なだらかなフェード曲線（raised cosine: 両端で傾き 0）
+// フェードアウト曲線（Smoothstep: 滑らかな開始・終了、DESIGN.md §4）
 function fadeCurve(points = 32) {
   const c = new Float32Array(points);
   for (let i = 0; i < points; i++) {
-    c[i] = 0.5 * (1 + Math.cos(Math.PI * (i / (points - 1))));
+    c[i] = 1 - EASING.smoothstep(i / (points - 1));
   }
   return c;
 }
@@ -329,9 +434,152 @@ function stop() {
   $("playBtn").textContent = "▶ 再生";
 }
 
+// --- プリセット（状態＋遷移を JSON で保存する、DESIGN.md 参照） ---
+// 正本プリセットは app/presets.json。ユーザーが保存したプリセットは
+// localStorage に同じ形式で入り、JSON ファイルに書き出しもできる。
+// parameters で省略した項目は変更しない。then は遷移完了後に続けて
+// 適用する次の状態（エントレインメント減速用）。
+let builtinPresets = [], userPresets = [];
+function curveFor(preset, param) {
+  const t = preset.transition || {};
+  const per = (t.parameters || {})[param] || {};
+  return per.curve || t.curve || "easeInOut";
+}
+function applyPreset(preset) {
+  const P = preset.parameters || {};
+  const dur = playing ? Number((preset.transition || {}).duration || 0) : 0;
+  if (P.gain) {
+    for (const [layer, el] of [["music", "volMusic"], ["heart", "volHeart"], ["waves", "volWaves"]]) {
+      if (P.gain[layer] == null) continue;
+      const from = Number($(el).value), target = Number(P.gain[layer]);
+      addTween("gain." + layer, dur, curveFor(preset, "gain"), (e) => {
+        $(el).value = Math.round(from + (target - from) * e);
+        applyVolumes();
+      });
+    }
+  }
+  if (P.bpm != null) {
+    const from = bpmCurrent, target = Number(P.bpm);
+    addTween("bpm", dur, (preset.transition || {}).curve || "easeInOut", (e) => {
+      bpmCurrent = from + (target - from) * e;
+      $("bpm").value = Math.round(bpmCurrent);
+      $("bpmVal").textContent = Math.round(bpmCurrent);
+    });
+  }
+  if (P.lowpassHz != null && Number(P.lowpassHz) !== lowpassHz) {
+    const target = Number(P.lowpassHz);
+    lowpassHz = target;
+    $("lpVal").textContent = target;
+    if (playing && ctx) {
+      const d = Math.max(dur, 0.3);
+      crossfadeMusicTo(target, d, curveFor(preset, "lowpass"));
+      crossfadeWavesTo(target, d, curveFor(preset, "lowpass"));
+    }
+  }
+  if (preset.then) {
+    const next = preset.then;
+    setTimeout(() => applyPreset(next), (dur + 0.3) * 1000);
+  }
+}
+function loadUserPresets() {
+  try { userPresets = JSON.parse(localStorage.getItem("lullaby.presets") || "[]"); }
+  catch (_) { userPresets = []; }
+}
+function storeUserPresets() {
+  try { localStorage.setItem("lullaby.presets", JSON.stringify(userPresets)); } catch (_) {}
+}
+function refreshPresetOptions() {
+  const sel = $("preset");
+  sel.innerHTML = "";
+  const ph = document.createElement("option");
+  ph.value = "";
+  ph.textContent = "プリセットを選ぶ";
+  sel.appendChild(ph);
+  const mk = (label, list, prefix) => {
+    if (!list.length) return;
+    const g = document.createElement("optgroup");
+    g.label = label;
+    list.forEach((p, i) => {
+      const o = document.createElement("option");
+      o.value = prefix + i;
+      o.textContent = p.name || "(無名)";
+      g.appendChild(o);
+    });
+    sel.appendChild(g);
+  };
+  mk("標準プリセット", builtinPresets, "b:");
+  mk("保存したプリセット", userPresets, "u:");
+  $("deletePreset").disabled = true;
+}
+function selectedPreset() {
+  const v = $("preset").value;
+  if (!v) return null;
+  const parts = v.split(":");
+  const list = parts[0] === "b" ? builtinPresets : userPresets;
+  return { preset: list[Number(parts[1])], isUser: parts[0] === "u", index: Number(parts[1]) };
+}
+async function initPresets() {
+  loadUserPresets();
+  try {
+    const res = await fetch("presets.json");
+    if (res.ok) builtinPresets = (await res.json()).presets || [];
+  } catch (_) {}
+  refreshPresetOptions();
+}
+function currentParams() {
+  return {
+    bpm: Math.round(bpmCurrent),
+    gain: {
+      music: Number($("volMusic").value),
+      heart: Number($("volHeart").value),
+      waves: Number($("volWaves").value),
+    },
+    lowpassHz,
+  };
+}
+
 $("song").addEventListener("change", () => { if (playing) startMusic(); });
 $("playBtn").addEventListener("click", () => (playing ? stop() : play()));
-$("bpm").addEventListener("input", () => { $("bpmVal").textContent = $("bpm").value; });
+$("bpm").addEventListener("input", () => {
+  cancelTween("bpm");
+  bpmCurrent = Number($("bpm").value);
+  $("bpmVal").textContent = $("bpm").value;
+});
+$("preset").addEventListener("change", () => {
+  const s = selectedPreset();
+  $("deletePreset").disabled = !(s && s.isUser);
+  if (s && s.preset) applyPreset(JSON.parse(JSON.stringify(s.preset)));
+});
+$("savePreset").addEventListener("click", () => {
+  const name = $("presetName").value.trim() || `マイプリセット ${userPresets.length + 1}`;
+  userPresets.push({
+    name,
+    parameters: currentParams(),
+    // 保存時の遷移は §4 の初期標準（Ease In Out、30 秒）
+    transition: { duration: 30, curve: "easeInOut", parameters: { gain: {}, lowpass: {}, reverb: {} } },
+  });
+  storeUserPresets();
+  refreshPresetOptions();
+  $("preset").value = "u:" + (userPresets.length - 1);
+  $("deletePreset").disabled = false;
+  $("presetName").value = "";
+});
+$("deletePreset").addEventListener("click", () => {
+  const s = selectedPreset();
+  if (!s || !s.isUser) return;
+  userPresets.splice(s.index, 1);
+  storeUserPresets();
+  refreshPresetOptions();
+});
+$("exportPresets").addEventListener("click", () => {
+  const blob = new Blob([JSON.stringify({ version: 1, presets: userPresets }, null, 2)], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "lullaby-presets.json";
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+});
+initPresets();
 ["volMusic", "volHeart", "volWaves"].forEach((id) => $(id).addEventListener("input", applyVolumes));
 $("timer").addEventListener("change", () => { if (playing) startFadeOut(Number($("timer").value)); });
 $("lockBtn").addEventListener("click", () => alert("画面ロックは Phase 3 で実装します"));

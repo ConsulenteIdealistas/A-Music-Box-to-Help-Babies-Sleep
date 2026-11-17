@@ -41,6 +41,16 @@
   </section>
 
   <section>
+    <label for="preset">プリセット（状態と遷移を JSON で保存）</label>
+    <select id="preset"><option value="">プリセットを選ぶ</option></select>
+    <p class="note">現在のローパス: <span id="lpVal">250</span> Hz（プリセットで変更できます）</p>
+    <input id="presetName" type="text" placeholder="新しいプリセット名">
+    <button id="savePreset" type="button">現在の設定をプリセットとして保存</button>
+    <button id="exportPresets" type="button">保存プリセットを JSON 書き出し</button>
+    <button id="deletePreset" type="button">選択中の保存プリセットを削除</button>
+  </section>
+
+  <section>
     <label for="timer">スリープタイマー（フェードアウト）</label>
     <select id="timer">
       <option value="0">なし</option>
