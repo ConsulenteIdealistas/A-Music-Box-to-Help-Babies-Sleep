@@ -225,3 +225,16 @@ dBTP は全曲ともサンプルピークと 0.05 dB 以内で一致した。
   Children, and Adolescents」(Pediatrics): 存在は確認。乳児用
   機器への具体的な dB 上限は示していないとされる（二次情報）。
   原著は未読
+
+### 外部指標の引用規律（TRL の規約に揃える）
+
+外部指標・文献の引用は、成熟している TRL 側の運用に揃える。
+
+- 外部ソースは中央レジストリに登録する（TRL の sources.json に
+  相当するのが analysis/evidence_references.csv）
+- 出所ごとの適用条件（測定条件・対象・限界）を必ず併記する
+- 照合状態と日付はレコード自身が持つ（verification_status /
+  verified_on 列。TRL の出典明記＋ schema_version の考え方）
+- 照合状態の語彙: primary_verified（一次源で照合済み）/
+  secondary_corroborated（独立した二次源で一致）/
+  existence_confirmed（存在のみ確認）/ unverified（未照合）

@@ -77,7 +77,9 @@ function mulberry32(seed) {
 let ctx = null;
 let master, gainMusic, gainHeart, gainWaves, surgeNode, heartDesign, flowDesign;
 let heartTimer = null, fadeTimer = null, wavesNodes = null;
+let thenTimer = null; // プリセットの then（継続状態）の予約。新しい操作で取り消す
 let musicSrc = null, musicSrcGain = null, musicStartedAt = 0, musicOffset = 0;
+let musicCrossfadeGen = 0; // クロスフェードの世代（古い非同期処理の割り込みを防ぐ）
 const musicBuffers = {}; // "id@cutoff" -> AudioBuffer（フィルタ済み・正規化済み）
 let playing = false;
 let playGen = 0; // 再生世代（停止直後の再開で suspend が競合しないよう）
@@ -342,8 +344,12 @@ function musicPos() {
 // ローパス変更: 同じ再生位置から新しいフィルタ版をクロスフェードで差し替える
 async function crossfadeMusicTo(cutoff, durS, curveName) {
   if (!musicSrc) return;
+  const gen = ++musicCrossfadeGen;
   try {
     const buf = await loadSong($("song").value, cutoff);
+    // 読み込みを待つ間に新しいクロスフェードが始まっていたら、
+    // そちらの状態（musicSrc 等）を壊さないよう何もしない
+    if (gen !== musicCrossfadeGen) return;
     const pos = musicPos();
     const old = { src: musicSrc, g: musicSrcGain };
     const nw = spawnMusic(buf, pos, 0);
@@ -395,7 +401,14 @@ function startFadeOut(minutes) {
 }
 
 async function play() {
-  if (!ctx) buildGraph();
+  if (!ctx) {
+    try { buildGraph(); }
+    catch (_) {
+      // AudioContext を作れない環境では黙って無反応にならず知らせる
+      $("songStatus").textContent = "音声を開始できませんでした";
+      return;
+    }
+  }
   await ctx.resume();
   playing = true;
   playGen++;
@@ -410,6 +423,9 @@ async function play() {
   $("playBtn").textContent = "■ 停止";
 }
 function stop() {
+  // 予約済みの then は再生状態によらず取り消す（停止後に状態が変わらないように）
+  clearTimeout(thenTimer);
+  thenTimer = null;
   if (!playing) return;
   playing = false;
   clearTimeout(heartTimer);
@@ -447,6 +463,9 @@ function curveFor(preset, param) {
   return per.curve || t.curve || "easeInOut";
 }
 function applyPreset(preset) {
+  // 前のプリセットが予約した then は取り消す（後から来た操作が優先）
+  clearTimeout(thenTimer);
+  thenTimer = null;
   const P = preset.parameters || {};
   const dur = playing ? Number((preset.transition || {}).duration || 0) : 0;
   if (P.gain) {
@@ -479,15 +498,27 @@ function applyPreset(preset) {
   }
   if (preset.then) {
     const next = preset.then;
-    setTimeout(() => applyPreset(next), (dur + 0.3) * 1000);
+    thenTimer = setTimeout(() => { thenTimer = null; applyPreset(next); }, (dur + 0.3) * 1000);
   }
 }
 function loadUserPresets() {
-  try { userPresets = JSON.parse(localStorage.getItem("lullaby.presets") || "[]"); }
-  catch (_) { userPresets = []; }
+  const raw = localStorage.getItem("lullaby.presets");
+  if (raw == null) { userPresets = []; return; }
+  try {
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed)) throw new Error("not an array");
+    userPresets = parsed;
+  } catch (_) {
+    // 壊れた保存分は黙って捨てず、生の文字列を退避キーに残してから
+    // 初期化する（復旧や原因調査の手がかりを失わないため）
+    try { localStorage.setItem("lullaby.presets.corrupt", raw); } catch (_) {}
+    userPresets = [];
+  }
 }
+// 保存できたら true、容量超過などで書けなかったら false を返す
 function storeUserPresets() {
-  try { localStorage.setItem("lullaby.presets", JSON.stringify(userPresets)); } catch (_) {}
+  try { localStorage.setItem("lullaby.presets", JSON.stringify(userPresets)); return true; }
+  catch (_) { return false; }
 }
 function refreshPresetOptions() {
   const sel = $("preset");
@@ -523,8 +554,20 @@ async function initPresets() {
   loadUserPresets();
   try {
     const res = await fetch("presets.json");
-    if (res.ok) builtinPresets = (await res.json()).presets || [];
-  } catch (_) {}
+    if (!res.ok) throw new Error("fetch failed: presets.json");
+    // 正本も読み込み時と同じ検証を通してから使う（壊れた正本で
+    // 状態系が壊れないように。不正なら標準プリセットなしとして扱う）
+    const r = validatePresetData(await res.json());
+    if (r.ok) {
+      builtinPresets = r.presets;
+    } else {
+      console.warn("presets.json の形式が不正なため標準プリセットを使いません:", r.error);
+      $("importStatus").textContent = "標準プリセットを読み込めませんでした";
+    }
+  } catch (_) {
+    // 読み込み自体に失敗したら、黙って空にせず利用者に知らせる
+    $("importStatus").textContent = "標準プリセットを読み込めませんでした";
+  }
   refreshPresetOptions();
 }
 function currentParams() {
@@ -633,6 +676,8 @@ $("song").addEventListener("change", () => { if (playing) startMusic(); });
 $("playBtn").addEventListener("click", () => (playing ? stop() : play()));
 $("bpm").addEventListener("input", () => {
   cancelTween("bpm");
+  clearTimeout(thenTimer);
+  thenTimer = null;
   bpmCurrent = Number($("bpm").value);
   $("bpmVal").textContent = $("bpm").value;
 });
@@ -649,7 +694,10 @@ $("savePreset").addEventListener("click", () => {
     // 保存時の遷移は §4 の初期標準（Ease In Out、30 秒）
     transition: { duration: 30, curve: "easeInOut", parameters: { gain: {}, lowpass: {}, reverb: {} } },
   });
-  storeUserPresets();
+  if (!storeUserPresets()) {
+    // 書けなかった場合は成功したように見せない（このセッション限りで消える）
+    $("importStatus").textContent = "保存できませんでした（ブラウザの保存容量を超えている可能性があります）";
+  }
   refreshPresetOptions();
   $("preset").value = "u:" + (userPresets.length - 1);
   $("deletePreset").disabled = false;
@@ -659,7 +707,9 @@ $("deletePreset").addEventListener("click", () => {
   const s = selectedPreset();
   if (!s || !s.isUser) return;
   userPresets.splice(s.index, 1);
-  storeUserPresets();
+  if (!storeUserPresets()) {
+    $("importStatus").textContent = "削除を保存できませんでした（ブラウザの保存容量を超えている可能性があります）";
+  }
   refreshPresetOptions();
 });
 $("exportPresets").addEventListener("click", () => {
@@ -674,6 +724,11 @@ $("importPresets").addEventListener("change", async (ev) => {
   const file = ev.target.files && ev.target.files[0];
   ev.target.value = ""; // 同じファイルを選び直せるようにする
   if (!file) return;
+  // プリセットは小さな JSON なので、上限を超えるファイルは読む前に弾く
+  if (file.size > 1024 * 1024) {
+    $("importStatus").textContent = "読み込めませんでした: ファイルが大きすぎます（上限は 1 MB です）";
+    return;
+  }
   let text;
   try { text = await file.text(); }
   catch (_) {
@@ -687,12 +742,26 @@ $("importPresets").addEventListener("change", async (ev) => {
     return;
   }
   userPresets.push(...r.presets);
-  storeUserPresets();
+  if (!storeUserPresets()) {
+    // 取り込めても保存できていなければ、その旨を表示する
+    $("importStatus").textContent = "読み込みましたが保存できませんでした（ブラウザの保存容量を超えている可能性があります）";
+    refreshPresetOptions();
+    return;
+  }
   refreshPresetOptions();
   $("importStatus").textContent = r.presets.length + " 件のプリセットを読み込みました";
 });
 initPresets();
-["volMusic", "volHeart", "volWaves"].forEach((id) => $(id).addEventListener("input", applyVolumes));
+// 音量スライダを手で動かしたら、その層の gain 遷移と予約済みの then を
+// 取り消す（bpm スライダと同じ扱い。遷移が手動操作を上書きしないように）
+[["volMusic", "gain.music"], ["volHeart", "gain.heart"], ["volWaves", "gain.waves"]].forEach(([id, key]) => {
+  $(id).addEventListener("input", () => {
+    cancelTween(key);
+    clearTimeout(thenTimer);
+    thenTimer = null;
+    applyVolumes();
+  });
+});
 $("timer").addEventListener("change", () => { if (playing) startFadeOut(Number($("timer").value)); });
 $("lockBtn").addEventListener("click", () => alert("画面ロックは Phase 3 で実装します"));
 
@@ -700,7 +769,12 @@ if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("./sw.js").catch(() => {});
 }
 
-// Node の検証ハーネス用に検証関数だけを公開する（ブラウザでは module が無いので何もしない）
+// Node の検証ハーネス用に検証関数と状態系の一部を公開する（ブラウザでは module が無いので何もしない）
 if (typeof module !== "undefined" && module.exports) {
-  module.exports = { validatePresetData, parsePresetImport };
+  module.exports = {
+    validatePresetData, parsePresetImport,
+    loadUserPresets, storeUserPresets, applyPreset, stop,
+    getUserPresets: () => userPresets,
+    thenTimerPending: () => thenTimer !== null,
+  };
 }
