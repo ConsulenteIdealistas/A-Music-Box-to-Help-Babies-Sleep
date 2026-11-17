@@ -21,7 +21,9 @@
    "safety_status": "未確認",
    "decision": "pending",
    "decision_reason": "",
-   "revision": "2026-11-17 scaffold"
+   "revision": "2026-11-17 scaffold",
+   "sensitivity": "",
+   "borrowed_from": ""
   },
   {
    "parameter_id": "preset_soothe_decel",
@@ -40,7 +42,9 @@
    "safety_status": "",
    "decision": "pending",
    "decision_reason": "",
-   "revision": "2026-11-17 scaffold"
+   "revision": "2026-11-17 scaffold",
+   "sensitivity": "",
+   "borrowed_from": ""
   },
   {
    "parameter_id": "preset_soothe_transition",
@@ -59,7 +63,9 @@
    "safety_status": "",
    "decision": "pending",
    "decision_reason": "",
-   "revision": "2026-11-17 scaffold"
+   "revision": "2026-11-17 scaffold",
+   "sensitivity": "",
+   "borrowed_from": ""
   },
   {
    "parameter_id": "preset_soothe_waves",
@@ -78,7 +84,9 @@
    "safety_status": "",
    "decision": "pending",
    "decision_reason": "",
-   "revision": "2026-11-17 scaffold"
+   "revision": "2026-11-17 scaffold",
+   "sensitivity": "",
+   "borrowed_from": ""
   },
   {
    "parameter_id": "preset_sleep_lowpass",
@@ -97,7 +105,9 @@
    "safety_status": "未確認",
    "decision": "pending",
    "decision_reason": "",
-   "revision": "2026-11-17 scaffold"
+   "revision": "2026-11-17 scaffold",
+   "sensitivity": "",
+   "borrowed_from": ""
   },
   {
    "parameter_id": "preset_deepsleep_level",
@@ -116,7 +126,9 @@
    "safety_status": "未確認",
    "decision": "pending",
    "decision_reason": "",
-   "revision": "2026-11-17 scaffold"
+   "revision": "2026-11-17 scaffold",
+   "sensitivity": "",
+   "borrowed_from": ""
   },
   {
    "parameter_id": "design_velocity_range",
@@ -135,7 +147,9 @@
    "safety_status": "",
    "decision": "pending",
    "decision_reason": "",
-   "revision": "2026-11-17 scaffold"
+   "revision": "2026-11-17 scaffold",
+   "sensitivity": "",
+   "borrowed_from": ""
   },
   {
    "parameter_id": "design_reverb_decay",
@@ -154,7 +168,9 @@
    "safety_status": "",
    "decision": "pending",
    "decision_reason": "",
-   "revision": "2026-11-17 scaffold"
+   "revision": "2026-11-17 scaffold",
+   "sensitivity": "",
+   "borrowed_from": ""
   },
   {
    "parameter_id": "design_pitch_range",
@@ -173,7 +189,9 @@
    "safety_status": "",
    "decision": "pending",
    "decision_reason": "",
-   "revision": "2026-11-17 scaffold"
+   "revision": "2026-11-17 scaffold",
+   "sensitivity": "",
+   "borrowed_from": ""
   },
   {
    "parameter_id": "design_band_pocket",
@@ -192,7 +210,9 @@
    "safety_status": "",
    "decision": "pending",
    "decision_reason": "",
-   "revision": "2026-11-17 scaffold"
+   "revision": "2026-11-17 scaffold",
+   "sensitivity": "",
+   "borrowed_from": ""
   },
   {
    "parameter_id": "klank_partial_amps",
@@ -211,7 +231,9 @@
    "safety_status": "",
    "decision": "pending",
    "decision_reason": "",
-   "revision": "2026-11-17 scaffold"
+   "revision": "2026-11-17 scaffold",
+   "sensitivity": "",
+   "borrowed_from": ""
   },
   {
    "parameter_id": "klank_ring_times",
@@ -230,7 +252,9 @@
    "safety_status": "",
    "decision": "pending",
    "decision_reason": "",
-   "revision": "2026-11-17 scaffold"
+   "revision": "2026-11-17 scaffold",
+   "sensitivity": "",
+   "borrowed_from": ""
   },
   {
    "parameter_id": "surge_shape",
@@ -249,7 +273,9 @@
    "safety_status": "",
    "decision": "pending",
    "decision_reason": "",
-   "revision": "2026-11-17 scaffold"
+   "revision": "2026-11-17 scaffold",
+   "sensitivity": "",
+   "borrowed_from": ""
   },
   {
    "parameter_id": "swell_params",
@@ -268,7 +294,9 @@
    "safety_status": "",
    "decision": "pending",
    "decision_reason": "",
-   "revision": "2026-11-17 scaffold"
+   "revision": "2026-11-17 scaffold",
+   "sensitivity": "",
+   "borrowed_from": ""
   },
   {
    "parameter_id": "heart_decay",
@@ -287,7 +315,9 @@
    "safety_status": "",
    "decision": "pending",
    "decision_reason": "",
-   "revision": "2026-11-17 scaffold"
+   "revision": "2026-11-17 scaffold",
+   "sensitivity": "",
+   "borrowed_from": ""
   },
   {
    "parameter_id": "heart_dub_amp",
@@ -306,7 +336,9 @@
    "safety_status": "",
    "decision": "pending",
    "decision_reason": "",
-   "revision": "2026-11-17 scaffold"
+   "revision": "2026-11-17 scaffold",
+   "sensitivity": "",
+   "borrowed_from": ""
   },
   {
    "parameter_id": "fade_timer",
@@ -325,7 +357,9 @@
    "safety_status": "",
    "decision": "pending",
    "decision_reason": "",
-   "revision": "2026-11-17 scaffold"
+   "revision": "2026-11-17 scaffold",
+   "sensitivity": "",
+   "borrowed_from": ""
   },
   {
    "parameter_id": "fade_in",
@@ -344,7 +378,9 @@
    "safety_status": "",
    "decision": "pending",
    "decision_reason": "",
-   "revision": "2026-11-17 scaffold"
+   "revision": "2026-11-17 scaffold",
+   "sensitivity": "",
+   "borrowed_from": ""
   },
   {
    "parameter_id": "fade_stop",
@@ -363,7 +399,9 @@
    "safety_status": "",
    "decision": "pending",
    "decision_reason": "",
-   "revision": "2026-11-17 scaffold"
+   "revision": "2026-11-17 scaffold",
+   "sensitivity": "",
+   "borrowed_from": ""
   },
   {
    "parameter_id": "bed_fades",
@@ -382,7 +420,9 @@
    "safety_status": "",
    "decision": "pending",
    "decision_reason": "",
-   "revision": "2026-11-17 scaffold"
+   "revision": "2026-11-17 scaffold",
+   "sensitivity": "",
+   "borrowed_from": ""
   },
   {
    "parameter_id": "volume_ease_tau",
@@ -401,7 +441,9 @@
    "safety_status": "",
    "decision": "pending",
    "decision_reason": "",
-   "revision": "2026-11-17 scaffold"
+   "revision": "2026-11-17 scaffold",
+   "sensitivity": "",
+   "borrowed_from": ""
   },
   {
    "parameter_id": "preset_save_transition",
@@ -420,7 +462,9 @@
    "safety_status": "",
    "decision": "pending",
    "decision_reason": "",
-   "revision": "2026-11-17 scaffold"
+   "revision": "2026-11-17 scaffold",
+   "sensitivity": "",
+   "borrowed_from": ""
   },
   {
    "parameter_id": "music_norm_rms",
@@ -439,7 +483,9 @@
    "safety_status": "未確認",
    "decision": "pending",
    "decision_reason": "",
-   "revision": "2026-11-17 scaffold"
+   "revision": "2026-11-17 scaffold",
+   "sensitivity": "",
+   "borrowed_from": ""
   },
   {
    "parameter_id": "phrase_gap",
@@ -458,7 +504,9 @@
    "safety_status": "",
    "decision": "pending",
    "decision_reason": "",
-   "revision": "2026-11-17 scaffold"
+   "revision": "2026-11-17 scaffold",
+   "sensitivity": "",
+   "borrowed_from": ""
   }
  ]
 }
