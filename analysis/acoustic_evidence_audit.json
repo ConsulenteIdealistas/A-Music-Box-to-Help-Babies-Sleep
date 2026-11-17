@@ -22,7 +22,7 @@
    "decision": "pending",
    "decision_reason": "",
    "revision": "2026-11-17 scaffold",
-   "sensitivity": "",
+   "sensitivity": "解析的： 線形チェーン最終段のため出力レベルは値に比例する（0.9→0.8 で −1.0 dB）。ただし耳元 SPL は端末音量で決まり、この値では定まらない",
    "borrowed_from": ""
   },
   {
@@ -43,7 +43,7 @@
    "decision": "pending",
    "decision_reason": "",
    "revision": "2026-11-17 scaffold",
-   "sensitivity": "",
+   "sensitivity": "解析的： BPM 変化率は時間に反比例する（180 s で 88→65、平均 −0.128 BPM/s）。効果面の感度は未測定",
    "borrowed_from": ""
   },
   {
@@ -64,7 +64,7 @@
    "decision": "pending",
    "decision_reason": "",
    "revision": "2026-11-17 scaffold",
-   "sensitivity": "",
+   "sensitivity": "解析的： 終端値は変わらず、パラメータ変化の速さだけが時間に反比例して変わる",
    "borrowed_from": ""
   },
   {
@@ -85,7 +85,7 @@
    "decision": "pending",
    "decision_reason": "",
    "revision": "2026-11-17 scaffold",
-   "sensitivity": "",
+   "sensitivity": "解析的： さざ波層のレベルはスライダ値に比例する（100→80 で −1.9 dB）。他層とのバランスも同量ずれる",
    "borrowed_from": ""
   },
   {
@@ -106,7 +106,7 @@
    "decision": "pending",
    "decision_reason": "",
    "revision": "2026-11-17 scaffold",
-   "sensitivity": "",
+   "sensitivity": "実測： Klank 4曲で膝 250→200 Hz により LUFS-I −1.45 LU・重心 −23 Hz・1000 Hz 帯域 −0.40 dB、250→315 Hz で LUFS-I +1.48 LU・重心 +24 Hz・1000 Hz 帯域 +0.44 dB（analysis/knee_sensitivity_2026-11-17.csv）",
    "borrowed_from": ""
   },
   {
@@ -127,7 +127,7 @@
    "decision": "pending",
    "decision_reason": "",
    "revision": "2026-11-17 scaffold",
-   "sensitivity": "",
+   "sensitivity": "解析的： 設定値は心音・さざ波のスライダゲインとなり、両層のレベルは値に比例する（半分で −6.0 dB）。値自体は未確定",
    "borrowed_from": ""
   },
   {
@@ -148,7 +148,7 @@
    "decision": "pending",
    "decision_reason": "",
    "revision": "2026-11-17 scaffold",
-   "sensitivity": "",
+   "sensitivity": "未測定",
    "borrowed_from": ""
   },
   {
@@ -169,7 +169,7 @@
    "decision": "pending",
    "decision_reason": "",
    "revision": "2026-11-17 scaffold",
-   "sensitivity": "",
+   "sensitivity": "未測定",
    "borrowed_from": ""
   },
   {
@@ -190,7 +190,7 @@
    "decision": "pending",
    "decision_reason": "",
    "revision": "2026-11-17 scaffold",
-   "sensitivity": "",
+   "sensitivity": "未測定",
    "borrowed_from": ""
   },
   {
@@ -211,7 +211,7 @@
    "decision": "pending",
    "decision_reason": "",
    "revision": "2026-11-17 scaffold",
-   "sensitivity": "",
+   "sensitivity": "解析的： ポケット量と対象帯域（300〜400 Hz 付近）の音楽レベルは 1:1 で対応する（定義）。未実装のため系全体への影響は未測定",
    "borrowed_from": ""
   },
   {
@@ -232,7 +232,7 @@
    "decision": "pending",
    "decision_reason": "",
    "revision": "2026-11-17 scaffold",
-   "sensitivity": "",
+   "sensitivity": "解析的： 各倍音のレベルは振幅比に比例する（2倍で +6.0 dB）。音色・重心への影響は未測定",
    "borrowed_from": ""
   },
   {
@@ -253,7 +253,7 @@
    "decision": "pending",
    "decision_reason": "",
    "revision": "2026-11-17 scaffold",
-   "sensitivity": "",
+   "sensitivity": "解析的： Klank の ring time は −60 dB 減衰時間で、減衰速度は 60/ring_time dB/s（基音 15 dB/s、第2倍音 133 dB/s）。時間を2倍にすると減衰は半分の速さになる",
    "borrowed_from": ""
   },
   {
@@ -274,7 +274,7 @@
    "decision": "pending",
    "decision_reason": "",
    "revision": "2026-11-17 scaffold",
-   "sensitivity": "",
+   "sensitivity": "解析的： 血流ゲインは拍内で 0.55〜1.00 を動き、変調深さは 5.2 dB。rate（4）を上げると盛り上がりは拍頭に集中し、下げると平坦になる",
    "borrowed_from": ""
   },
   {
@@ -295,7 +295,7 @@
    "decision": "pending",
    "decision_reason": "",
    "revision": "2026-11-17 scaffold",
-   "sensitivity": "",
+   "sensitivity": "解析的： ゆらぎ幅 ±10% は +0.8/−0.9 dB に相当し、周期は 1/0.05 Hz ＝ 20 秒。深さと周波数は独立に効く",
    "borrowed_from": ""
   },
   {
@@ -316,7 +316,7 @@
    "decision": "pending",
    "decision_reason": "",
    "revision": "2026-11-17 scaffold",
-   "sensitivity": "",
+   "sensitivity": "解析的： 包絡 exp(−22t) が −60 dB に達する時間は ln(1000)/22 ≈ 0.31 秒。率を2倍にすると減衰時間は半分になる",
    "borrowed_from": ""
   },
   {
@@ -337,7 +337,7 @@
    "decision": "pending",
    "decision_reason": "",
    "revision": "2026-11-17 scaffold",
-   "sensitivity": "",
+   "sensitivity": "解析的： 第2音は第1音より 20log10(0.55) ＝ −5.2 dB 小さい。比の変更は第2音のレベルにそのまま効く",
    "borrowed_from": ""
   },
   {
@@ -358,7 +358,7 @@
    "decision": "pending",
    "decision_reason": "",
    "revision": "2026-11-17 scaffold",
-   "sensitivity": "",
+   "sensitivity": "解析的： 終了タイミングは変わらず、フェード区間の長さだけが変わる（レベル軌跡は Smoothstep の時間軸の伸縮）",
    "borrowed_from": ""
   },
   {
@@ -379,7 +379,7 @@
    "decision": "pending",
    "decision_reason": "",
    "revision": "2026-11-17 scaffold",
-   "sensitivity": "",
+   "sensitivity": "解析的： 定常レベルは変わらず、全開までの時間だけが変わる",
    "borrowed_from": ""
   },
   {
@@ -400,7 +400,7 @@
    "decision": "pending",
    "decision_reason": "",
    "revision": "2026-11-17 scaffold",
-   "sensitivity": "",
+   "sensitivity": "解析的： 減衰は exp(−t/0.2 s) で、時定数を変えると消音までの時間が比例する（τ＝0.2 で 0.8 秒後に約 −35 dB）",
    "borrowed_from": ""
   },
   {
@@ -421,7 +421,7 @@
    "decision": "pending",
    "decision_reason": "",
    "revision": "2026-11-17 scaffold",
-   "sensitivity": "",
+   "sensitivity": "解析的： 定常部の音響は変わらず、フェード区間の長さだけが変わる（60 秒のベッドではイン2秒・アウト3秒が対象区間）",
    "borrowed_from": ""
   },
   {
@@ -442,7 +442,7 @@
    "decision": "pending",
    "decision_reason": "",
    "revision": "2026-11-17 scaffold",
-   "sensitivity": "",
+   "sensitivity": "解析的： 追従は exp 型で、時定数の約3倍（0.15 秒）でほぼ目標値に達する。定常値は変わらない",
    "borrowed_from": ""
   },
   {
@@ -463,7 +463,7 @@
    "decision": "pending",
    "decision_reason": "",
    "revision": "2026-11-17 scaffold",
-   "sensitivity": "",
+   "sensitivity": "解析的： 保存されるパラメータ値自体は変わらず、適用時の変化の速さだけが変わる",
    "borrowed_from": ""
   },
   {
@@ -484,7 +484,7 @@
    "decision": "pending",
    "decision_reason": "",
    "revision": "2026-11-17 scaffold",
-   "sensitivity": "",
+   "sensitivity": "解析的： 音楽層の RMS はこの値そのものになり、レベルは値に比例する（2倍で +6.0 dB）。層間バランスも同量ずれる",
    "borrowed_from": ""
   },
   {
@@ -505,7 +505,7 @@
    "decision": "pending",
    "decision_reason": "",
    "revision": "2026-11-17 scaffold",
-   "sensitivity": "",
+   "sensitivity": "解析的： フレーズ内の音響は変わらず、無音区間の割合だけが変わる。全長 RMS・LUFS-I は鳴っている時間比の分だけ下がる",
    "borrowed_from": ""
   }
  ]
