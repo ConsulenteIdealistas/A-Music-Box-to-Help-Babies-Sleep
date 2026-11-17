@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: JavaScript syntax
+        run: |
+          node --check app/app.js
+          node --check app/sw.js
+      - name: App harnesses (Node)
+        run: |
+          node app/tests/audit_fixes_harness.js
+          node app/tests/lullaby_import_dedupe_harness.js
+      - name: Python tests
+        run: |
+          python -m unittest discover -s . -p "test_*.py"
+          python -m unittest discover -s analysis -p "test_*.py"
+      - name: Audit ledger validation
+        run: python analysis/validate_audit_ledger.py
