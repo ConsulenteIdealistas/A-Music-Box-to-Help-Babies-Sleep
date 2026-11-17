@@ -37,6 +37,16 @@ Integrated transfer curves (level change inside minus outside, dB):
      literature; the anchor is the design curve, Richards is the
      gentler sensitivity bound.
 
+  Round 3 (2026-11-17, human only): Richards' full text and the
+  Querleu primaries were not openly accessible, so no new primary
+  values exist. The Querleu band points (2/14/20/26 dB at
+  250/500/1000/2000 Hz) are corroborated by three independent
+  secondary sources and stored in literature/bed_transfer_curves.csv
+  as kind=secondary_corroborated — used for curve comparison only,
+  never pooled with stated values (see
+  literature/bed_literature_round3_human.md). curve_rows() below
+  tabulates the point sources against the anchor and Richards lines.
+
 Song WAVs live outside the repo (they are binaries):
   ~/workspace/your_files/lullaby-klank/{brahms_wiegenlied,
   moldau_theme, vissi_darte, yurikago_no_uta}_klank.wav
@@ -45,7 +55,8 @@ Song WAVs live outside the repo (they are binaries):
 
 Usage: python -m analysis.bed_integration
 Outputs: analysis/bed_integration_stats_python.csv,
-         analysis/song_transfer_comparison.csv
+         analysis/song_transfer_comparison.csv,
+         analysis/bed_curve_comparison.csv
 """
 
 from __future__ import annotations
@@ -183,7 +194,71 @@ def song_rows() -> list[dict]:
     return rows
 
 
+# --------------------------------------------------------------- curves
+
+CURVES = ROOT / "literature" / "bed_transfer_curves.csv"
+STD_FREQS = [125, 250, 500, 1000, 2000, 4000]
+
+
+def curve_rows() -> list[dict]:
+    """Point-source curves: segment slopes (dB/oct of the level curve)
+    and log-linear interpolated levels at standard frequencies, only
+    within each source's stated range. The analytic anchor and the
+    Richards endpoint line are appended for comparison."""
+    sources: dict[str, list[tuple[float, float]]] = {}
+    with open(CURVES, newline="", encoding="utf-8") as fh:
+        for row in csv.DictReader(fh):
+            sources.setdefault(row["source"], []).append(
+                (float(row["freq_hz"]), float(row["level_db"])))
+    rows = []
+    for source, pts in sources.items():
+        pts.sort()
+        segs = [(l2 - l1) / math.log2(f2 / f1)
+                for (f1, l1), (f2, l2) in zip(pts, pts[1:])]
+        row: dict = {"source": source}
+        row["segment_slopes"] = ";".join(f"{s:.2f}" for s in segs)
+        row["overall_slope"] = (round((pts[-1][1] - pts[0][1])
+                                / math.log2(pts[-1][0] / pts[0][0]), 2)
+                                if len(pts) > 1 else "")
+        for f in STD_FREQS:
+            val: float | str = ""
+            for pf, pl in pts:
+                if f == pf:
+                    val = pl
+            if val == "":
+                for (f1, l1), (f2, l2) in zip(pts, pts[1:]):
+                    if f1 < f < f2:
+                        t = math.log2(f / f1) / math.log2(f2 / f1)
+                        val = round(l1 + t * (l2 - l1), 2)
+                        break
+            row[f"level_{f}"] = val
+        rows.append(row)
+    for label, fn in (("anchor (Gerhardt, analytic)", anchor_db),
+                      ("richards line (analytic)", richards_db)):
+        row = {"source": label, "segment_slopes": "", "overall_slope": ""}
+        for f in STD_FREQS:
+            row[f"level_{f}"] = round(fn(float(f)), 2)
+        rows.append(row)
+    return rows
+
+
 def main() -> None:
+    curves = curve_rows()
+    with open(ROOT / "analysis" / "bed_curve_comparison.csv", "w",
+              newline="", encoding="utf-8") as fh:
+        w = csv.DictWriter(fh, fieldnames=list(curves[0].keys()))
+        w.writeheader()
+        w.writerows(curves)
+    print("== transfer curves from point data (round 3) ==")
+    for r in curves:
+        lv = ", ".join(f"{f} Hz {r[f'level_{f}']:+.2f}" if r[f"level_{f}"] != ""
+                       else f"{f} Hz n/a" for f in STD_FREQS)
+        print(f"{r['source'][:52]:52s} {lv}")
+        if r["segment_slopes"]:
+            print(f"{'':52s} segment slopes {r['segment_slopes']} dB/oct, "
+                  f"overall {r['overall_slope']:+.2f}")
+    print()
+
     stats = group_stats()
     with open(ROOT / "analysis" / "bed_integration_stats_python.csv", "w",
               newline="", encoding="utf-8") as fh:

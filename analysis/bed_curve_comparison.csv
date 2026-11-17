@@ -1,0 +1,6 @@
+source,segment_slopes,overall_slope,level_125,level_250,level_500,level_1000,level_2000,level_4000
+Richards 1992 (PMID 1635729),-2.74,-2.74,3.7,0.96,-1.78,-4.52,-7.26,-10.0
+Querleu et al. 1988 as quoted in Muenssinger et al. 2013 (PMC3876038),-12.00;-6.00;-6.00,-8.0,,-2.0,-14.0,-20.0,-26.0,
+Gerhardt 1990 (PMID 2301503),,,,,,,,-20.0
+"anchor (Gerhardt, analytic)",,,3.5,3.5,-2.5,-8.5,-14.5,-20.5
+richards line (analytic),,,3.7,0.96,-1.78,-4.52,-7.26,-10.0
