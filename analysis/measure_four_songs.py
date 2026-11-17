@@ -107,10 +107,12 @@ def main() -> None:
               f"{row['balance_bed_music_db']} dB, "
               f"rms py/sox mix {row['rms_mix_py']}/{row['rms_mix_sox']}")
     out = ROOT / "analysis" / "four_songs_measurements.csv"
-    with open(out, "w", newline="", encoding="utf-8") as fh:
+    tmp = out.with_suffix(".csv.tmp")
+    with open(tmp, "w", newline="", encoding="utf-8") as fh:
         w = csv.DictWriter(fh, fieldnames=list(rows[0].keys()))
         w.writeheader()
         w.writerows(rows)
+    tmp.replace(out)  # 原子的に置き換える（Issue #12）
     print("wrote", out)
 
 

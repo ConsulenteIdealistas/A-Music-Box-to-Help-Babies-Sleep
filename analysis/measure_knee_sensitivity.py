@@ -96,10 +96,12 @@ def main() -> None:
                       f"centroid {row['centroid_hz']} Hz, "
                       f"1k band {row['band_1000hz_db_rel_total']} dB")
     out = ROOT / "analysis" / "knee_sensitivity_2026-11-17.csv"
-    with open(out, "w", newline="", encoding="utf-8") as fh:
+    tmp = out.with_suffix(".csv.tmp")
+    with open(tmp, "w", newline="", encoding="utf-8") as fh:
         w = csv.DictWriter(fh, fieldnames=list(rows[0].keys()))
         w.writeheader()
         w.writerows(rows)
+    tmp.replace(out)  # 原子的に置き換える（Issue #12）
     print("wrote", out)
 
 

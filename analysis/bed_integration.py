@@ -63,6 +63,7 @@ from __future__ import annotations
 
 import csv
 import math
+import os
 from pathlib import Path
 
 import numpy as np
@@ -242,13 +243,20 @@ def curve_rows() -> list[dict]:
     return rows
 
 
+def _write_csv(path, fieldnames, rows):
+    """tmp に書いてから原子的に置き換える（Issue #12）。"""
+    tmp = path.with_suffix(".csv.tmp")
+    with open(tmp, "w", newline="", encoding="utf-8") as fh:
+        w = csv.DictWriter(fh, fieldnames=fieldnames)
+        w.writeheader()
+        w.writerows(rows)
+    os.replace(tmp, path)
+
+
 def main() -> None:
     curves = curve_rows()
-    with open(ROOT / "analysis" / "bed_curve_comparison.csv", "w",
-              newline="", encoding="utf-8") as fh:
-        w = csv.DictWriter(fh, fieldnames=list(curves[0].keys()))
-        w.writeheader()
-        w.writerows(curves)
+    _write_csv(ROOT / "analysis" / "bed_curve_comparison.csv",
+               list(curves[0].keys()), curves)
     print("== transfer curves from point data (round 3) ==")
     for r in curves:
         lv = ", ".join(f"{f} Hz {r[f'level_{f}']:+.2f}" if r[f"level_{f}"] != ""
@@ -260,13 +268,15 @@ def main() -> None:
     print()
 
     stats = group_stats()
-    with open(ROOT / "analysis" / "bed_integration_stats_python.csv", "w",
-              newline="", encoding="utf-8") as fh:
+    _stats_path = ROOT / "analysis" / "bed_integration_stats_python.csv"
+    _tmp = _stats_path.with_suffix(".csv.tmp")
+    with open(_tmp, "w", newline="", encoding="utf-8") as fh:
         w = csv.DictWriter(fh, fieldnames=list(stats[0].keys()))
         w.writeheader()
         for r in stats:
             w.writerow({k: (round(v, 4) if isinstance(v, float) else v)
                         for k, v in r.items()})
+    os.replace(_tmp, _stats_path)
     print("== evidence-group statistics (Python, analysis/stats.py) ==")
     def f3(x):
         return f"{x:.3f}" if isinstance(x, (int, float)) else "n/a"
@@ -277,11 +287,8 @@ def main() -> None:
               f"SD={f3(r['sd'])} range={r['min']}..{r['max']}")
 
     rows = song_rows()
-    with open(ROOT / "analysis" / "song_transfer_comparison.csv", "w",
-              newline="", encoding="utf-8") as fh:
-        w = csv.DictWriter(fh, fieldnames=list(rows[0].keys()))
-        w.writeheader()
-        w.writerows(rows)
+    _write_csv(ROOT / "analysis" / "song_transfer_comparison.csv",
+               list(rows[0].keys()), rows)
     print("\n== songs through the integrated transfer ==")
     for r in rows:
         print(f"{r['name']:26s} centroid {r['centroid_raw']} -> "

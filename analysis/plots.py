@@ -28,6 +28,7 @@ import sys
 from xml.sax.saxutils import escape
 
 from analysis import stats
+import os
 
 WIDTH = 880
 MARGIN_LEFT = 130
@@ -253,8 +254,10 @@ def main(argv=None):
                 continue
         svg = scatter_svg(points, f"{args.y} vs {args.x}", args.x, args.y, log_x, log_y)
         n = len(points)
-    with open(args.out, "w", encoding="utf-8") as f:
+    tmp_out = args.out + ".tmp"
+    with open(tmp_out, "w", encoding="utf-8") as f:
         f.write(svg)
+    os.replace(tmp_out, args.out)  # 原子的に置き換える（Issue #12）
     print(f"wrote {args.out} ({n} points)")
     return 0
 

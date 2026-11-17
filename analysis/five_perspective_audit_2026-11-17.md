@@ -109,3 +109,16 @@ analysis/acid_rasis_audit_2026-11-17.md が正本で、本書は
 3. N2: 合否基準の最初の事前登録
 4. I1: インポートの重複排除
 5. T4: DESIGN §3 の記述更新（判断待ちの継続）
+
+## 対応 Issue（2026-11-17、外部監査レポートを受けて起票）
+
+本監査の残件は GitHub Issue で追跡する（レポートの Issue 番号と GitHub 番号は一致）。
+- A1（分析スクリプトの書き出し）: Issue #12 で原子的書き出しに統一済み
+- I2（保存側の重複排除）: Issue #11 で対応済み
+- I3（play/startMusic の冪等性）: Issue #2 で対応済み
+- T2（生成 HTML の reference_id）: Issue #9 で対応済み
+- T3（assets の生成記録）: Issue #5 で対応表を作成済み
+- N2（合否基準の事前登録）: Issue #8（人の5決定待ち）
+- 台帳の実質（判断待ち 24 件）: Issue #7 でバリデータに警告表示を追加。判断自体は A 層測定と合わせて別途
+- 書誌 discrepancy: Issue #10（Querleu 巻号は PubMed で解消。Moon & Fifer の帰属に新たな疑問が判明し、レジストリに記録済み）
+- 追跡の土台: Issue #14

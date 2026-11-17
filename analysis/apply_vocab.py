@@ -21,6 +21,7 @@ from __future__ import annotations
 import argparse
 import csv
 import sys
+import os
 
 COLUMN_PAIRS = [("Stimulus_Type", "Stimulus_Canonical"),
                 ("Outcome", "Outcome_Canonical")]
@@ -71,10 +72,12 @@ def run(extraction_path: str, vocab_path: str, out_path: str) -> dict:
     for _, dst in COLUMN_PAIRS:
         if dst not in fields:
             fields.append(dst)
-    with open(out_path, "w", newline="", encoding="utf-8") as fh:
+    tmp_path = str(out_path) + ".tmp"
+    with open(tmp_path, "w", newline="", encoding="utf-8") as fh:
         w = csv.DictWriter(fh, fieldnames=fields)
         w.writeheader()
         w.writerows(rows)
+    os.replace(tmp_path, out_path)  # 原子的に置き換える（Issue #12）
     return {"rows": len(rows), "vocab_entries": len(vocab)}
 
 

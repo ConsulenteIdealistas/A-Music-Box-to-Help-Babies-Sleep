@@ -80,6 +80,7 @@ let heartTimer = null, fadeTimer = null, wavesNodes = null;
 let thenTimer = null; // プリセットの then（継続状態）の予約。新しい操作で取り消す
 let musicSrc = null, musicSrcGain = null, musicStartedAt = 0, musicOffset = 0;
 let musicCrossfadeGen = 0; // クロスフェードの世代（古い非同期処理の割り込みを防ぐ）
+let musicStartGen = 0;     // startMusic の世代（同上）
 const musicBuffers = {}; // "id@cutoff" -> AudioBuffer（フィルタ済み・正規化済み）
 let playing = false;
 let playGen = 0; // 再生世代（停止直後の再開で suspend が競合しないよう）
@@ -256,6 +257,7 @@ function spawnWaves(cutoff, gainVal) {
   return { src, g };
 }
 function startWaves() {
+  stopWaves(); // 二重に呼ばれても旧ソースを止めてから差し替える（孤児化防止）
   const w = spawnWaves(lowpassHz, 1);
   wavesNodes.src = w.src;
   wavesNodes.srcGain = w.g;
@@ -314,9 +316,14 @@ function spawnMusic(buf, offset, gainVal) {
   return { src, g };
 }
 async function startMusic() {
+  const gen = ++musicStartGen;
   const id = $("song").value;
   try {
     const buf = await loadSong(id, lowpassHz);
+    // 読み込みを待つ間に新しい startMusic が始まっていたらそちらに
+    // 任せる（解決順の入れ替わりで古い曲が残らないように）。停止
+    // 済みなら鳴らさない。
+    if (gen !== musicStartGen || !playing) return;
     stopMusic();
     const m = spawnMusic(buf, 0, 1);
     musicSrc = m.src;
@@ -342,14 +349,17 @@ function musicPos() {
   return (musicOffset + (ctx.currentTime - musicStartedAt)) % musicSrc.buffer.duration;
 }
 // ローパス変更: 同じ再生位置から新しいフィルタ版をクロスフェードで差し替える
+// 戻り値: 実音の差し替えが成立したら true（差し替える実音が無い
+// 場合も、乖離のしようがないので true）。失敗・割り込み時は false
+// （呼び出し側は宣言状態を旧値に留める）。
 async function crossfadeMusicTo(cutoff, durS, curveName) {
-  if (!musicSrc) return;
+  if (!musicSrc) return true;
   const gen = ++musicCrossfadeGen;
   try {
     const buf = await loadSong($("song").value, cutoff);
     // 読み込みを待つ間に新しいクロスフェードが始まっていたら、
     // そちらの状態（musicSrc 等）を壊さないよう何もしない
-    if (gen !== musicCrossfadeGen) return;
+    if (gen !== musicCrossfadeGen) return false;
     const pos = musicPos();
     const old = { src: musicSrc, g: musicSrcGain };
     const nw = spawnMusic(buf, pos, 0);
@@ -364,7 +374,8 @@ async function crossfadeMusicTo(cutoff, durS, curveName) {
     musicStartedAt = t;
     musicOffset = pos;
     setTimeout(() => { try { old.src.stop(); } catch (_) {} if (old.g) old.g.disconnect(); }, (durS + 0.2) * 1000);
-  } catch (e) { /* 音源が無い場合は現状維持 */ }
+    return true;
+  } catch (e) { /* 音源が無い場合は現状維持 */ return false; }
 }
 
 function applyVolumes() {
@@ -401,6 +412,7 @@ function startFadeOut(minutes) {
 }
 
 async function play() {
+  if (playing) return; // 二重実行ガード（startWaves / startMusic の再入防止）
   if (!ctx) {
     try { buildGraph(); }
     catch (_) {
@@ -488,12 +500,22 @@ function applyPreset(preset) {
   }
   if (P.lowpassHz != null && Number(P.lowpassHz) !== lowpassHz) {
     const target = Number(P.lowpassHz);
-    lowpassHz = target;
-    $("lpVal").textContent = target;
     if (playing && ctx) {
       const d = Math.max(dur, 0.3);
-      crossfadeMusicTo(target, d, curveFor(preset, "lowpass"));
-      crossfadeWavesTo(target, d, curveFor(preset, "lowpass"));
+      const curve = curveFor(preset, "lowpass");
+      // 宣言状態（lowpassHz と表示）は実音の差し替えが成功してから
+      // 確定させる。失敗したら旧値のままにして、鳴っているフィルタ
+      // と「現在の状態」が乖離しないようにする（waves の差し替えも
+      // 成功後に続ける）。
+      Promise.resolve(crossfadeMusicTo(target, d, curve)).then((ok) => {
+        if (!ok) return;
+        lowpassHz = target;
+        $("lpVal").textContent = target;
+        crossfadeWavesTo(target, d, curve);
+      });
+    } else {
+      lowpassHz = target;
+      $("lpVal").textContent = target;
     }
   }
   if (preset.then) {
@@ -507,7 +529,25 @@ function loadUserPresets() {
   try {
     const parsed = JSON.parse(raw);
     if (!Array.isArray(parsed)) throw new Error("not an array");
-    userPresets = parsed;
+    // 要素単位でも検証を通す（正本・インポートと同じ検証）。壊れた
+    // 要素だけを理由付きで退避し、健全な要素はそのまま使う（全体を
+    // 黙って捨てない）。
+    const valid = [], rejected = [];
+    for (const p of parsed) {
+      const v = validatePresetData(p);
+      if (v.ok) valid.push(v.presets[0]);
+      else rejected.push({ error: v.error, preset: p });
+    }
+    userPresets = valid;
+    if (rejected.length) {
+      try {
+        localStorage.setItem("lullaby.presets.rejected", JSON.stringify({
+          at: new Date().toISOString(), rejected,
+        }));
+      } catch (_) {}
+      const st = $("importStatus");
+      if (st) st.textContent = "保存済みプリセットのうち " + rejected.length + " 件が壊れていたため退避しました（退避先: lullaby.presets.rejected）";
+    }
   } catch (_) {
     // 壊れた保存分は黙って捨てず、生の文字列を退避キーに残してから
     // 初期化する（復旧や原因調査の手がかりを失わないため）
@@ -686,6 +726,21 @@ function presetSignature(p) {
     name: p.name, parameters: p.parameters, transition: p.transition, then: p.then,
   });
 }
+// 名前を除いた内容だけの署名（保存時の重複判定用：名前が違っても
+// 中身が同じなら二重保存しない）。
+function presetContentSignature(p) {
+  return stableStringify({
+    parameters: p.parameters, transition: p.transition, then: p.then,
+  });
+}
+// 自動名の採番（削除で空いた番号から詰める。length + 1 では削除後に
+// 番号が重複し得る）。
+function nextPresetName() {
+  const used = new Set(userPresets.map((p) => p.name));
+  let i = 1;
+  while (used.has("マイプリセット " + i)) i++;
+  return "マイプリセット " + i;
+}
 // 取り込み候補を、既存の保存プリセットと候補同士の中で重複しない
 // 新規分（fresh）と、重複で除いた件数（skipped）に分ける純粋関数。
 function splitImportedPresets(incoming, existing) {
@@ -716,16 +771,26 @@ $("preset").addEventListener("change", () => {
   if (s && s.preset) applyPreset(JSON.parse(JSON.stringify(s.preset)));
 });
 $("savePreset").addEventListener("click", () => {
-  const name = $("presetName").value.trim() || `マイプリセット ${userPresets.length + 1}`;
-  userPresets.push({
-    name,
+  const candidate = {
     parameters: currentParams(),
     // 保存時の遷移は §4 の初期標準（Ease In Out、30 秒）
     transition: { duration: 30, curve: "easeInOut", parameters: { gain: {}, lowpass: {}, reverb: {} } },
-  });
+  };
+  // 中身が同じプリセットが既にあれば二重保存しない（名前が違っても）
+  const dup = userPresets.find((p) => presetContentSignature(p) === presetContentSignature(candidate));
+  if (dup) {
+    $("importStatus").textContent = "同じ内容のプリセットが既に保存されています（「" + (dup.name || "(無名)") + "」）";
+    return;
+  }
+  const name = $("presetName").value.trim() || nextPresetName();
+  userPresets.push({ name, ...candidate });
   if (!storeUserPresets()) {
-    // 書けなかった場合は成功したように見せない（このセッション限りで消える）
+    // 書けなかったらメモリ上の追加も巻き戻す（見かけと永続状態を
+    // 一致させる：画面にあるのに再読込で消える、を作らない）
+    userPresets.pop();
     $("importStatus").textContent = "保存できませんでした（ブラウザの保存容量を超えている可能性があります）";
+    refreshPresetOptions();
+    return;
   }
   refreshPresetOptions();
   $("preset").value = "u:" + (userPresets.length - 1);
@@ -735,8 +800,10 @@ $("savePreset").addEventListener("click", () => {
 $("deletePreset").addEventListener("click", () => {
   const s = selectedPreset();
   if (!s || !s.isUser) return;
-  userPresets.splice(s.index, 1);
+  const removed = userPresets.splice(s.index, 1)[0];
   if (!storeUserPresets()) {
+    // 書けなかったら削除も巻き戻す（再読込で「復活」する状態にしない）
+    userPresets.splice(s.index, 0, removed);
     $("importStatus").textContent = "削除を保存できませんでした（ブラウザの保存容量を超えている可能性があります）";
   }
   refreshPresetOptions();
@@ -778,8 +845,10 @@ $("importPresets").addEventListener("change", async (ev) => {
   }
   userPresets.push(...split.fresh);
   if (!storeUserPresets()) {
-    // 取り込めても保存できていなければ、その旨を表示する
-    $("importStatus").textContent = "読み込みましたが保存できませんでした（ブラウザの保存容量を超えている可能性があります）";
+    // 保存できなかったら取り込みも巻き戻す（このセッション限りで
+    // 見える状態にしない。重複判定の対象にも残さない）
+    userPresets.length -= split.fresh.length;
+    $("importStatus").textContent = "保存できなかったため、読み込みを取り消しました（ブラウザの保存容量を超えている可能性があります）";
     refreshPresetOptions();
     return;
   }
@@ -809,8 +878,11 @@ if ("serviceWorker" in navigator) {
 if (typeof module !== "undefined" && module.exports) {
   module.exports = {
     validatePresetData, parsePresetImport, stableStringify, splitImportedPresets,
+    presetContentSignature, nextPresetName,
     loadUserPresets, storeUserPresets, applyPreset, stop,
+    play, startMusic, startWaves,
     getUserPresets: () => userPresets,
+    getLowpassHz: () => lowpassHz,
     thenTimerPending: () => thenTimer !== null,
   };
 }

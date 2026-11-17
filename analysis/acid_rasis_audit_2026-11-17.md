@@ -72,3 +72,12 @@ app/sw.js）と監査台帳の検証手段。音響パラメータ、プリセ�
 （再生中にしか発生しない）、F3 の世代ガード、F9 の Service
 Worker インストール経路、F10 の表示、F11 の例外経路。
 いずれも実ブラウザ・実機での確認が別途必要。
+
+## 対応 Issue（2026-11-17、外部監査レポートを受けて起票）
+
+本監査の残件と、外部監査で新たに見つかった関連指摘は GitHub Issue で追跡する。
+- F5 の残件（永続化失敗時のロールバック）: Issue #1
+- F2/F3/F9/F11 の実機確認、CSP、A 層校正: Issue #13（Phase 4 前提条件チェックリスト: analysis/phase4_preconditions_checklist_2026-11-17.md）
+- 検証ハーネスの所在（本監査が引用したハーネスは app/tests/ に収蔵済み）: Issue #6
+- 外部監査の新規指摘（lowpass の状態乖離、loadUserPresets の検証）: Issues #3, #4
+- 追跡の土台: Issue #14

@@ -20,6 +20,18 @@ ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "analysis" / "four_songs.html"
 BANDS = [125, 250, 500, 1000, 2000, 4000, 8000]
 
+# 引用レジストリ（analysis/citation_discipline.md）: 出典表示には
+# reference_id を併記し、ID がレジストリに無ければ生成を止める。
+_REFS = {}
+with open(ROOT / "analysis" / "evidence_references.csv", encoding="utf-8") as _f:
+    for _row in csv.DictReader(_f):
+        _REFS[_row["reference_id"]] = _row
+
+
+def ref_suffix(reference_id: str) -> str:
+    assert reference_id in _REFS, f"reference_id がレジストリにありません: {reference_id}"
+    return f"reference_id: {reference_id}"
+
 NAMES = {
     "brahms_wiegenlied": ("ブラームスの子守歌", "楽譜は二重チェック済み"),
     "moldau_theme": ("モルダウ主題", "楽譜は二重チェック済み"),
@@ -116,6 +128,8 @@ h2{{font-size:17px}} h3{{font-size:15px;margin:8px 0 2px}}
 
 <p><b>設計の根拠</b>: 伝達曲線は Gerhardt 1990 (ヒツジ実測) の錨 —
 250 Hz 以下 +3.5 dB、それ以上 −6 dB/oct (曲線図は bed_curves.html)。
+引用は {ref_suffix("gerhardt_1990")}、レジストリは
+analysis/evidence_references.csv。
 心音 70 BPM (母体安静時心拍 60–80 の中央、可変パラメータ)、55 Hz は
 実測スタイルの音色。ゲインは試聴で2段階弱めた確定値 (心音 0.10 /
 血流 0.05 / 音楽 3.31 = 統合曲線の挿入損失を実測 ×3.01 で補償)。
@@ -141,7 +155,9 @@ h2{{font-size:17px}} h3{{font-size:15px;margin:8px 0 2px}}
 analysis/four_songs_measurements.csv と four_songs_stats_r.csv、
 伝達曲線の照合は audio/bed_integration_2026-11-17.md。</p>
 </body></html>"""
-    OUT.write_text(doc, encoding="utf-8")
+    _tmp = OUT.with_suffix(".html.tmp")
+    _tmp.write_text(doc, encoding="utf-8")
+    _tmp.replace(OUT)  # 原子的に置き換える（Issue #12）
     print("wrote", OUT)
 
 

@@ -34,6 +34,7 @@ import random
 import sys
 
 from analysis import validate_extraction as ve
+import os
 
 SAMPLE_TARGET_UPPER = 0.05   # ミス率の 95% 上限の目標
 SAMPLE_SEED = 20261113       # 決定的サンプリング用
@@ -128,11 +129,13 @@ def main(argv=None):
         rows = _read_csvs(args.inputs)
         abstracts = ve.load_abstracts(args.bibliography)
         targets = select_targets(rows, abstracts)
-        with open(args.out, "w", newline="", encoding="utf-8") as f:
+        tmp_out = args.out + ".tmp"
+        with open(tmp_out, "w", newline="", encoding="utf-8") as f:
             w = csv.writer(f)
             w.writerow(["PMID", "Reason"])
             for r, reason in targets:
                 w.writerow([(r.get("PMID") or "").strip(), reason])
+        os.replace(tmp_out, args.out)  # 原子的に置き換える（Issue #12）
         print(f"selected {len(targets)} targets -> {args.out}")
         return 0
     first = _read_csvs([args.first])

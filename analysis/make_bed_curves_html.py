@@ -18,6 +18,18 @@ ROOT = Path(__file__).resolve().parent.parent
 CURVES = ROOT / "literature" / "bed_transfer_curves.csv"
 OUT = ROOT / "analysis" / "bed_curves.html"
 
+# 引用レジストリ（analysis/citation_discipline.md）: 出典表示には
+# reference_id を併記し、ID がレジストリに無ければ生成を止める。
+_REFS = {}
+with open(ROOT / "analysis" / "evidence_references.csv", encoding="utf-8") as _f:
+    for _row in csv.DictReader(_f):
+        _REFS[_row["reference_id"]] = _row
+
+
+def ref_suffix(reference_id: str) -> str:
+    assert reference_id in _REFS, f"reference_id がレジストリにありません: {reference_id}"
+    return f"reference_id: {reference_id}"
+
 W, H = 760, 470
 ML, MR, MT, MB = 58, 130, 34, 46
 X0, X1 = 125.0, 4000.0          # Hz, log2 scale
@@ -108,9 +120,9 @@ def main() -> None:
 
     lx = W - MR + 12
     legend = [
-        ("#2456a6", "錨 Gerhardt (ヒツジ)", "250 Hz 以下 +3.5、以上 −6 dB/oct"),
-        ("#2a7f2a", "Richards 1992 (ヒト)", "端点は一次明記、線は計算"),
-        ("#c0392b", "Querleu 1988 (ヒト)", "二次裏付け・一次未確認"),
+        ("#2456a6", "錨 Gerhardt (ヒツジ)", "250 Hz 以下 +3.5、以上 −6 dB/oct / " + ref_suffix("gerhardt_1990")),
+        ("#2a7f2a", "Richards 1992 (ヒト)", "端点は一次明記、線は計算 / " + ref_suffix("richards_1992")),
+        ("#c0392b", "Querleu 1988 (ヒト)", "二次裏付け・一次未確認 / " + ref_suffix("querleu_1988")),
     ]
     ly = MT + 6
     for color, name, note in legend:
@@ -145,9 +157,13 @@ svg{{width:100%;height:auto}}p{{font-size:13px;line-height:1.6;color:#444}}</sty
 不確かさの本体は種差ではなくヒト研究間のばらつき。
 根拠と探索記録: literature/bed_literature_round3_human.md、
 数値: literature/bed_transfer_curves.csv と
-analysis/bed_curve_comparison.csv (Python × R 完全一致)。</p>
+analysis/bed_curve_comparison.csv (Python × R 完全一致)。
+引用レジストリ: analysis/evidence_references.csv
+（各曲線の reference_id は凡例に併記）。</p>
 </body></html>"""
-    OUT.write_text(doc, encoding="utf-8")
+    _tmp = OUT.with_suffix(".html.tmp")
+    _tmp.write_text(doc, encoding="utf-8")
+    _tmp.replace(OUT)  # 原子的に置き換える（Issue #12）
     print("wrote", OUT)
     print("check: anchor(1000) =", anchor(1000), "| richards(1000) =",
           round(richards(1000), 2), "| querleu pts:", quer)

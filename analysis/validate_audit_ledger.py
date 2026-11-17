@@ -12,6 +12,11 @@
 
 問題があれば一覧を表示して終了コード 1、なければ OK を表示して 0。
 台帳の中身（値・判断）は変更しない、読み取り専用の検証。
+
+形式の合否とは別に、実質の進み具合（判断待ちの件数、安全状態が
+未確認のパラメータ、等級が空の件数）を警告として表示する。
+形式 OK が「判断済み」を意味しないことを、出力の上で区別するため
+（GitHub Issue #7）。警告は終了コードに影響しない。
 """
 
 import csv
@@ -98,6 +103,28 @@ def check_references(problems):
             problems.append(f"{REFS.name} {i} 行目: 列数が {len(row)} で見出しの {len(EXPECTED_HEADER)} と一致しません")
 
 
+def substance_warnings():
+    """実質面の未決事項を警告行として返す（合否には影響しない）。"""
+    try:
+        data = json.loads(LEDGER.read_text(encoding="utf-8"))
+        params = data.get("parameters") or []
+    except Exception:
+        return []
+    lines = []
+    pending = [p.get("parameter_id") for p in params if p.get("decision") in ("", "pending")]
+    if pending:
+        lines.append(
+            f"判断待ち (decision=pending) が {len(pending)}/{len(params)} 件あります"
+        )
+    unconfirmed = [p.get("parameter_id") for p in params if p.get("safety_status") == "未確認"]
+    for pid in unconfirmed:
+        lines.append(f"安全状態が未確認のパラメータがあります: {pid}")
+    ungraded = [p.get("parameter_id") for p in params if not p.get("evidence_grade")]
+    if ungraded:
+        lines.append(f"evidence_grade が空のパラメータが {len(ungraded)} 件あります")
+    return lines
+
+
 def main():
     problems = []
     check_ledger(problems)
@@ -108,6 +135,11 @@ def main():
             print(" -", p)
         return 1
     print("OK: acoustic_evidence_audit.json と evidence_references.csv の形式は正しいです")
+    warnings = substance_warnings()
+    if warnings:
+        print("警告（形式ではなく実質の未決事項。判断は人が行う）:")
+        for w in warnings:
+            print(" -", w)
     return 0
 
 

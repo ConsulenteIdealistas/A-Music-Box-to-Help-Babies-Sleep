@@ -62,9 +62,25 @@ def efetch_batch(ids):
     return rows
 
 
+FIELDS = ["PMID", "Title", "Journal", "Year", "Abstract", "Has_Abstract"]
+
+
+def write_csv_atomic(path, rows):
+    """tmp ファイルに書いてから原子的に置き換える（中断しても
+    版の混ざったデータセットが残らないように）。"""
+    tmp = path + ".tmp"
+    with open(tmp, "w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=FIELDS)
+        w.writeheader()
+        w.writerows(rows)
+    os.replace(tmp, path)
+
+
 def main():
     os.makedirs(LIT, exist_ok=True)
-    all_rows = []
+    # 先に全ジャーナル分を取得し終えてから書き出す（取得の途中で
+    # 落ちても、既存のデータセットは無傷なままにする）。
+    fetched = {}
     for key, query in QUERIES.items():
         ids = esearch_ids(query)
         time.sleep(0.4)
@@ -72,20 +88,33 @@ def main():
         for i in range(0, len(ids), 200):
             rows.extend(efetch_batch(ids[i:i + 200]))
             time.sleep(0.4)
+        fetched[key] = rows
+    all_rows = []
+    manifest = {
+        "fetched_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        "source": "PubMed E-utilities (esearch/efetch)",
+        "queries": {},
+    }
+    for key, query in QUERIES.items():
+        rows = fetched[key]
         path = os.path.join(LIT, f"bibliography_{key}.csv")
-        with open(path, "w", newline="", encoding="utf-8") as f:
-            w = csv.DictWriter(f, fieldnames=["PMID", "Title", "Journal", "Year", "Abstract", "Has_Abstract"])
-            w.writeheader()
-            w.writerows(rows)
+        write_csv_atomic(path, rows)
         no_abs = sum(1 for r in rows if r["Has_Abstract"] == "no")
         print(f"{key}: {len(rows)}件 (抄録なし {no_abs}件)")
+        manifest["queries"][key] = {
+            "query": query, "count": len(rows), "no_abstract": no_abs,
+        }
         all_rows.extend(rows)
     path = os.path.join(LIT, "bibliography_all.csv")
-    with open(path, "w", newline="", encoding="utf-8") as f:
-        w = csv.DictWriter(f, fieldnames=["PMID", "Title", "Journal", "Year", "Abstract", "Has_Abstract"])
-        w.writeheader()
-        w.writerows(all_rows)
+    write_csv_atomic(path, all_rows)
+    manifest["total_rows"] = len(all_rows)
+    mpath = os.path.join(LIT, "bibliography_fetch_manifest.json")
+    mtmp = mpath + ".tmp"
+    with open(mtmp, "w", encoding="utf-8") as f:
+        json.dump(manifest, f, ensure_ascii=False, indent=2)
+    os.replace(mtmp, mpath)
     print(f"合計: {len(all_rows)}件 -> {path}")
+    print(f"マニフェスト: {mpath}")
 
 
 if __name__ == "__main__":

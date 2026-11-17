@@ -37,6 +37,7 @@ import argparse
 import csv
 import hashlib
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -181,14 +182,19 @@ def main(argv: list[str] | None = None) -> int:
     args = ap.parse_args(argv)
     rows, manifest = run(args.bibliography, args.pmids)
     fields = ["PMID", "Raw_Text", "Value_Normalized", "Column_Candidate", "Position", "Snippet"]
-    with open(args.out, "w", newline="", encoding="utf-8") as fh:
+    tmp_out = args.out + ".tmp"
+    with open(tmp_out, "w", newline="", encoding="utf-8") as fh:
         w = csv.DictWriter(fh, fieldnames=fields)
         w.writeheader()
         w.writerows(rows)
+    os.replace(tmp_out, args.out)  # 原子的に置き換える（Issue #12）
     if args.manifest:
-        Path(args.manifest).write_text(
+        mp = Path(args.manifest)
+        mtmp = mp.with_suffix(mp.suffix + ".tmp")
+        mtmp.write_text(
             json.dumps(manifest, ensure_ascii=False, indent=1), encoding="utf-8"
         )
+        mtmp.replace(mp)
     print(
         f"scanned {manifest['abstracts_scanned']} abstracts: "
         f"{manifest['candidates_found']} candidates in "
