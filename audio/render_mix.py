@@ -72,6 +72,12 @@ FLOW_CUTOFF_HZ = 400.0
 FLOW_RMS_PER_GAIN = 0.087975
 TRANSFER_KNEE_HZ = 250.0
 SEED = 20261115
+SURGE_SMOOTH_S = 0.025  # surge envelope smoothing (25 ms one-pole).
+                        # The raw surge jumps by 0.442 at each beat
+                        # wrap (measured 2026-11-17 in the SoX bed
+                        # prototype); the smoothing removes that step.
+                        # Same treatment as audio/render_bed_sox.py
+                        # and app/app.js (SURGE_SMOOTH_S).
 
 GAIN_HEART = 0.10  # softened on listening judgement: 0.50 -> 0.32
                    # (2026-11-15) -> 0.20 (2026-11-17, -4 dB) -> 0.10
@@ -131,13 +137,23 @@ def womb_flow(n: int) -> list[float]:
     white = [rng.uniform(-1.0, 1.0) for _ in range(n)]
     smooth = lowpass(white, TRANSFER_KNEE_HZ, passes=1)
     period = 60.0 / HEART_BPM
+    surge_raw = []
+    for i in range(n):
+        t = i / SR
+        phase = ((t - 0.3) % period) / period
+        surge_raw.append(0.55 + 0.45 * math.exp(-phase * 4.0))  # pulse after each beat
+    # Smooth the surge with a 25 ms one-pole (periodic start: the
+    # filter state begins at the last sample, as in render_bed_sox.py).
+    a = 1.0 - math.exp(-1.0 / (SURGE_SMOOTH_S * SR))
+    surge, y = [], surge_raw[-1]
+    for v in surge_raw:
+        y += a * (v - y)
+        surge.append(y)
     out = []
     for i, x in enumerate(smooth):
         t = i / SR
-        phase = ((t - 0.3) % period) / period
-        surge = 0.55 + 0.45 * math.exp(-phase * 4.0)  # pulse after each beat
         swell = 1.0 + 0.10 * math.sin(2 * math.pi * 0.05 * t)
-        out.append(x * surge * swell)
+        out.append(x * surge[i] * swell)
     rms = math.sqrt(sum(x * x for x in out) / len(out))
     scale = FLOW_RMS_PER_GAIN * GAIN_FLOW / rms
     return [x * scale for x in out]
