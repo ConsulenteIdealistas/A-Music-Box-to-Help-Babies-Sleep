@@ -1,20 +1,21 @@
-"""Offline render of the 3-layer mix for audition (PROVISIONAL parameters).
+"""Offline render of the 3-layer mix for audition.
 
 Layers:
   1. Music box  -- the confirmed SuperCollider/Klank render
      (audio/musicbox_supercollider_full.wav), looped with gaps and run
-     through the provisional womb filter.
+     through the integrated womb transfer curve (below).
   2. Heartbeat  -- maternal heartbeat, lub-dub pair of low sine bursts.
-  3. Womb flow  -- brown noise whose amplitude surges with each
-     heartbeat (maternal blood flow is heartbeat-synchronous by design;
-     this is NOT ocean waves). Brown (-6 dB/oct) was adopted on
-     2026-11-17 by the user's listening decision: the extraction could
-     not settle brown vs pink (Attenuation n=5), so the slope is a
-     design judgement, not a literature value -- see
-     audio/noise_target_2026-11-16.md. The flow level is matched to
-     the previous (400 Hz x3 lowpass) flow, so adoption changed only
-     the spectrum. Bed gains were then softened on the user's
-     listening judgement (2026-11-15 and 2026-11-17, -4 dB each step)
+  3. Womb flow  -- noise shaped to the integrated transfer curve
+     (flat at/below 250 Hz, -6 dB/oct above) whose amplitude surges
+     with each heartbeat (maternal blood flow is heartbeat-synchronous
+     by design; this is NOT ocean waves). The curve integrates the
+     two evidence rounds -- see audio/bed_integration_2026-11-17.md:
+     the slope is Gerhardt 1990's stated 6 dB/oct (the same value the
+     user's ear picked as brown in round 1), and the flat low shelf
+     replaces brown's unbounded low-frequency rise. The flow level
+     follows FLOW_RMS_PER_GAIN * GAIN_FLOW, so shaping changes never
+     move the level. Bed gains were softened on the user's listening
+     judgement (2026-11-15: -4 dB; 2026-11-17: -4 dB, then halved)
      because the bed asserted itself too much against the music box.
 
 Parameter bases:
@@ -29,8 +30,14 @@ Parameter bases:
                         have been acceptable); what needed changing
                         was the bed level, not the heartbeat character.
   LUB_DUB_MS = 280      typical systolic interval at rest.
-  WOMB_FILTER_HZ = 1500, 12 dB/oct -- the standing provisional womb
-                        filter for the music-box layer.
+  TRANSFER_KNEE_HZ = 250  the integrated transfer curve's corner
+                        (Gerhardt 1990): flat at/below, -6 dB/oct
+                        above. One one-pole lowpass at this frequency
+                        realizes the curve for both the flow layer
+                        (shaping white noise) and the music-box layer
+                        (replacing the provisional 1500 Hz, 12 dB/oct
+                        womb filter). The curve's +3.5 dB low shelf is
+                        a level offset, absorbed by the layer gains.
   FLOW_CUTOFF_HZ = 400  retired flow shaping (pre-2026-11-17), kept
                         only as the reference definition for
                         FLOW_RMS_PER_GAIN and audio/render_bed_variants.py.
@@ -59,18 +66,23 @@ BEAT_FREQ_HZ = 55.0  # measured-style heartbeat tone (see docstring)
 FLOW_CUTOFF_HZ = 400.0
 # RMS of the retired 400 Hz x3 flow per unit GAIN_FLOW: measured
 # 2026-11-17 as 0.014076 at GAIN_FLOW = 0.16 (same seed and envelope),
-# divided by 0.16. The brown flow is scaled to
-# FLOW_RMS_PER_GAIN * GAIN_FLOW, so GAIN_FLOW sets the level while
-# the spectrum stays brown at any gain.
+# divided by 0.16. The shaped flow is scaled to
+# FLOW_RMS_PER_GAIN * GAIN_FLOW, so GAIN_FLOW sets the level
+# whatever shaping the flow layer uses.
 FLOW_RMS_PER_GAIN = 0.087975
-WOMB_FILTER_HZ = 1500.0
+TRANSFER_KNEE_HZ = 250.0
 SEED = 20261115
 
 GAIN_HEART = 0.10  # softened on listening judgement: 0.50 -> 0.32
                    # (2026-11-15) -> 0.20 (2026-11-17, -4 dB) -> 0.10
                    # (2026-11-17, halved at the user's direction)
 GAIN_FLOW = 0.05  # 0.26 -> 0.16 -> 0.10 -> 0.05, same steps as GAIN_HEART
-GAIN_MUSIC = 1.10
+GAIN_MUSIC = 3.31  # was 1.10 with the provisional 1500 Hz filter.
+                   # Raised 2026-11-17 (x3.01, measured) to compensate
+                   # the integrated transfer curve's insertion loss, so
+                   # the bed/music balance settled by listening
+                   # (bed -10.4 dB vs music, after the halving) is
+                   # preserved while only the shape changes.
 PHRASE_GAP_S = 4.5  # silence between music-box phrases
 
 
@@ -110,17 +122,14 @@ def heartbeat(n: int) -> list[float]:
 
 
 def womb_flow(n: int) -> list[float]:
-    """Brown noise (-6 dB/oct) by leaky integration of white noise,
-    surging with each heartbeat. The shaped flow is scaled to
-    FLOW_RMS_PER_GAIN * GAIN_FLOW, so GAIN_FLOW sets the level and
-    the spectrum stays brown at any gain."""
+    """White noise shaped to the integrated transfer curve (one-pole
+    lowpass at TRANSFER_KNEE_HZ: flat at/below 250 Hz, -6 dB/oct
+    above), surging with each heartbeat. The shaped flow is scaled
+    to FLOW_RMS_PER_GAIN * GAIN_FLOW, so GAIN_FLOW sets the level
+    and the shape stays the integrated curve at any gain."""
     rng = random.Random(SEED)
     white = [rng.uniform(-1.0, 1.0) for _ in range(n)]
-    smooth = []
-    y = 0.0
-    for x in white:
-        y = 0.999 * y + x  # leak keeps the random walk bounded
-        smooth.append(y)
+    smooth = lowpass(white, TRANSFER_KNEE_HZ, passes=1)
     period = 60.0 / HEART_BPM
     out = []
     for i, x in enumerate(smooth):
@@ -146,7 +155,7 @@ def read_wav_mono(path: Path) -> list[float]:
 
 
 def music_box(n: int, phrase: list[float]) -> list[float]:
-    filtered = lowpass(phrase, WOMB_FILTER_HZ, passes=2)  # ~12 dB/oct
+    filtered = lowpass(phrase, TRANSFER_KNEE_HZ, passes=1)  # integrated curve
     out = [0.0] * n
     step = len(filtered) + int(PHRASE_GAP_S * SR)
     pos = int(1.0 * SR)
