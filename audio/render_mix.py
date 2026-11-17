@@ -5,20 +5,32 @@ Layers:
      (audio/musicbox_supercollider_full.wav), looped with gaps and run
      through the provisional womb filter.
   2. Heartbeat  -- maternal heartbeat, lub-dub pair of low sine bursts.
-  3. Womb flow  -- lowpassed noise whose amplitude surges with each
+  3. Womb flow  -- brown noise whose amplitude surges with each
      heartbeat (maternal blood flow is heartbeat-synchronous by design;
-     this is NOT ocean waves).
+     this is NOT ocean waves). Brown (-6 dB/oct) was adopted on
+     2026-11-17 by the user's listening decision: the extraction could
+     not settle brown vs pink (Attenuation n=5), so the slope is a
+     design judgement, not a literature value -- see
+     audio/noise_target_2026-11-16.md. The flow level is matched to
+     the previous (400 Hz x3 lowpass) flow, so adoption changed only
+     the spectrum, not the level.
 
-Every number below is PROVISIONAL and will be replaced by the
-literature-derived values (METHODOLOGY parameter flow) once numeric
-extraction is complete:
+Parameter bases:
   HEART_BPM = 70        midpoint of the typical maternal resting range
-                        60-80; the entrainment curve (85 -> 65) sketched
-                        in app/app.js is a later step, not applied here.
+                        60-80; user decision 2026-11-15: BPM is a
+                        variable parameter, not a fixed value. The
+                        entrainment curve (85 -> 65) sketched in
+                        app/app.js is a later step, not applied here.
+  BEAT_FREQ_HZ = 55     image-based choice (user decision 2026-11-17):
+                        the heartbeat tone does NOT have to reproduce
+                        measured heart-sound spectra; it is set by the
+                        intended womb image and listening impression.
   LUB_DUB_MS = 280      typical systolic interval at rest.
-  FLOW_CUTOFF_HZ = 400  centre of the provisional 200-500 Hz womb band.
   WOMB_FILTER_HZ = 1500, 12 dB/oct -- the standing provisional womb
                         filter for the music-box layer.
+  FLOW_CUTOFF_HZ = 400  retired flow shaping (pre-2026-11-17), kept
+                        only as the reference definition for
+                        FLOW_REF_RMS and audio/render_bed_variants.py.
 Noise uses a fixed seed so anyone re-running this script gets the
 identical render. Python standard library only.
 
@@ -40,8 +52,12 @@ DURATION_S = 60.0
 
 HEART_BPM = 70.0
 LUB_DUB_MS = 280.0
-BEAT_FREQ_HZ = 55.0
+BEAT_FREQ_HZ = 55.0  # image-based (see docstring), not a measured value
 FLOW_CUTOFF_HZ = 400.0
+# RMS of the retired 400 Hz x3 flow (same seed, envelope and gains),
+# measured 2026-11-17. The brown flow is scaled to this so adopting
+# brown changed the spectrum only, not the level.
+FLOW_REF_RMS = 0.014076
 WOMB_FILTER_HZ = 1500.0
 SEED = 20261115
 
@@ -87,9 +103,17 @@ def heartbeat(n: int) -> list[float]:
 
 
 def womb_flow(n: int) -> list[float]:
+    """Brown noise (-6 dB/oct) by leaky integration of white noise,
+    surging with each heartbeat. Scaled to FLOW_REF_RMS so the level
+    matches the retired lowpassed flow; only the spectrum changed
+    when brown was adopted (2026-11-17)."""
     rng = random.Random(SEED)
     white = [rng.uniform(-1.0, 1.0) for _ in range(n)]
-    smooth = lowpass(white, FLOW_CUTOFF_HZ, passes=3)
+    smooth = []
+    y = 0.0
+    for x in white:
+        y = 0.999 * y + x  # leak keeps the random walk bounded
+        smooth.append(y)
     period = 60.0 / HEART_BPM
     out = []
     for i, x in enumerate(smooth):
@@ -98,7 +122,9 @@ def womb_flow(n: int) -> list[float]:
         surge = 0.55 + 0.45 * math.exp(-phase * 4.0)  # pulse after each beat
         swell = 1.0 + 0.10 * math.sin(2 * math.pi * 0.05 * t)
         out.append(x * surge * swell * GAIN_FLOW * 2.2)
-    return out
+    rms = math.sqrt(sum(x * x for x in out) / len(out))
+    scale = FLOW_REF_RMS / rms
+    return [x * scale for x in out]
 
 
 def read_wav_mono(path: Path) -> list[float]:
