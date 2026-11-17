@@ -1,16 +1,36 @@
 "use strict";
 /*
- * lullaby-pwa スケルトン
- * Web Audio API 単体で 3 層（オルゴール / 心音 / さざ波）の
- * グラフとミキサーを配線しただけの器。音源とパラメータは
- * Phase 1（文献レビュー）・Phase 2（音源制作）で差し込む。
+ * A Music Box to Help Babies Sleep — PWA
+ * 3層（オルゴール / 心音 / さざ波=血流ベッド）を Web Audio API で
+ * リアルタイム合成する。音響パラメータは 2026-11-17 に確定した
+ * 設計（audio/render_mix.py のオフライン版と同一）に揃えてある。
  *
- * TODO(Phase 1): 最大音量リミッター値をレビューの安全側統計から設定
- * TODO: エントレインメント減速カーブ（BPM 85 → 65）、キー変更、画面ロック
+ * 確定設計の要点:
+ *   統合伝達曲線 … 250 Hz の1極ローパス（250 Hz 以下は平坦、
+ *     それ以上 −6 dB/oct）。根拠は Gerhardt 1990 の実測
+ *     （audio/bed_integration_2026-11-17.md）。音楽層と血流層の
+ *     両方に同じ曲線を通す。Web Audio の BiquadFilter は2極
+ *     （−12 dB/oct）なので、1極は係数を直接計算して
+ *     IIRFilterNode / オフライン処理で実現する。
+ *   心音 … 55 Hz サインの lub-dub（間隔 280 ms、減衰 exp(−22t)）。
+ *     BPM は可変（既定 70 = 母体安静時心拍 60–80 の中央）。
+ *   血流 … 白色ノイズ → 統合曲線 → 心拍同期の surge
+ *     （0.55 + 0.45·exp(−4·phase)、25 ms で平滑化。オフライン版で
+ *     拍ごとの 0.44 のゲイン段差を測定し除去した形）→
+ *     0.05 Hz の swell（±10%）。
+ *   バランス … スライダ既定位置でオフライン完成ミックスの実測
+ *     比になるよう、各層に設計ゲインを置いた。心音/音楽 −16.7 dB、
+ *     血流/音楽 −26.2 dB（4曲の発音中バランス中央値 −16.3 dB と
+ *     オフライン stem 実測 0.01311 / 0.00439 から導出、
+ *     analysis/four_songs_measurements.csv）。
+ *
+ * TODO: 最大音量リミッター値の確定（安全側統計から）、
+ *   エントレインメント減速カーブ（BPM 85 → 65）、画面ロック。
  *
  * オルゴール音源: audio/render_klank.py で書き出し、audio/make_loop.py で
  * ループ化した WAV を app/assets/ に置く（生成物なのでリポジトリには
- * 含めない）。ループ境界は「無音 → 曲頭のアタック」で、継ぎ目なし。
+ * 含めない）。読み込み時に統合曲線でフィルタした複製を作り、
+ * RMS を揃えてからループ再生する。
  */
 
 const SONGS = [
@@ -20,42 +40,115 @@ const SONGS = [
   { id: "vissi", label: "歌に生き、愛に生き", file: "assets/vissi_darte_klank_loop.wav" },
 ];
 
+// --- 確定設計の定数（出所は冒頭コメント） ---
+const KNEE_HZ = 250;            // 統合伝達曲線の折れ点
+const HEART_FREQ_HZ = 55;       // 心音のサイン周波数
+const LUB_DUB_S = 0.28;         // lub-dub 間隔
+const HEART_DECAY = 22.0;       // 心音エンベロープ exp(-22t)
+const SURGE_BASE = 0.55, SURGE_DEPTH = 0.45, SURGE_RATE = 4.0;
+const SURGE_SMOOTH_S = 0.025;   // surge の平滑化（25 ms）
+const SWELL_HZ = 0.05, SWELL_DEPTH = 0.10;
+const MUSIC_NORM_RMS = 0.10;    // 音楽層の正規化 RMS
+const DESIGN_GAIN_HEART = 0.111; // 心音の設計ゲイン（導出は冒頭）
+const DESIGN_GAIN_FLOW = 0.095;  // 血流の設計ゲイン（同上）
+const MASTER_LEVEL = 0.9;       // TODO: リミッター確定まで従来値
+const FADE_OUT_S = 30;          // タイマー終了前のフェード長
+
 let ctx = null;
-let master, gainMusic, gainHeart, gainWaves;
+let master, gainMusic, gainHeart, gainWaves, surgeNode, heartDesign, flowDesign;
 let heartTimer = null, fadeTimer = null, wavesNodes = null;
 let musicSrc = null;
-const musicBuffers = {}; // id -> AudioBuffer（デコード済みキャッシュ）
+const musicBuffers = {}; // id -> AudioBuffer（フィルタ済み・正規化済み）
 let playing = false;
+let playGen = 0; // 再生世代（停止直後の再開で suspend が競合しないよう）
 
 const $ = (id) => document.getElementById(id);
+
+// 1極ローパスの係数（render_mix.py の one_pole_alpha と同一式）
+function onePoleAlpha(cutoffHz, sampleRate) {
+  return 1.0 - Math.exp(-2.0 * Math.PI * cutoffHz / sampleRate);
+}
+
+// Float32Array に1極ローパスをかける（wrap=true で末尾→先頭を
+// つないで2周し、2周目を返す: ループ境界でフィルタ状態が連続する）
+function lowpassBuffer(data, alpha, wrap) {
+  const out = new Float32Array(data.length);
+  let y = 0;
+  const passes = wrap ? 2 : 1;
+  for (let p = 0; p < passes; p++) {
+    for (let i = 0; i < data.length; i++) {
+      y += alpha * (data[i] - y);
+      if (p === passes - 1) out[i] = y;
+    }
+  }
+  return out;
+}
+
+// surge カーブ（1周期分、25 ms 平滑化済み・周期境界も連続）
+function surgeCurve(points = 128) {
+  const raw = new Float32Array(points);
+  for (let i = 0; i < points; i++) {
+    raw[i] = SURGE_BASE + SURGE_DEPTH * Math.exp(-SURGE_RATE * (i / points));
+  }
+  // 周期信号として平滑化（2周期つないで2周期目を取る）
+  const bpm = Number($("bpm").value);
+  const period = 60 / bpm;
+  const a = 1.0 - Math.exp(-1.0 / (SURGE_SMOOTH_S * (points / period)));
+  const out = new Float32Array(points);
+  let y = raw[points - 1];
+  for (let p = 0; p < 2; p++) {
+    for (let i = 0; i < points; i++) {
+      y += a * (raw[i] - y);
+      if (p === 1) out[i] = y;
+    }
+  }
+  return out;
+}
 
 function buildGraph() {
   ctx = new (window.AudioContext || window.webkitAudioContext)();
   master = ctx.createGain();
-  master.gain.value = 0.9; // TODO: リミッター（Phase 1 で確定）
+  master.gain.value = MASTER_LEVEL;
   master.connect(ctx.destination);
 
   gainMusic = ctx.createGain();
-  gainHeart = ctx.createGain();
-  gainWaves = ctx.createGain();
   gainMusic.connect(master);
-  gainHeart.connect(master);
-  gainWaves.connect(master);
+
+  heartDesign = ctx.createGain();
+  heartDesign.gain.value = DESIGN_GAIN_HEART;
+  gainHeart = ctx.createGain();
+  heartDesign.connect(gainHeart).connect(master);
+
+  // 血流: ノイズ → 統合曲線(IIR 1極) → surge → swell → 設計ゲイン
+  surgeNode = ctx.createGain();
+  surgeNode.gain.value = SURGE_BASE + SURGE_DEPTH;
+  const swellNode = ctx.createGain();
+  swellNode.gain.value = 1.0;
+  const lfo = ctx.createOscillator();
+  lfo.frequency.value = SWELL_HZ;
+  const lfoGain = ctx.createGain();
+  lfoGain.gain.value = SWELL_DEPTH;
+  lfo.connect(lfoGain).connect(swellNode.gain);
+  lfo.start();
+  flowDesign = ctx.createGain();
+  flowDesign.gain.value = DESIGN_GAIN_FLOW;
+  gainWaves = ctx.createGain();
+  surgeNode.connect(swellNode).connect(flowDesign).connect(gainWaves).connect(master);
+  wavesNodes = { swellNode, lfo };
   applyVolumes();
 }
 
-// --- 心音: 低いサイン波の2拍（lub-dub）をスケジュールする仮実装 ---
-function thump(when, freq, peak, dur) {
+// --- 心音: 55 Hz サインの lub-dub（オフライン版と同一波形） ---
+function thump(when, peak) {
   const osc = ctx.createOscillator();
   const g = ctx.createGain();
   osc.type = "sine";
-  osc.frequency.value = freq;
-  g.gain.setValueAtTime(0, when);
-  g.gain.linearRampToValueAtTime(peak, when + 0.02);
-  g.gain.exponentialRampToValueAtTime(0.001, when + dur);
-  osc.connect(g).connect(gainHeart);
+  osc.frequency.value = HEART_FREQ_HZ;
+  g.gain.setValueAtTime(peak, when);
+  g.gain.setTargetAtTime(0, when, 1.0 / HEART_DECAY);
+  osc.connect(g).connect(heartDesign);
   osc.start(when);
-  osc.stop(when + dur + 0.05);
+  osc.stop(when + 0.3);
 }
 function scheduleHeart() {
   clearTimeout(heartTimer);
@@ -63,53 +156,61 @@ function scheduleHeart() {
   const bpm = Number($("bpm").value);
   const period = 60 / bpm;
   const t = ctx.currentTime + 0.05;
-  thump(t, 58, 0.9, 0.18);            // 第1音
-  thump(t + period * 0.28, 50, 0.55, 0.14); // 第2音
+  thump(t, 1.0);                 // lub
+  thump(t + LUB_DUB_S, 0.55);    // dub（280 ms 固定）
+  // 血流の surge を同じ拍に同期させる
+  if (surgeNode) {
+    const curve = surgeCurve();
+    surgeNode.gain.cancelScheduledValues(t);
+    surgeNode.gain.setValueCurveAtTime(curve, t, period);
+  }
   heartTimer = setTimeout(scheduleHeart, period * 1000);
 }
 
-// --- さざ波: ブラウンノイズ → ローパス → ゆっくりした音量ゆらぎ ---
+// --- さざ波（血流）: 白色ノイズを統合曲線で整形してループ ---
 function startWaves() {
-  const len = ctx.sampleRate * 4;
+  const len = ctx.sampleRate * 8;
   const buf = ctx.createBuffer(1, len, ctx.sampleRate);
-  const d = buf.getChannelData(0);
-  let last = 0;
-  for (let i = 0; i < len; i++) {
-    const white = Math.random() * 2 - 1;
-    last = (last + 0.02 * white) / 1.02;
-    d[i] = last * 3.2;
+  const white = new Float32Array(len);
+  for (let i = 0; i < len; i++) white[i] = Math.random() * 2 - 1;
+  const shaped = lowpassBuffer(white, onePoleAlpha(KNEE_HZ, ctx.sampleRate), true);
+  // ループ境界の波形段差を 50 ms クロスフェードで消す
+  const xf = Math.floor(ctx.sampleRate * 0.05);
+  for (let i = 0; i < xf; i++) {
+    const k = i / xf;
+    shaped[i] = shaped[i] * k + shaped[len - xf + i] * (1 - k);
   }
+  buf.getChannelData(0).set(shaped);
   const src = ctx.createBufferSource();
   src.buffer = buf;
   src.loop = true;
-  const lpf = ctx.createBiquadFilter();
-  lpf.type = "lowpass";
-  lpf.frequency.value = 500; // DESIGN.md §2: 200〜500Hz 中心（仮説値）
-  const lfo = ctx.createOscillator();
-  lfo.frequency.value = 0.08; // 血流音に近い周期的なゆらぎ（仮）
-  const lfoGain = ctx.createGain();
-  lfoGain.gain.value = 0.25;
-  const swell = ctx.createGain();
-  swell.gain.value = 0.75;
-  lfo.connect(lfoGain).connect(swell.gain);
-  src.connect(lpf).connect(swell).connect(gainWaves);
+  src.connect(surgeNode);
   src.start();
-  lfo.start();
-  wavesNodes = { src, lfo };
+  wavesNodes.src = src;
 }
 function stopWaves() {
-  if (!wavesNodes) return;
-  try { wavesNodes.src.stop(); wavesNodes.lfo.stop(); } catch (_) {}
-  wavesNodes = null;
+  if (wavesNodes && wavesNodes.src) {
+    try { wavesNodes.src.stop(); } catch (_) {}
+    wavesNodes.src = null;
+  }
 }
 
-// --- オルゴール: ループ WAV を BufferSource(loop=true) で再生 ---
+// --- オルゴール: 読み込み時に統合曲線を適用し RMS を正規化 ---
 async function loadSong(id) {
   if (musicBuffers[id]) return musicBuffers[id];
   const song = SONGS.find((s) => s.id === id);
   const res = await fetch(song.file);
   if (!res.ok) throw new Error("fetch failed: " + song.file);
-  const buf = await ctx.decodeAudioData(await res.arrayBuffer());
+  const raw = await ctx.decodeAudioData(await res.arrayBuffer());
+  const src = raw.getChannelData(0);
+  const filtered = lowpassBuffer(src, onePoleAlpha(KNEE_HZ, ctx.sampleRate), true);
+  let sum = 0;
+  for (let i = 0; i < filtered.length; i++) sum += filtered[i] * filtered[i];
+  const rms = Math.sqrt(sum / filtered.length);
+  const norm = MUSIC_NORM_RMS / Math.max(rms, 1e-6);
+  const buf = ctx.createBuffer(1, filtered.length, ctx.sampleRate);
+  const d = buf.getChannelData(0);
+  for (let i = 0; i < filtered.length; i++) d[i] = filtered[i] * norm;
   musicBuffers[id] = buf;
   return buf;
 }
@@ -143,23 +244,39 @@ function applyVolumes() {
   gainWaves.gain.value = $("volWaves").value / 100;
 }
 
+// なだらかなフェード曲線（raised cosine: 両端で傾き 0）
+function fadeCurve(points = 32) {
+  const c = new Float32Array(points);
+  for (let i = 0; i < points; i++) {
+    c[i] = 0.5 * (1 + Math.cos(Math.PI * (i / (points - 1))));
+  }
+  return c;
+}
+
 function startFadeOut(minutes) {
   clearTimeout(fadeTimer);
   if (!minutes) return;
   fadeTimer = setTimeout(() => {
+    if (!ctx || !playing) return;
     const t = ctx.currentTime;
+    const curve = fadeCurve();
+    const scaled = new Float32Array(curve.length);
+    for (let i = 0; i < curve.length; i++) scaled[i] = curve[i] * master.gain.value;
     master.gain.cancelScheduledValues(t);
-    master.gain.setValueAtTime(master.gain.value, t);
-    master.gain.linearRampToValueAtTime(0, t + 30); // 終了30秒前からフェード
-    setTimeout(stop, 31000);
-  }, (minutes * 60 - 30) * 1000);
+    master.gain.setValueCurveAtTime(scaled, t, FADE_OUT_S);
+    setTimeout(stop, (FADE_OUT_S + 1) * 1000);
+  }, (minutes * 60 - FADE_OUT_S) * 1000);
 }
 
 async function play() {
   if (!ctx) buildGraph();
   await ctx.resume();
   playing = true;
-  master.gain.value = 0.9;
+  playGen++;
+  const t = ctx.currentTime;
+  master.gain.cancelScheduledValues(t);
+  master.gain.setValueAtTime(0, t);
+  master.gain.linearRampToValueAtTime(MASTER_LEVEL, t + 1.0); // 1秒フェードイン
   scheduleHeart();
   startWaves();
   startMusic();
@@ -167,12 +284,27 @@ async function play() {
   $("playBtn").textContent = "■ 停止";
 }
 function stop() {
+  if (!playing) return;
   playing = false;
   clearTimeout(heartTimer);
   clearTimeout(fadeTimer);
-  stopWaves();
-  stopMusic();
-  if (ctx) ctx.suspend();
+  // 音源はフェードが終わってから止める（鳴っている途中で切らない）
+  const musicToStop = musicSrc;
+  musicSrc = null;
+  const wavesToStop = wavesNodes && wavesNodes.src;
+  if (wavesNodes) wavesNodes.src = null;
+  if (ctx && ctx.state === "running") {
+    const t = ctx.currentTime;
+    master.gain.cancelScheduledValues(t);
+    master.gain.setTargetAtTime(0, t, 0.2); // 0.8 秒ほどで消える
+    const c = ctx;
+    const gen = playGen;
+    setTimeout(() => {
+      if (musicToStop) { try { musicToStop.stop(); } catch (_) {} }
+      if (wavesToStop) { try { wavesToStop.stop(); } catch (_) {} }
+      if (playGen === gen && !playing) c.suspend();
+    }, 900);
+  }
   $("playBtn").textContent = "▶ 再生";
 }
 

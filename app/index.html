@@ -11,7 +11,7 @@
 <body>
 <main>
   <h1>A Music Box to Help Babies Sleep</h1>
-  <p class="note">開発用スケルトン — 音響パラメータは文献レビュー（Phase 1）で確定します。</p>
+  <p class="note">音響パラメータは確定設計（統合伝達曲線・心音 55 Hz・試聴で確定したバランス）を反映済み。スライダは全て 80 が設計バランス。</p>
 
   <button id="playBtn" class="play" type="button">▶ 再生</button>
 
@@ -33,11 +33,11 @@
 
   <section>
     <label for="volMusic">オルゴール</label>
-    <input id="volMusic" type="range" min="0" max="100" value="60">
+    <input id="volMusic" type="range" min="0" max="100" value="80">
     <label for="volHeart">心音</label>
-    <input id="volHeart" type="range" min="0" max="100" value="70">
+    <input id="volHeart" type="range" min="0" max="100" value="80">
     <label for="volWaves">さざ波</label>
-    <input id="volWaves" type="range" min="0" max="100" value="50">
+    <input id="volWaves" type="range" min="0" max="100" value="80">
   </section>
 
   <section>
