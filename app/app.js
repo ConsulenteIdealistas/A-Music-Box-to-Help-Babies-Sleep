@@ -5,6 +5,10 @@
  * リアルタイム合成する。音響パラメータは 2026-11-17 に確定した
  * 設計（audio/render_mix.py のオフライン版と同一）に揃えてある。
  *
+ * 基本設計思想（DESIGN.md）: 同じ入力には同じ出力（決定性）、
+ * パラメータは独立・協調制御、変化はイージングで滑らかに、
+ * 確率的な揺らぎは入れない、制御は事前定義した数理モデルのみ。
+ *
  * 確定設計の要点:
  *   統合伝達曲線 … 250 Hz の1極ローパス（250 Hz 以下は平坦、
  *     それ以上 −6 dB/oct）。根拠は Gerhardt 1990 の実測
@@ -53,6 +57,20 @@ const DESIGN_GAIN_HEART = 0.111; // 心音の設計ゲイン（導出は冒頭�
 const DESIGN_GAIN_FLOW = 0.095;  // 血流の設計ゲイン（同上）
 const MASTER_LEVEL = 0.9;       // TODO: リミッター確定まで従来値
 const FADE_OUT_S = 30;          // タイマー終了前のフェード長
+const SEED = 20261115;          // 決定性のためノイズも種固定（オフライン版と同値）
+const VOLUME_EASE_S = 0.05;     // スライダ変更のイージング時定数
+
+// 種固定 PRNG（mulberry32）: 開くたびに同じノイズ波形にする
+function mulberry32(seed) {
+  let a = seed >>> 0;
+  return function () {
+    a = (a + 0x6D2B79F5) >>> 0;
+    let t = a;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
 
 let ctx = null;
 let master, gainMusic, gainHeart, gainWaves, surgeNode, heartDesign, flowDesign;
@@ -172,7 +190,8 @@ function startWaves() {
   const len = ctx.sampleRate * 8;
   const buf = ctx.createBuffer(1, len, ctx.sampleRate);
   const white = new Float32Array(len);
-  for (let i = 0; i < len; i++) white[i] = Math.random() * 2 - 1;
+  const rng = mulberry32(SEED);
+  for (let i = 0; i < len; i++) white[i] = rng() * 2 - 1;
   const shaped = lowpassBuffer(white, onePoleAlpha(KNEE_HZ, ctx.sampleRate), true);
   // ループ境界の波形段差を 50 ms クロスフェードで消す
   const xf = Math.floor(ctx.sampleRate * 0.05);
@@ -239,9 +258,11 @@ function stopMusic() {
 
 function applyVolumes() {
   if (!ctx) return;
-  gainMusic.gain.value = $("volMusic").value / 100;
-  gainHeart.gain.value = $("volHeart").value / 100;
-  gainWaves.gain.value = $("volWaves").value / 100;
+  // スライダ変更もイージングで滑らかに（基本設計思想 3）
+  const t = ctx.currentTime;
+  gainMusic.gain.setTargetAtTime($("volMusic").value / 100, t, VOLUME_EASE_S);
+  gainHeart.gain.setTargetAtTime($("volHeart").value / 100, t, VOLUME_EASE_S);
+  gainWaves.gain.setTargetAtTime($("volWaves").value / 100, t, VOLUME_EASE_S);
 }
 
 // なだらかなフェード曲線（raised cosine: 両端で傾き 0）
