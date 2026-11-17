@@ -226,15 +226,17 @@ dBTP は全曲ともサンプルピークと 0.05 dB 以内で一致した。
   機器への具体的な dB 上限は示していないとされる（二次情報）。
   原著は未読
 
-### 外部指標の引用規律（TRL の規約に揃える）
+### 外部指標の引用規律
 
-外部指標・文献の引用は、成熟している TRL 側の運用に揃える。
+外部指標・文献の引用は、analysis/citation_discipline.md の
+規律に従う（あちらが正本）。要点:
 
-- 外部ソースは中央レジストリに登録する（TRL の sources.json に
-  相当するのが analysis/evidence_references.csv）
+- 引用は先に中央レジストリ（analysis/evidence_references.csv）
+  へ登録する。未登録の外部数値は書かない
 - 出所ごとの適用条件（測定条件・対象・限界）を必ず併記する
 - 照合状態と日付はレコード自身が持つ（verification_status /
-  verified_on 列。TRL の出典明記＋ schema_version の考え方）
-- 照合状態の語彙: primary_verified（一次源で照合済み）/
-  secondary_corroborated（独立した二次源で一致）/
-  existence_confirmed（存在のみ確認）/ unverified（未照合）
+  verified_on）。状態によって使える範囲が決まる:
+  設計値の錨に使えるのは primary_verified のみで、
+  secondary_corroborated は比較と文脈付けに限る
+- 他の文脈の基準値を借りる場合は借用元と文脈の差を明記し、
+  合否基準に使うなら測定前に借用と明記して固定する
