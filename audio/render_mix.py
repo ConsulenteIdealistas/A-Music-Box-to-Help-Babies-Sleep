@@ -1,5 +1,13 @@
 """Offline render of the 3-layer mix for audition.
 
+CANONICAL PIPELINE (user decision 2026-11-18): this script is the
+single source of the deliverable mixes and bed. The SoX variants
+(audio/render_bed_sox.py, audio/render_mixes_sox.py) are retained
+as an independent cross-check only; their outputs are never the
+deliverables. The bed fades that originated in the SoX recipe were
+ported here (FADE_IN_S / FADE_OUT_S below), so the canonical
+render carries them natively.
+
 Layers:
   1. Music box  -- the confirmed SuperCollider/Klank render
      (audio/musicbox_supercollider_full.wav), looped with gaps and run
@@ -41,11 +49,22 @@ Parameter bases:
   FLOW_CUTOFF_HZ = 400  retired flow shaping (pre-2026-11-17), kept
                         only as the reference definition for
                         FLOW_RMS_PER_GAIN and audio/render_bed_variants.py.
+  FADE_IN_S = 2.0, FADE_OUT_S = 3.0  linear fades on the bed
+                        (heartbeat + flow), adopted from the SoX bed
+                        recipe (audio/render_bed_sox.py, `fade t 2 0 3`)
+                        so the bed neither starts nor stops abruptly.
+                        The SoX 't' shape was measured 2026-11-18 to be
+                        exactly linear, so a linear ramp reproduces it.
+                        Applied to the bed only, as in the SoX chain;
+                        the music stem keeps its own 1 s offset.
 Noise uses a fixed seed so anyone re-running this script gets the
 identical render. Python standard library only.
 
 Usage: python -m audio.render_mix --out-dir <dir>
 Outputs: mix_3layer.wav, bed_only.wav (heartbeat + flow).
+With --phrases-dir <dir>: renders bed_only.wav plus one deliverable
+mix_<song>.wav per <song>_klank.wav phrase found in <dir> (the
+four-song deliverable set), instead of mix_3layer.wav.
 """
 
 from __future__ import annotations
@@ -90,6 +109,8 @@ GAIN_MUSIC = 3.31  # was 1.10 with the provisional 1500 Hz filter.
                    # (bed -10.4 dB vs music, after the halving) is
                    # preserved while only the shape changes.
 PHRASE_GAP_S = 4.5  # silence between music-box phrases
+FADE_IN_S = 2.0   # bed fade-in (linear), from the SoX bed recipe
+FADE_OUT_S = 3.0  # bed fade-out (linear), same source; see docstring
 
 
 def one_pole_alpha(cutoff_hz: float) -> float:
@@ -159,6 +180,22 @@ def womb_flow(n: int) -> list[float]:
     return [x * scale for x in out]
 
 
+def bed(n: int) -> list[float]:
+    """The canonical bed: heartbeat + womb flow with the linear
+    FADE_IN_S / FADE_OUT_S fades applied (the fades live in the bed
+    only, exactly as in the SoX recipe they were adopted from).
+    Every consumer that needs the bed as it appears in the mixes
+    (e.g. analysis/measure_four_songs.py) must use this function,
+    never an unfaded heartbeat + flow sum."""
+    out = [a + b for a, b in zip(heartbeat(n), womb_flow(n))]
+    total = n / SR
+    for i in range(n):
+        t = i / SR
+        g = min(1.0, t / FADE_IN_S, (total - t) / FADE_OUT_S)
+        out[i] *= g
+    return out
+
+
 def read_wav_mono(path: Path) -> list[float]:
     with wave.open(str(path), "rb") as w:
         assert w.getsampwidth() == 2 and w.getframerate() == SR
@@ -205,16 +242,34 @@ def main() -> None:
         "--music",
         default=str(Path(__file__).with_name("musicbox_supercollider_full.wav")),
     )
+    ap.add_argument(
+        "--phrases-dir",
+        default=None,
+        help="render the deliverable set: bed_only.wav plus one "
+             "mix_<song>.wav per <song>_klank.wav in this directory",
+    )
     args = ap.parse_args()
     out_dir = Path(args.out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     n = int(DURATION_S * SR)
-    bed = [a + b for a, b in zip(heartbeat(n), womb_flow(n))]
-    phrase = read_wav_mono(Path(args.music))
-    mix = [a + b for a, b in zip(bed, music_box(n, phrase))]
-    write_wav(out_dir / "bed_only.wav", bed)
-    write_wav(out_dir / "mix_3layer.wav", mix)
-    print(f"wrote {out_dir}/mix_3layer.wav and bed_only.wav ({DURATION_S:.0f}s each)")
+    bed_samples = bed(n)
+    write_wav(out_dir / "bed_only.wav", bed_samples)
+    if args.phrases_dir:
+        phrases = sorted(Path(args.phrases_dir).glob("*_klank.wav"))
+        if not phrases:
+            raise SystemExit(f"no *_klank.wav phrases in {args.phrases_dir}")
+        for p in phrases:
+            song = p.name[: -len("_klank.wav")]
+            phrase = read_wav_mono(p)
+            mix = [a + b for a, b in zip(bed_samples, music_box(n, phrase))]
+            write_wav(out_dir / f"mix_{song}.wav", mix)
+            print(f"wrote {out_dir}/mix_{song}.wav ({DURATION_S:.0f}s)")
+        print(f"wrote {out_dir}/bed_only.wav ({DURATION_S:.0f}s)")
+    else:
+        phrase = read_wav_mono(Path(args.music))
+        mix = [a + b for a, b in zip(bed_samples, music_box(n, phrase))]
+        write_wav(out_dir / "mix_3layer.wav", mix)
+        print(f"wrote {out_dir}/mix_3layer.wav and bed_only.wav ({DURATION_S:.0f}s each)")
 
 
 if __name__ == "__main__":

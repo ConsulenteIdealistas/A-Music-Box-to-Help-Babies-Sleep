@@ -1,5 +1,13 @@
 """Bed prototype with SoX doing what SoX can do (2026-11-17).
 
+STATUS (2026-11-18): cross-check only. The canonical pipeline is
+audio/render_mix.py (user decision 2026-11-18: Python is the single
+source of the deliverable mixes and bed). The bed fades introduced
+here were ported into render_mix.py, so this script's remaining
+role is to verify that an independent shaping/mixdown path (SoX
+`lowpass -1 250`, `sox -m`) agrees with the canonical render.
+Its outputs are never the deliverables.
+
 Motivation (user): let SoX handle the parts of the heartbeat/flow
 mix it is good at, and make the bed smoother. Division of labour:
 

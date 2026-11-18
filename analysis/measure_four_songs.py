@@ -34,7 +34,7 @@ import numpy as np
 
 from analysis.bed_integration import (BAND_CENTERS, avg_power_spectrum,
                                       band_levels, metrics, read_wav_mono)
-from audio.render_mix import SR, heartbeat, music_box, womb_flow
+from audio.render_mix import SR, bed, music_box
 
 ROOT = Path(__file__).resolve().parent.parent
 FILES = Path.home() / "workspace" / "your_files" / "lullaby-4songs"
@@ -60,8 +60,7 @@ def rms(x: np.ndarray) -> float:
 
 def main() -> None:
     n = int(60.0 * SR)
-    bed = np.array(heartbeat(n)) + np.array(womb_flow(n))
-    bed_rms = rms(bed)
+    bed_rms = rms(np.array(bed(n)))  # canonical bed (fades included)
     rows = []
     for name in SONGS:
         raw_path = FILES / "klank" / f"{name}_klank.wav"

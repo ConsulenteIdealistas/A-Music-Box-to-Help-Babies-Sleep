@@ -1,6 +1,12 @@
 """Full mixes on the SoX bed (2026-11-17, expanding the Brahms
 prototype in audio/render_bed_sox.py to all four songs).
 
+STATUS (2026-11-18): cross-check only. The canonical pipeline is
+audio/render_mix.py (user decision 2026-11-18: Python is the single
+source of the deliverable mixes and bed). These SoX mixes exist to
+verify the canonical renders against an independent mixdown path;
+they are never the deliverables.
+
 Recipe (identical for every song, Brahms included):
   bed    -- bed_sox.wav from audio/render_bed_sox.py (SoX-shaped
             flow + unchanged heartbeat stem, SoX mixdown, 2 s / 3 s
@@ -21,8 +27,11 @@ Recipe (identical for every song, Brahms included):
 Verification built in: the Brahms mix is rebuilt and compared
 against the prototype file (peak / RMS / max sample difference),
 and every mix is compared against the Python-bed mix of the same
-song. The SoX bed differs from the Python bed only by the surge
-smoothing and the fades, so the mixes should agree closely.
+song. The surge smoothing (2026-11-17) and the bed fades
+(2026-11-18) were both ported back into render_mix.py, so the beds
+now differ only in the shaping/mixdown implementation (SoX
+`lowpass -1 250` and `sox -m` vs the Python one-pole and sum),
+and the mixes should agree closely.
 
 Usage: python -m audio.render_mixes_sox --dir <lullaby-4songs dir>
 Expects <dir>/bed_sox.wav, <dir>/klank/<song>_klank.wav and the

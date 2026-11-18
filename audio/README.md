@@ -25,3 +25,13 @@ SuperCollider + Klank（共振器バンクによる櫛歯モデル）が最も�
 血流層と音楽層の両方に同じ曲線を通す。根拠と経緯は
 `bed_integration_2026-11-17.md`。書き出しは mix_3layer.wav
 （3層）と bed_only.wav（心音＋血流のみ）の60秒。
+
+正本の指定（2026-11-18、ユーザーの決定）: 完成ミックスとベッドの
+正本パイプラインは `render_mix.py`（Python）に一本化した。
+4曲の完成品セットは `python -m audio.render_mix --out-dir <dir>
+--phrases-dir <klank フレーズの dir>` で生成する（bed_only.wav と
+mix_<曲>.wav ×4）。SoX 系（`render_bed_sox.py` /
+`render_mixes_sox.py`）は独立した整形・ミックス経路による
+相互検証専用で、その出力は完成品にしない。SoX 側で生まれた
+ベッドのフェード（イン 2 秒／アウト 3 秒、直線）は render_mix.py
+に取り込み済みで、正本のベッドも同じフェードを持つ。
