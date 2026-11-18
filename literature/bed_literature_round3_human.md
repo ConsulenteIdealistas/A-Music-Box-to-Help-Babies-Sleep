@@ -17,7 +17,7 @@ numbers are NOT adopted as extracted data.
 - **Not obtained.** The journal is paywalled (LWW); no open author manuscript
   or PDF was found. Searches surfaced only the abstract (already extracted in
   round 2) and secondary discussions quoting the same two endpoints.
-- One additional detail circulates secondarily: Moon & Fifer 1996
+- One additional detail circulates secondarily: Spence & Freeman 1996
   (Infant Behav Dev 19:199-212) write that in Richards et al. 1992
   "one-third-octave bands with center frequencies below 250 Hz were enhanced
   up to 5 dB" and that the maternal voice was measured at 77 dB in utero,
@@ -46,7 +46,7 @@ numbers are NOT adopted as extracted data.
     head at the beginning of labor and after amniotomy, Querleu et al.
     (1988) recorded an attenuation of 2 dB at 250 Hz, 14 dB at 500 Hz,
     20 dB at 1000 Hz, and 26 dB at 2000 Hz."
-  - Moon & Fifer 1996 attribute two of the points to Querleu et al. 1981:
+  - Spence & Freeman 1996 attribute two of the points to Querleu et al. 1981:
     a 250 Hz tone attenuated 2 dB and a 1000 Hz tone attenuated 20 dB.
   - Busnel, Granier-Deferre & Lecanuet, "Fetal audition" (Ann NY Acad Sci)
     synthesize the group's human recordings as: "Pressure loss is
@@ -80,3 +80,19 @@ numbers are NOT adopted as extracted data.
   steeper), and the Querleu points themselves run at 6 dB/oct above
   500 Hz — the same slope as the anchor. See the round-3 section of
   audio/bed_integration_2026-11-17.md for the numbers.
+
+## Correction (2026-11-18)
+
+Earlier versions of this memo attributed the statements in §1–§2 to
+"Moon & Fifer 1996". That attribution was wrong: the document read in
+round 3 was Spence & Freeman, "Newborn Infants Prefer the Maternal
+Low-Pass Filtered Voice, But Not the Maternal Whispered Voice",
+Infant Behav Dev 19:199-212 (1996), DOI 10.1016/S0163-6383(96)90019-3.
+Verified 2026-11-18 against the publicly available scan (Docsity):
+authors (Melanie J. Spence and Mark S. Freeman) and title on p.199,
+and both passages quoted in §1–§2 present verbatim on p.200. The
+likely source of the confusion is the DeCasper & Fifer (1980)
+citation on p.199 and the topical closeness. The attributions in
+§1–§2 have been corrected in place; no values or conclusions change.
+Registry: spence_freeman_1996 (the old ID moon_fifer_1996 is retired
+and will not be reused).
