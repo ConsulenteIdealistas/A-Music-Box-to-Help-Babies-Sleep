@@ -17,7 +17,7 @@
       "source_doi": "",
       "source_url": "",
       "source_conditions": "",
-      "applicability": " 安全側の文脈付けに使う erbele_2024 / aap_2023 はいずれも secondary_corroborated（一次未確認）であり、本値の根拠（錨）には 使わない。本値の安全側の裏付けは合否基準の事前登録（Issue #8）と A 層実測に置く。",
+      "applicability": " 安全側の文脈付けに使う erbele_2024 は一次抄録確認済み（全文未取得）、aap_2023 は secondary_corroborated（一次未確認）であり、いずれも、本値の根拠（錨）には 使わない。本値の安全側の裏付けは合否基準の事前登録（Issue #8）と A 層実測に置く。",
       "safety_status": "未確認",
       "decision": "pending",
       "decision_reason": "",
