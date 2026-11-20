@@ -362,3 +362,27 @@ analysis/acoustic_evidence_audit.json の24パラメータについて、
   アプリ側はループ WAV の再生であり、本パラメータは使われて
   いない（適用範囲は試聴レンダー限定）。
 - 未解決: 4.5 秒の根拠はリポジトリ内に無い。
+
+## 訂正（2026-11-20）: erbele_2024 の帰属誤り
+
+- 本ノートの master_limit 節で「Erbele 2024（二次裏付け）」として
+  引いた analysis/evidence_references.csv の erbele_2024 行は、
+  題名・著者・内容を取り違えていた。Issue #125 の指摘で判明し、
+  レジストリ側はコミット ac10094 で訂正済み。
+- 正しい出典: De Jong RW, Davis GS, Chelf CJ, Marinelli JP,
+  Erbele ID, Bowe SN. "Continuous white noise exposure during
+  sleep and childhood development: A scoping review."
+  Sleep Medicine 2024;119:88-94. DOI 10.1016/j.sleep.2024.04.006、
+  PMID 38663282。照合状態は primary_verified（抄録照合、全文は
+  未取得）。
+- 従来の記述にあった「既存データの再解析（24 機種と 6 アプリ）」
+  「著者らの推奨は約 60 dBA」は、本論文の抄録に存在しない。
+  analysis/acoustic_evidence_audit_plan_2026-11-17.md の外部照合
+  記録にある「報道3件以上で骨子一致」という判断も誤りだった
+  （報道側の混同を論文の骨子として扱ってしまった）。
+- 影響: erbele_2024 は master_limit の根拠ではなく関連資料の
+  位置づけだったため、本ノートの各パラメータの位置づけと
+  設計値への影響はない。ただし同じ誤った帰属は DESIGN.md の
+  CONF-030 決定表（合格上限の候補2）と
+  analysis/pass_criteria_draft_2026-11-17.md に現行の根拠として
+  残っている。
