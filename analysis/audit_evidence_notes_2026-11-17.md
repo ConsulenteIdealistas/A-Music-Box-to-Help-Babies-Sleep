@@ -32,9 +32,9 @@ analysis/acoustic_evidence_audit.json の24パラメータについて、
 
 ## preset_soothe_decel（減速 180 秒）
 
-- リポジトリ内の根拠: DESIGN.md §5 のプロファイル定義
+- リポジトリ内の根拠: DESIGN.md §10 のプロファイル定義
   「BPM 85〜90 + 強めのさざ波で開始し、数分で BPM 65 へ減速」
-  と §1 のエントレインメント記述が qualitative な出所。
+  と §6 のエントレインメント記述が qualitative な出所。
   app/presets.json の当該プリセット説明にも「『数分』は仮に
   180 秒とした仮置き」と明記。audio/provisional_values_2026-11-17.md
   項目2も同じ整理（開始 BPM 88 は 85〜90 の中央という規則由来で
@@ -58,7 +58,7 @@ analysis/acoustic_evidence_audit.json の24パラメータについて、
 
 ## preset_soothe_waves（さざ波 100）
 
-- リポジトリ内の根拠: DESIGN.md §5 の「強めのさざ波」という
+- リポジトリ内の根拠: DESIGN.md §10 の「強めのさざ波」という
   qualitative な記述が出所。app/presets.json の説明に「さざ波
   最大で開始」とあり、audio/provisional_values_2026-11-17.md
   項目2は「『強め』を最大で解釈」と整理している。
@@ -73,7 +73,7 @@ analysis/acoustic_evidence_audit.json の24パラメータについて、
 
 ## preset_sleep_lowpass（入眠のローパス、数値なし）
 
-- リポジトリ内の根拠: DESIGN.md §5 の「ローパス深め」という
+- リポジトリ内の根拠: DESIGN.md §10 の「ローパス深め」という
   記述のみで、数値は無い。app/presets.json の入眠プリセットは
   本項目を省略し、説明文に「数値が確定するまで変更しない」と
   明記。比較の基準になる現行値は、統合伝達曲線の 250 Hz
@@ -88,7 +88,7 @@ analysis/acoustic_evidence_audit.json の24パラメータについて、
 
 ## preset_deepsleep_level（深い睡眠維持の音量、数値なし）
 
-- リポジトリ内の根拠: DESIGN.md §5 の「心音＋さざ波のみ
+- リポジトリ内の根拠: DESIGN.md §10 の「心音＋さざ波のみ
   極小音量」という記述のみ。app/presets.json の当該プリセットは
   音楽 0 だけを設定し、心音・さざ波は変更しない旨を説明文に
   明記。audio/provisional_values_2026-11-17.md 項目4も同じ整理。
@@ -100,7 +100,7 @@ analysis/acoustic_evidence_audit.json の24パラメータについて、
 
 ## design_velocity_range（ベロシティ 45〜60）
 
-- リポジトリ内の根拠: DESIGN.md §3 の「ベロシティレンジを
+- リポジトリ内の根拠: DESIGN.md §8 の「ベロシティレンジを
   極限まで圧縮（例: 45〜60）し、強弱の予測不能な変化をなくす」
   という初期仮説のみ。audio/provisional_values_2026-11-17.md
   項目5が「未実装のまま残存」と明記。
@@ -115,8 +115,8 @@ analysis/acoustic_evidence_audit.json の24パラメータについて、
 
 ## design_reverb_decay（リバーブ Decay 0.8〜1.2 秒）
 
-- リポジトリ内の根拠: DESIGN.md §3 の「リバーブは短いルーム
-  （Decay 0.8〜1.2 秒）を薄く」という初期仮説と、§0 の仮説
+- リポジトリ内の根拠: DESIGN.md §8 の「リバーブは短いルーム
+  （Decay 0.8〜1.2 秒）を薄く」という初期仮説と、§5 の仮説
   「短い残響＝広い空間を感じさせない」が動機。開発フェーズでは
   Phase 2 の項目。app/presets.json では reverb は空 {} の形式
   のみで、DESIGN.md のプリセット形式メモにも「Phase 2 で実装
@@ -132,7 +132,7 @@ analysis/acoustic_evidence_audit.json の24パラメータについて、
 
 ## design_pitch_range（音域 C3〜C5）
 
-- リポジトリ内の根拠: DESIGN.md §3 の「音域は C3〜C5 程度に
+- リポジトリ内の根拠: DESIGN.md §8 の「音域は C3〜C5 程度に
   収め、密集配置で『包まれた』響きにする」という初期仮説。
   楽譜の正本は audio/scores/*.musicxml で、audio/SONGS.md に
   曲ごとの照合記録がある（モルダウは「全音・リズム・音域が
@@ -146,7 +146,7 @@ analysis/acoustic_evidence_audit.json の24パラメータについて、
 
 ## design_band_pocket（帯域ポケット −2〜−3 dB）
 
-- リポジトリ内の根拠: DESIGN.md §3（さざ波トラック）の
+- リポジトリ内の根拠: DESIGN.md §8（さざ波トラック）の
   「オルゴールの帯域（300〜400 Hz 付近）と被る部分は −2〜3 dB
   削ってポケットを作る」という初期仮説のみ。
   audio/provisional_values_2026-11-17.md 項目5にも初期仮説値
@@ -198,7 +198,7 @@ analysis/acoustic_evidence_audit.json の24パラメータについて、
 
 - リポジトリ内の根拠: audio/render_mix.py の womb_flow が式の
   正本で、血流が心拍同期であることの生理的な動機は DESIGN.md
-  §2 にある。audio/provisional_values_2026-11-17.md 項目8は
+  §7 にある。audio/provisional_values_2026-11-17.md 項目8は
   「生理学的な動機はあるが実測値ではない設計判断（文書化
   済み）」と明記。25 ms 平滑化については audio/render_bed_sox.py
   が、平滑化なしでは拍の折り返しごとに 0.442 のゲイン段差が
@@ -255,10 +255,10 @@ analysis/acoustic_evidence_audit.json の24パラメータについて、
 ## fade_timer（タイマーフェード 30 秒）
 
 - リポジトリ内の根拠: app/app.js の FADE_OUT_S と、フェード
-  曲線に Smoothstep を使う根拠として DESIGN.md §4（Smoothstep
+  曲線に Smoothstep を使う根拠として DESIGN.md §3（Smoothstep
   ＝滑らかな開始・終了）がある。audio/provisional_values_
   2026-11-17.md 項目10は「滑らかさの判断値で、秒数自体に
-  根拠はない」と明記。なお DESIGN.md §6 の「フェードアウト
+  根拠はない」と明記。なお DESIGN.md §11 の「フェードアウト
   付きスリープタイマー（15〜30 分）」はタイマー時間の話で、
   フェード長とは別の量である。
 - 既存音源から測れるもの: タイマーフェードはアプリ実行時の
@@ -275,7 +275,7 @@ analysis/acoustic_evidence_audit.json の24パラメータについて、
 - 既存音源から測れるもの: 実行時の動作のため音源ファイルは
   無い。
 - 未解決: 1 秒の根拠はリポジトリ内に無い。曲線が線形である
-  点も、イージング方針（DESIGN.md §4）との対応づけは文書化
+  点も、イージング方針（DESIGN.md §3）との対応づけは文書化
   されていない。
 
 ## fade_stop（停止フェード 約0.8 秒）
@@ -318,8 +318,8 @@ analysis/acoustic_evidence_audit.json の24パラメータについて、
 ## preset_save_transition（保存プリセットの遷移 30 秒 / easeInOut）
 
 - リポジトリ内の根拠: app/app.js の savePreset ハンドラに
-  「保存時の遷移は §4 の初期標準（Ease In Out、30 秒）」と
-  コメントがあり、曲線側の出所は DESIGN.md §4 の「初期標準は
+  「保存時の遷移は §3 の初期標準（Ease In Out、30 秒）」と
+  コメントがあり、曲線側の出所は DESIGN.md §3 の「初期標準は
   Ease In Out」。30 秒という長さは app/presets.json の正本
   プリセット（標準・入眠・深い睡眠維持）がいずれも遷移 30 秒
   であることと揃っている。

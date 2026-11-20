@@ -89,7 +89,7 @@ let lowpassHz = KNEE_HZ;        // ローパスの現在値（プリセットで
 
 const $ = (id) => document.getElementById(id);
 
-// --- イージング関数（DESIGN.md §4: 初期標準 Ease In Out、比較基準 Linear、
+// --- イージング関数（DESIGN.md §3: 初期標準 Ease In Out、比較基準 Linear、
 // パラメータごとに異なる曲線を使ってよい） ---
 const EASING = {
   linear: (t) => t,
@@ -105,7 +105,7 @@ function easingSamples(name, points = 64) {
   return c;
 }
 
-// --- 遷移エンジン（DESIGN.md §2 の Easing Engine） ---
+// --- 遷移エンジン（DESIGN.md §1 の Easing Engine） ---
 // key ごとに1本の遷移を持ち、同じ key の再登録で置き換える。
 const tweens = new Map();
 let tweenTimer = null;
@@ -387,7 +387,7 @@ function applyVolumes() {
   gainWaves.gain.setTargetAtTime($("volWaves").value / 100, t, VOLUME_EASE_S);
 }
 
-// フェードアウト曲線（Smoothstep: 滑らかな開始・終了、DESIGN.md §4）
+// フェードアウト曲線（Smoothstep: 滑らかな開始・終了、DESIGN.md §3）
 function fadeCurve(points = 32) {
   const c = new Float32Array(points);
   for (let i = 0; i < points; i++) {
@@ -773,7 +773,7 @@ $("preset").addEventListener("change", () => {
 $("savePreset").addEventListener("click", () => {
   const candidate = {
     parameters: currentParams(),
-    // 保存時の遷移は §4 の初期標準（Ease In Out、30 秒）
+    // 保存時の遷移は §3 の初期標準（Ease In Out、30 秒）
     transition: { duration: 30, curve: "easeInOut", parameters: { gain: {}, lowpass: {}, reverb: {} } },
   };
   // 中身が同じプリセットが既にあれば二重保存しない（名前が違っても）
