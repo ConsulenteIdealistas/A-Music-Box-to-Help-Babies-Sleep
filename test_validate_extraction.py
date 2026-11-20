@@ -79,6 +79,15 @@ class ValidateTests(unittest.TestCase):
         self.assertIn(("ERROR", "exclude_no_reason"),
                       codes(ve.validate_rows([r], ABSTRACTS)))
 
+    def test_count_only_decision(self):
+        # 抽出バッチの指示どおり、音響数値が抄録に無い行は Count_only +
+        # 理由で件数に数える（数値は N/A のまま）。理由が空なら ERROR。
+        r = row(Decision="Count_only", Exclude_Reason="NO_ACOUSTIC_IN_ABSTRACT")
+        self.assertEqual(ve.validate_rows([r], ABSTRACTS), [])
+        r2 = row(Decision="Count_only")
+        self.assertIn(("ERROR", "exclude_no_reason"),
+                      codes(ve.validate_rows([r2], ABSTRACTS)))
+
     def test_implausible_warns_not_errors(self):
         r = row(PMID="444", Sound_Level_dB="115", Tempo_BPM="140",
                 Evidence_Quote="Heart rate was 140 beats per minute during exposure to 115 dB noise.")

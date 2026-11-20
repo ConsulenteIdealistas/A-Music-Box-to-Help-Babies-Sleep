@@ -7,7 +7,8 @@
   - `Stratum`: A（主対象: 2歳未満を含む）/ B（参照層: 2歳以上のみ）/
     C（補足層: 動物実験のみ）。層を混ぜて集計しない
   - `Evidence_Quote`: 抽出した数値の根拠となる抄録内の原文フレーズ（必須）
-  - `Decision`: Include / Exclude
+  - `Decision`: Include / Exclude / Count_only（音響数値が抄録に無い
+    行は Count_only で件数のみ数え、Exclude_Reason に理由を書く）
   - `Exclude_Reason`: 除外基準のどれに当たったか
 - ジャーナル別書誌 CSV（取得後に配置）:
   `bibliography_pediatrics.csv` など。ファイル名・取得日・クエリ版を

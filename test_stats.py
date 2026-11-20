@@ -99,20 +99,32 @@ class SnQnTests(unittest.TestCase):
     期待値は順序統計量を手で数えた固定値:
     - [1..5]: Sn の raw lowmed = 1 → 1.1926 × c_5(1.351)
               Qn のペア差ソート済み [1,1,1,1,2,2,2,3,3,4] の k=3 番目 = 1
-              → 2.219144 × d_5(0.844)
-    - [1,2,3]: Sn raw = 1 → 1.1926 × c_3(1.851)、Qn raw = 1 → 2.219144 × d_3(0.994)
+              → 2.219144 × d_5(0.84401)
+    - [1,2,3]: Sn raw = 1 → 1.1926 × c_3(1.851)、Qn raw = 1 → 2.219144 × d_3(0.99365)
     定数 2.219144 は原論文の誤植 2.2219 ではない正値を使う。
+    Qn の d_n は 2026-11-17 から robustbase の係数（n≤12 の表 + n>12 の
+    多項式モデル）。R robustbase 0.99.2 との照合済み（同日）。
     """
 
     def test_fixed_values(self):
         self.assertAlmostEqual(stats.sn_estimator([1, 2, 3, 4, 5]),
                                1.1926 * 1.351)
         self.assertAlmostEqual(stats.qn_estimator([1, 2, 3, 4, 5]),
-                               2.21914446598508 * 0.844)
+                               2.21914446598508 * 0.84401)
         self.assertAlmostEqual(stats.sn_estimator([1, 2, 3]),
                                1.1926 * 1.851)
         self.assertAlmostEqual(stats.qn_estimator([1, 2, 3]),
-                               2.21914446598508 * 0.994)
+                               2.21914446598508 * 0.99365)
+
+    def test_qn_polynomial_range(self):
+        # n=13 は表の範囲外（多項式モデル側）。[1..13] のペア差は
+        # 差1が12組・差2が11組…で、k=C(7,2)=21 番目は差2。
+        # 期待値 4.00468 は R robustbase 0.99.2 の Qn(1:13)=4.00467994 と
+        # 照合済み（2026-11-17）。robustbase 内部の定数 2.21914（切捨て）と
+        # こちらの正値 2.21914446598508 の差が約 2e-6 相対で乗るため
+        # delta=1e-4 で照合する。
+        self.assertAlmostEqual(stats.qn_estimator(list(range(1, 14))),
+                               4.00468, delta=1e-4)
 
     def test_scale_equivariance_and_shift_invariance(self):
         x = [3, 1, 4, 1, 5, 9, 2, 6]
@@ -127,12 +139,12 @@ class SnQnTests(unittest.TestCase):
         # n=2: raw はどちらも |a-b| そのもの
         self.assertAlmostEqual(stats.sn_estimator([0, 10]), 1.1926 * 0.743 * 10)
         self.assertAlmostEqual(stats.qn_estimator([0, 10]),
-                               2.21914446598508 * 0.399 * 10)
+                               2.21914446598508 * 0.399356 * 10)
 
     def test_in_summarize(self):
         s = stats.summarize([1, 2, 3, 4, 5])
         self.assertAlmostEqual(s["sn"], 1.1926 * 1.351)
-        self.assertAlmostEqual(s["qn"], 2.21914446598508 * 0.844)
+        self.assertAlmostEqual(s["qn"], 2.21914446598508 * 0.84401)
 
 
 class QuartileTests(unittest.TestCase):

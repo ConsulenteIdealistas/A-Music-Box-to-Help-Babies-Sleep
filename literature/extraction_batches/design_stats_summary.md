@@ -1,5 +1,13 @@
 # Design-statistics summary — first computation, 2026-11-15
 
+> Addendum (2026-11-17): Qn's finite-sample correction factors in
+> analysis/stats.py were switched from the Croux & Rousseeuw (1992)
+> approximations to robustbase's simulation-based factors (see stats.py
+> header). Recomputation on the identical population below gives:
+> Frequency_Hz Qn 1802 → 1803.5; Sound_Level_dB Qn unchanged at the
+> displayed precision (20.95 → 20.98, shown as 21.0). All other figures
+> were reproduced exactly and are unchanged.
+
 Population: extraction rows with Stratum = A and Decision = Include
 (the §3 gate), numeric cells expanded (ranges contribute both endpoints,
 discrete sets contribute every value). Computed with analysis/stats.py
