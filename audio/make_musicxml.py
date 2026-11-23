@@ -100,6 +100,14 @@ def build(song) -> ET.ElementTree:
     misc = ET.SubElement(ident, "miscellaneous")
     field = ET.SubElement(misc, "miscellaneous-field", {"name": "source"})
     field.text = song["source"]
+    field = ET.SubElement(misc, "miscellaneous-field", {"name": "transcription"})
+    field.text = song["transcription"]
+    field = ET.SubElement(misc, "miscellaneous-field", {"name": "tools"})
+    field.text = ("Transcription record and MusicXML generation: Python "
+                  "(audio/make_musicxml.py). Music-box render: SuperCollider "
+                  "(Klank) via audio/render_klank.py. Cross-checks and "
+                  "measurement: SoX; loudness: ffmpeg. Full record: "
+                  "audio/PROVENANCE.md")
     part_list = ET.SubElement(root, "part-list")
     sp = ET.SubElement(part_list, "score-part", {"id": "P1"})
     ET.SubElement(sp, "part-name").text = "Music box"
@@ -137,6 +145,7 @@ BRAHMS = {
     "title": "Wiegenlied (Brahms' Lullaby), Op. 49 No. 4",
     "composer": "Johannes Brahms",
     "source": "LilyPond score in Wikipedia 'Wiegenlied (Brahms)' (Eb major); transposed to C major, +8va",
+    "transcription": "Notes read from the LilyPond source text and entered as note data in audio/make_musicxml.py; transposition (Eb to C major, +8va) applied in the data. No notation software used. No machine cross-check recorded; the .ly source file was not retained in the project work folder.",
     "fifths": 0, "beats": 3, "beat_type": 4, "pickup": True,
     "measures": [
         (None, [("E5", .5), ("E5", .5)]),
@@ -164,6 +173,7 @@ YURIKAGO = {
     "title": "Yurikago no Uta",
     "composer": "Shin Kusakawa (lyrics: Hakushu Kitahara)",
     "source": "Published kalimba score (Ehon Biyori, class101 PDF), melody line; rhythm regularised to 4/4",
+    "transcription": "Melody line read from the published kalimba score PDF and entered as note data in audio/make_musicxml.py; accompaniment reduced to simple low chord stacks and rhythm regularised to 4/4 by the arranger. This is an arrangement, not a verified transcription. The source PDF was not retained in the project work folder.",
     "fifths": 0, "beats": 4, "beat_type": 4, "pickup": False,
     "measures": [
         (("C", "major"), [("G5", 2), ("A5", 1), ("G5", 1)]),
@@ -196,6 +206,7 @@ MOLDAU = {
     "title": "Vltava (The Moldau) - main theme",
     "composer": "Bedrich Smetana",
     "source": "LilyPond score in Wikipedia 'Ma vlast' (E minor, 6/8); final bar completed by the arranger (source excerpt ends mid-bar); theme played twice",
+    "transcription": "Notes read from the LilyPond source text (retained as score_0.ly in the project work folder) and entered as note data in audio/make_musicxml.py. Verified 2026-11-15: the LilyPond source was re-fetched and machine-compared (all pitches, rhythms and range matched), and the theme section was also checked against the IMSLP piano-solo PDF. The final bar is completed by the arranger because the source excerpt ends mid-bar.",
     "fifths": 1, "beats": 6, "beat_type": 8, "pickup": True,
     "measures": [(None, [("B4", .5)])] + _MOLDAU_BARS + _MOLDAU_BARS,
 }
@@ -205,6 +216,7 @@ VISSI = {
     "title": "Vissi d'arte (Tosca, Act II)",
     "composer": "Giacomo Puccini",
     "source": "Ricordi vocal score, Milan 1910, plate 113189 (IMSLP); vocal staff transcribed from scan; first section only",
+    "transcription": "Vocal staff transcribed by reading the scanned score; first-reading errors were all corrected by re-reading at 300 dpi with staff-grid overlays and cross-checking against the Ricordi full score (IMSLP 608234) - itemised corrections are in audio/SONGS.md. Opening section only; the remainder is not transcribed. Work images are retained in the project work folder (outside the repo); the grid-overlay generation script was not retained.",
     "fifths": -6, "beats": 2, "beat_type": 4, "pickup": False,
     "measures": [
         (("Gb", "major"), [("Eb5", 1), ("Db5", 1)]),

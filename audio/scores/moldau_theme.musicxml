@@ -8,6 +8,8 @@
     <rights>Melody: public domain. Transcription: see audio/SONGS.md</rights>
     <miscellaneous>
       <miscellaneous-field name="source">LilyPond score in Wikipedia 'Ma vlast' (E minor, 6/8); final bar completed by the arranger (source excerpt ends mid-bar); theme played twice</miscellaneous-field>
+      <miscellaneous-field name="transcription">Notes read from the LilyPond source text (retained as score_0.ly in the project work folder) and entered as note data in audio/make_musicxml.py. Verified 2026-11-15: the LilyPond source was re-fetched and machine-compared (all pitches, rhythms and range matched), and the theme section was also checked against the IMSLP piano-solo PDF. The final bar is completed by the arranger because the source excerpt ends mid-bar.</miscellaneous-field>
+      <miscellaneous-field name="tools">Transcription record and MusicXML generation: Python (audio/make_musicxml.py). Music-box render: SuperCollider (Klank) via audio/render_klank.py. Cross-checks and measurement: SoX; loudness: ffmpeg. Full record: audio/PROVENANCE.md</miscellaneous-field>
     </miscellaneous>
   </identification>
   <part-list>

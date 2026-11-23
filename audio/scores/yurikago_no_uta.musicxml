@@ -8,6 +8,8 @@
     <rights>Melody: public domain. Transcription: see audio/SONGS.md</rights>
     <miscellaneous>
       <miscellaneous-field name="source">Published kalimba score (Ehon Biyori, class101 PDF), melody line; rhythm regularised to 4/4</miscellaneous-field>
+      <miscellaneous-field name="transcription">Melody line read from the published kalimba score PDF and entered as note data in audio/make_musicxml.py; accompaniment reduced to simple low chord stacks and rhythm regularised to 4/4 by the arranger. This is an arrangement, not a verified transcription. The source PDF was not retained in the project work folder.</miscellaneous-field>
+      <miscellaneous-field name="tools">Transcription record and MusicXML generation: Python (audio/make_musicxml.py). Music-box render: SuperCollider (Klank) via audio/render_klank.py. Cross-checks and measurement: SoX; loudness: ffmpeg. Full record: audio/PROVENANCE.md</miscellaneous-field>
     </miscellaneous>
   </identification>
   <part-list>
