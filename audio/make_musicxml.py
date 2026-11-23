@@ -145,7 +145,7 @@ BRAHMS = {
     "title": "Wiegenlied (Brahms' Lullaby), Op. 49 No. 4",
     "composer": "Johannes Brahms",
     "source": "LilyPond score in Wikipedia 'Wiegenlied (Brahms)' (Eb major); transposed to C major, +8va",
-    "transcription": "Notes read from the LilyPond source text and entered as note data in audio/make_musicxml.py; transposition (Eb to C major, +8va) applied in the data. No notation software used. No machine cross-check recorded; the .ly source file was not retained in the project work folder.",
+    "transcription": "Notes read from the LilyPond source text and entered as note data in audio/make_musicxml.py; transposition (Eb to C major, +8va) applied in the data. No notation software used. The .ly source was recovered on 2026-11-23 from the Wikipedia revision current at transcription time (oldid 1315867230) and machine-verified against the transcription: all 54 pitches and durations match, except the final note (lengthened from 2 to 3 quarters to fill the bar) and 3 grace notes, which are not transcribed.",
     "fifths": 0, "beats": 3, "beat_type": 4, "pickup": True,
     "measures": [
         (None, [("E5", .5), ("E5", .5)]),
@@ -173,7 +173,7 @@ YURIKAGO = {
     "title": "Yurikago no Uta",
     "composer": "Shin Kusakawa (lyrics: Hakushu Kitahara)",
     "source": "Published kalimba score (Ehon Biyori, class101 PDF), melody line; rhythm regularised to 4/4",
-    "transcription": "Melody line read from the published kalimba score PDF and entered as note data in audio/make_musicxml.py; accompaniment reduced to simple low chord stacks and rhythm regularised to 4/4 by the arranger. This is an arrangement, not a verified transcription. The source PDF was not retained in the project work folder.",
+    "transcription": "Melody line read from the published kalimba score PDF and entered as note data in audio/make_musicxml.py; accompaniment reduced to simple low chord stacks and rhythm regularised to 4/4 by the arranger. This is an arrangement, not a verified transcription. The source PDF was recovered on 2026-11-23 from the class101 CDN (still hosted) and is retained in the project work folder; the melody line was checked against it.",
     "fifths": 0, "beats": 4, "beat_type": 4, "pickup": False,
     "measures": [
         (("C", "major"), [("G5", 2), ("A5", 1), ("G5", 1)]),
@@ -216,7 +216,7 @@ VISSI = {
     "title": "Vissi d'arte (Tosca, Act II)",
     "composer": "Giacomo Puccini",
     "source": "Ricordi vocal score, Milan 1910, plate 113189 (IMSLP); vocal staff transcribed from scan; first section only",
-    "transcription": "Vocal staff transcribed by reading the scanned score; first-reading errors were all corrected by re-reading at 300 dpi with staff-grid overlays and cross-checking against the Ricordi full score (IMSLP 608234) - itemised corrections are in audio/SONGS.md. Opening section only; the remainder is not transcribed. Work images are retained in the project work folder (outside the repo); the grid-overlay generation script was not retained.",
+    "transcription": "Vocal staff transcribed by reading the scanned score; first-reading errors were all corrected by re-reading at 300 dpi with staff-grid overlays and cross-checking against the Ricordi full score (IMSLP 608234) - itemised corrections are in audio/SONGS.md. Opening section only; the remainder is not transcribed. Work images are retained in the project work folder (outside the repo); the grid-overlay script was lost and was recreated in 2026-11 (staff_grid.py there, checked against the surviving grid images).",
     "fifths": -6, "beats": 2, "beat_type": 4, "pickup": False,
     "measures": [
         (("Gb", "major"), [("Eb5", 1), ("Db5", 1)]),

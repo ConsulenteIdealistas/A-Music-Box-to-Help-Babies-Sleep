@@ -8,7 +8,7 @@
     <rights>Melody: public domain. Transcription: see audio/SONGS.md</rights>
     <miscellaneous>
       <miscellaneous-field name="source">Ricordi vocal score, Milan 1910, plate 113189 (IMSLP); vocal staff transcribed from scan; first section only</miscellaneous-field>
-      <miscellaneous-field name="transcription">Vocal staff transcribed by reading the scanned score; first-reading errors were all corrected by re-reading at 300 dpi with staff-grid overlays and cross-checking against the Ricordi full score (IMSLP 608234) - itemised corrections are in audio/SONGS.md. Opening section only; the remainder is not transcribed. Work images are retained in the project work folder (outside the repo); the grid-overlay generation script was not retained.</miscellaneous-field>
+      <miscellaneous-field name="transcription">Vocal staff transcribed by reading the scanned score; first-reading errors were all corrected by re-reading at 300 dpi with staff-grid overlays and cross-checking against the Ricordi full score (IMSLP 608234) - itemised corrections are in audio/SONGS.md. Opening section only; the remainder is not transcribed. Work images are retained in the project work folder (outside the repo); the grid-overlay script was lost and was recreated in 2026-11 (staff_grid.py there, checked against the surviving grid images).</miscellaneous-field>
       <miscellaneous-field name="tools">Transcription record and MusicXML generation: Python (audio/make_musicxml.py). Music-box render: SuperCollider (Klank) via audio/render_klank.py. Cross-checks and measurement: SoX; loudness: ffmpeg. Full record: audio/PROVENANCE.md</miscellaneous-field>
     </miscellaneous>
   </identification>
